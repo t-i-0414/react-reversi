@@ -2,20 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import Const from '../../const';
 
-import Board from '../organisms/Board';
+import Square from '../molecules/Square';
 
 const { Color } = Const;
 
 export default () => {
   return (
     <Wrapper>
-      <Board />
+      <Square />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  color: ${Color.TX_BLACK};
+  border: 1px solid ${Color.BD_BLACK};
+  display: flex;
+  flex-wrap: wrap;
+  height: 640px;
   margin: 0 auto;
-  width: 1024px;
+  width: 640px;
 `;
