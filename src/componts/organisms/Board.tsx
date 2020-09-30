@@ -5,11 +5,15 @@ import Const from '../../const';
 import Square from '../molecules/Square';
 
 const { Color } = Const;
+const arr = new Array(64);
+arr.fill(0);
 
 export default () => {
   return (
     <Wrapper>
-      <Square />
+      {arr.map(() => (
+        <Square />
+      ))}
     </Wrapper>
   );
 };
