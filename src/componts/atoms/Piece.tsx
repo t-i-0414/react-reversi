@@ -9,6 +9,9 @@ export default () => {
 };
 
 const Piece = styled.span`
+  &:hover {
+    cursor: pointer;
+  }
   background-color: ${Color.BG_BLACK};
   border-radius: 50%;
   display: block;
