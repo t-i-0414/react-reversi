@@ -4,17 +4,32 @@ import Const from '../../const';
 
 const { Color } = Const;
 
-export default () => {
-  return <Piece></Piece>;
+interface Props {
+  color: string;
+}
+export default (props: Props) => {
+  return <StyledPiece {...props} ></StyledPiece>;
 };
 
-const Piece = styled.span`
-  &:hover {
-    cursor: pointer;
-  }
-  background-color: ${Color.BG_BLACK};
+const StyledPiece = styled.span<Pick<Props, "color">>`
+  ${(props) => getPieceColor(props.color)}
   border-radius: 50%;
   display: block;
   height: 80%;
   width: 80%;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
+
+const getPieceColor = (color: string): string => {
+  switch (color) {
+    case "white":
+      return `background-color: ${Color.PC_WHITE};`
+    case "black":
+      return `background-color: ${ Color.PC_BLACK };`
+    default:
+      return `background-color: ${Color.BG_GREEN};`
+  }
+}

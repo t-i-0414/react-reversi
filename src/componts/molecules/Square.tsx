@@ -9,7 +9,7 @@ const { Color } = Const;
 export default () => {
   return (
     <Wrapper>
-      <Piece />
+      <Piece color=""></Piece>
     </Wrapper>
   );
 };
