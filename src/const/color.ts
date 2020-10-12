@@ -15,5 +15,5 @@ export default {
 
   // Piece colors
   PC_WHITE: '#fff',
-  PC_BLACK: "#000"
+  PC_BLACK: '#000',
 };

@@ -6,13 +6,11 @@ import Piece from '../atoms/Piece';
 
 const { Color } = Const;
 
-export default () => {
-  return (
-    <Wrapper>
-      <Piece color=""></Piece>
-    </Wrapper>
-  );
-};
+const Square: React.FC = () => (
+  <Wrapper>
+    <Piece color="white" />
+  </Wrapper>
+);
 
 const Wrapper = styled.div`
   align-items: center;
@@ -24,3 +22,5 @@ const Wrapper = styled.div`
   justify-content: center;
   width: 80px;
 `;
+
+export default Square;

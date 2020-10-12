@@ -6,19 +6,17 @@ import Square from '../molecules/Square';
 
 const { Color } = Const;
 
-type Props = {
-  squares: number,
+interface BoardProps {
+  squares: number;
 }
 
-export default (props: Props) => {
-  return (
-    <Wrapper>
-      {[...Array(props.squares)].map((_, i) => (
-        <Square key={++i} />
-      ))}
-    </Wrapper>
-  );
-};
+const Board: React.FC<BoardProps> = ({ squares }) => (
+  <Wrapper>
+    {Array.from(new Array(squares).keys()).map((i: number) => (
+      <Square key={i + 1} />
+    ))}
+  </Wrapper>
+);
 
 const Wrapper = styled.div`
   border: 1px solid ${Color.BD_BLACK};
@@ -28,3 +26,5 @@ const Wrapper = styled.div`
   margin: 0 auto;
   width: 640px;
 `;
+
+export default Board;

@@ -1,107 +1,70 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true,
-    node: true,
-    'jest/globals': true,
+    es2020: true,
   },
   extends: [
-    'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:jest/recommended',
     'airbnb',
+    'airbnb/hooks',
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-    'prettier',
-    'prettier/@typescript-eslint',
-    'prettier/react',
-    'prettier/standard',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-    __DEV__: true,
-  },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    project: './tsconfig.json',
+    ecmaVersion: 2020,
+    project: './tsconfig.eslint.json',
     sourceType: 'module',
+    tsconfigRootDir: __dirname,
   },
   plugins: [
     '@typescript-eslint',
     'import',
-    'jest',
     'jsx-a11y',
-    'prefer-arrow',
-    'prettier',
     'react',
     'react-hooks',
   ],
   root: true,
   rules: {
-    // eslint official
-    'newline-before-return': 'error',
-    'no-console': 'warn',
-    'no-continue': 'off',
-    'require-yield': 'error',
-    // for react-app-env.d.ts (https://github.com/facebook/create-react-app/issues/6560)
-    'spaced-comment': [
+    'lines-between-class-members': [
       'error',
       'always',
       {
-        markers: ['/'],
+        exceptAfterSingleLine: true,
       },
     ],
-
-    // @typescript-eslint
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-member-accessibility': 'off',
-    indent: 'off',
-    '@typescript-eslint/indent': 'off',
-    '@typescript-eslint/no-unnecessary-type-assertion': 'error',
-
-    // prefer-arrow
-    'prefer-arrow/prefer-arrow-functions': [
+    // should be rewritten as `['error', { allowAsStatement: true }]` in ESLint 7 or later
+    // SEE: https://github.com/typescript-eslint/typescript-eslint/issues/1184
+    'no-void': 'off',
+    'padding-line-between-statements': [
       'error',
       {
-        disallowPrototype: true,
-        singleReturnOnly: true,
-        classPropertiesAllowed: false,
+        blankLine: 'always',
+        prev: '*',
+        next: 'return',
       },
     ],
-
-    // react
-    'react/jsx-filename-extension': [
+    'no-use-before-define': "off",
+    '@typescript-eslint/no-unused-vars': [
       'error',
       {
-        extensions: ['jsx', 'tsx'],
+        'vars': 'all',
+        'args': 'after-used',
+        'argsIgnorePattern': '_',
+        'ignoreRestSiblings': false,
+        'varsIgnorePattern': '_',
       },
     ],
-    'react/jsx-props-no-spreading': [
-      'warn',
-      {
-        custom: 'ignore',
-      },
-    ],
-    'react/prop-types': 'off',
-    'react/prefer-stateless-function': 'off',
-
-    // react hooks
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'error',
-
-    // import
     'import/extensions': [
       'error',
-      'always',
+      'ignorePackages',
       {
         js: 'never',
         jsx: 'never',
@@ -109,20 +72,34 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'import/prefer-default-export': 'off',
+    'react/jsx-filename-extension': [
+      'error',
+      {
+        extensions: ['.jsx', '.tsx'],
+      },
+    ],
+    'react/jsx-props-no-spreading': [
+      'error',
+      {
+        html: 'enforce',
+        custom: 'enforce',
+        explicitSpread: 'ignore',
+      },
+    ],
   },
-  settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
-    'import/resolver': {
-      node: {
-        extensions: ['.js', 'jsx', '.ts', '.tsx'],
-        paths: ['src'],
+  overrides: [
+    {
+      'files': ['*.tsx'],
+      'rules': {
+        'react/prop-types': 'off',
       },
     },
-    react: {
-      version: 'detect',
+  ],
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+      },
     },
   },
 };

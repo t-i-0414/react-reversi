@@ -1,18 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import Const from '../../const';
+// import Const from '../../const';
 
-const { Color } = Const;
+// const { Color } = Const;
 
-interface Props {
+interface PieceProps {
   color: string;
 }
-export default (props: Props) => {
-  return <StyledPiece {...props} ></StyledPiece>;
-};
 
-const StyledPiece = styled.span<Pick<Props, "color">>`
-  ${(props) => getPieceColor(props.color)}
+const Piece: React.FC<PieceProps> = ({ color }) => <StyledPiece color={color} />;
+
+const StyledPiece = styled.span`
+  background-color: ${(props) => props.color};
   border-radius: 50%;
   display: block;
   height: 80%;
@@ -23,13 +22,4 @@ const StyledPiece = styled.span<Pick<Props, "color">>`
   }
 `;
 
-const getPieceColor = (color: string): string => {
-  switch (color) {
-    case "white":
-      return `background-color: ${Color.PC_WHITE};`
-    case "black":
-      return `background-color: ${ Color.PC_BLACK };`
-    default:
-      return `background-color: ${Color.BG_GREEN};`
-  }
-}
+export default Piece;
