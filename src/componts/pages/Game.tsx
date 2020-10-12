@@ -9,7 +9,7 @@ const { Color } = Const;
 export default () => {
   return (
     <Wrapper>
-      <Board />
+      <Board squares={64} />
     </Wrapper>
   );
 };

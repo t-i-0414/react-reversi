@@ -5,14 +5,16 @@ import Const from '../../const';
 import Square from '../molecules/Square';
 
 const { Color } = Const;
-const arr = new Array(64);
-arr.fill(0);
 
-export default () => {
+type Props = {
+  squares: number,
+}
+
+export default (props: Props) => {
   return (
     <Wrapper>
-      {arr.map(() => (
-        <Square />
+      {[...Array(props.squares)].map((_, i) => (
+        <Square key={++i} />
       ))}
     </Wrapper>
   );
