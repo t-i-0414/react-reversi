@@ -8,7 +8,9 @@ interface PieceProps {
   color: string;
 }
 
-const Piece: React.FC<PieceProps> = ({ color }) => <StyledPiece color={color} />;
+const Piece: React.FC<PieceProps> = ({ color }) => (
+  <StyledPiece color={color} />
+);
 
 const StyledPiece = styled.span`
   background-color: ${(props) => props.color};

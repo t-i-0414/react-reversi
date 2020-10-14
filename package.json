@@ -43,6 +43,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:conflict": "npx eslint --print-config .eslintrc.js | npx eslint-config-prettier-check",
     "postinstall": "typesync"
   },
   "eslintConfig": {
