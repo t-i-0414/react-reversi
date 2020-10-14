@@ -67,7 +67,7 @@
     }
   },
   "lint-staged": {
-    "src /**/*.{js,jsx,ts,tsx}": "lint"
+    "src/**/*.{js,jsx,ts,tsx}": "lint"
   },
   "devDependencies": {
     "@types/eslint": "7.2.4",
