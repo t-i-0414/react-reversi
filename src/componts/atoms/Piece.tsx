@@ -13,11 +13,11 @@ const Piece: React.FC<PieceProps> = ({ color }) => (
 );
 
 const StyledPiece = styled.span`
+  display: block;
+  width: 80%;
+  height: 80%;
   background-color: ${(props) => props.color};
   border-radius: 50%;
-  display: block;
-  height: 80%;
-  width: 80%;
 
   &:hover {
     cursor: pointer;

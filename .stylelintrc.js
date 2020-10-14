@@ -1,14 +1,15 @@
 module.exports = {
-  plugins: ['stylelint-order'],
   extends: [
     'stylelint-config-standard',
-    './node_modules/prettier-stylelint/config.js',
+    'stylelint-config-recess-order',
   ],
-  ignoreFiles: ['**/node_modules/**'],
+  plugins: [
+    'stylelint-order'
+  ],
+  ignoreFiles: [
+    '**/node_modules/**'
+  ],
   rules: {
-    indentation: 2,
     'string-quotes': 'single',
-    'order/properties-alphabetical-order': true,
-    'declaration-empty-line-before': null,
   },
 };

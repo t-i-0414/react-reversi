@@ -7,9 +7,9 @@ import Board from '../organisms/Board';
 const { Color } = Const;
 
 const Wrapper = styled.div`
-  color: ${Color.TX_BLACK};
-  margin: 0 auto;
   width: 1024px;
+  margin: 0 auto;
+  color: ${Color.TX_BLACK};
 `;
 
 const Game: React.FC = () => (

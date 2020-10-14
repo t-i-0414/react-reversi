@@ -19,12 +19,12 @@ const Board: React.FC<BoardProps> = ({ squares }) => (
 );
 
 const Wrapper = styled.div`
-  border: 1px solid ${Color.BD_BLACK};
   display: flex;
   flex-wrap: wrap;
+  width: 640px;
   height: 640px;
   margin: 0 auto;
-  width: 640px;
+  border: 1px solid ${Color.BD_BLACK};
 `;
 
 export default Board;
