@@ -1,6 +1,9 @@
 FROM node:12.18.4-alpine
-WORKDIR /usr/src/app
-COPY ["package.json", "yarn.lock", "./"]
-RUN yarn install
+
+WORKDIR /usr/src/frontend
+
+RUN yarn global add create-react-app
+
 COPY . .
-ENTRYPOINT ["yarn", "start"]
+
+RUN yarn install
