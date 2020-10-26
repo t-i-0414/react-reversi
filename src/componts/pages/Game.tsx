@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 
 const Game: React.FC = () => (
   <Wrapper>
-    <Board squares={64} />
+    <Board squaresOnSide={8} />
   </Wrapper>
 );
 

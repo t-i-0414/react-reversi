@@ -6,14 +6,19 @@ import styled from 'styled-components';
 
 interface PieceProps {
   color: string;
+  display: 'none' | 'block';
 }
+type PieceStyle = {
+  color: string;
+  display: 'none' | 'block';
+};
 
-const Piece: React.FC<PieceProps> = ({ color }) => (
-  <StyledPiece color={color} />
+const Piece: React.FC<PieceProps> = ({ color, display }) => (
+  <StyledPiece color={color} display={display} />
 );
 
-const StyledPiece = styled.span`
-  display: block;
+const StyledPiece = styled.span<PieceStyle>`
+  display: ${(props) => props.display};
   width: 80%;
   height: 80%;
   background-color: ${(props) => props.color};

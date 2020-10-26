@@ -7,22 +7,31 @@ import Square from '../molecules/Square';
 const { Color } = Const;
 
 interface BoardProps {
-  squares: number;
+  squaresOnSide: number;
 }
 
-const Board: React.FC<BoardProps> = ({ squares }) => (
-  <Wrapper>
-    {Array.from(new Array(squares).keys()).map((i: number) => (
-      <Square key={i + 1} />
+type Wrapper = {
+  side: number;
+};
+
+const Board: React.FC<BoardProps> = ({ squaresOnSide }) => (
+  <Wrapper side={squaresOnSide * 80}>
+    {Array.from(new Array(squaresOnSide ** 2).keys()).map((i: number) => (
+      <Square
+        key={i + 1}
+        position={[i % squaresOnSide, Math.floor(i / squaresOnSide)]}
+        value={0}
+        piece="block"
+      />
     ))}
   </Wrapper>
 );
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<Wrapper>`
   display: flex;
   flex-wrap: wrap;
-  width: 640px;
-  height: 640px;
+  width: ${(props) => props.side}px;
+  height: ${(props) => props.side}px;
   margin: 0 auto;
   border: 1px solid ${Color.BD_BLACK};
 `;
