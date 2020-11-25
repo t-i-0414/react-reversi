@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Const from '../../const';
 
@@ -12,10 +12,24 @@ const Wrapper = styled.div`
   color: ${Color.TX_BLACK};
 `;
 
-const Game: React.FC = () => (
-  <Wrapper>
-    <Board squaresOnSide={8} />
-  </Wrapper>
-);
+const Game: React.FC = () => {
+  const [isGameStart, setGameStart] = useState(true); // TODO:最後にfalseにする
+
+  return (
+    <Wrapper>
+      {!isGameStart && (
+        <button
+          type="button"
+          onClick={() => {
+            setGameStart(true);
+          }}
+        >
+          Game Start
+        </button>
+      )}
+      {isGameStart && <Board sideSquares={8} />}
+    </Wrapper>
+  );
+};
 
 export default Game;

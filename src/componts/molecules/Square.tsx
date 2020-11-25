@@ -8,12 +8,12 @@ const { Color } = Const;
 
 interface Square {
   key: number;
-  position: number[];
-  value: 0 | 1 | -1 | 100;
+  value: number;
   piece: 'none' | 'block';
+  onClick: () => void;
 }
 
-const Square: React.FC<Square> = ({ value, piece }) => {
+const Square: React.FC<Square> = ({ value, piece, onClick }) => {
   let color: string;
   switch (value) {
     case 1:
@@ -28,7 +28,7 @@ const Square: React.FC<Square> = ({ value, piece }) => {
 
   return (
     <Wrapper>
-      <Piece color={color} display={piece} />
+      <Piece color={color} display={piece} onClick={onClick} />
     </Wrapper>
   );
 };
