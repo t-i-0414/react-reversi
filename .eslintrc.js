@@ -86,6 +86,7 @@ module.exports = {
         optionalDependencies: false,
       },
     ],
+    'import/no-unresolved': 'off',
     'react/jsx-filename-extension': [
       'error',
       {
