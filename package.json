@@ -12,6 +12,7 @@
   "bugs": {
     "url": "https://github.com/iwashiro-takuya/react-reversi/issues"
   },
+  "license": "MIT",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
