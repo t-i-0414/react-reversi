@@ -27,7 +27,7 @@ const Game: React.FC = () => {
           Game Start
         </button>
       )}
-      {isGameStart && <Board sideSquares={8} />}
+      {isGameStart && <Board onSideSquares={8} />}
     </Wrapper>
   );
 };
