@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Const from '../../const';
-
 import Board from '../organisms/Board';
+import Const from '../../const';
 
 const { Color } = Const;
 
