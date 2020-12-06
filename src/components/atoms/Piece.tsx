@@ -1,22 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
-// import Const from '../../const';
-
-// const { Color } = Const;
+import { useDispatch } from 'react-redux';
+import { toWhite } from '../../actions';
 
 interface PieceProps {
   color: string;
   display: 'none' | 'block';
-  onClick: () => void;
 }
 type PieceStyle = {
   color: string;
   display: 'none' | 'block';
 };
 
-const Piece: React.FC<PieceProps> = ({ color, display, onClick }) => (
-  <StyledPiece color={color} display={display} onClick={onClick} />
-);
+const Piece: React.FC<PieceProps> = ({ color, display }) => {
+  // const board = useSelector<State, BoardState>((state) => state.board);
+  const dispatch = useDispatch();
+
+  return (
+    <StyledPiece
+      color={color}
+      display={display}
+      onClick={() => {
+        dispatch(toWhite(1));
+      }}
+    />
+  );
+};
 
 const StyledPiece = styled.span<PieceStyle>`
   display: ${(props) => props.display};
