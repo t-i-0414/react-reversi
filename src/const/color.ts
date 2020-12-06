@@ -17,4 +17,4 @@ export default {
   PC_WHITE: '#fff',
   PC_BLACK: '#000',
   PC_INVISIBLE: '#38A34B',
-};
+} as const;
