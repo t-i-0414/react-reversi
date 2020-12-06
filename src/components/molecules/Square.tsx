@@ -1,34 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
-import Const from '../../const';
-
 import Piece from '../atoms/Piece';
+import Const from '../../const';
 
 const { Color } = Const;
 
 interface Square {
   key: number;
-  value: number;
   piece: 'none' | 'block';
-  onClick: () => void;
 }
 
-const Square: React.FC<Square> = ({ value, piece, onClick }) => {
-  let color: string;
-  switch (value) {
-    case 1:
-      color = Color.PC_WHITE;
-      break;
-    case -1:
-      color = Color.PC_BLACK;
-      break;
-    default:
-      color = Color.PC_INVISIBLE;
-  }
+const Square: React.FC<Square> = ({ piece }) => {
+  const color: string = Color.PC_INVISIBLE;
+  // switch (value) {
+  //   case 1:
+  //     color = Color.PC_WHITE;
+  //     break;
+  //   case -1:
+  //     color = Color.PC_BLACK;
+  //     break;
+  //   default:
+  //     color =
+  // }
 
   return (
     <Wrapper>
-      <Piece color={color} display={piece} onClick={onClick} />
+      <Piece display={piece} color={color} />
     </Wrapper>
   );
 };
