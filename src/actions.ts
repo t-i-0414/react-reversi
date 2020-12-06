@@ -1,25 +1,30 @@
-export const CounterActionType = {
-  ADD: 'ADD',
-  DECREMENT: 'DECREMENT',
-  INCREMENT: 'INCREMENT',
+import { BoardState } from './types';
+
+export const boardActionType = {
+  ADD_SQUARES: 'ADD_SQUARES',
+  TO_WHITE: 'TO_WHITE',
+  TO_BLACK: 'TO_BLACK',
 } as const;
 
 type ValueOf<T> = T[keyof T];
 
-export type CounterAction = {
-  type: ValueOf<typeof CounterActionType>;
-  amount?: number;
+export type BoardAction = {
+  type: ValueOf<typeof boardActionType>;
+  add?: BoardState;
+  val?: number;
 };
 
-export const add = (amount: number): CounterAction => ({
-  type: CounterActionType.ADD,
-  amount,
+export const addSquares = (add: BoardState): BoardAction => ({
+  type: boardActionType.ADD_SQUARES,
+  add,
 });
 
-export const decrement = (): CounterAction => ({
-  type: CounterActionType.DECREMENT,
+export const toWhite = (val: number): BoardAction => ({
+  type: boardActionType.TO_WHITE,
+  val,
 });
 
-export const increment = (): CounterAction => ({
-  type: CounterActionType.INCREMENT,
+export const toBlack = (val: number): BoardAction => ({
+  type: boardActionType.TO_BLACK,
+  val,
 });

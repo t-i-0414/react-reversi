@@ -1,31 +1,30 @@
 import { Reducer } from 'redux';
-import { CounterAction, CounterActionType as Type } from './actions';
+import { BoardAction, boardActionType as type } from './actions';
+import { State } from './types';
 
-export type CounterState = {
-  count: number;
+export const initialState: State = {
+  board: [{ column: 0, row: 0, val: 0 }],
 };
 
-export const initialState: CounterState = { count: 0 };
-
-export const counterReducer: Reducer<CounterState, CounterAction> = (
-  state: CounterState = initialState,
-  action: CounterAction,
-): CounterState => {
+export const boardReducer: Reducer<State, BoardAction> = (
+  state: State = initialState,
+  action: BoardAction,
+): State => {
   switch (action.type) {
-    case Type.ADD:
+    case type.ADD_SQUARES:
       return {
         ...state,
-        count: state.count + (action.amount || 0),
+        board: action.add ?? [{ column: 0, row: 0, val: 0 }],
       };
-    case Type.DECREMENT:
+    case type.TO_WHITE:
       return {
         ...state,
-        count: state.count - 1,
+        board: state.board.slice(),
       };
-    case Type.INCREMENT:
+    case type.TO_BLACK:
       return {
         ...state,
-        count: state.count + 1,
+        board: state.board.slice(),
       };
     default: {
       const _: never = action.type;
