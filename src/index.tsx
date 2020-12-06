@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
-import { counterReducer, initialState } from './reducer';
-import Game from './componts/pages/Game';
+import { boardReducer } from './reducer';
+import Game from './components/pages/Game';
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(counterReducer, initialState);
+interface ExtendedWindow extends Window {
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+}
+declare let window: ExtendedWindow;
+
+const composeReduxDevToolsEnhancers =
+  (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+
+const store = createStore(boardReducer, composeReduxDevToolsEnhancers());
 
 ReactDOM.render(
   <Provider store={store}>
