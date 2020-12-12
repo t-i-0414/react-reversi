@@ -12,11 +12,11 @@ const Wrapper = styled.div`
 `;
 
 const Game: React.FC = () => {
-  const [isGameStart, setGameStart] = useState(true); // TODO:最後にfalseにする
+  const [isGameStartFlg, setGameStart] = useState(true); // TODO:最後にfalseにする
 
   return (
     <Wrapper>
-      {!isGameStart && (
+      {!isGameStartFlg && (
         <button
           type="button"
           onClick={() => {
@@ -26,7 +26,7 @@ const Game: React.FC = () => {
           Game Start
         </button>
       )}
-      {isGameStart && <Board onSideSquares={8} />}
+      {isGameStartFlg && <Board onSideSquares={8} />}
     </Wrapper>
   );
 };
