@@ -1,53 +1,71 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, {
+  useState,
+  // , useReducer
+} from 'react';
 import styled from 'styled-components';
-import { SqiuareState } from '../../types';
-import { addSquares } from '../../actions';
-import Square from '../molecules/Square';
 
+// 子要素
+import Square from '../atoms/Square';
+import Piece from '../atoms/Piece';
+
+// 型
+import { BoardState, SquareState } from '../../types';
+
+// スタイル用
 import Const from '../../const';
 
 const { Color } = Const;
 
-interface BoardProps {
+interface BoardProp {
   onSideSquares: number;
 }
+const Board: React.FC<BoardProp> = ({ onSideSquares }) => {
+  const squaresCounts = Array.from(new Array(onSideSquares ** 2).keys());
 
-interface Wrapper {
-  side: number;
-}
+  const initializePosition = (countsArray: number[]): BoardState => {
+    const positionArray = countsArray.map(
+      (i: number): SquareState => {
+        return {
+          column: i % onSideSquares,
+          row: Math.floor(i / onSideSquares),
+          val: 0,
+        };
+      },
+    );
 
-const Board: React.FC<BoardProps> = ({ onSideSquares }) => {
-  const dispatch = useDispatch();
+    return positionArray;
+  };
 
-  const totalSquaresCounts = Array.from(new Array(onSideSquares ** 2).keys());
-
-  const initializeSquaresPosition = totalSquaresCounts.map(
-    (i: number): SqiuareState => {
-      return {
-        column: Math.floor(i / onSideSquares),
-        row: i % onSideSquares,
-        val: 0,
-      };
-    },
+  const [position, updatePosition] = useState(
+    initializePosition(squaresCounts),
   );
-
-  dispatch(addSquares(initializeSquaresPosition));
+  console.log(position, updatePosition);
 
   return (
-    <Wrapper side={onSideSquares * 80}>
-      {totalSquaresCounts.map((i: number) => (
-        <Square key={i} piece="block" />
+    <StyledWrapper length={onSideSquares * 80}>
+      {squaresCounts.map((i: number) => (
+        <Square key={i}>
+          <Piece
+            display="block"
+            color={Color.PC_INVISIBLE}
+            onclick={() => {
+              console.log('clicked!');
+            }}
+          />
+        </Square>
       ))}
-    </Wrapper>
+    </StyledWrapper>
   );
 };
 
-const Wrapper = styled.div<Wrapper>`
+interface StyledWrapperProp {
+  length: number;
+}
+const StyledWrapper = styled.div<StyledWrapperProp>`
   display: flex;
   flex-wrap: wrap;
-  width: ${(props) => props.side}px;
-  height: ${(props) => props.side}px;
+  width: ${(props) => props.length}px;
+  height: ${(props) => props.length}px;
   margin: 0 auto;
   border: 1px solid ${Color.BD_BLACK};
 `;

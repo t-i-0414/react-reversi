@@ -5,17 +5,11 @@ import Const from '../../const';
 
 const { Color } = Const;
 
-const Wrapper = styled.div`
-  width: 1024px;
-  margin: 0 auto;
-  color: ${Color.TX_BLACK};
-`;
-
 const Game: React.FC = () => {
   const [isGameStartFlg, setGameStart] = useState(true); // TODO:最後にfalseにする
 
   return (
-    <Wrapper>
+    <StyledGameWrapper>
       {!isGameStartFlg && (
         <button
           type="button"
@@ -27,8 +21,14 @@ const Game: React.FC = () => {
         </button>
       )}
       {isGameStartFlg && <Board onSideSquares={8} />}
-    </Wrapper>
+    </StyledGameWrapper>
   );
 };
+
+const StyledGameWrapper = styled.div`
+  width: 1024px;
+  margin: 0 auto;
+  color: ${Color.TX_BLACK};
+`;
 
 export default Game;

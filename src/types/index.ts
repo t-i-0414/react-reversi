@@ -1,8 +1,8 @@
 // マスの状態
-export type SqiuareState = { column: number; row: number; val: number };
+export type SquareState = { column: number; row: number; val: number };
 
 // ボードの状態
-export type BoardState = SqiuareState[];
+export type BoardState = SquareState[];
 
 // state全体の状態
 export type State = {
