@@ -1,7 +1,4 @@
-import React, {
-  useState,
-  // , useReducer
-} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // 子要素
@@ -22,8 +19,8 @@ interface BoardProp {
 const Board: React.FC<BoardProp> = ({ onSideSquares }) => {
   const squaresCounts = Array.from(new Array(onSideSquares ** 2).keys());
 
-  const initializePosition = (countsArray: number[]): BoardState => {
-    const positionArray = countsArray.map(
+  const initializeState = (countsArray: number[]): BoardState => {
+    const squareArray = countsArray.map(
       (i: number): SquareState => {
         return {
           column: i % onSideSquares,
@@ -33,16 +30,14 @@ const Board: React.FC<BoardProp> = ({ onSideSquares }) => {
       },
     );
 
-    return positionArray;
+    return squareArray;
   };
 
-  const [position, updatePosition] = useState(
-    initializePosition(squaresCounts),
-  );
-  console.log(position, updatePosition);
+  const [state, updateState] = useState(initializeState(squaresCounts));
+  console.log(state, updateState);
 
   return (
-    <StyledWrapper length={onSideSquares * 80}>
+    <StyledWrapper size={onSideSquares * 80}>
       {squaresCounts.map((i: number) => (
         <Square key={i}>
           <Piece
@@ -59,13 +54,13 @@ const Board: React.FC<BoardProp> = ({ onSideSquares }) => {
 };
 
 interface StyledWrapperProp {
-  length: number;
+  size: number;
 }
 const StyledWrapper = styled.div<StyledWrapperProp>`
   display: flex;
   flex-wrap: wrap;
-  width: ${(props) => props.length}px;
-  height: ${(props) => props.length}px;
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
   margin: 0 auto;
   border: 1px solid ${Color.BD_BLACK};
 `;

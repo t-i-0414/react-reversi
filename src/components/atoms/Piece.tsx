@@ -10,11 +10,11 @@ const Piece: React.FC<PieceProps> = ({ color, display, onclick }) => {
   return <StyledPiece color={color} display={display} onClick={onclick} />;
 };
 
-type PieceStyle = {
+type StyledPieceProp = {
   color: string;
   display: 'none' | 'block';
 };
-const StyledPiece = styled.span<PieceStyle>`
+const StyledPiece = styled.span<StyledPieceProp>`
   display: ${(props) => props.display};
   width: 80%;
   height: 80%;
