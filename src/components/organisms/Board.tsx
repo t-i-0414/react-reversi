@@ -23,6 +23,7 @@ const Board: React.FC<BoardProp> = ({ onSideSquares }) => {
     const squareArray = countsArray.map(
       (i: number): SquareState => {
         return {
+          id: i,
           column: i % onSideSquares,
           row: Math.floor(i / onSideSquares),
           val: 0,
@@ -33,18 +34,33 @@ const Board: React.FC<BoardProp> = ({ onSideSquares }) => {
     return squareArray;
   };
 
+  const [playerFlg, changePlayer] = useState(true);
   const [state, updateState] = useState(initializeState(squaresCounts));
-  console.log(state, updateState);
 
   return (
     <StyledWrapper size={onSideSquares * 80}>
       {squaresCounts.map((i: number) => (
-        <Square key={i}>
+        <Square key={state[i].id}>
           <Piece
-            display="block"
-            color={Color.PC_INVISIBLE}
+            key={state[i].id}
+            pieceVal={state[i].val}
             onclick={() => {
-              console.log('clicked!');
+              updateState((prevState) => {
+                const stateCopy = prevState;
+                let playerVal;
+                if (playerFlg) {
+                  playerVal = 1;
+                } else {
+                  playerVal = -1;
+                }
+
+                stateCopy[squaresCounts[i]].val = playerVal;
+
+                return {
+                  ...stateCopy,
+                };
+              });
+              changePlayer(!playerFlg);
             }}
           />
         </Square>
