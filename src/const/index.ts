@@ -1,4 +1,4 @@
-import { default as Color } from './color';
+import Color from './color';
 
 export default {
   Color,
