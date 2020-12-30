@@ -1,9 +1,9 @@
 import Size from './size';
 import Color from './color';
-import Settings from './settings';
+import PlayerVal from './playerVal';
 
 export default {
   Size,
   Color,
-  Settings,
+  PlayerVal,
 };

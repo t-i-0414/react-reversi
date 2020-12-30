@@ -1,54 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
-
-// スタイル用
 import Const from '../../const';
 
-const { Color } = Const;
+import { PlayerValType } from '../../types';
 
+const { Color, PlayerVal } = Const;
 interface PieceProps {
-  pieceVal: number;
+  playerVal: PlayerValType;
   onclick?: () => void;
 }
-const Piece: React.FC<PieceProps> = ({ pieceVal, onclick }) => {
-  switch (pieceVal) {
-    case 1:
-      return (
-        <StyledPiece
-          pieceVal={pieceVal}
-          color="white"
-          display="block"
-          // onClick={onclick}
-        />
-      );
-    case -1:
-      return (
-        <StyledPiece
-          pieceVal={pieceVal}
-          color="black"
-          display="block"
-          // onClick={onclick}
-        />
-      );
+
+const Piece: React.FC<PieceProps> = ({ playerVal, onclick }) => {
+  switch (playerVal) {
+    case PlayerVal.WHITE:
+      return <StyledPiece color={Color.PC_WHITE} />;
+    case PlayerVal.BLACK:
+      return <StyledPiece color={Color.PC_BLACK} />;
     default:
-      return (
-        <StyledPiece
-          pieceVal={pieceVal}
-          color={Color.PC_INVISIBLE}
-          display="block"
-          onClick={onclick}
-        />
-      );
+      return <StyledPiece color={Color.PC_INVISIBLE} onClick={onclick} />;
   }
 };
 
 type StyledPieceProp = {
-  pieceVal: number;
   color: string;
-  display: 'none' | 'block';
+  onClick?: () => void;
 };
 const StyledPiece = styled.span<StyledPieceProp>`
-  display: ${(props) => props.display};
+  display: block;
   width: 80%;
   height: 80%;
   background-color: ${(props) => props.color};
