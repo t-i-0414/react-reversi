@@ -1,11 +1,6 @@
 export default {
   // 白と黒のそれぞれのプレイヤーとして持つ値
-  PLAYER: {
-    WHITE: {
-      VAL: 1,
-    },
-    BLACK: {
-      VAL: -1,
-    },
-  },
+  WHITE: 1,
+  BLACK: -1,
+  NONE: 0,
 } as const;
