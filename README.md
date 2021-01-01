@@ -1,37 +1,22 @@
 # react-reversi
 
-Reactを用いた、Webブラウザで楽しめるオセロアプリです。
+This is an Othello application that can be enjoyed in a web browser using React.  
 
-## セットアップ
+## Procedure for setting up the environment
 
-### Node.js yarn インストール
+### Installing Node.js and yarn
 
-事前に.node-versionのとおりのNode.jsとyarnをインストール願います。
+Install the .node-version version of Node.js. Then install yarn as a package manager.  
 
-### 依存関係インストール
+### Install dependent modules
 
-```
+```bash
 yarn
 ```
+  
 
-### ローカルサーバー起動
+### Starting the Local Server
 
-```
+```bash
 yarn start
 ```
-
-コンテナ起動する際は、
-
-```
-docker-compose up -d
-```
-
-## 対応ブラウザ
-
-* IE11 ~
-* chrome (PC, android)
-* safari (ios)
-
-※IE9は、2017/4-2018/3のシェア率1.4%(問い合わせ送信は0.1%)なので、対応無し。
-
-※IE10は、0.3%。
