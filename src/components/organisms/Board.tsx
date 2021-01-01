@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Const from '../../const';
 import getShouldReverseSquareArray from '../../utils';
@@ -36,16 +36,60 @@ const Board: React.FC<BoardProp> = ({ onSideSquares }) => {
   );
 
   // コンポーネントで使用する状態を定義
-  const [playerFlg, changePlayer] = useState(true);
+  const [isCurrentPlayer, changePlayer] = useState(true);
   const [state, updateState] = useState(initializeState(squaresCountsArray));
 
   // 現在のプレイヤーの値を設定
   let currentPlayerVal: PlayerValType;
-  if (playerFlg) {
+  if (isCurrentPlayer) {
     currentPlayerVal = PlayerVal.WHITE;
   } else {
     currentPlayerVal = PlayerVal.BLACK;
   }
+
+  // ボードの初期レンダリング時に石を４つ互い違いに置く
+  useEffect(() => {
+    const stateCopy: BoardState = state.slice();
+    const centerSquareArray: SquareState[] = stateCopy.filter((square) => {
+      return (
+        // 右上のマス
+        (square.column === onSideSquares / 2 - 1 &&
+          square.row === onSideSquares / 2 - 1) ||
+        // 左上のマス
+        (square.column === onSideSquares / 2 &&
+          square.row === onSideSquares / 2 - 1) ||
+        // 右下のマス
+        (square.column === onSideSquares / 2 - 1 &&
+          square.row === onSideSquares / 2) ||
+        // 左下のマス
+        (square.column === onSideSquares / 2 &&
+          square.row === onSideSquares / 2)
+      );
+    });
+
+    let isColorWhite = false;
+    let playerVal: PlayerValType;
+    centerSquareArray.map((square) => {
+      const squareCopy = square;
+
+      if (centerSquareArray.indexOf(square) * 2 !== centerSquareArray.length) {
+        isColorWhite = !isColorWhite;
+      }
+
+      if (isColorWhite) {
+        playerVal = PlayerVal.WHITE;
+      } else {
+        playerVal = PlayerVal.BLACK;
+      }
+
+      squareCopy.val = playerVal;
+
+      return square;
+    });
+
+    updateState(stateCopy);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // ひっくり返せる石があるかチェックするメソッド
   const checkCanReverseSquare = (squareCount: number): boolean => {
@@ -57,11 +101,7 @@ const Board: React.FC<BoardProp> = ({ onSideSquares }) => {
       currentPlayerVal,
     );
 
-    if (shouldReverseSquareArray.length === 0) {
-      return true; // FIXME:useEffectで最初に4つの石を置けるようになったらfalseに変える
-    }
-
-    return true;
+    return !!(baseSquare.val !== 0) || !!(shouldReverseSquareArray.length > 0);
   };
 
   // 石が置かれたときに挟まれた石をひっくり返し、プレイヤーを交代するメソッド
@@ -84,7 +124,7 @@ const Board: React.FC<BoardProp> = ({ onSideSquares }) => {
 
     clickedSquare.val = currentPlayerVal;
     updateState(stateCopy);
-    changePlayer(!playerFlg);
+    changePlayer(!isCurrentPlayer);
   };
 
   return (
