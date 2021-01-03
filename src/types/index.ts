@@ -6,7 +6,7 @@ const { PlayerVal } = Const;
 export type PlayerValType = typeof PlayerVal[keyof typeof PlayerVal];
 
 // マスの状態
-export type SquareState = {
+export type SquareStateType = {
   id: number;
   column: number;
   row: number;
@@ -14,9 +14,9 @@ export type SquareState = {
 };
 
 // ボードの状態
-export type BoardState = SquareState[];
+export type BoardStateType = SquareStateType[];
 
 // state全体の状態
 export type State = {
-  board: BoardState;
+  board: BoardStateType;
 };

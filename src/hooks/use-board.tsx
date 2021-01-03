@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Const from '../const';
 
-import { BoardState, SquareState, PlayerValType } from '../types';
+import { BoardStateType, SquareStateType, PlayerValType } from '../types';
 
 const { PlayerVal } = Const;
 
@@ -9,19 +9,19 @@ const useBoard = (
   onSideSquares: number,
 ): {
   squaresCountsArray: Array<number>;
-  state: BoardState;
-  hasReversibleSquare: (squareCount: number) => boolean;
-  setSquare: (squareCount: number) => void;
-  hasPlacedSquare: (squareCount: number) => boolean;
+  BoardState: BoardStateType;
+  hasReversiblePiece: (squareCount: number) => boolean;
+  reverseSquare: (squareCount: number) => void;
+  hasPlacedPiece: (squareCount: number) => boolean;
 } => {
   // 渡された配列からひっくり返すべきマスを取得するメソッド
   const getShouldReverseSquareArray = (
-    baseSquare: SquareState,
-    board: BoardState,
+    baseSquare: SquareStateType,
+    board: BoardStateType,
     sideSquares: number,
     currentPlayerVal: PlayerValType,
-  ): SquareState[] => {
-    const aroundSquareArrays: Array<SquareState[]> = [];
+  ): SquareStateType[] => {
+    const aroundSquareArrays: Array<SquareStateType[]> = [];
 
     // 起点となるマスから盤面の左方向のマスを配列として取得
     aroundSquareArrays.push(
@@ -64,7 +64,7 @@ const useBoard = (
     );
 
     // 起点となるマスから盤面の左斜上方向のマスを配列として取得
-    const upperLeftDiagonalSideSquareArray: SquareState[] = [];
+    const upperLeftDiagonalSideSquareArray: SquareStateType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id - sideSquares * count - count;
       if (squareId >= 0 && squareId < board.length) {
@@ -74,7 +74,7 @@ const useBoard = (
     aroundSquareArrays.push(upperLeftDiagonalSideSquareArray);
 
     // 起点となるマスから盤面の右斜上方向のマスを配列として取得
-    const upperRightDiagonalSideSquareArray: SquareState[] = [];
+    const upperRightDiagonalSideSquareArray: SquareStateType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id - sideSquares * count + count;
       if (squareId > 0 && squareId < board.length) {
@@ -85,7 +85,7 @@ const useBoard = (
 
     // 起点となるマスから盤面の左斜下方向のマスを配列として取得
 
-    const lowerLeftDiagonalSideSquareArray: SquareState[] = [];
+    const lowerLeftDiagonalSideSquareArray: SquareStateType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id + sideSquares * count - count;
       if (squareId >= 0 && squareId < board.length - 1) {
@@ -95,7 +95,7 @@ const useBoard = (
     aroundSquareArrays.push(lowerLeftDiagonalSideSquareArray);
 
     // 起点となるマスから盤面の右斜下方向のマスを配列として取得
-    const lowerRightDiagonalSideSquareArray: SquareState[] = [];
+    const lowerRightDiagonalSideSquareArray: SquareStateType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id + sideSquares * count + count;
       if (squareId >= 0 && squareId < board.length) {
@@ -104,7 +104,7 @@ const useBoard = (
     }
     aroundSquareArrays.push(lowerRightDiagonalSideSquareArray);
 
-    const shouldReverseSquareArray: SquareState[] = [];
+    const shouldReverseSquareArray: SquareStateType[] = [];
     aroundSquareArrays.forEach((squareArray) => {
       const emptySquareIndex: number = squareArray.findIndex(
         (square) => square.val === 0,
@@ -125,9 +125,9 @@ const useBoard = (
   };
 
   // ボードの状態の初期化メソッド
-  const initializeState = (numArray: number[]): BoardState => {
-    const squaresArray: SquareState[] = numArray.map(
-      (num: number): SquareState => {
+  const initializeState = (numArray: number[]): BoardStateType => {
+    const squaresArray: SquareStateType[] = numArray.map(
+      (num: number): SquareStateType => {
         return {
           id: num,
           column: num % onSideSquares,
@@ -147,7 +147,9 @@ const useBoard = (
 
   // コンポーネントで使用する状態を定義
   const [isCurrentPlayer, changePlayer] = useState(true);
-  const [state, updateState] = useState(initializeState(squaresCountsArray));
+  const [BoardState, updateState] = useState(
+    initializeState(squaresCountsArray),
+  );
 
   // 現在のプレイヤーの値を設定
   let currentPlayerVal: PlayerValType;
@@ -159,8 +161,8 @@ const useBoard = (
 
   // ボードの初期レンダリング時に石を４つ互い違いに置く
   useEffect(() => {
-    const stateCopy: BoardState = state.slice();
-    const centerSquareArray: SquareState[] = stateCopy.filter((square) => {
+    const stateCopy: BoardStateType = BoardState.slice();
+    const centerSquareArray: SquareStateType[] = stateCopy.filter((square) => {
       return (
         // 右上のマス
         (square.column === onSideSquares / 2 - 1 &&
@@ -202,11 +204,11 @@ const useBoard = (
   }, []);
 
   // ひっくり返せる石があるかチェックするメソッド
-  const hasReversibleSquare = (squareCount: number): boolean => {
-    const baseSquare = state[squareCount];
-    const shouldReverseSquareArray: SquareState[] = getShouldReverseSquareArray(
+  const hasReversiblePiece = (squareCount: number): boolean => {
+    const baseSquare = BoardState[squareCount];
+    const shouldReverseSquareArray: SquareStateType[] = getShouldReverseSquareArray(
       baseSquare,
-      state,
+      BoardState,
       onSideSquares,
       currentPlayerVal,
     );
@@ -215,19 +217,19 @@ const useBoard = (
   };
 
   // すでに置かれた石があるかチェックするメソッド
-  const hasPlacedSquare = (squareCount: number): boolean => {
-    const baseSquare = state[squareCount];
+  const hasPlacedPiece = (squareCount: number): boolean => {
+    const baseSquare = BoardState[squareCount];
 
     return !!(baseSquare.val !== 0);
   };
 
   // 石が置かれたときに挟まれた石をひっくり返し、プレイヤーを交代するメソッド
-  const setSquare = (squareCount: number) => {
-    const stateCopy: typeof state = state.slice();
-    const clickedSquare: SquareState = stateCopy[squareCount];
+  const reverseSquare = (squareCount: number) => {
+    const stateCopy: typeof BoardState = BoardState.slice();
+    const clickedSquare: SquareStateType = stateCopy[squareCount];
 
     // ひっくり返されるべきマスをまとめておく配列を定義
-    const shouldReverseSquareArray: SquareState[] = getShouldReverseSquareArray(
+    const shouldReverseSquareArray: SquareStateType[] = getShouldReverseSquareArray(
       clickedSquare,
       stateCopy,
       onSideSquares,
@@ -246,10 +248,10 @@ const useBoard = (
 
   return {
     squaresCountsArray,
-    state,
-    hasReversibleSquare,
-    setSquare,
-    hasPlacedSquare,
+    BoardState,
+    hasReversiblePiece,
+    reverseSquare,
+    hasPlacedPiece,
   };
 };
 
