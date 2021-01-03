@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Const from '../../const';
-import getShouldReverseSquareArray from '../../utils';
+import getShouldReverseSquareArray from '../../hooks/use-board';
 
 import Square from '../atoms/Square';
 import Piece from '../atoms/Piece';
