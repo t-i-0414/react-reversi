@@ -11,21 +11,26 @@ const EnhancedBoard: React.FC<BoardProp> = ({ onSideSquares }) => {
   const {
     squaresCountsArray,
     state,
-    checkCanReverseSquare,
+    hasReversibleSquare,
     setSquare,
+    hasPlacedSquare,
   } = useBoard(onSideSquares);
 
   return (
     <Board onSideSquares={onSideSquares}>
       {squaresCountsArray.map((squareCount: number) => (
         <Square key={state[squareCount].id}>
-          {checkCanReverseSquare(squareCount) && (
+          {hasReversibleSquare(squareCount) && (
             <Piece
               playerVal={state[squareCount].val}
               onclick={() => {
                 setSquare(squareCount);
               }}
             />
+          )}
+
+          {hasPlacedSquare(squareCount) && (
+            <Piece playerVal={state[squareCount].val} />
           )}
         </Square>
       ))}

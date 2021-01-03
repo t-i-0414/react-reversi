@@ -10,8 +10,9 @@ const useBoard = (
 ): {
   squaresCountsArray: Array<number>;
   state: BoardState;
-  checkCanReverseSquare: (squareCount: number) => boolean;
+  hasReversibleSquare: (squareCount: number) => boolean;
   setSquare: (squareCount: number) => void;
+  hasPlacedSquare: (squareCount: number) => boolean;
 } => {
   // 渡された配列からひっくり返すべきマスを取得するメソッド
   const getShouldReverseSquareArray = (
@@ -201,7 +202,7 @@ const useBoard = (
   }, []);
 
   // ひっくり返せる石があるかチェックするメソッド
-  const checkCanReverseSquare = (squareCount: number): boolean => {
+  const hasReversibleSquare = (squareCount: number): boolean => {
     const baseSquare = state[squareCount];
     const shouldReverseSquareArray: SquareState[] = getShouldReverseSquareArray(
       baseSquare,
@@ -210,7 +211,14 @@ const useBoard = (
       currentPlayerVal,
     );
 
-    return !!(baseSquare.val !== 0) || !!(shouldReverseSquareArray.length > 0);
+    return !!(baseSquare.val === 0) && !!(shouldReverseSquareArray.length > 0);
+  };
+
+  // すでに置かれた石があるかチェックするメソッド
+  const hasPlacedSquare = (squareCount: number): boolean => {
+    const baseSquare = state[squareCount];
+
+    return !!(baseSquare.val !== 0);
   };
 
   // 石が置かれたときに挟まれた石をひっくり返し、プレイヤーを交代するメソッド
@@ -236,7 +244,13 @@ const useBoard = (
     changePlayer(!isCurrentPlayer);
   };
 
-  return { squaresCountsArray, state, checkCanReverseSquare, setSquare };
+  return {
+    squaresCountsArray,
+    state,
+    hasReversibleSquare,
+    setSquare,
+    hasPlacedSquare,
+  };
 };
 
 export default useBoard;
