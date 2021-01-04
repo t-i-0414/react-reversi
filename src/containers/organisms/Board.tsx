@@ -10,7 +10,7 @@ interface BoardProp {
 const EnhancedBoard: React.FC<BoardProp> = ({ onSideSquares }) => {
   const {
     squaresCountsArray,
-    BoardState,
+    boardState,
     hasReversiblePiece,
     reverseSquare,
     hasPlacedPiece,
@@ -19,10 +19,10 @@ const EnhancedBoard: React.FC<BoardProp> = ({ onSideSquares }) => {
   return (
     <Board onSideSquares={onSideSquares}>
       {squaresCountsArray.map((squareCount: number) => (
-        <Square key={BoardState[squareCount].id}>
+        <Square key={boardState[squareCount].id}>
           {hasReversiblePiece(squareCount) && (
             <Piece
-              playerVal={BoardState[squareCount].val}
+              playerVal={boardState[squareCount].val}
               onclick={() => {
                 reverseSquare(squareCount);
               }}
@@ -30,7 +30,7 @@ const EnhancedBoard: React.FC<BoardProp> = ({ onSideSquares }) => {
           )}
 
           {hasPlacedPiece(squareCount) && (
-            <Piece playerVal={BoardState[squareCount].val} />
+            <Piece playerVal={boardState[squareCount].val} />
           )}
         </Square>
       ))}

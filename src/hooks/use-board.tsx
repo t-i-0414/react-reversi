@@ -9,17 +9,100 @@ const useBoard = (
   onSideSquares: number,
 ): {
   squaresCountsArray: Array<number>;
-  BoardState: BoardStateType;
+  boardState: BoardStateType;
   hasReversiblePiece: (squareCount: number) => boolean;
   reverseSquare: (squareCount: number) => void;
   hasPlacedPiece: (squareCount: number) => boolean;
 } => {
+  /**
+   * Calculate the total number of squares on the board from the number of squares on the sides
+   * @param {number} onSideSquares - Number of squares per side
+   * @return - [0, 1, 2 ・・・]
+   */
+  const squaresCountsArray: number[] = Array.from(
+    new Array(onSideSquares ** 2).keys(),
+  );
+
+  // ボードの状態の初期化メソッド
+  const initializeState = (numArray: number[]): BoardStateType => {
+    const squaresArray: SquareStateType[] = numArray.map(
+      (num: number): SquareStateType => {
+        return {
+          id: num,
+          column: num % onSideSquares,
+          row: Math.floor(num / onSideSquares),
+          val: PlayerVal.NONE,
+        };
+      },
+    );
+
+    return squaresArray;
+  };
+
+  // コンポーネントで使用する状態を定義
+  const [isCurrentPlayer, changePlayer] = useState(true);
+  const [boardState, updateState] = useState(
+    initializeState(squaresCountsArray),
+  );
+
+  // 現在のプレイヤーの値を設定
+  let currentPlayerVal: PlayerValType;
+  if (isCurrentPlayer) {
+    currentPlayerVal = PlayerVal.WHITE;
+  } else {
+    currentPlayerVal = PlayerVal.BLACK;
+  }
+
+  // ボードの初期レンダリング時に石を４つ互い違いに置く
+  useEffect(() => {
+    const stateCopy: BoardStateType = boardState.slice();
+    const centerSquareArray: SquareStateType[] = stateCopy.filter((square) => {
+      return (
+        // 右上のマス
+        (square.column === onSideSquares / 2 - 1 &&
+          square.row === onSideSquares / 2 - 1) ||
+        // 左上のマス
+        (square.column === onSideSquares / 2 &&
+          square.row === onSideSquares / 2 - 1) ||
+        // 右下のマス
+        (square.column === onSideSquares / 2 - 1 &&
+          square.row === onSideSquares / 2) ||
+        // 左下のマス
+        (square.column === onSideSquares / 2 &&
+          square.row === onSideSquares / 2)
+      );
+    });
+
+    let isColorWhite = false;
+    let playerVal: PlayerValType;
+    centerSquareArray.map((square) => {
+      const squareCopy = square;
+
+      if (centerSquareArray.indexOf(square) * 2 !== centerSquareArray.length) {
+        isColorWhite = !isColorWhite;
+      }
+
+      if (isColorWhite) {
+        playerVal = PlayerVal.WHITE;
+      } else {
+        playerVal = PlayerVal.BLACK;
+      }
+
+      squareCopy.val = playerVal;
+
+      return square;
+    });
+
+    updateState(stateCopy);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // 渡された配列からひっくり返すべきマスを取得するメソッド
   const getShouldReverseSquareArray = (
     baseSquare: SquareStateType,
     board: BoardStateType,
     sideSquares: number,
-    currentPlayerVal: PlayerValType,
+    playerVal: PlayerValType,
   ): SquareStateType[] => {
     const aroundSquareArrays: Array<SquareStateType[]> = [];
 
@@ -114,7 +197,7 @@ const useBoard = (
       }
 
       const endpointSquareIndex: number = squareArray.findIndex(
-        (square) => square.val === currentPlayerVal,
+        (square) => square.val === playerVal,
       );
       squareArray.splice(Math.max(0, endpointSquareIndex), squareArray.length);
 
@@ -124,91 +207,12 @@ const useBoard = (
     return shouldReverseSquareArray;
   };
 
-  // ボードの状態の初期化メソッド
-  const initializeState = (numArray: number[]): BoardStateType => {
-    const squaresArray: SquareStateType[] = numArray.map(
-      (num: number): SquareStateType => {
-        return {
-          id: num,
-          column: num % onSideSquares,
-          row: Math.floor(num / onSideSquares),
-          val: PlayerVal.NONE,
-        };
-      },
-    );
-
-    return squaresArray;
-  };
-
-  // 一辺のマスの数から、盤面のトータルのマスの数を算出
-  const squaresCountsArray: number[] = Array.from(
-    new Array(onSideSquares ** 2).keys(),
-  );
-
-  // コンポーネントで使用する状態を定義
-  const [isCurrentPlayer, changePlayer] = useState(true);
-  const [BoardState, updateState] = useState(
-    initializeState(squaresCountsArray),
-  );
-
-  // 現在のプレイヤーの値を設定
-  let currentPlayerVal: PlayerValType;
-  if (isCurrentPlayer) {
-    currentPlayerVal = PlayerVal.WHITE;
-  } else {
-    currentPlayerVal = PlayerVal.BLACK;
-  }
-
-  // ボードの初期レンダリング時に石を４つ互い違いに置く
-  useEffect(() => {
-    const stateCopy: BoardStateType = BoardState.slice();
-    const centerSquareArray: SquareStateType[] = stateCopy.filter((square) => {
-      return (
-        // 右上のマス
-        (square.column === onSideSquares / 2 - 1 &&
-          square.row === onSideSquares / 2 - 1) ||
-        // 左上のマス
-        (square.column === onSideSquares / 2 &&
-          square.row === onSideSquares / 2 - 1) ||
-        // 右下のマス
-        (square.column === onSideSquares / 2 - 1 &&
-          square.row === onSideSquares / 2) ||
-        // 左下のマス
-        (square.column === onSideSquares / 2 &&
-          square.row === onSideSquares / 2)
-      );
-    });
-
-    let isColorWhite = false;
-    let playerVal: PlayerValType;
-    centerSquareArray.map((square) => {
-      const squareCopy = square;
-
-      if (centerSquareArray.indexOf(square) * 2 !== centerSquareArray.length) {
-        isColorWhite = !isColorWhite;
-      }
-
-      if (isColorWhite) {
-        playerVal = PlayerVal.WHITE;
-      } else {
-        playerVal = PlayerVal.BLACK;
-      }
-
-      squareCopy.val = playerVal;
-
-      return square;
-    });
-
-    updateState(stateCopy);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   // ひっくり返せる石があるかチェックするメソッド
   const hasReversiblePiece = (squareCount: number): boolean => {
-    const baseSquare = BoardState[squareCount];
+    const baseSquare = boardState[squareCount];
     const shouldReverseSquareArray: SquareStateType[] = getShouldReverseSquareArray(
       baseSquare,
-      BoardState,
+      boardState,
       onSideSquares,
       currentPlayerVal,
     );
@@ -218,14 +222,14 @@ const useBoard = (
 
   // すでに置かれた石があるかチェックするメソッド
   const hasPlacedPiece = (squareCount: number): boolean => {
-    const baseSquare = BoardState[squareCount];
+    const baseSquare = boardState[squareCount];
 
     return !!(baseSquare.val !== 0);
   };
 
   // 石が置かれたときに挟まれた石をひっくり返し、プレイヤーを交代するメソッド
   const reverseSquare = (squareCount: number) => {
-    const stateCopy: typeof BoardState = BoardState.slice();
+    const stateCopy: typeof boardState = boardState.slice();
     const clickedSquare: SquareStateType = stateCopy[squareCount];
 
     // ひっくり返されるべきマスをまとめておく配列を定義
@@ -248,7 +252,7 @@ const useBoard = (
 
   return {
     squaresCountsArray,
-    BoardState,
+    boardState,
     hasReversiblePiece,
     reverseSquare,
     hasPlacedPiece,
