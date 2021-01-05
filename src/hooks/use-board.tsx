@@ -23,7 +23,7 @@ const useBoard = (
     new Array(onSideSquares ** 2).keys(),
   );
 
-  // ボードの状態の初期化メソッド
+  // Board state initialization method
   const initializeState = (numArray: number[]): BoardStateType => {
     const squaresArray: SquareStateType[] = numArray.map(
       (num: number): SquareStateType => {
@@ -39,13 +39,13 @@ const useBoard = (
     return squaresArray;
   };
 
-  // コンポーネントで使用する状態を定義
+  // Define the state to be used by the component
   const [isCurrentPlayer, changePlayer] = useState(true);
   const [boardState, updateState] = useState(
     initializeState(squaresCountsArray),
   );
 
-  // 現在のプレイヤーの値を設定
+  // Set the value for the current player
   let currentPlayerVal: PlayerValType;
   if (isCurrentPlayer) {
     currentPlayerVal = PlayerVal.WHITE;
@@ -53,21 +53,21 @@ const useBoard = (
     currentPlayerVal = PlayerVal.BLACK;
   }
 
-  // ボードの初期レンダリング時に石を４つ互い違いに置く
+  // Place four stones on top of each other when the board is initially rendered
   useEffect(() => {
     const stateCopy: BoardStateType = boardState.slice();
     const centerSquareArray: SquareStateType[] = stateCopy.filter((square) => {
       return (
-        // 右上のマス
+        // Top right square
         (square.column === onSideSquares / 2 - 1 &&
           square.row === onSideSquares / 2 - 1) ||
-        // 左上のマス
+        // Top left square
         (square.column === onSideSquares / 2 &&
           square.row === onSideSquares / 2 - 1) ||
-        // 右下のマス
+        // Lower right square
         (square.column === onSideSquares / 2 - 1 &&
           square.row === onSideSquares / 2) ||
-        // 左下のマス
+        // Lower left square
         (square.column === onSideSquares / 2 &&
           square.row === onSideSquares / 2)
       );
@@ -97,7 +97,7 @@ const useBoard = (
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // 渡された配列からひっくり返すべきマスを取得するメソッド
+  // Method to get the square to turn over from the passed array
   const getShouldReverseSquareArray = (
     baseSquare: SquareStateType,
     board: BoardStateType,
@@ -106,7 +106,7 @@ const useBoard = (
   ): SquareStateType[] => {
     const aroundSquareArrays: Array<SquareStateType[]> = [];
 
-    // 起点となるマスから盤面の左方向のマスを配列として取得
+    // Get the array of squares from the starting square to the left of the board.
     aroundSquareArrays.push(
       board
         .filter((square) => {
@@ -115,9 +115,9 @@ const useBoard = (
           );
         })
         .reverse(),
-    ); // クリックされたマスを起点としたいためreverseをかける
+    ); // Reverse to use the clicked square as a starting point
 
-    // 起点となるマスから盤面の右方向のマスを配列として取得
+    // Get the array of squares on the right side of the board from the starting square
     aroundSquareArrays.push(
       board.filter((square) => {
         return !!(
@@ -135,9 +135,9 @@ const useBoard = (
           );
         })
         .reverse(),
-    ); // クリックされたマスを起点としたいためreverseをかける
+    ); // Get an array of squares from the starting square to the top of the board
 
-    // 起点となるマスから盤面の下方向のマスを配列として取得
+    // Obtain an array of squares from the starting square to the bottom of the board
     aroundSquareArrays.push(
       board.filter((square) => {
         return !!(
@@ -146,7 +146,7 @@ const useBoard = (
       }),
     );
 
-    // 起点となるマスから盤面の左斜上方向のマスを配列として取得
+    // Obtain an array of squares from the starting square to the top left corner of the board
     const upperLeftDiagonalSideSquareArray: SquareStateType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id - sideSquares * count - count;
@@ -156,7 +156,7 @@ const useBoard = (
     }
     aroundSquareArrays.push(upperLeftDiagonalSideSquareArray);
 
-    // 起点となるマスから盤面の右斜上方向のマスを配列として取得
+    // Obtain an array of squares from the starting square to the top right corner of the board
     const upperRightDiagonalSideSquareArray: SquareStateType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id - sideSquares * count + count;
@@ -166,7 +166,7 @@ const useBoard = (
     }
     aroundSquareArrays.push(upperRightDiagonalSideSquareArray);
 
-    // 起点となるマスから盤面の左斜下方向のマスを配列として取得
+    // Obtain an array of squares from the starting square to the bottom left corner of the board
 
     const lowerLeftDiagonalSideSquareArray: SquareStateType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
@@ -177,7 +177,7 @@ const useBoard = (
     }
     aroundSquareArrays.push(lowerLeftDiagonalSideSquareArray);
 
-    // 起点となるマスから盤面の右斜下方向のマスを配列として取得
+    // Obtain an array of squares from the starting square to the bottom right corner of the board
     const lowerRightDiagonalSideSquareArray: SquareStateType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id + sideSquares * count + count;
@@ -207,7 +207,7 @@ const useBoard = (
     return shouldReverseSquareArray;
   };
 
-  // ひっくり返せる石があるかチェックするメソッド
+  // Method to check if there is a stone that can be turned over
   const hasReversiblePiece = (squareCount: number): boolean => {
     const baseSquare = boardState[squareCount];
     const shouldReverseSquareArray: SquareStateType[] = getShouldReverseSquareArray(
@@ -220,7 +220,7 @@ const useBoard = (
     return !!(baseSquare.val === 0) && !!(shouldReverseSquareArray.length > 0);
   };
 
-  // すでに置かれた石があるかチェックするメソッド
+  // A method to check if a stone has already been placed
   const hasPlacedPiece = (squareCount: number): boolean => {
     const baseSquare = boardState[squareCount];
 
@@ -232,7 +232,7 @@ const useBoard = (
     const stateCopy: typeof boardState = boardState.slice();
     const clickedSquare: SquareStateType = stateCopy[squareCount];
 
-    // ひっくり返されるべきマスをまとめておく配列を定義
+    // The method turns over the stone that was trapped when the stone was placed and replaces the player
     const shouldReverseSquareArray: SquareStateType[] = getShouldReverseSquareArray(
       clickedSquare,
       stateCopy,
@@ -240,7 +240,7 @@ const useBoard = (
       currentPlayerVal,
     );
 
-    // ひっくり返すマスの値を一括変更
+    // Batch change the values of cells to be flipped
     shouldReverseSquareArray.forEach((square) => {
       stateCopy[square.id].val = currentPlayerVal;
     });
