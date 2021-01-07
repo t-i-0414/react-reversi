@@ -126,7 +126,7 @@ const useBoard = (
       }),
     );
 
-    // 起点となるマスから盤面の上方向のマスを配列として取得
+    // Get an array of squares from the starting square to the top of the board
     aroundSquareArrays.push(
       board
         .filter((square) => {
@@ -227,7 +227,7 @@ const useBoard = (
     return !!(baseSquare.val !== 0);
   };
 
-  // 石が置かれたときに挟まれた石をひっくり返し、プレイヤーを交代するメソッド
+  // The method turns over the stone that was trapped when the stone was placed and replaces the player
   const reverseSquare = (squareCount: number) => {
     const stateCopy: typeof boardState = boardState.slice();
     const clickedSquare: SquareStateType = stateCopy[squareCount];
