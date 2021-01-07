@@ -6,7 +6,7 @@ import Const from '../../const';
 const { Color } = Const;
 
 const Game: React.FC = () => {
-  const [isGameStartFlg, setGameStart] = useState(true); // TODO:最後にfalseにする
+  const [isGameStartFlg, setGameStart] = useState(true); // TODO:Set to false at releasing this app
 
   return (
     <StyledGameWrapper>
