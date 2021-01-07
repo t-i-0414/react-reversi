@@ -2,10 +2,10 @@ import Const from '../const';
 
 const { PlayerVal } = Const;
 
-// プレイヤーの値
+// Player value
 export type PlayerValType = typeof PlayerVal[keyof typeof PlayerVal];
 
-// マスの状態
+// Square state
 export type SquareStateType = {
   id: number;
   column: number;
@@ -13,10 +13,10 @@ export type SquareStateType = {
   val: PlayerValType;
 };
 
-// ボードの状態
+// Board state
 export type BoardStateType = SquareStateType[];
 
-// state全体の状態
+// Whole state of Board states
 export type State = {
   board: BoardStateType;
 };
