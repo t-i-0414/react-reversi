@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Const from '../../const';
+import Const from 'src/const';
 
-import { PlayerValType } from '../../types';
+import { PlayerValType } from 'src/types';
 
 const { Color, PlayerVal } = Const;
 interface PieceProps {

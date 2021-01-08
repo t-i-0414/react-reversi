@@ -1,8 +1,8 @@
 import React from 'react';
-import useBoard from '../../hooks/use-board';
-import Board from '../../components/organisms/Board';
-import Square from '../../components/atoms/Square';
-import Piece from '../../components/atoms/Piece';
+import useBoard from 'src/hooks/use-board';
+import Board from 'src/components/organisms/Board';
+import Square from 'src/components/atoms/Square';
+import Piece from 'src/components/atoms/Piece';
 
 interface BoardProp {
   onSideSquares: number;
