@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import Const from '../const';
+import Const from 'src/const';
 
-import { BoardStateType, SquareStateType, PlayerValType } from '../types';
+import { BoardStateType, SquareStateType, PlayerValType } from 'src/types';
 
 const { PlayerVal } = Const;
 
