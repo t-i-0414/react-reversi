@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Board from '../../containers/organisms/Board';
-import Const from '../../const';
+import Const from 'src/const';
+import Board from 'src/containers/organisms/Board';
 
 const { Color } = Const;
 

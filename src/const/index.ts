@@ -1,6 +1,6 @@
-import Size from './size';
-import Color from './color';
-import PlayerVal from './player-val';
+import Size from 'src/const/size';
+import Color from 'src/const/color';
+import PlayerVal from 'src/const/player-val';
 
 export default {
   Size,

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Const from '../../const';
+import Const from 'src/const';
 
 const { Size, Color } = Const;
 
