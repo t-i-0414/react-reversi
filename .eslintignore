@@ -6,3 +6,4 @@ public/
 *.config.js
 .eslintrc.js
 serviceWorker.ts
+cypress/
