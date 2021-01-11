@@ -58,10 +58,10 @@ const useBoard = (
     const stateCopy: BoardStateType = boardState.slice();
     const centerSquareArray: SquareStateType[] = stateCopy.filter((square) => {
       return (
-        // Top right square
+        // Upper right square
         (square.column === onSideSquares / 2 - 1 &&
           square.row === onSideSquares / 2 - 1) ||
-        // Top left square
+        // Upprer left square
         (square.column === onSideSquares / 2 &&
           square.row === onSideSquares / 2 - 1) ||
         // Lower right square
