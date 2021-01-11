@@ -1,5 +1,5 @@
 describe('The Game Page', () => {
-  it('successfully loads', () => {
+  it('Successfully loads', () => {
     cy.visit('/');
   });
 });
