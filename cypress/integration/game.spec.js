@@ -3,6 +3,8 @@ describe('The Game Page', () => {
     cy.visit('/');
   });
 
+  // TODO:More detail should be given about having a game app
+  // TODO:Add more test
   it('Game App exists', () => {
     expect(cy.get('#root')).to.exist;
   });
