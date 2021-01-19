@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import Game from 'src/components/pages/Game';
+import Button from 'src/containers/atoms/Button';
 import Board from 'src/containers/organisms/Board';
 
 const EnhancedGame: React.FC = () => {
-  const [isGameStartFlg, setGameStart] = useState(true); // TODO:Set to false at releasing this app
+  const [isGameStartFlg, setGameStart] = useState(false);
 
   return (
     <Game>
-      {!isGameStartFlg && (
-        <button
-          type="button"
+      {isGameStartFlg ? (
+        <Board onSideSquares={8} />
+      ) : (
+        <Button
           onClick={() => {
             setGameStart(true);
           }}
-        >
-          Game Start
-        </button>
+          text="Game Start"
+        />
       )}
-      {isGameStartFlg && <Board onSideSquares={8} />}
     </Game>
   );
 };
