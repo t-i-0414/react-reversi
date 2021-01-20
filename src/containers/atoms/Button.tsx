@@ -1,11 +1,18 @@
 import React from 'react';
-import Button from 'src/components/atoms/Button';
+import Button, { ButtonProp } from 'src/components/atoms/Button';
 
-interface EnhancedButtonProps {
-  onClick: () => void;
+interface EnhancedButtonProp extends ButtonProp {
   text: string;
 }
-const EnhancedButton: React.FC<EnhancedButtonProps> = ({ onClick, text }) => {
-  return <Button onClick={onClick}>{text}</Button>;
+const EnhancedButton: React.FC<EnhancedButtonProp> = ({
+  onClick,
+  text,
+  dataCy,
+}) => {
+  return (
+    <Button onClick={onClick} dataCy={dataCy}>
+      {text}
+    </Button>
+  );
 };
 export default EnhancedButton;

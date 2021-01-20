@@ -5,12 +5,12 @@ import Const from 'src/const';
 import { PlayerValType } from 'src/types';
 
 const { Color, PlayerVal } = Const;
-interface PieceProps {
+interface PieceProp {
   playerVal: PlayerValType;
   onclick?: () => void;
 }
 
-const Piece: React.FC<PieceProps> = ({ playerVal, onclick }) => {
+const Piece: React.FC<PieceProp> = ({ playerVal, onclick }) => {
   switch (playerVal) {
     case PlayerVal.WHITE:
       return <StyledPiece color={Color.PC_WHITE} />;

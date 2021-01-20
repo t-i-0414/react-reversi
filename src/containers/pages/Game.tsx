@@ -9,13 +9,14 @@ const EnhancedGame: React.FC = () => {
   return (
     <Game>
       {isGameStartFlg ? (
-        <Board onSideSquares={8} />
+        <Board onSideSquares={8} dataCy="board" />
       ) : (
         <Button
           onClick={() => {
             setGameStart(true);
           }}
           text="Game Start"
+          dataCy="start"
         />
       )}
     </Game>
