@@ -1,11 +1,12 @@
 import React from 'react';
 
-interface ButtonProps {
+export interface ButtonProp {
   onClick: () => void;
+  dataCy: string;
 }
-const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
+const Button: React.FC<ButtonProp> = ({ children, onClick, dataCy }) => {
   return (
-    <button type="button" onClick={onClick}>
+    <button type="button" onClick={onClick} data-cy={dataCy}>
       {children}
     </button>
   );

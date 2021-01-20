@@ -4,12 +4,13 @@ import Const from 'src/const';
 
 const { Size, Color } = Const;
 
-interface BoardProp {
+export interface BoardProp {
   onSideSquares: number;
+  dataCy: string;
 }
-const Board: React.FC<BoardProp> = ({ children, onSideSquares }) => {
+const Board: React.FC<BoardProp> = ({ children, onSideSquares, dataCy }) => {
   return (
-    <StyledBoard size={onSideSquares * Size.SQUARE_SIZE}>
+    <StyledBoard size={onSideSquares * Size.SQUARE_SIZE} data-cy={dataCy}>
       {children}
     </StyledBoard>
   );
