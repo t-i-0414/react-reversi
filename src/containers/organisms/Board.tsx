@@ -26,6 +26,7 @@ const EnhancedBoard: React.FC<BoardProp> = ({ onSideSquares, dataCy }) => {
               onclick={() => {
                 reverseSquare(squareCount);
               }}
+              dataCy="clickable"
             />
           )}
 
