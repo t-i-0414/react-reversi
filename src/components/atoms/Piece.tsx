@@ -5,19 +5,26 @@ import Const from 'src/const';
 import { PlayerValType } from 'src/types';
 
 const { Color, PlayerVal } = Const;
-interface PieceProps {
+interface PieceProp {
   playerVal: PlayerValType;
   onclick?: () => void;
+  dataCy?: string;
 }
 
-const Piece: React.FC<PieceProps> = ({ playerVal, onclick }) => {
+const Piece: React.FC<PieceProp> = ({ playerVal, onclick, dataCy }) => {
   switch (playerVal) {
     case PlayerVal.WHITE:
       return <StyledPiece color={Color.PC_WHITE} />;
     case PlayerVal.BLACK:
       return <StyledPiece color={Color.PC_BLACK} />;
     default:
-      return <StyledPiece color={Color.PC_INVISIBLE} onClick={onclick} />;
+      return (
+        <StyledPiece
+          color={Color.PC_INVISIBLE}
+          onClick={onclick}
+          data-cy={dataCy}
+        />
+      );
   }
 };
 

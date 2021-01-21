@@ -4,8 +4,12 @@ import Const from 'src/const';
 
 const { Size, Color } = Const;
 
-const Square: React.FC = ({ children }) => {
-  return <Wrapper>{children}</Wrapper>;
+interface SquareProp {
+  dataCy: string;
+}
+
+const Square: React.FC<SquareProp> = ({ children, dataCy }) => {
+  return <Wrapper data-cy={dataCy}>{children}</Wrapper>;
 };
 
 const Wrapper = styled.div`
