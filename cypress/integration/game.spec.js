@@ -19,7 +19,12 @@ describe('The Game Page', () => {
   });
 
   it('Successfully Square click', () => {
-    cy.get('[data-cy="square-20"]').click();
-    cy.get('[data-cy="square-21"]').click();
+    for (let n = 0; n < 60; n++) {
+      if (n % 2 === 0) {
+        cy.get('[data-cy="clickable"]').first().click();
+      } else {
+        cy.get('[data-cy="clickable"]').last().click();
+      }
+    }
   });
 });
