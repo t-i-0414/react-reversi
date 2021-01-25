@@ -11,6 +11,10 @@ describe('The Game Page', () => {
     expect(cy.title('My App')).to.exist;
   });
 
+  it('Unsuccessfully Game Start', () => {
+    cy.get('[data-cy="board"]').should('not.exist');
+  });
+
   it('Successfully Game Start', () => {
     cy.get('[data-cy="start"]').click();
     expect(cy.get('[data-cy="board"]')).to.exist;
@@ -24,5 +28,9 @@ describe('The Game Page', () => {
         cy.get('[data-cy="clickable"]').last().click();
       }
     }
+  });
+
+  it('Unsuccessfully Square click', () => {
+    cy.get('[data-cy="clickable"]').should('not.exist');
   });
 });
