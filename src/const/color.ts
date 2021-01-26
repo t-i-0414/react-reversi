@@ -4,6 +4,7 @@ export default {
 
   // Text colors
   TX_BLACK: '#555',
+  TX_WHITE: '#fff',
 
   // Background colors
   BG_GREEN: '#38A34B',
