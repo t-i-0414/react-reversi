@@ -3,14 +3,16 @@ describe('The Game Page', () => {
     cy.visit('/');
   });
 
-  // TODO:More detail should be given about having a game app
-  // TODO:Add more test
   it('Game App exists', () => {
-    expect(cy.get('#root')).to.exist;
+    expect(cy.get('[data-cy="game"]')).to.exist;
   });
 
   it('Game App Title exists', () => {
     expect(cy.title('My App')).to.exist;
+  });
+
+  it('Unsuccessfully Game Start', () => {
+    cy.get('[data-cy="board"]').should('not.exist');
   });
 
   it('Successfully Game Start', () => {
@@ -26,5 +28,9 @@ describe('The Game Page', () => {
         cy.get('[data-cy="clickable"]').last().click();
       }
     }
+  });
+
+  it('Unsuccessfully Square click', () => {
+    cy.get('[data-cy="clickable"]').should('not.exist');
   });
 });

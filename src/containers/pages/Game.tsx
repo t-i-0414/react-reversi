@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import Game from 'src/components/pages/Game';
+import Game, { GameProp } from 'src/components/pages/Game';
 import Button from 'src/containers/atoms/Button';
 import Board from 'src/containers/organisms/Board';
 
-const EnhancedGame: React.FC = () => {
+const EnhancedGame: React.FC<GameProp> = ({ dataCy }) => {
   const [isGameStartFlg, setGameStart] = useState(false);
 
   return (
-    <Game>
+    <Game dataCy={dataCy}>
       {isGameStartFlg ? (
         <Board onSideSquares={8} dataCy="board" />
       ) : (

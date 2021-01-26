@@ -4,8 +4,11 @@ import Const from 'src/const';
 
 const { Color } = Const;
 
-const Game: React.FC = ({ children }) => {
-  return <StyledGameWrapper>{children}</StyledGameWrapper>;
+export interface GameProp {
+  dataCy: string;
+}
+const Game: React.FC<GameProp> = ({ children, dataCy }) => {
+  return <StyledGameWrapper data-cy={dataCy}>{children}</StyledGameWrapper>;
 };
 
 const StyledGameWrapper = styled.div`
