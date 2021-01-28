@@ -1,34 +1,36 @@
-## PR 内容
+# Title
 
-<!-- ※簡潔に PR の内容をまとめる。 -->
+## Summary of PR
 
-- [ ] hogehoge の追加
+<!-- ※Briefly summarize the content of your PR -->
 
-## 理由/目的/関連
+- [ ] hogehoge
 
-<!-- ※ PRの理由や目的を書く。 -->
+## Reason/Purpose/Relationship
+
+<!-- ※Write the reason or purpose of the PR -->
 
 - issue
 
-## スクリーンキャプチャ
+## screen capture
 
-### 改善前 😫
+### Before improvement 😫
 
-<!-- キャプチャを添付 -->
+<!-- Attach a captcha -->
 
-### 改善後 😃
+### After improvement 😃
 
-<!-- キャプチャを添付 -->
+<!-- Attach a captcha -->
 
-## 確認方法/テスト
+## How to check/test
 
-- 追加しなければならないデータ等があればその追加手順などを記述。
+- If there is any data that needs to be added, describe the procedure for adding it
 
-### テスト観点
+### test perspective
 
-1. ◯◯ の時、◯◯ が ◯◯ されること
-2. ◯◯ の時、◯◯ が ◯◯ されないこと
+1. When ◯◯, ◯◯ be ◯◯.
+2. When ◯◯, ◯◯ be not ◯◯.
 
-## その他
+## Other
 
-確認してほしいことや、気になっていることなど、その他何かアレば記述。
+Describe what you would like us to check, what you are concerned about, or anything else.
