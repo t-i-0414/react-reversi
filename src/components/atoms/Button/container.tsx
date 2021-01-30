@@ -1,5 +1,5 @@
 import React from 'react';
-import Button, { ButtonProp } from 'src/components/atoms/Button';
+import Button, { ButtonProp } from 'src/components/atoms/Button/component';
 
 interface EnhancedButtonProp extends ButtonProp {
   text: string;
