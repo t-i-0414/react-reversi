@@ -25,3 +25,9 @@ yarn start
 ```bash
 yarn run cypress:run
 ```
+
+or
+
+```bash
+yarn run cypress:open
+```
