@@ -20,3 +20,9 @@ yarn
 ```bash
 yarn start
 ```
+
+### Run Cypress's Integration Test
+
+```bash
+yarn run cypress:run
+```
