@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game snapshot testing 1`] = `
+<div
+  className="sc-bdnylx igJAAz"
+  data-cy="start"
+>
+  <button
+    className="sc-gtssRu ktkxWl"
+    data-cy="start"
+    onClick={[Function]}
+    type="button"
+  >
+    Game Start
+  </button>
+</div>
+`;
