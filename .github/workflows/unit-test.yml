@@ -11,13 +11,13 @@ on:
       - release/**
 
 jobs:
-  cypress-run:
+  jest-run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies
-        run: yarn build
+        run: yarn install
       - name: Unit test run
         run: yarn test
       - name: Slack Notification on Success
