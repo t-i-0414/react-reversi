@@ -1,10 +1,14 @@
-name: cypress Run
+name: e2e Test
 
 on:
   push:
-    branches: [develop]
+    branches:
+      - feature/**
   pull_request:
-    branches: [develop]
+    branches:
+      - master
+      - develop
+      - release/**
 
 jobs:
   cypress-run:
