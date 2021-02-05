@@ -1,0 +1,266 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game snapshot testing 1`] = `
+<div
+  className="sc-bdnylx bfLJgB"
+  data-cy="board"
+  size={640}
+>
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-0"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-1"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-2"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-3"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-4"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-5"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-6"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-7"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-8"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-9"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-10"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-11"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-12"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-13"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-14"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-15"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-16"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-17"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-18"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-19"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-20"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-21"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-22"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-23"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-24"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-25"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-26"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-27"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-28"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-29"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-30"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-31"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-32"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-33"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-34"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-35"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-36"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-37"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-38"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-39"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-40"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-41"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-42"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-43"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-44"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-45"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-46"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-47"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-48"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-49"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-50"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-51"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-52"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-53"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-54"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-55"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-56"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-57"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-58"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-59"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-60"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-61"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-62"
+  />
+  <div
+    className="sc-gtssRu bimUly"
+    data-cy="square-63"
+  />
+</div>
+`;
