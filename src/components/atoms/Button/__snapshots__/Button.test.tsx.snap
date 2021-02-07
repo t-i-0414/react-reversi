@@ -10,14 +10,3 @@ exports[`Button unit test snapshot 1`] = `
   Game Start
 </button>
 `;
-
-exports[`Button unit test snapshot testing 1`] = `
-<button
-  className="sc-bdnylx hhgKdU"
-  data-cy="start"
-  onClick={[Function]}
-  type="button"
->
-  Game Start
-</button>
-`;

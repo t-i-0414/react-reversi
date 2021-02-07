@@ -1,27 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Piece unit test snapshot testing(black) 1`] = `
-<span
-  className="sc-bdnylx JBiyk"
-  color="#000"
-/>
-`;
-
-exports[`Piece unit test snapshot testing(clickable) 1`] = `
-<span
-  className="sc-bdnylx dPcEsT"
-  color="#38A34B"
-  data-cy="clickable"
-/>
-`;
-
-exports[`Piece unit test snapshot testing(white) 1`] = `
-<span
-  className="sc-bdnylx cJlQFq"
-  color="#fff"
-/>
-`;
-
 exports[`Piece unit test snapshot(black) 1`] = `
 <span
   className="sc-bdnylx JBiyk"
