@@ -1,10 +1,10 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Game from './container';
+import Square from './component';
 
-describe('Game unit test', () => {
+describe('Square unit test', () => {
   it('snapshot', () => {
-    const component = renderer.create(<Game dataCy="start" />);
+    const component = renderer.create(<Square dataCy="square-1" />);
     expect(component).toMatchSnapshot();
   });
 });
