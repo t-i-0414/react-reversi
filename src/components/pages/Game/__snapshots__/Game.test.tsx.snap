@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Game snapshot testing 1`] = `
+exports[`Game unit test snapshot 1`] = `
 <div
   className="sc-bdnylx igJAAz"
   data-cy="start"
