@@ -25,7 +25,7 @@ export default {
 
 const Template: Story<PieceProp> = (args) => (
   <Base>
-    <Piece dataCy="dataCy" {...args} />
+    <Piece {...args} />
   </Base>
 );
 
