@@ -2,14 +2,14 @@
 
 exports[`Piece unit test snapshot(black) 1`] = `
 <span
-  className="sc-bdnylx JBiyk"
+  className="sc-bdnylx dxSWyx"
   color="#000"
 />
 `;
 
 exports[`Piece unit test snapshot(clickable) 1`] = `
 <span
-  className="sc-bdnylx dPcEsT"
+  className="sc-bdnylx fOZcCf"
   color="#38A34B"
   data-cy="clickable"
 />
@@ -17,7 +17,7 @@ exports[`Piece unit test snapshot(clickable) 1`] = `
 
 exports[`Piece unit test snapshot(white) 1`] = `
 <span
-  className="sc-bdnylx cJlQFq"
+  className="sc-bdnylx bXfKzn"
   color="#fff"
 />
 `;

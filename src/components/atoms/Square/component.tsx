@@ -4,7 +4,7 @@ import Const from 'src/const';
 
 const { Size, Color } = Const;
 
-interface SquareProp {
+export interface SquareProp {
   dataCy: string;
 }
 
