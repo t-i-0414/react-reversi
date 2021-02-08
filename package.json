@@ -14,6 +14,12 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@storybook/addon-actions": "^6.1.17",
+    "@storybook/addon-essentials": "^6.1.17",
+    "@storybook/addon-links": "^6.1.17",
+    "@storybook/node-logger": "^6.1.17",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.17",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.7",
@@ -75,7 +81,9 @@
     "lint:style": "stylelint 'src/**/*.{css,scss,jsx,ts,tsx}'",
     "lint:style:fix": "stylelint --fix 'src/**/*.{css,scss,jsx,ts,tsx}'",
     "lint:conflict": "npx eslint --print-config .eslintrc.js | npx eslint-config-prettier-check",
-    "postinstall": "typesync"
+    "postinstall": "typesync",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -104,5 +112,6 @@
     "src/**/*.{css,scss,jsx,ts,tsx}": [
       "yarn lint:style:fix"
     ]
-  }
+  },
+  "dependencies": {}
 }
