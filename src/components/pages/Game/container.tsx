@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Game, { GameProp } from 'src/components/pages/Game';
-import Button from 'src/containers/atoms/Button';
-import Board from 'src/containers/organisms/Board';
+import Game, { GameProp } from 'src/components/pages/Game/component';
+import Button from 'src/components/atoms/Button/container';
+import Board from 'src/components/organisms/Board/container';
 
 const EnhancedGame: React.FC<GameProp> = ({ dataCy }) => {
   const [isGameStartFlg, setGameStart] = useState(false);

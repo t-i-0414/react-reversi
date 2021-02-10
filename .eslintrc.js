@@ -117,6 +117,12 @@ module.exports = {
         'react/prop-types': 'off',
       },
     },
+    {
+      files: ['*.stories.tsx'],
+      rules: {
+        'react/jsx-props-no-spreading': 'off',
+      },
+    },
   ],
   settings: {
     'import/resolver': {

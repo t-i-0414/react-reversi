@@ -14,6 +14,12 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@storybook/addon-actions": "^6.1.17",
+    "@storybook/addon-essentials": "^6.1.17",
+    "@storybook/addon-links": "^6.1.17",
+    "@storybook/node-logger": "^6.1.17",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.17",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.7",
@@ -25,6 +31,7 @@
     "@types/react": "^16.9.52",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.11",
+    "@types/react-test-renderer": "^17.0.0",
     "@types/styled-components": "^5.1.4",
     "@types/stylelint": "^9.10.1",
     "@types/testing-library__jest-dom": "^5.9.4",
@@ -49,6 +56,7 @@
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.2",
     "react-scripts": "3.4.3",
+    "react-test-renderer": "^17.0.1",
     "redux": "^4.0.5",
     "styled-components": "^5.2.0",
     "stylelint": "^13.7.2",
@@ -73,7 +81,9 @@
     "lint:style": "stylelint 'src/**/*.{css,scss,jsx,ts,tsx}'",
     "lint:style:fix": "stylelint --fix 'src/**/*.{css,scss,jsx,ts,tsx}'",
     "lint:conflict": "npx eslint --print-config .eslintrc.js | npx eslint-config-prettier-check",
-    "postinstall": "typesync"
+    "postinstall": "typesync",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -102,5 +112,6 @@
     "src/**/*.{css,scss,jsx,ts,tsx}": [
       "yarn lint:style:fix"
     ]
-  }
+  },
+  "dependencies": {}
 }

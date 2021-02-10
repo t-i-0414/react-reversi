@@ -1,8 +1,8 @@
 import React from 'react';
-import useBoard from 'src/hooks/use-board';
-import Board, { BoardProp } from 'src/components/organisms/Board';
-import Square from 'src/components/atoms/Square';
-import Piece from 'src/components/atoms/Piece';
+import useBoard from 'src/components/organisms/Board/hook';
+import Board, { BoardProp } from 'src/components/organisms/Board/component';
+import Square from 'src/components/atoms/Square/component';
+import Piece from 'src/components/atoms/Piece/container';
 
 const EnhancedBoard: React.FC<BoardProp> = ({ onSideSquares, dataCy }) => {
   const {

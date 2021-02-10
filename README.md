@@ -13,10 +13,21 @@ Install the .node-version version of Node.js. Then install yarn as a package man
 ```bash
 yarn
 ```
-  
 
 ### Starting the Local Server
 
 ```bash
 yarn start
+```
+
+### Run Cypress's Integration Test
+
+```bash
+yarn run cypress:run
+```
+
+or
+
+```bash
+yarn run cypress:open
 ```
