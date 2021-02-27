@@ -24,7 +24,7 @@ const StyledBoard = styled.div<StyledBoardProp>`
   flex-wrap: wrap;
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
-  margin: 0 auto;
+  margin-bottom: 16px;
   border: 1px solid ${Color.BD_BLACK};
 `;
 

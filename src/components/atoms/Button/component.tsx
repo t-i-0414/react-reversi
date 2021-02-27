@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Const from 'src/const';
 
-const { Color } = Const;
+const { Color, Size } = Const;
 
 export interface ButtonProp {
   onClick: () => void;
@@ -23,6 +23,8 @@ const StyledBottun = styled.button`
   padding: 8px 16px;
   margin: 0 auto;
   overflow: hidden;
+  font-size: ${Size.FS_16};
+  line-height: 1.2;
   background: none;
   border: 1px solid ${Color.BD_BLACK};
   border-radius: 4px;

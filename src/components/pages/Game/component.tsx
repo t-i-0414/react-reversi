@@ -12,8 +12,13 @@ const Game: React.FC<GameProp> = ({ children, dataCy }) => {
 };
 
 const StyledGameWrapper = styled.div`
-  width: 1024px;
-  margin: 64px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 992px;
+  height: 768px;
+  margin: 0 auto;
   color: ${Color.TX_BLACK};
 `;
 
