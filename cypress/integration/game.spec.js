@@ -1,3 +1,7 @@
+beforeEach(() => {
+  cy.viewport(1366, 768);
+});
+
 describe('The Game Page', () => {
   it('Successfully loads', () => {
     cy.visit('/');
