@@ -2,11 +2,11 @@
 
 exports[`Game unit test snapshot 1`] = `
 <div
-  className="sc-bdnylx igJAAz"
+  className="sc-bdnylx ljgJuJ"
   data-cy="start"
 >
   <button
-    className="sc-gtssRu ktkxWl"
+    className="sc-gtssRu uftyw"
     data-cy="start"
     onClick={[Function]}
     type="button"
