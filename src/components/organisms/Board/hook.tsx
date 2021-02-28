@@ -1,48 +1,42 @@
 import { useState, useEffect } from 'react';
 import Const from 'src/const';
-
-import { BoardStateType, SquareStateType, PlayerValType } from 'src/types';
+import { BoardStateType, SquareStateType, PlayerValType } from 'src/@types';
 
 const { PlayerVal } = Const;
 
 const useBoard = (
   onSideSquares: number,
 ): {
-  squaresCountsArray: Array<number>;
   boardState: BoardStateType;
   hasReversiblePiece: (squareCount: number) => boolean;
   reverseSquare: (squareCount: number) => void;
   hasPlacedPiece: (squareCount: number) => boolean;
 } => {
-  /**
-   * Calculate the total number of squares on the board from the number of squares on the sides
-   * @param {number} onSideSquares - Number of squares per side
-   * @return - [0, 1, 2 ・・・]
-   */
-  const squaresCountsArray: number[] = Array.from(
-    new Array(onSideSquares ** 2).keys(),
-  );
+  const initializeBoardState = (
+    oneSideSquareCounts: number,
+  ): BoardStateType => {
+    const totalSquareCounts: number = oneSideSquareCounts ** 2;
+    const boardState: BoardStateType = [];
 
-  // Board state initialization method
-  const initializeState = (numArray: number[]): BoardStateType => {
-    const squaresArray: SquareStateType[] = numArray.map(
-      (num: number): SquareStateType => {
-        return {
-          id: num,
-          column: num % onSideSquares,
-          row: Math.floor(num / onSideSquares),
-          val: PlayerVal.NONE,
-        };
-      },
-    );
+    for (
+      let squareCounts = 0;
+      squareCounts < totalSquareCounts;
+      squareCounts += 1
+    ) {
+      boardState.push({
+        id: squareCounts,
+        column: squareCounts % oneSideSquareCounts,
+        row: Math.floor(squareCounts / oneSideSquareCounts),
+        val: PlayerVal.NONE,
+      });
+    }
 
-    return squaresArray;
+    return boardState;
   };
 
-  // Define the state to be used by the component
   const [isCurrentPlayer, changePlayer] = useState(true);
   const [boardState, updateState] = useState(
-    initializeState(squaresCountsArray),
+    initializeBoardState(onSideSquares),
   );
 
   // Set the value for the current player
@@ -251,7 +245,6 @@ const useBoard = (
   };
 
   return {
-    squaresCountsArray,
     boardState,
     hasReversiblePiece,
     reverseSquare,
