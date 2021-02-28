@@ -3,10 +3,10 @@ import useBoard from 'src/components/organisms/Board/hook';
 import Board, { BoardProp } from 'src/components/organisms/Board/component';
 import Square from 'src/components/atoms/Square/component';
 import Piece from 'src/components/atoms/Piece/container';
+import { SquareStateType } from 'src/@types';
 
 const EnhancedBoard: React.FC<BoardProp> = ({ onSideSquares, dataCy }) => {
   const {
-    squaresCountsArray,
     boardState,
     hasReversiblePiece,
     reverseSquare,
@@ -15,26 +15,22 @@ const EnhancedBoard: React.FC<BoardProp> = ({ onSideSquares, dataCy }) => {
 
   return (
     <Board onSideSquares={onSideSquares} dataCy={dataCy}>
-      {squaresCountsArray.map((squareCount: number) => (
-        <Square
-          key={boardState[squareCount].id}
-          dataCy={`square-${boardState[squareCount].id}`}
-        >
-          {hasReversiblePiece(squareCount) && (
-            <Piece
-              playerVal={boardState[squareCount].val}
-              onclick={() => {
-                reverseSquare(squareCount);
-              }}
-              dataCy="clickable"
-            />
-          )}
-
-          {hasPlacedPiece(squareCount) && (
-            <Piece playerVal={boardState[squareCount].val} />
-          )}
-        </Square>
-      ))}
+      {boardState.map((square: SquareStateType) => {
+        return (
+          <Square key={square.id} dataCy={`square-${square.id}`}>
+            {hasReversiblePiece(square.id) && (
+              <Piece
+                playerVal={square.val}
+                onclick={() => {
+                  reverseSquare(square.id);
+                }}
+                dataCy="clickable"
+              />
+            )}
+            {hasPlacedPiece(square.id) && <Piece playerVal={square.val} />}
+          </Square>
+        );
+      })}
     </Board>
   );
 };
