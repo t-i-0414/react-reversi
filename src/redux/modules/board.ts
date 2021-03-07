@@ -26,4 +26,4 @@ export default (state = initialState, action: ActionType) => {
   }
 };
 
-// updating.
+// updating...
