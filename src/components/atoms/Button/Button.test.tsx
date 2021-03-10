@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Button from './container';
+import Button from './component';
 
 describe('Button unit test', () => {
   it('snapshot', () => {

@@ -8,7 +8,7 @@ export default {
   component: Button,
   argTypes: {
     // creates a specific argType based on the iconMap object
-    children: {
+    text: {
       control: {
         type: 'text',
       },
@@ -20,14 +20,14 @@ interface EnhancedButtonProp extends ButtonProp {
 }
 const Template: Story<EnhancedButtonProp> = (args) => (
   <Base>
-    <Button {...args}>{args.children}</Button>
+    <Button {...args}>{args.text}</Button>
   </Base>
 );
 
 export const normal = Template.bind({});
 
 normal.args = {
-  children: 'Game Start',
+  text: 'Game Start',
 };
 
 const Base = styled.div`

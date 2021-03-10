@@ -12,6 +12,7 @@ exports[`Piece unit test snapshot(clickable) 1`] = `
   className="sc-bdnylx fOZcCf"
   color="#38A34B"
   data-cy="clickable"
+  onClick={[Function]}
 />
 `;
 

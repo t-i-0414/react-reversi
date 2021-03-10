@@ -3,7 +3,7 @@ import Const from 'src/const';
 import styled from 'styled-components';
 import Piece from 'src/components/atoms/Piece/component';
 
-const { Color, Size } = Const;
+const { Color, Size, PlayerVal } = Const;
 
 const Information: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const Information: React.FC = () => {
       <MainContainer>
         <PlayerInformation>
           <PieceContainer>
-            <Piece color={Color.PC_WHITE} />
+            <Piece playerVal={PlayerVal.WHITE} />
           </PieceContainer>
           <CurrentCounts>2</CurrentCounts>
         </PlayerInformation>
@@ -22,7 +22,7 @@ const Information: React.FC = () => {
         <PlayerInformation>
           <CurrentCounts>2</CurrentCounts>
           <PieceContainer>
-            <Piece color={Color.PC_BLACK} />
+            <Piece playerVal={PlayerVal.BLACK} />
           </PieceContainer>
         </PlayerInformation>
       </MainContainer>
