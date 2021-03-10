@@ -1,4 +1,4 @@
-name: Type Check
+name: Lint Check
 
 on:
   pull_request:
@@ -15,15 +15,15 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: yarn install
-      - name: Type Check run
-        run: yarn type-check
+      - name: Lint Check run
+        run: yarn lint
       - name: Slack Notification on Success
         if: success()
         uses: rtCamp/action-slack-notify@v2.0.2
         env:
           SLACK_CHANNEL: react-reversi-gh
           SLACK_TITLE: CI Test Success
-          SLACK_MESSAGE: 'Type Check Passed! :rocket:'
+          SLACK_MESSAGE: 'Lint Check Passed! :rocket:'
           SLACK_COLOR: good
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       - name: Slack Notification on Failure
@@ -32,6 +32,6 @@ jobs:
         env:
           SLACK_CHANNEL: react-reversi-gh
           SLACK_TITLE: CI Test Success
-          SLACK_MESSAGE: 'Type Check Failed! :boom:'
+          SLACK_MESSAGE: 'Lint Check Failed! :boom:'
           SLACK_COLOR: danger
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
