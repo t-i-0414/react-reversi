@@ -8,7 +8,7 @@ on:
       - release/**
 
 jobs:
-  jest-run:
+  type-check-run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
