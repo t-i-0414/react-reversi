@@ -1,4 +1,4 @@
-name: E2E Test
+name: Lint Check
 
 on:
   pull_request:
@@ -8,25 +8,22 @@ on:
       - release/**
 
 jobs:
-  e2e-test-run:
+  type-check-run:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Cypress.io
-        uses: cypress-io/github-action@v2.7.0
-        with:
-          build: yarn build
-          start: yarn start
-          wait-on: 'http://localhost:3000'
-          spec: cypress/integration/game.spec.ts
+      - name: Install dependencies
+        run: yarn install
+      - name: Lint Check run
+        run: yarn lint
       - name: Slack Notification on Success
         if: success()
         uses: rtCamp/action-slack-notify@v2.0.2
         env:
           SLACK_CHANNEL: react-reversi-gh
           SLACK_TITLE: CI Test Success
-          SLACK_MESSAGE: 'E2E Test Passed! :rocket:'
+          SLACK_MESSAGE: 'Lint Check Passed! :rocket:'
           SLACK_COLOR: good
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       - name: Slack Notification on Failure
@@ -34,7 +31,7 @@ jobs:
         if: failure()
         env:
           SLACK_CHANNEL: react-reversi-gh
-          SLACK_TITLE: CI Test Failure
-          SLACK_MESSAGE: 'E2E Test Failed! :boom:'
+          SLACK_TITLE: CI Test Success
+          SLACK_MESSAGE: 'Lint Check Failed! :boom:'
           SLACK_COLOR: danger
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

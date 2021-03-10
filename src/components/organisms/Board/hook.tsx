@@ -1,22 +1,19 @@
 import { useState, useEffect } from 'react';
 import Const from 'src/const';
-import { BoardStateType, SquareStateType, PlayerValType } from 'src/@types';
 
 const { PlayerVal } = Const;
 
 const useBoard = (
   onSideSquares: number,
 ): {
-  boardState: BoardStateType;
+  boardState: BoardType;
   hasReversiblePiece: (squareCount: number) => boolean;
   reverseSquare: (squareCount: number) => void;
   hasPlacedPiece: (squareCount: number) => boolean;
 } => {
-  const initializeBoardState = (
-    oneSideSquareCounts: number,
-  ): BoardStateType => {
+  const initializeBoardState = (oneSideSquareCounts: number): BoardType => {
     const totalSquareCounts: number = oneSideSquareCounts ** 2;
-    const boardState: BoardStateType = [];
+    const boardState: BoardType = [];
 
     for (
       let squareCounts = 0;
@@ -40,7 +37,7 @@ const useBoard = (
   );
 
   // Set the value for the current player
-  let currentPlayerVal: PlayerValType;
+  let currentPlayerVal: UnionValType<typeof PlayerVal>;
   if (isCurrentPlayer) {
     currentPlayerVal = PlayerVal.WHITE;
   } else {
@@ -49,8 +46,8 @@ const useBoard = (
 
   // Place four stones on top of each other when the board is initially rendered
   useEffect(() => {
-    const stateCopy: BoardStateType = boardState.slice();
-    const centerSquareArray: SquareStateType[] = stateCopy.filter((square) => {
+    const stateCopy: BoardType = boardState.slice();
+    const centerSquareArray: SquareType[] = stateCopy.filter((square) => {
       return (
         // Upper right square
         (square.column === onSideSquares / 2 - 1 &&
@@ -68,7 +65,7 @@ const useBoard = (
     });
 
     let isColorWhite = false;
-    let playerVal: PlayerValType;
+    let playerVal: UnionValType<typeof PlayerVal>;
     centerSquareArray.map((square) => {
       const squareCopy = square;
 
@@ -93,12 +90,12 @@ const useBoard = (
 
   // Method to get the square to turn over from the passed array
   const getShouldReverseSquareArray = (
-    baseSquare: SquareStateType,
-    board: BoardStateType,
+    baseSquare: SquareType,
+    board: BoardType,
     sideSquares: number,
-    playerVal: PlayerValType,
-  ): SquareStateType[] => {
-    const aroundSquareArrays: Array<SquareStateType[]> = [];
+    playerVal: UnionValType<typeof PlayerVal>,
+  ): SquareType[] => {
+    const aroundSquareArrays: Array<SquareType[]> = [];
 
     // Get the array of squares from the starting square to the left of the board.
     aroundSquareArrays.push(
@@ -141,7 +138,7 @@ const useBoard = (
     );
 
     // Obtain an array of squares from the starting square to the top left corner of the board
-    const upperLeftDiagonalSideSquareArray: SquareStateType[] = [];
+    const upperLeftDiagonalSideSquareArray: SquareType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id - sideSquares * count - count;
       if (squareId >= 0 && squareId < board.length) {
@@ -151,7 +148,7 @@ const useBoard = (
     aroundSquareArrays.push(upperLeftDiagonalSideSquareArray);
 
     // Obtain an array of squares from the starting square to the top right corner of the board
-    const upperRightDiagonalSideSquareArray: SquareStateType[] = [];
+    const upperRightDiagonalSideSquareArray: SquareType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id - sideSquares * count + count;
       if (squareId > 0 && squareId < board.length) {
@@ -162,7 +159,7 @@ const useBoard = (
 
     // Obtain an array of squares from the starting square to the bottom left corner of the board
 
-    const lowerLeftDiagonalSideSquareArray: SquareStateType[] = [];
+    const lowerLeftDiagonalSideSquareArray: SquareType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id + sideSquares * count - count;
       if (squareId >= 0 && squareId < board.length - 1) {
@@ -172,7 +169,7 @@ const useBoard = (
     aroundSquareArrays.push(lowerLeftDiagonalSideSquareArray);
 
     // Obtain an array of squares from the starting square to the bottom right corner of the board
-    const lowerRightDiagonalSideSquareArray: SquareStateType[] = [];
+    const lowerRightDiagonalSideSquareArray: SquareType[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id + sideSquares * count + count;
       if (squareId >= 0 && squareId < board.length) {
@@ -181,7 +178,7 @@ const useBoard = (
     }
     aroundSquareArrays.push(lowerRightDiagonalSideSquareArray);
 
-    const shouldReverseSquareArray: SquareStateType[] = [];
+    const shouldReverseSquareArray: SquareType[] = [];
     aroundSquareArrays.forEach((squareArray) => {
       const emptySquareIndex: number = squareArray.findIndex(
         (square) => square.val === 0,
@@ -204,7 +201,7 @@ const useBoard = (
   // Method to check if there is a stone that can be turned over
   const hasReversiblePiece = (squareCount: number): boolean => {
     const baseSquare = boardState[squareCount];
-    const shouldReverseSquareArray: SquareStateType[] = getShouldReverseSquareArray(
+    const shouldReverseSquareArray: SquareType[] = getShouldReverseSquareArray(
       baseSquare,
       boardState,
       onSideSquares,
@@ -224,10 +221,10 @@ const useBoard = (
   // The method turns over the stone that was trapped when the stone was placed and replaces the player
   const reverseSquare = (squareCount: number) => {
     const stateCopy: typeof boardState = boardState.slice();
-    const clickedSquare: SquareStateType = stateCopy[squareCount];
+    const clickedSquare: SquareType = stateCopy[squareCount];
 
     // The method turns over the stone that was trapped when the stone was placed and replaces the player
-    const shouldReverseSquareArray: SquareStateType[] = getShouldReverseSquareArray(
+    const shouldReverseSquareArray: SquareType[] = getShouldReverseSquareArray(
       clickedSquare,
       stateCopy,
       onSideSquares,
