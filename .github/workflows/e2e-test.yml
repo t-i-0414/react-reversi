@@ -1,4 +1,4 @@
-name: e2e Test
+name: E2E Test
 
 on:
   pull_request:
@@ -19,14 +19,14 @@ jobs:
           build: yarn build
           start: yarn start
           wait-on: 'http://localhost:3000'
-          spec: cypress/integration/game.spec.js
+          spec: cypress/integration/game.spec.ts
       - name: Slack Notification on Success
         if: success()
         uses: rtCamp/action-slack-notify@v2.0.2
         env:
           SLACK_CHANNEL: react-reversi-gh
-          SLACK_TITLE: Test Success
-          SLACK_MESSAGE: 'CI Test Passed! :rocket:'
+          SLACK_TITLE: CI Test Success
+          SLACK_MESSAGE: 'E2E Test Passed! :rocket:'
           SLACK_COLOR: good
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       - name: Slack Notification on Failure
@@ -34,7 +34,7 @@ jobs:
         if: failure()
         env:
           SLACK_CHANNEL: react-reversi-gh
-          SLACK_TITLE: Test Failure
-          SLACK_MESSAGE: 'CI Test Failed! :boom:'
+          SLACK_TITLE: CI Test Failure
+          SLACK_MESSAGE: 'E2E Test Failed! :boom:'
           SLACK_COLOR: danger
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

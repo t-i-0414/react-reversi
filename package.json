@@ -1,6 +1,6 @@
 {
   "name": "react-reversi",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "author": {
     "name": "Takuya Iwashiro",
     "email": "gutlo.ol0414@gmail.com"
@@ -86,7 +86,8 @@
     "lint:conflict": "npx eslint --print-config .eslintrc.js | npx eslint-config-prettier-check",
     "postinstall": "typesync",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "type-check": "yarn tsc --noEmit --skipLibCheck"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -115,6 +116,5 @@
     "src/**/*.{css,scss,jsx,ts,tsx}": [
       "yarn lint:style:fix"
     ]
-  },
-  "dependencies": {}
+  }
 }
