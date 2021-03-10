@@ -2,11 +2,9 @@ import React from 'react';
 import Const from 'src/const';
 import Piece from 'src/components/atoms/Piece/component';
 
-import { PlayerValType } from 'src/@types';
-
 const { Color, PlayerVal } = Const;
 interface PieceProp {
-  playerVal: PlayerValType;
+  playerVal: number;
   onclick?: () => void;
   dataCy?: string;
 }

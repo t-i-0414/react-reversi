@@ -1,10 +1,8 @@
-import { BoardStateType } from 'src/@types';
-
 const SET_BOARD = 'reversi/board/SET_BOARD';
 
 type SetBoard = {
   type: typeof SET_BOARD;
-  payload: BoardStateType;
+  payload: BoardType;
 };
 
 type ActionType = SetBoard;

@@ -1,22 +1,13 @@
-import Const from 'src/const';
+// Utility Types
+declare type UnionValType<T> = T[keyof T];
 
-const { PlayerVal } = Const;
-
-// Player value
-declare type PlayerValType = typeof PlayerVal[keyof typeof PlayerVal];
-
-// Square state
-declare type SquareStateType = {
+// Square Type
+declare type SquareType = {
   id: number;
   column: number;
   row: number;
-  val: PlayerValType;
+  val: number;
 };
 
-// Board state
-declare type BoardStateType = SquareStateType[];
-
-// Whole state of Board states
-declare type State = {
-  board: BoardStateType;
-};
+// Board Type
+declare type BoardType = SquareType[];

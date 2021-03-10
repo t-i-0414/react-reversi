@@ -6,4 +6,4 @@ export default {
   Size,
   Color,
   PlayerVal,
-};
+} as const;
