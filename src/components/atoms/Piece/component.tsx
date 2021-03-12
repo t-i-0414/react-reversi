@@ -27,7 +27,7 @@ const Piece: React.FC<PieceProp> = ({ playerVal, onclick, dataCy }) => {
 };
 
 type StyledPieceProp = {
-  color: typeof Color[keyof typeof Color];
+  color: UnionValType<typeof Color>;
 };
 const StyledPiece = styled.span<StyledPieceProp>`
   display: block;

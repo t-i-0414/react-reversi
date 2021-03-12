@@ -3,56 +3,53 @@ import Const from 'src/const';
 
 const { PlayerVal } = Const;
 
-const SET_GAME_START_FLAG = 'reversi/game/SET_GAME_START_FLAG';
-const SET_BOARD = 'reversi/game/SET_BOARD';
-const SET_SIDE_SQUARE_COUNT = 'reversi/game/SET_SIDE_SQUARE_COUNT';
+const SET_GAME_START_FLAG = 'reversi/store/game/SET_GAME_START_FLAG';
+const SET_SIDE_SQUARES_COUNT = 'reversi/store/game/SET_SIDE_SQUARES_COUNT';
+const SET_BOARD_STATE = 'reversi/store/game/SET_BOARD_STATE';
 
 type SetGameStartFlag = {
   type: typeof SET_GAME_START_FLAG;
   payload: boolean;
 };
 
-type setBoardStates = {
-  type: typeof SET_BOARD;
-  payload: BoardState;
-};
-
-type SetSideSquareCount = {
-  type: typeof SET_SIDE_SQUARE_COUNT;
+type SetSideSquaresCount = {
+  type: typeof SET_SIDE_SQUARES_COUNT;
   payload: number;
 };
 
-type ActionType = SetGameStartFlag | setBoardStates | SetSideSquareCount;
+type setBoardState = {
+  type: typeof SET_BOARD_STATE;
+  payload: BoardState;
+};
+
+type ActionType = SetGameStartFlag | SetSideSquaresCount | setBoardState;
 
 const initialState = {
   isGameStart: false,
-  boardSquaresArray: [],
   sideSquaresCount: 0,
-};
-
-type State = {
-  isGameStart: boolean;
-  boardSquaresArray: BoardState;
-  sideSquaresCount: number;
+  boardState: [],
 };
 
 // reducer
-export default (state: State = initialState, action: ActionType): State => {
+export default (
+  state: StoreState['game'] = initialState,
+  action: ActionType,
+): StoreState['game'] => {
   switch (action.type) {
     case SET_GAME_START_FLAG:
       return {
         ...state,
         isGameStart: action.payload,
       };
-    case SET_BOARD:
-      return {
-        ...state,
-        boardSquaresArray: action.payload,
-      };
-    case SET_SIDE_SQUARE_COUNT:
+    case SET_SIDE_SQUARES_COUNT:
       return {
         ...state,
         sideSquaresCount: action.payload,
+      };
+    case SET_BOARD_STATE:
+      return {
+        ...state,
+        boardState: action.payload,
       };
     default:
       return state;
@@ -68,7 +65,7 @@ export const setGameStartFlg = (flag: boolean) => (
   });
 };
 
-export const setBoardStates = (sideSquaresCount: number) => (
+export const setTotalBoardStates = (sideSquaresCount: number) => (
   dispatch: Dispatch,
 ): void => {
   const totalSquareCount: number = sideSquaresCount ** 2;
@@ -113,20 +110,21 @@ export const setBoardStates = (sideSquaresCount: number) => (
   }
 
   dispatch({
-    type: SET_BOARD,
+    type: SET_BOARD_STATE,
     payload: stagingBoard,
   });
+
   dispatch({
-    type: SET_SIDE_SQUARE_COUNT,
+    type: SET_SIDE_SQUARES_COUNT,
     payload: sideSquaresCount,
   });
 };
 
-export const updateBoard = (stagingBoard: BoardState) => (
+export const updateBoardState = (stagingBoard: BoardState) => (
   dispatch: Dispatch,
 ): void => {
   dispatch({
-    type: SET_BOARD,
+    type: SET_BOARD_STATE,
     payload: stagingBoard,
   });
 };

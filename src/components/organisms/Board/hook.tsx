@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { updateBoard } from 'src/redux/modules/game';
+import { updateBoardState } from 'src/redux/modules/game';
 import Const from 'src/const';
 
 const { PlayerVal } = Const;
@@ -14,7 +15,7 @@ const useBoard = (): {
   reverseSquare: (squareCount: number) => void;
   hasPlacedPiece: (squareCount: number) => boolean;
 } => {
-  const { sideSquaresCount, boardSquaresArray } = useSelector(
+  const { sideSquaresCount, boardState: boardSquaresArray } = useSelector(
     (state: StoreState) => state.game,
   );
 
@@ -177,7 +178,7 @@ const useBoard = (): {
     });
 
     clickedSquare.val = currentPlayerVal;
-    updateBoard(stateCopy);
+    updateBoardState(stateCopy);
     changePlayer(!isCurrentPlayer);
   };
 

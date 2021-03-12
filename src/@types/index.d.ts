@@ -15,7 +15,7 @@ declare type BoardState = Square[];
 interface StoreState {
   game: {
     isGameStart: boolean;
-    boardSquaresArray: BoardState;
+    boardState: BoardState;
     sideSquaresCount: number;
   };
 }
