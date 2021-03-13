@@ -110,13 +110,13 @@ export const setTotalBoardStates = (sideSquaresCount: number) => (
   }
 
   dispatch({
-    type: SET_BOARD_STATE,
-    payload: stagingBoard,
+    type: SET_SIDE_SQUARES_COUNT,
+    payload: sideSquaresCount,
   });
 
   dispatch({
-    type: SET_SIDE_SQUARES_COUNT,
-    payload: sideSquaresCount,
+    type: SET_BOARD_STATE,
+    payload: stagingBoard,
   });
 };
 
