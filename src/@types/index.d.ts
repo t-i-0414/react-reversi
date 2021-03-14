@@ -17,5 +17,6 @@ interface StoreState {
     isGameStart: boolean;
     boardState: BoardState;
     sideSquaresCount: number;
+    currentPlayer: number;
   };
 }
