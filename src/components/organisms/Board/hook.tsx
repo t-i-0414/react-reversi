@@ -29,7 +29,7 @@ const useBoard = (): {
     currentPlayerVal = PlayerVal.BLACK;
   }
 
-  // Method to get the square to turn over from the passed array..
+  // Method to get the square to turn over from the passed array...
   const getShouldReverseSquareArray = (
     baseSquare: SquareState,
     board: BoardState,
