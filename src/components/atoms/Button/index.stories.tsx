@@ -15,10 +15,8 @@ export default {
     },
   },
 };
-interface EnhancedButtonProp extends ButtonProp {
-  children: React.ReactNode;
-}
-const Template: Story<EnhancedButtonProp> = (args) => (
+
+const Template: Story<ButtonProp> = (args) => (
   <Base>
     <Button {...args}>{args.text}</Button>
   </Base>

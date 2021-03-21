@@ -1,106 +1,39 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { useSelector, useDispatch } from 'react-redux';
+import { updateBoardState, updateCurrentPlayer } from 'src/redux/modules/game';
 import Const from 'src/const';
 
 const { PlayerVal } = Const;
 
-const useBoard = (
-  onSideSquares: number,
-): {
-  boardState: BoardType;
+const useBoard = (): {
+  boardSquaresArray: BoardState;
+  sideSquaresCount: number;
   hasReversiblePiece: (squareCount: number) => boolean;
   reverseSquare: (squareCount: number) => void;
   hasPlacedPiece: (squareCount: number) => boolean;
 } => {
-  const initializeBoardState = (oneSideSquareCounts: number): BoardType => {
-    const totalSquareCounts: number = oneSideSquareCounts ** 2;
-    const boardState: BoardType = [];
+  const dispatch = useDispatch();
+  const {
+    sideSquaresCount,
+    boardState: boardSquaresArray,
+    currentPlayer,
+  } = useSelector((state: StoreState) => state.game);
 
-    for (
-      let squareCounts = 0;
-      squareCounts < totalSquareCounts;
-      squareCounts += 1
-    ) {
-      boardState.push({
-        id: squareCounts,
-        column: squareCounts % oneSideSquareCounts,
-        row: Math.floor(squareCounts / oneSideSquareCounts),
-        val: PlayerVal.NONE,
-      });
-    }
-
-    return boardState;
-  };
-
-  const [isCurrentPlayer, changePlayer] = useState(true);
-  const [boardState, updateState] = useState(
-    initializeBoardState(onSideSquares),
-  );
-
-  // Set the value for the current player
-  let currentPlayerVal: UnionValType<typeof PlayerVal>;
-  if (isCurrentPlayer) {
-    currentPlayerVal = PlayerVal.WHITE;
-  } else {
-    currentPlayerVal = PlayerVal.BLACK;
-  }
-
-  // Place four stones on top of each other when the board is initially rendered
-  useEffect(() => {
-    const stateCopy: BoardType = boardState.slice();
-    const centerSquareArray: SquareType[] = stateCopy.filter((square) => {
-      return (
-        // Upper right square
-        (square.column === onSideSquares / 2 - 1 &&
-          square.row === onSideSquares / 2 - 1) ||
-        // Upprer left square
-        (square.column === onSideSquares / 2 &&
-          square.row === onSideSquares / 2 - 1) ||
-        // Lower right square
-        (square.column === onSideSquares / 2 - 1 &&
-          square.row === onSideSquares / 2) ||
-        // Lower left square
-        (square.column === onSideSquares / 2 &&
-          square.row === onSideSquares / 2)
-      );
-    });
-
-    let isColorWhite = false;
-    let playerVal: UnionValType<typeof PlayerVal>;
-    centerSquareArray.map((square) => {
-      const squareCopy = square;
-
-      if (centerSquareArray.indexOf(square) * 2 !== centerSquareArray.length) {
-        isColorWhite = !isColorWhite;
-      }
-
-      if (isColorWhite) {
-        playerVal = PlayerVal.WHITE;
-      } else {
-        playerVal = PlayerVal.BLACK;
-      }
-
-      squareCopy.val = playerVal;
-
-      return square;
-    });
-
-    updateState(stateCopy);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Method to get the square to turn over from the passed array
+  // Method to get the square to turn over from the passed array....
   const getShouldReverseSquareArray = (
-    baseSquare: SquareType,
-    board: BoardType,
+    baseSquare: SquareState,
+    board: BoardState,
     sideSquares: number,
     playerVal: UnionValType<typeof PlayerVal>,
-  ): SquareType[] => {
-    const aroundSquareArrays: Array<SquareType[]> = [];
+  ): SquareState[] => {
+    const aroundSquareArrays: Array<SquareState[]> = [];
 
     // Get the array of squares from the starting square to the left of the board.
     aroundSquareArrays.push(
       board
-        .filter((square) => {
+        .filter((square: SquareState) => {
           return !!(
             square.row === baseSquare.row && square.column < baseSquare.column
           );
@@ -110,7 +43,7 @@ const useBoard = (
 
     // Get the array of squares on the right side of the board from the starting square
     aroundSquareArrays.push(
-      board.filter((square) => {
+      board.filter((square: SquareState) => {
         return !!(
           square.row === baseSquare.row && square.column > baseSquare.column
         );
@@ -120,7 +53,7 @@ const useBoard = (
     // Get an array of squares from the starting square to the top of the board
     aroundSquareArrays.push(
       board
-        .filter((square) => {
+        .filter((square: SquareState) => {
           return !!(
             square.row < baseSquare.row && square.column === baseSquare.column
           );
@@ -130,7 +63,7 @@ const useBoard = (
 
     // Obtain an array of squares from the starting square to the bottom of the board
     aroundSquareArrays.push(
-      board.filter((square) => {
+      board.filter((square: SquareState) => {
         return !!(
           square.row > baseSquare.row && square.column === baseSquare.column
         );
@@ -138,7 +71,7 @@ const useBoard = (
     );
 
     // Obtain an array of squares from the starting square to the top left corner of the board
-    const upperLeftDiagonalSideSquareArray: SquareType[] = [];
+    const upperLeftDiagonalSideSquareArray: SquareState[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id - sideSquares * count - count;
       if (squareId >= 0 && squareId < board.length) {
@@ -148,7 +81,7 @@ const useBoard = (
     aroundSquareArrays.push(upperLeftDiagonalSideSquareArray);
 
     // Obtain an array of squares from the starting square to the top right corner of the board
-    const upperRightDiagonalSideSquareArray: SquareType[] = [];
+    const upperRightDiagonalSideSquareArray: SquareState[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id - sideSquares * count + count;
       if (squareId > 0 && squareId < board.length) {
@@ -159,7 +92,7 @@ const useBoard = (
 
     // Obtain an array of squares from the starting square to the bottom left corner of the board
 
-    const lowerLeftDiagonalSideSquareArray: SquareType[] = [];
+    const lowerLeftDiagonalSideSquareArray: SquareState[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id + sideSquares * count - count;
       if (squareId >= 0 && squareId < board.length - 1) {
@@ -169,7 +102,7 @@ const useBoard = (
     aroundSquareArrays.push(lowerLeftDiagonalSideSquareArray);
 
     // Obtain an array of squares from the starting square to the bottom right corner of the board
-    const lowerRightDiagonalSideSquareArray: SquareType[] = [];
+    const lowerRightDiagonalSideSquareArray: SquareState[] = [];
     for (let count = 1; count < sideSquares; count += 1) {
       const squareId: number = baseSquare.id + sideSquares * count + count;
       if (squareId >= 0 && squareId < board.length) {
@@ -178,7 +111,7 @@ const useBoard = (
     }
     aroundSquareArrays.push(lowerRightDiagonalSideSquareArray);
 
-    const shouldReverseSquareArray: SquareType[] = [];
+    const shouldReverseSquareArray: SquareState[] = [];
     aroundSquareArrays.forEach((squareArray) => {
       const emptySquareIndex: number = squareArray.findIndex(
         (square) => square.val === 0,
@@ -200,12 +133,12 @@ const useBoard = (
 
   // Method to check if there is a stone that can be turned over
   const hasReversiblePiece = (squareCount: number): boolean => {
-    const baseSquare = boardState[squareCount];
-    const shouldReverseSquareArray: SquareType[] = getShouldReverseSquareArray(
+    const baseSquare: SquareState = boardSquaresArray[squareCount];
+    const shouldReverseSquareArray: SquareState[] = getShouldReverseSquareArray(
       baseSquare,
-      boardState,
-      onSideSquares,
-      currentPlayerVal,
+      boardSquaresArray,
+      sideSquaresCount,
+      currentPlayer,
     );
 
     return !!(baseSquare.val === 0) && !!(shouldReverseSquareArray.length > 0);
@@ -213,36 +146,40 @@ const useBoard = (
 
   // A method to check if a stone has already been placed
   const hasPlacedPiece = (squareCount: number): boolean => {
-    const baseSquare = boardState[squareCount];
+    const baseSquare: SquareState = boardSquaresArray[squareCount];
 
     return !!(baseSquare.val !== 0);
   };
 
   // The method turns over the stone that was trapped when the stone was placed and replaces the player
   const reverseSquare = (squareCount: number) => {
-    const stateCopy: typeof boardState = boardState.slice();
-    const clickedSquare: SquareType = stateCopy[squareCount];
+    const stateCopy: typeof boardSquaresArray = boardSquaresArray.slice();
+    const clickedSquare: SquareState = stateCopy[squareCount];
 
     // The method turns over the stone that was trapped when the stone was placed and replaces the player
-    const shouldReverseSquareArray: SquareType[] = getShouldReverseSquareArray(
+    const shouldReverseSquareArray: SquareState[] = getShouldReverseSquareArray(
       clickedSquare,
       stateCopy,
-      onSideSquares,
-      currentPlayerVal,
+      sideSquaresCount,
+      currentPlayer,
     );
 
     // Batch change the values of cells to be flipped
     shouldReverseSquareArray.forEach((square) => {
-      stateCopy[square.id].val = currentPlayerVal;
+      stateCopy[square.id].val = currentPlayer;
     });
 
-    clickedSquare.val = currentPlayerVal;
-    updateState(stateCopy);
-    changePlayer(!isCurrentPlayer);
+    clickedSquare.val = currentPlayer;
+
+    const nextPlayer =
+      currentPlayer === PlayerVal.BLACK ? PlayerVal.WHITE : PlayerVal.BLACK;
+    dispatch(updateBoardState(stateCopy));
+    dispatch(updateCurrentPlayer(nextPlayer));
   };
 
   return {
-    boardState,
+    boardSquaresArray,
+    sideSquaresCount,
     hasReversiblePiece,
     reverseSquare,
     hasPlacedPiece,
