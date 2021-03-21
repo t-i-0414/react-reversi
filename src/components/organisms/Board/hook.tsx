@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { updateBoardState, updateCurrentPlayer } from 'src/redux/modules/game';
 import Const from 'src/const';
 
@@ -14,6 +14,7 @@ const useBoard = (): {
   reverseSquare: (squareCount: number) => void;
   hasPlacedPiece: (squareCount: number) => boolean;
 } => {
+  const dispatch = useDispatch();
   const {
     sideSquaresCount,
     boardState: boardSquaresArray,
@@ -172,8 +173,8 @@ const useBoard = (): {
 
     const nextPlayer =
       currentPlayer === PlayerVal.BLACK ? PlayerVal.WHITE : PlayerVal.BLACK;
-    updateBoardState(stateCopy);
-    updateCurrentPlayer(nextPlayer);
+    dispatch(updateBoardState(stateCopy));
+    dispatch(updateCurrentPlayer(nextPlayer));
   };
 
   return {
