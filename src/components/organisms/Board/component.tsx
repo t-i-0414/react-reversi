@@ -18,7 +18,6 @@ const Board: React.FC<BoardProp> = ({ dataCy }) => {
     reverseSquare,
     hasPlacedPiece,
   } = useBoard();
-  console.log('update!');
 
   return (
     <StyledBoard size={sideSquaresCount * Size.SQUARE_SIZE} data-cy={dataCy}>
