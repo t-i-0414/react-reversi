@@ -149,7 +149,7 @@ export const updateCurrentPlayer = (
   stagingPlayer: UnionValType<typeof PlayerVal>,
 ) => (dispatch: Dispatch): void => {
   dispatch({
-    type: SET_BOARD_STATE,
+    type: UPDATE_CURRENT_PLAYER,
     payload: stagingPlayer,
   });
 };

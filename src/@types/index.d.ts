@@ -12,11 +12,17 @@ declare type SquareState = {
 // Board Type
 declare type BoardState = Square[];
 
+declare type PlayerValState = {
+  WHITE: 1;
+  BLACK: -1;
+  NONE: 0;
+};
+
 interface StoreState {
   game: {
     isGameStart: boolean;
     boardState: BoardState;
     sideSquaresCount: number;
-    currentPlayer: number;
+    currentPlayer: UnionValType<PlayerValState>;
   };
 }

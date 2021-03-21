@@ -1,6 +1,13 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setGameStartFlg, setTotalBoardStates } from 'src/redux/modules/game';
+import {
+  setGameStartFlg,
+  setTotalBoardStates,
+  updateCurrentPlayer,
+} from 'src/redux/modules/game';
+import Const from 'src/const';
+
+const { PlayerVal } = Const;
 
 const useGame = (): {
   isGameStart: boolean;
@@ -15,6 +22,7 @@ const useGame = (): {
   const onGameStart = (sideSquaresCount: number) => {
     dispatch(setGameStartFlg(true));
     dispatch(setTotalBoardStates(sideSquaresCount));
+    dispatch(updateCurrentPlayer(PlayerVal.BLACK));
   };
 
   const isGameStart = useSelector(

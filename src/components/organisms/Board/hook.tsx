@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { updateBoardState } from 'src/redux/modules/game';
+import { updateBoardState, updateCurrentPlayer } from 'src/redux/modules/game';
 import Const from 'src/const';
 
 const { PlayerVal } = Const;
@@ -15,19 +14,11 @@ const useBoard = (): {
   reverseSquare: (squareCount: number) => void;
   hasPlacedPiece: (squareCount: number) => boolean;
 } => {
-  const { sideSquaresCount, boardState: boardSquaresArray } = useSelector(
-    (state: StoreState) => state.game,
-  );
-
-  const [isCurrentPlayer, changePlayer] = useState(true);
-
-  // Set the value for the current player
-  let currentPlayerVal: UnionValType<typeof PlayerVal>;
-  if (isCurrentPlayer) {
-    currentPlayerVal = PlayerVal.WHITE;
-  } else {
-    currentPlayerVal = PlayerVal.BLACK;
-  }
+  const {
+    sideSquaresCount,
+    boardState: boardSquaresArray,
+    currentPlayer,
+  } = useSelector((state: StoreState) => state.game);
 
   // Method to get the square to turn over from the passed array....
   const getShouldReverseSquareArray = (
@@ -146,7 +137,7 @@ const useBoard = (): {
       baseSquare,
       boardSquaresArray,
       sideSquaresCount,
-      currentPlayerVal,
+      currentPlayer,
     );
 
     return !!(baseSquare.val === 0) && !!(shouldReverseSquareArray.length > 0);
@@ -169,17 +160,20 @@ const useBoard = (): {
       clickedSquare,
       stateCopy,
       sideSquaresCount,
-      currentPlayerVal,
+      currentPlayer,
     );
 
     // Batch change the values of cells to be flipped
     shouldReverseSquareArray.forEach((square) => {
-      stateCopy[square.id].val = currentPlayerVal;
+      stateCopy[square.id].val = currentPlayer;
     });
 
-    clickedSquare.val = currentPlayerVal;
+    clickedSquare.val = currentPlayer;
+
+    const nextPlayer =
+      currentPlayer === PlayerVal.BLACK ? PlayerVal.WHITE : PlayerVal.BLACK;
     updateBoardState(stateCopy);
-    changePlayer(!isCurrentPlayer);
+    updateCurrentPlayer(nextPlayer);
   };
 
   return {
