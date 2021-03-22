@@ -21,7 +21,7 @@ const useBoard = (): {
     currentPlayer,
   } = useSelector((state: StoreState) => state.game);
 
-  // Method to get the square to turn over from the passed array....
+  // Method to get the square to turn over from the passed array.....
   const getShouldReverseSquareArray = (
     baseSquare: SquareState,
     board: BoardState,
