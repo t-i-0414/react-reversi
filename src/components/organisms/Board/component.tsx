@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React from 'react';
 import styled from 'styled-components';
 import useBoard from 'src/components/organisms/Board/hook';
