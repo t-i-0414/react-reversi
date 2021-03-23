@@ -2,20 +2,32 @@ import React from 'react';
 import Const from 'src/const';
 import styled, { css } from 'styled-components';
 
-const { Color } = Const;
+const { Color, PlayerVal } = Const;
 
 export interface PieceProp {
-  color: typeof Color[keyof typeof Color];
+  playerVal: number;
   onclick?: () => void;
   dataCy?: string;
 }
-
-const Piece: React.FC<PieceProp> = ({ onclick, dataCy, color }) => {
-  return <StyledPiece color={color} onClick={onclick} data-cy={dataCy} />;
+const Piece: React.FC<PieceProp> = ({ playerVal, onclick, dataCy }) => {
+  switch (playerVal) {
+    case PlayerVal.WHITE:
+      return <StyledPiece color={Color.PC_WHITE} />;
+    case PlayerVal.BLACK:
+      return <StyledPiece color={Color.PC_BLACK} />;
+    default:
+      return (
+        <StyledPiece
+          color={Color.PC_INVISIBLE}
+          onClick={onclick}
+          data-cy={dataCy}
+        />
+      );
+  }
 };
 
 type StyledPieceProp = {
-  color: string;
+  color: UnionValType<typeof Color>;
 };
 const StyledPiece = styled.span<StyledPieceProp>`
   display: block;

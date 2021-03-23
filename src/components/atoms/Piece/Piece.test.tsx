@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Const from 'src/const';
-import Piece from 'src/components/atoms/Piece/container';
+import Piece from 'src/components/atoms/Piece/component';
 
 const { PlayerVal } = Const;
 
@@ -16,7 +16,13 @@ describe('Piece unit test', () => {
   });
   it('snapshot(clickable)', () => {
     const component = renderer.create(
-      <Piece playerVal={PlayerVal.NONE} dataCy="clickable" />,
+      <Piece
+        playerVal={PlayerVal.NONE}
+        onclick={() => {
+          return 'This is clickable Piece.';
+        }}
+        dataCy="clickable"
+      />,
     );
     expect(component).toMatchSnapshot();
   });

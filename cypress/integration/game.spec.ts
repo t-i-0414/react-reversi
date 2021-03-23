@@ -8,7 +8,7 @@ describe('The Game Page', () => {
   });
 
   it('Game App Title exists', () => {
-    expect(cy.title('My App')).to.exist;
+    cy.title().should('eq', 'React App');
   });
 
   it('Unsuccessfully Game Start', () => {

@@ -1,6 +1,6 @@
 {
   "name": "react-reversi",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "author": {
     "name": "Takuya Iwashiro",
     "email": "gutlo.ol0414@gmail.com"
@@ -26,18 +26,19 @@
     "@types/eslint": "7.2.4",
     "@types/eslint-plugin-prettier": "^3.1.0",
     "@types/jest": "^26.0.14",
-    "@types/node": "^14.11.8",
+    "@types/node": "^14.14.31",
     "@types/prettier": "^2.1.2",
     "@types/react": "^16.9.52",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.11",
     "@types/react-test-renderer": "^17.0.0",
+    "@types/redux-logger": "^3.0.8",
     "@types/styled-components": "^5.1.4",
     "@types/stylelint": "^9.10.1",
     "@types/testing-library__jest-dom": "^5.9.4",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
-    "cypress": "^6.2.1",
+    "cypress": "^6.6.0",
     "eslint": "6.6.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.12.0",
@@ -58,6 +59,8 @@
     "react-scripts": "3.4.3",
     "react-test-renderer": "^17.0.1",
     "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.0",
     "stylelint": "^13.7.2",
     "stylelint-config-prettier": "^8.0.2",
@@ -83,7 +86,8 @@
     "lint:conflict": "npx eslint --print-config .eslintrc.js | npx eslint-config-prettier-check",
     "postinstall": "typesync",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "type-check": "yarn tsc --noEmit --skipLibCheck"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -112,6 +116,5 @@
     "src/**/*.{css,scss,jsx,ts,tsx}": [
       "yarn lint:style:fix"
     ]
-  },
-  "dependencies": {}
+  }
 }
