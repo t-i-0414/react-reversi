@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React from 'react';
 import styled from 'styled-components';
 import useBoard from 'src/components/organisms/Board/hook';
@@ -25,7 +24,7 @@ const Board: React.FC<BoardProp> = ({ dataCy }) => {
       {boardSquaresArray.map((square: SquareState) => {
         return (
           <Square key={square.id} dataCy={`square-${square.id}`}>
-            {hasReversiblePiece(square.id) && (
+            {hasReversiblePiece(square) && (
               <Piece
                 playerVal={square.val}
                 onclick={() => {
@@ -34,7 +33,7 @@ const Board: React.FC<BoardProp> = ({ dataCy }) => {
                 dataCy="clickable"
               />
             )}
-            {hasPlacedPiece(square.id) && <Piece playerVal={square.val} />}
+            {hasPlacedPiece(square) && <Piece playerVal={square.val} />}
           </Square>
         );
       })}
