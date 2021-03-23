@@ -10,7 +10,7 @@ declare type SquareState = {
 };
 
 // Board Type
-declare type BoardState = Square[];
+declare type BoardState = SquareState[];
 
 declare type PlayerValState = {
   WHITE: 1;

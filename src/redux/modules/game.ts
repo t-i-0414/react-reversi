@@ -153,3 +153,113 @@ export const updateCurrentPlayer = (
     payload: stagingPlayer,
   });
 };
+
+// Method to get the squares to turn over from the passed array
+export const getShouldReversibleSquaresArray = (
+  baseSquare: SquareState,
+  board: BoardState,
+  sideSquaresCount: number,
+  currentPlayer: UnionValType<PlayerValState>,
+): SquareState[] => {
+  const surroundingSquares: Array<SquareState[]> = [];
+
+  // Get the array of squares from the starting square to the left of the board.
+  surroundingSquares.push(
+    board
+      .filter((square: SquareState) => {
+        return !!(
+          square.row === baseSquare.row && square.column < baseSquare.column
+        );
+      })
+      .reverse(), // Reverse to use the clicked square as a starting point
+  );
+
+  // Get the array of squares on the right side of the board from the starting square
+  surroundingSquares.push(
+    board.filter((square: SquareState) => {
+      return !!(
+        square.row === baseSquare.row && square.column > baseSquare.column
+      );
+    }),
+  );
+
+  // Get an array of squares from the starting square to the top of the board
+  surroundingSquares.push(
+    board
+      .filter((square: SquareState) => {
+        return !!(
+          square.row < baseSquare.row && square.column === baseSquare.column
+        );
+      })
+      .reverse(), // Reverse to use the clicked square as a starting point
+  );
+
+  // Get an array of squares from the starting square to the bottom of the board
+  surroundingSquares.push(
+    board.filter((square: SquareState) => {
+      return !!(
+        square.row > baseSquare.row && square.column === baseSquare.column
+      );
+    }),
+  );
+
+  // Get an array of squares from the starting square to the top left corner of the board
+  const upperLeftDiagonalSideSquaresArray: SquareState[] = [];
+  for (let count = 1; count < sideSquaresCount; count += 1) {
+    const squareId: number = baseSquare.id - sideSquaresCount * count - count;
+    if (squareId >= 0 && squareId < board.length) {
+      upperLeftDiagonalSideSquaresArray.push(board[squareId]);
+    }
+  }
+  surroundingSquares.push(upperLeftDiagonalSideSquaresArray);
+
+  // Get an array of squares from the starting square to the top right corner of the board
+  const upperRightDiagonalSideSquaresArray: SquareState[] = [];
+  for (let count = 1; count < sideSquaresCount; count += 1) {
+    const squareId: number = baseSquare.id - sideSquaresCount * count + count;
+    if (squareId > 0 && squareId < board.length) {
+      upperRightDiagonalSideSquaresArray.push(board[squareId]);
+    }
+  }
+  surroundingSquares.push(upperRightDiagonalSideSquaresArray);
+
+  // Get an array of squares from the starting square to the bottom left corner of the board
+  const lowerLeftDiagonalSideSquaresArray: SquareState[] = [];
+  for (let count = 1; count < sideSquaresCount; count += 1) {
+    const squareId: number = baseSquare.id + sideSquaresCount * count - count;
+    if (squareId >= 0 && squareId < board.length - 1) {
+      lowerLeftDiagonalSideSquaresArray.push(board[squareId]);
+    }
+  }
+  surroundingSquares.push(lowerLeftDiagonalSideSquaresArray);
+
+  // Get an array of squares from the starting square to the bottom right corner of the board
+  const lowerRightDiagonalSideSquaresArray: SquareState[] = [];
+  for (let count = 1; count < sideSquaresCount; count += 1) {
+    const squareId: number = baseSquare.id + sideSquaresCount * count + count;
+    if (squareId >= 0 && squareId < board.length) {
+      lowerRightDiagonalSideSquaresArray.push(board[squareId]);
+    }
+  }
+  surroundingSquares.push(lowerRightDiagonalSideSquaresArray);
+
+  const reversibleSquaresArray: SquareState[] = [];
+
+  surroundingSquares.forEach((squareArray) => {
+    const emptySquareIndex: number = squareArray.findIndex(
+      (square) => square.val === 0,
+    );
+    if (emptySquareIndex !== -1) {
+      squareArray.splice(emptySquareIndex, squareArray.length);
+    }
+
+    const endpointSquareIndex: number = squareArray.findIndex(
+      (square) => square.val === currentPlayer,
+    );
+    squareArray.splice(Math.max(0, endpointSquareIndex), squareArray.length);
+
+    reversibleSquaresArray.push(...squareArray);
+  });
+
+  return reversibleSquaresArray;
+};
