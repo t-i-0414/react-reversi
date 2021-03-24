@@ -5,6 +5,7 @@ import Piece from 'src/components/atoms/Piece/component';
 
 const { Color, Size, PlayerVal } = Const;
 
+// .
 const Information: React.FC = () => {
   return (
     <Wrapper>
