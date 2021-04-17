@@ -11,6 +11,6 @@ export default [
       ctx.status(200),
     );
   }),
-  // Handles a GET /user request............
+  // Handles a GET /user request.............
   rest.get('/user', null),
 ];
