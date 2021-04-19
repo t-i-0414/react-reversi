@@ -5,28 +5,27 @@ import Piece from 'src/components/atoms/Piece/component';
 
 const { Color, Size, PlayerVal } = Const;
 
-// .
 const Information: React.FC = () => {
   return (
     <Wrapper>
       <ContentHeader>Scores</ContentHeader>
-      <MainContainer>
+      <Container>
         <PlayerInformation>
-          <PieceContainer>
+          <PieceInner>
             <Piece playerVal={PlayerVal.WHITE} />
-          </PieceContainer>
-          <CurrentCounts>2</CurrentCounts>
+          </PieceInner>
+          <CurrentScore>2</CurrentScore>
         </PlayerInformation>
         <Separator>
           <Line />
         </Separator>
         <PlayerInformation>
-          <CurrentCounts>2</CurrentCounts>
-          <PieceContainer>
+          <CurrentScore>2</CurrentScore>
+          <PieceInner>
             <Piece playerVal={PlayerVal.BLACK} />
-          </PieceContainer>
+          </PieceInner>
         </PlayerInformation>
-      </MainContainer>
+      </Container>
     </Wrapper>
   );
 };
@@ -44,7 +43,7 @@ const ContentHeader = styled.p`
   text-align: center;
 `;
 
-const MainContainer = styled.div`
+const Container = styled.div`
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -83,7 +82,7 @@ const PlayerInformation = styled.div`
   align-items: center;
 `;
 
-const PieceContainer = styled.div`
+const PieceInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,7 +90,7 @@ const PieceContainer = styled.div`
   height: 48px;
 `;
 
-const CurrentCounts = styled.span`
+const CurrentScore = styled.span`
   display: block;
   font-size: ${Size.FS_24};
 `;
