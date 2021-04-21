@@ -25,9 +25,7 @@ const useGame = (): {
     dispatch(updateCurrentPlayer(PlayerVal.BLACK));
   };
 
-  const isGameStart = useSelector(
-    (state: StoreState) => state.game.isGameStart,
-  );
+  const { isGameStart } = useSelector((state: StoreState) => state.game);
 
   return {
     isGameStart,
