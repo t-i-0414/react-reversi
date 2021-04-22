@@ -1,7 +1,11 @@
-// Utility Types
+/**
+ * Utility Types
+ */
 declare type UnionValType<T> = T[keyof T];
 
-// Square Type
+/**
+ * State Types
+ */
 declare type SquareState = {
   id: number;
   column: number;
@@ -9,7 +13,6 @@ declare type SquareState = {
   val: number;
 };
 
-// Board Type
 declare type BoardState = SquareState[];
 
 declare type PlayerValState = {
