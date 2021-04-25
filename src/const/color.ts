@@ -1,20 +1,20 @@
 export default {
-  // Common colors
+  // common colors
   WHITE: 'fff',
 
-  // Text colors
+  // text colors
   TX_BLACK: '#555',
   TX_WHITE: '#fff',
 
-  // Background colors
+  // background colors
   BG_GREEN: '#38A34B',
   BG_WHITE: '#fff',
   BG_BLACK: '#000',
 
-  // Border colors
+  // border colors
   BD_BLACK: '#000',
 
-  // Piece colors
+  // piece colors
   PC_WHITE: '#fff',
   PC_BLACK: '#000',
   PC_INVISIBLE: '#38A34B',

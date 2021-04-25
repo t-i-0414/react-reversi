@@ -9,7 +9,7 @@ const Information: React.FC = () => {
   // TODO:something
   return (
     <Wrapper>
-      <ContentHeader>Scores</ContentHeader>
+      <ContentHeader>Score</ContentHeader>
       <Container>
         <PlayerInformation>
           <PieceInner>

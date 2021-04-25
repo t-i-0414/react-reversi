@@ -1,8 +1,8 @@
 export default {
-  // Size of one side of a square(px)
+  // one side's size of a square(px)
   SQUARE_SIZE: 64,
 
-  // Size of text
+  // text font size
   FS_16: '16px',
   FS_20: '20px',
   FS_24: '24px',

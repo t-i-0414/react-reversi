@@ -12,7 +12,7 @@ export interface GameProp {
   dataCy: string;
 }
 const Game: React.FC<GameProp> = ({ dataCy }) => {
-  const { isGameStart, onGameStart } = useGame();
+  const { isGameStart, startGame } = useGame();
 
   return (
     <StyledGameWrapper data-cy={dataCy}>
@@ -24,7 +24,7 @@ const Game: React.FC<GameProp> = ({ dataCy }) => {
       ) : (
         <Button
           onClick={() => {
-            onGameStart(8);
+            startGame(8);
           }}
           text="Game Start"
           dataCy="start"

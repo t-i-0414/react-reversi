@@ -4,10 +4,9 @@ import { Story } from '@storybook/react/types-6-0';
 import Button, { ButtonProp } from './component';
 
 export default {
-  title: 'Button',
+  title: 'Atoms/Button',
   component: Button,
   argTypes: {
-    // creates a specific argType based on the iconMap object
     text: {
       control: {
         type: 'text',

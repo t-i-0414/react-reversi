@@ -3,7 +3,7 @@ import { Story } from '@storybook/react/types-6-0';
 import Square, { SquareProp } from './component';
 
 export default {
-  title: 'Square',
+  title: 'Atoms/Square',
   component: Square,
 };
 

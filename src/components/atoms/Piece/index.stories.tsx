@@ -7,7 +7,7 @@ import Piece, { PieceProp } from './component';
 const { PlayerVal } = Const;
 
 export default {
-  title: 'Piece',
+  title: 'Atoms/Piece',
   component: Piece,
   argTypes: {
     playerVal: {
