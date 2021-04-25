@@ -1,12 +1,12 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
-import Square, { SquareProp } from './component';
+import Square, { SquareProps } from './component';
 
 export default {
-  title: 'Square',
+  title: 'Atoms/Square',
   component: Square,
 };
 
-const Template: Story<SquareProp> = () => <Square dataCy="dataCy" />;
+const Template: Story<SquareProps> = () => <Square dataCy="dataCy" />;
 
 export const normal = Template.bind({});

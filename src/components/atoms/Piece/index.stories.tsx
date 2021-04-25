@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Story } from '@storybook/react/types-6-0';
 import Const from 'src/const';
-import Piece, { PieceProp } from './component';
+import Piece, { PieceProps } from './component';
 
 const { PlayerVal } = Const;
 
 export default {
-  title: 'Piece',
+  title: 'Atoms/Piece',
   component: Piece,
   argTypes: {
     playerVal: {
@@ -23,7 +23,7 @@ export default {
   },
 };
 
-const Template: Story<PieceProp> = (args) => (
+const Template: Story<PieceProps> = (args) => (
   <Base>
     <Piece {...args} />
   </Base>

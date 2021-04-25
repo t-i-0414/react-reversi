@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Story } from '@storybook/react/types-6-0';
-import Button, { ButtonProp } from './component';
+import Button, { ButtonProps } from './component';
 
 export default {
-  title: 'Button',
+  title: 'Atoms/Button',
   component: Button,
   argTypes: {
-    // creates a specific argType based on the iconMap object
     text: {
       control: {
         type: 'text',
@@ -16,7 +15,7 @@ export default {
   },
 };
 
-const Template: Story<ButtonProp> = (args) => (
+const Template: Story<ButtonProps> = (args) => (
   <Base>
     <Button {...args}>{args.text}</Button>
   </Base>

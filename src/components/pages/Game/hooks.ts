@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setGameStartFlg,
-  setTotalBoardStates,
+  initializeBoard,
   updateCurrentPlayer,
 } from 'src/redux/modules/game';
 import Const from 'src/const';
@@ -11,25 +11,25 @@ const { PlayerVal } = Const;
 
 const useGame = (): {
   isGameStart: boolean;
-  onGameStart: (sideSquaresCount: number) => void;
+  startGame: (sideSquaresCount: number) => void;
 } => {
   const dispatch = useDispatch();
+
+  const { isGameStart } = useSelector((store: Store) => store.game);
 
   useEffect(() => {
     dispatch(setGameStartFlg(false));
   }, [dispatch]);
 
-  const onGameStart = (sideSquaresCount: number) => {
+  const startGame = (sideSquaresCount: number) => {
     dispatch(setGameStartFlg(true));
-    dispatch(setTotalBoardStates(sideSquaresCount));
+    dispatch(initializeBoard(sideSquaresCount));
     dispatch(updateCurrentPlayer(PlayerVal.BLACK));
   };
 
-  const { isGameStart } = useSelector((state: StoreState) => state.game);
-
   return {
     isGameStart,
-    onGameStart,
+    startGame,
   };
 };
 export default useGame;

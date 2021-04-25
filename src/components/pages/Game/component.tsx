@@ -8,11 +8,11 @@ import useGame from './hooks';
 
 const { Color } = Const;
 
-export interface GameProp {
+export interface GameProps {
   dataCy: string;
 }
-const Game: React.FC<GameProp> = ({ dataCy }) => {
-  const { isGameStart, onGameStart } = useGame();
+const Game: React.FC<GameProps> = ({ dataCy }) => {
+  const { isGameStart, startGame } = useGame();
 
   return (
     <StyledGameWrapper data-cy={dataCy}>
@@ -24,7 +24,7 @@ const Game: React.FC<GameProp> = ({ dataCy }) => {
       ) : (
         <Button
           onClick={() => {
-            onGameStart(8);
+            startGame(8);
           }}
           text="Game Start"
           dataCy="start"

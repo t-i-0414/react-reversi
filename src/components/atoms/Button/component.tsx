@@ -4,12 +4,12 @@ import Const from 'src/const';
 
 const { Color, Size } = Const;
 
-export interface ButtonProp {
+export interface ButtonProps {
   text: string;
   onClick: () => void;
   dataCy: string;
 }
-const Button: React.FC<ButtonProp> = ({ text, onClick, dataCy }) => {
+const Button: React.FC<ButtonProps> = ({ text, onClick, dataCy }) => {
   return (
     <StyledBottun type="button" onClick={onClick} data-cy={dataCy}>
       {text}

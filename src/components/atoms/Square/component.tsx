@@ -4,11 +4,10 @@ import Const from 'src/const';
 
 const { Size, Color } = Const;
 
-export interface SquareProp {
+export interface SquareProps {
   dataCy: string;
 }
-
-const Square: React.FC<SquareProp> = ({ children, dataCy }) => {
+const Square: React.FC<SquareProps> = ({ children, dataCy }) => {
   return <Wrapper data-cy={dataCy}>{children}</Wrapper>;
 };
 
