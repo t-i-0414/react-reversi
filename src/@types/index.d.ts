@@ -6,14 +6,14 @@ declare type UnionValType<T> = T[keyof T];
 /**
  * State Types
  */
-declare type SquareState = {
+declare type Square = {
   key: number;
   column: number;
   row: number;
   val: number;
 };
 
-declare type BoardState = SquareState[];
+declare type Board = Square[];
 
 declare type PlayerValState = {
   WHITE: 1;
@@ -21,10 +21,10 @@ declare type PlayerValState = {
   NONE: 0;
 };
 
-interface StoreState {
+interface Store {
   game: {
     isGameStart: boolean;
-    boardState: BoardState;
+    boardState: Board;
     sideSquaresCount: number;
     currentPlayer: UnionValType<PlayerValState>;
   };

@@ -7,34 +7,32 @@ const {
 } = Utils;
 
 const useBoard = (): {
-  boardState: BoardState;
+  boardState: Board;
   sideSquaresCount: number;
-  hasCanBeTurnOverPieces: (square: SquareState) => boolean;
-  hasPlacedPiece: (square: SquareState) => boolean;
-  placePiece: (square: SquareState) => void;
+  hasCanBeTurnOverPieces: (square: Square) => boolean;
+  hasPlacedPiece: (square: Square) => boolean;
+  placePiece: (square: Square) => void;
 } => {
   const dispatch = useDispatch();
   const { sideSquaresCount, boardState } = useSelector(
-    (state: StoreState) => state.game,
+    (store: Store) => store.game,
   );
 
   // check if there is a stone that can be turned over
-  const hasCanBeTurnOverPieces = (square: SquareState): boolean => {
-    const updatableSquaresArray: SquareState[] = getUpdatableSquaresArray(
-      square,
-    );
+  const hasCanBeTurnOverPieces = (square: Square): boolean => {
+    const updatableSquaresArray: Square[] = getUpdatableSquaresArray(square);
 
     return !!(square.val === 0) && !!(updatableSquaresArray.length > 0);
   };
 
   // check if a stone has already been placed
-  const hasPlacedPiece = (square: SquareState): boolean => {
+  const hasPlacedPiece = (square: Square): boolean => {
     return !!(square.val !== 0);
   };
 
   // turn over the stone that was trapped when the stone was placed and switch the current player
-  const placePiece = (clickedSquare: SquareState) => {
-    const updatableSquaresArray: SquareState[] = getUpdatableSquaresArray(
+  const placePiece = (clickedSquare: Square) => {
+    const updatableSquaresArray: Square[] = getUpdatableSquaresArray(
       clickedSquare,
     );
 

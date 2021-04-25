@@ -15,7 +15,7 @@ const useGame = (): {
 } => {
   const dispatch = useDispatch();
 
-  const { isGameStart } = useSelector((state: StoreState) => state.game);
+  const { isGameStart } = useSelector((store: Store) => store.game);
 
   useEffect(() => {
     dispatch(setGameStartFlg(false));

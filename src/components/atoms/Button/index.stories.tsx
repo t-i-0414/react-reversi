@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Story } from '@storybook/react/types-6-0';
-import Button, { ButtonProp } from './component';
+import Button, { ButtonProps } from './component';
 
 export default {
   title: 'Atoms/Button',
@@ -15,7 +15,7 @@ export default {
   },
 };
 
-const Template: Story<ButtonProp> = (args) => (
+const Template: Story<ButtonProps> = (args) => (
   <Base>
     <Button {...args}>{args.text}</Button>
   </Base>

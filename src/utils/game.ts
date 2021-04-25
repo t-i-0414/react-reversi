@@ -3,10 +3,10 @@ import store from 'src/redux/create-store';
 /**
  * Method to get arrays of the square that has piece that can be turn over in each directions from the passed square
  */
-const getUpdatableSquaresArray = (passedSquare: SquareState): SquareState[] => {
+const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
   const { boardState, sideSquaresCount, currentPlayer } = store.getState().game;
 
-  const eachDirectionSquaresArray: Array<SquareState[]> = [];
+  const eachDirectionSquaresArray: Array<Square[]> = [];
 
   // Get an array of squares from the passed square to the left
   eachDirectionSquaresArray.push(
@@ -49,7 +49,7 @@ const getUpdatableSquaresArray = (passedSquare: SquareState): SquareState[] => {
   );
 
   // Get an array of squares from the passed square to the upper left
-  const upperLeftSquaresArray: SquareState[] = [];
+  const upperLeftSquaresArray: Square[] = [];
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key - sideSquaresCount * count - count;
@@ -60,7 +60,7 @@ const getUpdatableSquaresArray = (passedSquare: SquareState): SquareState[] => {
   eachDirectionSquaresArray.push(upperLeftSquaresArray);
 
   // Get an array of squares from the passed square to the upper right
-  const upperRightSquaresArray: SquareState[] = [];
+  const upperRightSquaresArray: Square[] = [];
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key - sideSquaresCount * count + count;
@@ -71,7 +71,7 @@ const getUpdatableSquaresArray = (passedSquare: SquareState): SquareState[] => {
   eachDirectionSquaresArray.push(upperRightSquaresArray);
 
   // Get an array of squares from the passed square to the lower left
-  const lowerLeftSquaresArray: SquareState[] = [];
+  const lowerLeftSquaresArray: Square[] = [];
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key + sideSquaresCount * count - count;
@@ -82,7 +82,7 @@ const getUpdatableSquaresArray = (passedSquare: SquareState): SquareState[] => {
   eachDirectionSquaresArray.push(lowerLeftSquaresArray);
 
   // Get an array of squares from the passed square to the lower right
-  const lowerRightSquaresArray: SquareState[] = [];
+  const lowerRightSquaresArray: Square[] = [];
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key + sideSquaresCount * count + count;
@@ -92,7 +92,7 @@ const getUpdatableSquaresArray = (passedSquare: SquareState): SquareState[] => {
   }
   eachDirectionSquaresArray.push(lowerRightSquaresArray);
 
-  const updatableSquaresArray: SquareState[] = [];
+  const updatableSquaresArray: Square[] = [];
 
   eachDirectionSquaresArray.forEach((squareArray) => {
     const emptySquareIndex: number = squareArray.findIndex(
