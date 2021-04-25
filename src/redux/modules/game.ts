@@ -26,7 +26,7 @@ type SetSideSquaresCount = {
 
 type setBoardState = {
   type: typeof SET_BOARD_STATE;
-  payload: BoardState;
+  payload: Board;
 };
 
 type updateCurrentPlayer = {
@@ -54,9 +54,9 @@ const initialState = {
  * reducer
  */
 export default (
-  state: StoreState['game'] = initialState,
+  state: Store['game'] = initialState,
   action: ActionType,
-): StoreState['game'] => {
+): Store['game'] => {
   switch (action.type) {
     case SET_GAME_START_FLAG:
       return {
@@ -96,7 +96,7 @@ export const initializeBoard = (sideSquaresCount: number) => (
   dispatch: Dispatch,
 ): void => {
   const squaresCountAmount: number = sideSquaresCount ** 2;
-  const stagingBoard: BoardState = [];
+  const stagingBoard: Board = [];
 
   for (
     let squareCount = 0;
@@ -151,7 +151,7 @@ export const initializeBoard = (sideSquaresCount: number) => (
   });
 };
 
-export const updateBoardState = (stagingBoard: BoardState) => (
+export const updateBoardState = (stagingBoard: Board) => (
   dispatch: Dispatch,
 ): void => {
   dispatch({
@@ -170,16 +170,16 @@ export const updateCurrentPlayer = (
 };
 
 export const changeGamesTurn = (
-  square: SquareState,
-  updatableSquaresArray: SquareState[],
-) => (dispatch: Dispatch, getState: () => StoreState): void => {
+  square: Square,
+  updatableSquaresArray: Square[],
+) => (dispatch: Dispatch, getState: () => Store): void => {
   const {
     game: { boardState: stagingBoardState, currentPlayer },
   } = getState();
-  const clickedSquare: SquareState = stagingBoardState[square.key];
+  const clickedSquare: Square = stagingBoardState[square.key];
 
   // change each the value of squares for pieces to be turn over
-  updatableSquaresArray.forEach((updatableSquare: SquareState) => {
+  updatableSquaresArray.forEach((updatableSquare: Square) => {
     stagingBoardState[updatableSquare.key].val = currentPlayer;
   });
 

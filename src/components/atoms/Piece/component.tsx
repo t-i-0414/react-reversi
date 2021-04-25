@@ -4,12 +4,12 @@ import styled, { css } from 'styled-components';
 
 const { Color, PlayerVal } = Const;
 
-export interface PieceProp {
+export interface PieceProps {
   playerVal: number;
   onclick?: () => void;
   dataCy?: string;
 }
-const Piece: React.FC<PieceProp> = ({ playerVal, onclick, dataCy }) => {
+const Piece: React.FC<PieceProps> = ({ playerVal, onclick, dataCy }) => {
   switch (playerVal) {
     case PlayerVal.WHITE:
       return <StyledPiece color={Color.PC_WHITE} />;

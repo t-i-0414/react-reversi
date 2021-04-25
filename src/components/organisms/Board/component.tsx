@@ -7,10 +7,10 @@ import Const from 'src/const';
 
 const { Size, Color } = Const;
 
-export interface BoardProp {
+export interface BoardProps {
   dataCy: string;
 }
-const Board: React.FC<BoardProp> = ({ dataCy }) => {
+const Board: React.FC<BoardProps> = ({ dataCy }) => {
   const {
     boardState,
     sideSquaresCount,
@@ -21,7 +21,7 @@ const Board: React.FC<BoardProp> = ({ dataCy }) => {
 
   return (
     <StyledBoard size={sideSquaresCount * Size.SQUARE_SIZE} data-cy={dataCy}>
-      {boardState.map((square: SquareState) => {
+      {boardState.map((square: Square) => {
         return (
           <Square key={square.key} dataCy={`square-${square.key}`}>
             {hasCanBeTurnOverPieces(square) && (

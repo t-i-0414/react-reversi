@@ -8,10 +8,10 @@ import useGame from './hooks';
 
 const { Color } = Const;
 
-export interface GameProp {
+export interface GameProps {
   dataCy: string;
 }
-const Game: React.FC<GameProp> = ({ dataCy }) => {
+const Game: React.FC<GameProps> = ({ dataCy }) => {
   const { isGameStart, startGame } = useGame();
 
   return (
