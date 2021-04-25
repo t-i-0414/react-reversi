@@ -1,76 +1,52 @@
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  updateBoardState,
-  updateCurrentPlayer,
-  getShouldReversibleSquaresArray,
-} from 'src/redux/modules/game';
-import Const from 'src/const';
+import { changeGamesTurn } from 'src/redux/modules/game';
+import Utils from 'src/utils';
 
-const { PlayerVal } = Const;
+const {
+  Game: { getUpdatableSquaresArray },
+} = Utils;
 
 const useBoard = (): {
-  boardSquaresArray: BoardState;
+  boardState: BoardState;
   sideSquaresCount: number;
-  hasReversiblePiece: (square: SquareState) => boolean;
-  reverseSquare: (squareCount: number) => void;
+  hasCanBeTurnOverPieces: (square: SquareState) => boolean;
   hasPlacedPiece: (square: SquareState) => boolean;
+  placePiece: (square: SquareState) => void;
 } => {
   const dispatch = useDispatch();
-  const {
-    sideSquaresCount,
-    boardState: boardSquaresArray,
-    currentPlayer,
-  } = useSelector((state: StoreState) => state.game);
+  const { sideSquaresCount, boardState } = useSelector(
+    (state: StoreState) => state.game,
+  );
 
-  // Method to check if there is a stone that can be turned over
-  const hasReversiblePiece = (square: SquareState): boolean => {
-    const shouldReverseSquareArray: SquareState[] = getShouldReversibleSquaresArray(
+  // check if there is a stone that can be turned over
+  const hasCanBeTurnOverPieces = (square: SquareState): boolean => {
+    const updatableSquaresArray: SquareState[] = getUpdatableSquaresArray(
       square,
-      boardSquaresArray,
-      sideSquaresCount,
-      currentPlayer,
     );
 
-    return !!(square.val === 0) && !!(shouldReverseSquareArray.length > 0);
+    return !!(square.val === 0) && !!(updatableSquaresArray.length > 0);
   };
 
-  // A method to check if a stone has already been placed
+  // check if a stone has already been placed
   const hasPlacedPiece = (square: SquareState): boolean => {
     return !!(square.val !== 0);
   };
 
-  // The method turns over the stone that was trapped when the stone was placed and replaces the player
-  const reverseSquare = (squareCount: number) => {
-    const stateCopy: typeof boardSquaresArray = boardSquaresArray.slice();
-    const clickedSquare: SquareState = stateCopy[squareCount];
-
-    // The method turns over the stone that was trapped when the stone was placed and replaces the player
-    const shouldReverseSquareArray: SquareState[] = getShouldReversibleSquaresArray(
+  // turn over the stone that was trapped when the stone was placed and switch the current player
+  const placePiece = (clickedSquare: SquareState) => {
+    const updatableSquaresArray: SquareState[] = getUpdatableSquaresArray(
       clickedSquare,
-      boardSquaresArray,
-      sideSquaresCount,
-      currentPlayer,
     );
 
-    // Batch change the values of cells to be flipped
-    shouldReverseSquareArray.forEach((square) => {
-      stateCopy[square.id].val = currentPlayer;
-    });
-
-    clickedSquare.val = currentPlayer;
-
-    const nextPlayer =
-      currentPlayer === PlayerVal.BLACK ? PlayerVal.WHITE : PlayerVal.BLACK;
-    dispatch(updateBoardState(stateCopy));
-    dispatch(updateCurrentPlayer(nextPlayer));
+    dispatch(changeGamesTurn(clickedSquare, updatableSquaresArray));
   };
 
   return {
-    boardSquaresArray,
+    boardState,
     sideSquaresCount,
-    hasReversiblePiece,
-    reverseSquare,
+    hasCanBeTurnOverPieces,
     hasPlacedPiece,
+    placePiece,
   };
 };
 

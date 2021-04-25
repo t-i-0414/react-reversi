@@ -6,9 +6,8 @@ declare type UnionValType<T> = T[keyof T];
 /**
  * State Types
  */
-
 declare type SquareState = {
-  id: number;
+  key: number;
   column: number;
   row: number;
   val: number;

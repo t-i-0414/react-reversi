@@ -12,23 +12,23 @@ export interface BoardProp {
 }
 const Board: React.FC<BoardProp> = ({ dataCy }) => {
   const {
-    boardSquaresArray,
+    boardState,
     sideSquaresCount,
-    hasReversiblePiece,
-    reverseSquare,
+    hasCanBeTurnOverPieces,
     hasPlacedPiece,
+    placePiece,
   } = useBoard();
 
   return (
     <StyledBoard size={sideSquaresCount * Size.SQUARE_SIZE} data-cy={dataCy}>
-      {boardSquaresArray.map((square: SquareState) => {
+      {boardState.map((square: SquareState) => {
         return (
-          <Square key={square.id} dataCy={`square-${square.id}`}>
-            {hasReversiblePiece(square) && (
+          <Square key={square.key} dataCy={`square-${square.key}`}>
+            {hasCanBeTurnOverPieces(square) && (
               <Piece
                 playerVal={square.val}
                 onclick={() => {
-                  reverseSquare(square.id);
+                  placePiece(square);
                 }}
                 dataCy="clickable"
               />

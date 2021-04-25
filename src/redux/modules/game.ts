@@ -3,11 +3,17 @@ import Const from 'src/const';
 
 const { PlayerVal } = Const;
 
+/**
+ * action
+ */
 const SET_GAME_START_FLAG = 'reversi/store/game/SET_GAME_START_FLAG';
 const SET_SIDE_SQUARES_COUNT = 'reversi/store/game/SET_SIDE_SQUARES_COUNT';
 const SET_BOARD_STATE = 'reversi/store/game/SET_BOARD_STATE';
 const UPDATE_CURRENT_PLAYER = 'reversi/store/game/UPDATE_CURRENT_PLAYER';
 
+/**
+ * action types
+ */
 type SetGameStartFlag = {
   type: typeof SET_GAME_START_FLAG;
   payload: boolean;
@@ -34,6 +40,9 @@ type ActionType =
   | setBoardState
   | updateCurrentPlayer;
 
+/**
+ * initial state
+ */
 const initialState = {
   isGameStart: false,
   sideSquaresCount: 0,
@@ -41,7 +50,9 @@ const initialState = {
   currentPlayer: PlayerVal.NONE,
 };
 
-// reducer
+/**
+ * reducer
+ */
 export default (
   state: StoreState['game'] = initialState,
   action: ActionType,
@@ -81,25 +92,29 @@ export const setGameStartFlg = (flag: boolean) => (
   });
 };
 
-export const setTotalBoardStates = (sideSquaresCount: number) => (
+export const initializeBoard = (sideSquaresCount: number) => (
   dispatch: Dispatch,
 ): void => {
-  const totalSquareCount: number = sideSquaresCount ** 2;
+  const squaresCountAmount: number = sideSquaresCount ** 2;
   const stagingBoard: BoardState = [];
 
-  for (let squareCount = 0; squareCount < totalSquareCount; squareCount += 1) {
-    const id = squareCount;
+  for (
+    let squareCount = 0;
+    squareCount < squaresCountAmount;
+    squareCount += 1
+  ) {
+    const key = squareCount;
     const column = squareCount % sideSquaresCount;
     const row = Math.floor(squareCount / sideSquaresCount);
     let val: UnionValType<typeof PlayerVal> = PlayerVal.NONE;
 
-    // Place four stones on top of each other when the board is initially rendered
-    // Upprer left square
+    // place four stones when the board is initially rendered
+    // upprer left square
     if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2 - 1) {
       val = PlayerVal.WHITE;
     }
 
-    // Upper right square
+    // upper right square
     if (
       column === sideSquaresCount / 2 - 1 &&
       row === sideSquaresCount / 2 - 1
@@ -107,18 +122,18 @@ export const setTotalBoardStates = (sideSquaresCount: number) => (
       val = PlayerVal.BLACK;
     }
 
-    // Lower left square
+    // lower left square
     if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2) {
       val = PlayerVal.BLACK;
     }
 
-    // Lower right square
+    // lower right square
     if (column === sideSquaresCount / 2 - 1 && row === sideSquaresCount / 2) {
       val = PlayerVal.WHITE;
     }
 
     stagingBoard.push({
-      id,
+      key,
       column,
       row,
       val,
@@ -154,112 +169,33 @@ export const updateCurrentPlayer = (
   });
 };
 
-// Method to get the squares to turn over from the passed array
-export const getShouldReversibleSquaresArray = (
-  baseSquare: SquareState,
-  board: BoardState,
-  sideSquaresCount: number,
-  currentPlayer: UnionValType<PlayerValState>,
-): SquareState[] => {
-  const surroundingSquares: Array<SquareState[]> = [];
+export const changeGamesTurn = (
+  square: SquareState,
+  updatableSquaresArray: SquareState[],
+) => (dispatch: Dispatch, getState: () => StoreState): void => {
+  const {
+    game: { boardState: stagingBoardState, currentPlayer },
+  } = getState();
+  const clickedSquare: SquareState = stagingBoardState[square.key];
 
-  // Get the array of squares from the starting square to the left of the board.
-  surroundingSquares.push(
-    board
-      .filter((square: SquareState) => {
-        return !!(
-          square.row === baseSquare.row && square.column < baseSquare.column
-        );
-      })
-      .reverse(), // Reverse to use the clicked square as a starting point
-  );
-
-  // Get the array of squares on the right side of the board from the starting square
-  surroundingSquares.push(
-    board.filter((square: SquareState) => {
-      return !!(
-        square.row === baseSquare.row && square.column > baseSquare.column
-      );
-    }),
-  );
-
-  // Get an array of squares from the starting square to the top of the board
-  surroundingSquares.push(
-    board
-      .filter((square: SquareState) => {
-        return !!(
-          square.row < baseSquare.row && square.column === baseSquare.column
-        );
-      })
-      .reverse(), // Reverse to use the clicked square as a starting point
-  );
-
-  // Get an array of squares from the starting square to the bottom of the board
-  surroundingSquares.push(
-    board.filter((square: SquareState) => {
-      return !!(
-        square.row > baseSquare.row && square.column === baseSquare.column
-      );
-    }),
-  );
-
-  // Get an array of squares from the starting square to the top left corner of the board
-  const upperLeftDiagonalSideSquaresArray: SquareState[] = [];
-  for (let count = 1; count < sideSquaresCount; count += 1) {
-    const squareId: number = baseSquare.id - sideSquaresCount * count - count;
-    if (squareId >= 0 && squareId < board.length) {
-      upperLeftDiagonalSideSquaresArray.push(board[squareId]);
-    }
-  }
-  surroundingSquares.push(upperLeftDiagonalSideSquaresArray);
-
-  // Get an array of squares from the starting square to the top right corner of the board
-  const upperRightDiagonalSideSquaresArray: SquareState[] = [];
-  for (let count = 1; count < sideSquaresCount; count += 1) {
-    const squareId: number = baseSquare.id - sideSquaresCount * count + count;
-    if (squareId > 0 && squareId < board.length) {
-      upperRightDiagonalSideSquaresArray.push(board[squareId]);
-    }
-  }
-  surroundingSquares.push(upperRightDiagonalSideSquaresArray);
-
-  // Get an array of squares from the starting square to the bottom left corner of the board
-  const lowerLeftDiagonalSideSquaresArray: SquareState[] = [];
-  for (let count = 1; count < sideSquaresCount; count += 1) {
-    const squareId: number = baseSquare.id + sideSquaresCount * count - count;
-    if (squareId >= 0 && squareId < board.length - 1) {
-      lowerLeftDiagonalSideSquaresArray.push(board[squareId]);
-    }
-  }
-  surroundingSquares.push(lowerLeftDiagonalSideSquaresArray);
-
-  // Get an array of squares from the starting square to the bottom right corner of the board
-  const lowerRightDiagonalSideSquaresArray: SquareState[] = [];
-  for (let count = 1; count < sideSquaresCount; count += 1) {
-    const squareId: number = baseSquare.id + sideSquaresCount * count + count;
-    if (squareId >= 0 && squareId < board.length) {
-      lowerRightDiagonalSideSquaresArray.push(board[squareId]);
-    }
-  }
-  surroundingSquares.push(lowerRightDiagonalSideSquaresArray);
-
-  const reversibleSquaresArray: SquareState[] = [];
-
-  surroundingSquares.forEach((squareArray) => {
-    const emptySquareIndex: number = squareArray.findIndex(
-      (square) => square.val === 0,
-    );
-    if (emptySquareIndex !== -1) {
-      squareArray.splice(emptySquareIndex, squareArray.length);
-    }
-
-    const endpointSquareIndex: number = squareArray.findIndex(
-      (square) => square.val === currentPlayer,
-    );
-    squareArray.splice(Math.max(0, endpointSquareIndex), squareArray.length);
-
-    reversibleSquaresArray.push(...squareArray);
+  // change each the value of squares for pieces to be turn over
+  updatableSquaresArray.forEach((updatableSquare: SquareState) => {
+    stagingBoardState[updatableSquare.key].val = currentPlayer;
   });
 
-  return reversibleSquaresArray;
+  // change the value of clicked square
+  clickedSquare.val = currentPlayer;
+
+  // switch the current player
+  const nextPlayer =
+    currentPlayer === PlayerVal.BLACK ? PlayerVal.WHITE : PlayerVal.BLACK;
+
+  dispatch({
+    type: SET_BOARD_STATE,
+    payload: stagingBoardState,
+  });
+  dispatch({
+    type: UPDATE_CURRENT_PLAYER,
+    payload: nextPlayer,
+  });
 };
