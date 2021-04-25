@@ -15,7 +15,7 @@ const useBoard = (): {
 } => {
   const dispatch = useDispatch();
   const { sideSquaresCount, boardState } = useSelector(
-    (state: Store) => state.game,
+    (store: Store) => store.game,
   );
 
   // check if there is a stone that can be turned over
