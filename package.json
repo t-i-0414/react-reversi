@@ -111,10 +111,13 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
-      "yarn lint:es:fix"
+      "yarn prettier --write",
+      "yarn lint:es:fix",
+      "git add ."
     ],
     "src/**/*.{css,scss,jsx,ts,tsx}": [
-      "yarn lint:style:fix"
+      "yarn lint:style:fix",
+      "git add ."
     ]
   }
 }

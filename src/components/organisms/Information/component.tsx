@@ -6,6 +6,7 @@ import Piece from 'src/components/atoms/Piece/component';
 const { Color, Size, PlayerVal } = Const;
 
 const Information: React.FC = () => {
+  // TODO:need some facts from useInformation
   return (
     <Wrapper>
       <ContentHeader>Score</ContentHeader>
