@@ -1,29 +1,33 @@
 import React from 'react';
 import Const from 'src/const';
 import styled from 'styled-components';
-import Piece from 'src/components/atoms/Piece/component';
+import Piece from 'src/components/atoms/Piece/';
 
-const { Color, Size, PlayerVal } = Const;
+const { Color, Size, Player } = Const;
 
 const Information: React.FC = () => {
+  // TODO:need some facts from useInformation
   return (
     <Wrapper>
       <ContentHeader>Score</ContentHeader>
+
       <Container>
         <PlayerInformation>
-          <PieceInner>
-            <Piece playerVal={PlayerVal.WHITE} />
-          </PieceInner>
-          <CurrentScore>2</CurrentScore>
+          <Inner>
+            <Piece playerVal={Player.WHITE} />
+          </Inner>
+          <Score>2</Score>
         </PlayerInformation>
+
         <Separator>
           <Line />
         </Separator>
+
         <PlayerInformation>
-          <CurrentScore>2</CurrentScore>
-          <PieceInner>
-            <Piece playerVal={PlayerVal.BLACK} />
-          </PieceInner>
+          <Score>2</Score>
+          <Inner>
+            <Piece playerVal={Player.BLACK} />
+          </Inner>
         </PlayerInformation>
       </Container>
     </Wrapper>
@@ -82,7 +86,7 @@ const PlayerInformation = styled.div`
   align-items: center;
 `;
 
-const PieceInner = styled.div`
+const Inner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,7 +94,7 @@ const PieceInner = styled.div`
   height: 48px;
 `;
 
-const CurrentScore = styled.span`
+const Score = styled.span`
   display: block;
   font-size: ${Size.FS_24};
 `;

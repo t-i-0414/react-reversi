@@ -1,23 +1,23 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Const from 'src/const';
-import Piece from 'src/components/atoms/Piece/component';
+import Piece from 'src/components/atoms/Piece';
 
-const { PlayerVal } = Const;
+const { Player } = Const;
 
 describe('Piece unit test', () => {
   it('snapshot(white)', () => {
-    const component = renderer.create(<Piece playerVal={PlayerVal.WHITE} />);
+    const component = renderer.create(<Piece playerVal={Player.WHITE} />);
     expect(component).toMatchSnapshot();
   });
   it('snapshot(black)', () => {
-    const component = renderer.create(<Piece playerVal={PlayerVal.BLACK} />);
+    const component = renderer.create(<Piece playerVal={Player.BLACK} />);
     expect(component).toMatchSnapshot();
   });
   it('snapshot(clickable)', () => {
     const component = renderer.create(
       <Piece
-        playerVal={PlayerVal.NONE}
+        playerVal={Player.NONE}
         onclick={() => {
           return 'This is clickable Piece.';
         }}

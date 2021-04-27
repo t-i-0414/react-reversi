@@ -7,16 +7,14 @@ const {
 } = Utils;
 
 const useBoard = (): {
-  boardState: Board;
+  board: Board;
   sideSquaresCount: number;
   hasCanBeTurnOverPieces: (square: Square) => boolean;
   hasPlacedPiece: (square: Square) => boolean;
   placePiece: (square: Square) => void;
 } => {
   const dispatch = useDispatch();
-  const { sideSquaresCount, boardState } = useSelector(
-    (store: Store) => store.game,
-  );
+  const { sideSquaresCount, board } = useSelector((store: Store) => store.game);
 
   // check if there is a stone that can be turned over
   const hasCanBeTurnOverPieces = (square: Square): boolean => {
@@ -40,7 +38,7 @@ const useBoard = (): {
   };
 
   return {
-    boardState,
+    board,
     sideSquaresCount,
     hasCanBeTurnOverPieces,
     hasPlacedPiece,

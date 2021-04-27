@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
-import Square, { SquareProps } from './component';
+import Square, { SquareProps } from '.';
 
 export default {
   title: 'Atoms/Square',
