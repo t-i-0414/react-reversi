@@ -1,7 +1,7 @@
 /**
  * Utility Types
  */
-declare type UnionValType<T> = T[keyof T];
+declare type UnionVal<T> = T[keyof T];
 
 /**
  * State Types
@@ -15,7 +15,7 @@ declare type Square = {
 
 declare type Board = Square[];
 
-declare type PlayerValState = {
+declare type Player = {
   WHITE: 1;
   BLACK: -1;
   NONE: 0;
@@ -24,8 +24,8 @@ declare type PlayerValState = {
 interface Store {
   game: {
     isGameStart: boolean;
-    boardState: Board;
+    board: Board;
     sideSquaresCount: number;
-    currentPlayer: UnionValType<PlayerValState>;
+    currentPlayer: UnionVal<Player>;
   };
 }

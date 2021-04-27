@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import useBoard from 'src/components/organisms/Board/hook';
-import Square from 'src/components/atoms/Square/component';
-import Piece from 'src/components/atoms/Piece/component';
+import Square from 'src/components/atoms/Square/';
+import Piece from 'src/components/atoms/Piece/';
 import Const from 'src/const';
 
 const { Size, Color } = Const;
@@ -12,7 +12,7 @@ export interface BoardProps {
 }
 const Board: React.FC<BoardProps> = ({ dataCy }) => {
   const {
-    boardState,
+    board,
     sideSquaresCount,
     hasCanBeTurnOverPieces,
     hasPlacedPiece,
@@ -20,8 +20,8 @@ const Board: React.FC<BoardProps> = ({ dataCy }) => {
   } = useBoard();
 
   return (
-    <StyledBoard size={sideSquaresCount * Size.SQUARE_SIZE} data-cy={dataCy}>
-      {boardState.map((square: Square) => {
+    <Wrapper size={sideSquaresCount * Size.SQUARE_SIZE} data-cy={dataCy}>
+      {board.map((square: Square) => {
         return (
           <Square key={square.key} dataCy={`square-${square.key}`}>
             {hasCanBeTurnOverPieces(square) && (
@@ -37,14 +37,14 @@ const Board: React.FC<BoardProps> = ({ dataCy }) => {
           </Square>
         );
       })}
-    </StyledBoard>
+    </Wrapper>
   );
 };
 
 interface StyledBoardProp {
   size: number;
 }
-const StyledBoard = styled.div<StyledBoardProp>`
+const Wrapper = styled.div<StyledBoardProp>`
   display: flex;
   flex-wrap: wrap;
   width: ${(props) => props.size}px;

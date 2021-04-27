@@ -113,11 +113,11 @@
     "src/**/*.{js,jsx,ts,tsx}": [
       "yarn prettier --write",
       "yarn lint:es:fix",
-      "git add ."
+      "git add"
     ],
     "src/**/*.{css,scss,jsx,ts,tsx}": [
       "yarn lint:style:fix",
-      "git add ."
+      "git add"
     ]
   }
 }
