@@ -6,7 +6,7 @@ import Piece from 'src/components/atoms/Piece/';
 const { Color, Size, Player } = Const;
 
 const Information: React.FC = () => {
-  // TODO:need some facts from useInformation
+  // TODO:need some facts from useInformation.
   return (
     <Wrapper>
       <ContentHeader>Score</ContentHeader>
