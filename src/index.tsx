@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import Game from 'src/components/pages/Game/';
+import Game from 'src/components/pages/game';
 import * as serviceWorker from 'src/serviceWorker';
 import store from './redux/create-store';
 

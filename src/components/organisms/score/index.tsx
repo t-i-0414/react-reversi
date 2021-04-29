@@ -1,34 +1,23 @@
 import React from 'react';
 import Const from 'src/const';
 import styled from 'styled-components';
-import Piece from 'src/components/atoms/Piece/';
+import PlayerInformation from './player';
 
 const { Color, Size, Player } = Const;
 
 const Information: React.FC = () => {
-  // TODO:need some facts from useInformation..
   return (
     <Wrapper>
       <ContentHeader>Score</ContentHeader>
 
       <Container>
-        <PlayerInformation>
-          <Inner>
-            <Piece playerVal={Player.WHITE} />
-          </Inner>
-          <Score>2</Score>
-        </PlayerInformation>
+        <PlayerInformation player={Player.WHITE} />
 
         <Separator>
           <Line />
         </Separator>
 
-        <PlayerInformation>
-          <Score>2</Score>
-          <Inner>
-            <Piece playerVal={Player.BLACK} />
-          </Inner>
-        </PlayerInformation>
+        <PlayerInformation player={Player.BLACK} />
       </Container>
     </Wrapper>
   );
@@ -79,24 +68,6 @@ const Container = styled.div`
     border-style: solid;
     border-width: 12px;
   }
-`;
-
-const PlayerInformation = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Inner = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-`;
-
-const Score = styled.span`
-  display: block;
-  font-size: ${Size.FS_24};
 `;
 
 const Separator = styled.div`

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import useBoard from 'src/components/organisms/Board/hook';
-import Square from 'src/components/atoms/Square/';
-import Piece from 'src/components/atoms/Piece/';
+import useBoard from 'src/components/organisms/board/hook';
+import Square from 'src/components/atoms/square';
+import Piece from 'src/components/atoms/piece';
 import Const from 'src/const';
 
 const { Size, Color } = Const;
