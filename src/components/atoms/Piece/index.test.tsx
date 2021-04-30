@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Const from 'src/const';
-import Piece from 'src/components/atoms/piece';
+import Piece from '.';
 
 const { Player } = Const;
 
