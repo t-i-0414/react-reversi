@@ -6,7 +6,7 @@ import Piece from 'src/components/atoms/piece';
 const { Size, Player } = Const;
 
 interface PlayerInformationProps {
-  player: UnionVal<Player>;
+  player: UnionVal<typeof Player>;
 }
 const PlayerInformation: React.FC<PlayerInformationProps> = ({ player }) => {
   return (

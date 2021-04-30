@@ -1,16 +1,19 @@
 import React from 'react';
 import Const from 'src/const';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import useScore from './hooks';
 import PlayerInformation from './player';
 
 const { Color, Size, Player } = Const;
 
 const Information: React.FC = () => {
+  const currentPlayer = useScore();
+
   return (
     <Wrapper>
       <ContentHeader>Score</ContentHeader>
 
-      <Container>
+      <Container indicator={currentPlayer}>
         <PlayerInformation player={Player.WHITE} />
 
         <Separator>
@@ -36,7 +39,10 @@ const ContentHeader = styled.p`
   text-align: center;
 `;
 
-const Container = styled.div`
+interface ContainerProps {
+  indicator: UnionVal<typeof Player>;
+}
+const Container = styled.div<ContainerProps>`
   position: relative;
   box-sizing: border-box;
   display: flex;
@@ -45,29 +51,37 @@ const Container = styled.div`
   width: 232px;
   margin: 0 auto;
 
-  &::before {
-    position: absolute;
-    left: 0;
-    display: none;
-    width: 0;
-    height: 0;
-    content: '';
-    border-color: transparent red transparent transparent;
-    border-style: solid;
-    border-width: 12px;
-  }
+  ${(props) =>
+    props.indicator === Player.WHITE &&
+    css`
+      &::before {
+        position: absolute;
+        left: 0;
+        display: block;
+        width: 0;
+        height: 0;
+        content: '';
+        border-color: transparent red transparent transparent;
+        border-style: solid;
+        border-width: 12px;
+      }
+    `}
 
-  &::after {
-    position: absolute;
-    right: 0;
-    display: none;
-    width: 0;
-    height: 0;
-    content: '';
-    border-color: transparent transparent transparent red;
-    border-style: solid;
-    border-width: 12px;
-  }
+  ${(props) =>
+    props.indicator === Player.BLACK &&
+    css`
+      &::after {
+        position: absolute;
+        right: 0;
+        display: block;
+        width: 0;
+        height: 0;
+        content: '';
+        border-color: transparent transparent transparent red;
+        border-style: solid;
+        border-width: 12px;
+      }
+    `}
 `;
 
 const Separator = styled.div`
