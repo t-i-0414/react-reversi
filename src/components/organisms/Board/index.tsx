@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import useBoard from 'src/components/organisms/board/hook';
 import Square from 'src/components/atoms/square';
 import Piece from 'src/components/atoms/piece';
 import Const from 'src/const';
+import useBoard from './hook';
 
 const { Size, Color } = Const;
 
