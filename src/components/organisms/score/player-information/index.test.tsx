@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Const from 'src/const';
-import PlayerInformation from './index';
+import PlayerInformation from '.';
 
 const { Player } = Const;
 

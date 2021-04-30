@@ -1,7 +1,7 @@
 import React from 'react';
 import Const from 'src/const';
 import styled from 'styled-components';
-import Piece from 'src/components/atoms/piece/index';
+import Piece from 'src/components/atoms/piece';
 
 const { Size, Player } = Const;
 
