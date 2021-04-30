@@ -41,10 +41,10 @@ const Board: React.FC<BoardProps> = ({ dataCy }) => {
   );
 };
 
-interface StyledBoardProp {
+interface StyledBoardProps {
   size: number;
 }
-const Wrapper = styled.div<StyledBoardProp>`
+const Wrapper = styled.div<StyledBoardProps>`
   display: flex;
   flex-wrap: wrap;
   width: ${(props) => props.size}px;
