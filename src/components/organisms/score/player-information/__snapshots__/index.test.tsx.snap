@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Square unit test snapshot(Player Black) 1`] = `
+<div
+  className="sc-gtssRu hAvyXn"
+>
+  <span
+    className="sc-hKFyIo izrEJU"
+  >
+    2
+  </span>
+  <div
+    className="sc-dlnjPT jUuLpY"
+  >
+    <span
+      className="sc-bdnylx kjkACR"
+      color="#000"
+    />
+  </div>
+</div>
+`;
+
+exports[`Square unit test snapshot(Player White) 1`] = `
+<div
+  className="sc-gtssRu hAvyXn"
+>
+  <div
+    className="sc-dlnjPT jUuLpY"
+  >
+    <span
+      className="sc-bdnylx hEHfkv"
+      color="#fff"
+    />
+  </div>
+  <span
+    className="sc-hKFyIo izrEJU"
+  >
+    2
+  </span>
+</div>
+`;

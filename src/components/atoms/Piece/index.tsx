@@ -26,13 +26,13 @@ const Piece: React.FC<PieceProps> = ({ playerVal, onclick, dataCy }) => {
   }
 };
 
-type StyledPieceProp = {
+type StyledPieceProps = {
   color: typeof Color[keyof Pick<
     typeof Color,
     'PC_WHITE' | 'PC_BLACK' | 'PC_INVISIBLE'
   >];
 };
-const StyledPiece = styled.span<StyledPieceProp>`
+const StyledPiece = styled.span<StyledPieceProps>`
   display: block;
   width: 80%;
   height: 80%;

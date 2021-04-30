@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from 'src/components/atoms/Button/';
-import Board from 'src/components/organisms/Board/';
-import Information from 'src/components/organisms/Information/';
+import Button from 'src/components/atoms/button';
+import Board from 'src/components/organisms/board';
+import Information from 'src/components/organisms/score';
 import Const from 'src/const';
 import useGame from './hooks';
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import useBoard from 'src/components/organisms/Board/hook';
-import Square from 'src/components/atoms/Square/';
-import Piece from 'src/components/atoms/Piece/';
+import Square from 'src/components/atoms/square';
+import Piece from 'src/components/atoms/piece';
 import Const from 'src/const';
+import useBoard from './hook';
 
 const { Size, Color } = Const;
 
@@ -41,10 +41,10 @@ const Board: React.FC<BoardProps> = ({ dataCy }) => {
   );
 };
 
-interface StyledBoardProp {
+interface StyledBoardProps {
   size: number;
 }
-const Wrapper = styled.div<StyledBoardProp>`
+const Wrapper = styled.div<StyledBoardProps>`
   display: flex;
   flex-wrap: wrap;
   width: ${(props) => props.size}px;
