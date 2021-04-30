@@ -2,7 +2,7 @@ import React from 'react';
 import Const from 'src/const';
 import styled, { css } from 'styled-components';
 import useScore from './hooks';
-import PlayerInformation from './player-information';
+import PlayerInformation from './player-information/index';
 
 const { Color, Size, Player } = Const;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Square from 'src/components/atoms/square';
-import Piece from 'src/components/atoms/piece';
+import Square from 'src/components/atoms/square/index';
+import Piece from 'src/components/atoms/piece/index';
 import Const from 'src/const';
 import useBoard from './hook';
 
