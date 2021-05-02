@@ -49,6 +49,10 @@ const initialState = {
   sideSquaresCount: 0,
   board: [],
   currentPlayer: Player.NONE,
+  score: {
+    [Player.WHITE]: 0,
+    [Player.BLACK]: 0,
+  },
 };
 
 /**
