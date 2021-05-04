@@ -27,5 +27,9 @@ interface Store {
     board: Board;
     sideSquaresCount: number;
     currentPlayer: UnionVal<Player>;
+    score: {
+      white: number;
+      black: number;
+    };
   };
 }

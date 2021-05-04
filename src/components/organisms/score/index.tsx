@@ -7,20 +7,20 @@ import PlayerInformation from './player-information';
 const { Color, Size, Player } = Const;
 
 const Information: React.FC = () => {
-  const currentPlayer = useScore();
+  const { currentPlayer, score } = useScore();
 
   return (
     <Wrapper>
       <ContentHeader>Score</ContentHeader>
 
       <Container indicator={currentPlayer}>
-        <PlayerInformation player={Player.WHITE} />
+        <PlayerInformation player={Player.WHITE} score={score.white} />
 
         <Separator>
           <Line />
         </Separator>
 
-        <PlayerInformation player={Player.BLACK} />
+        <PlayerInformation player={Player.BLACK} score={score.black} />
       </Container>
     </Wrapper>
   );

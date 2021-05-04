@@ -4,6 +4,7 @@ import {
   updateGameStartFlg,
   initializeBoard,
   updateCurrentPlayer,
+  countScore,
 } from 'src/redux/modules/game';
 import Const from 'src/const';
 
@@ -25,6 +26,7 @@ const useGame = (): {
     dispatch(updateGameStartFlg(true));
     dispatch(initializeBoard(sideSquaresCount));
     dispatch(updateCurrentPlayer(Player.BLACK));
+    dispatch(countScore());
   };
 
   return {

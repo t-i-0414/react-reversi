@@ -8,13 +8,13 @@ const { Player } = Const;
 describe('Square unit test', () => {
   it('snapshot(Player White)', () => {
     const component = renderer.create(
-      <PlayerInformation player={Player.WHITE} />,
+      <PlayerInformation player={Player.WHITE} score={0} />,
     );
     expect(component).toMatchSnapshot();
   });
   it('snapshot(Player Black)', () => {
     const component = renderer.create(
-      <PlayerInformation player={Player.BLACK} />,
+      <PlayerInformation player={Player.BLACK} score={0} />,
     );
     expect(component).toMatchSnapshot();
   });
