@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { changeGamesTurn } from 'src/redux/modules/game';
+import { changeGamesTurn, countScore } from 'src/redux/modules/game';
 import Utils from 'src/utils';
 
 const {
@@ -35,6 +35,7 @@ const useBoard = (): {
     );
 
     dispatch(changeGamesTurn(clickedSquare, updatableSquaresArray));
+    dispatch(countScore());
   };
 
   return {

@@ -7,8 +7,12 @@ const { Size, Player } = Const;
 
 interface PlayerInformationProps {
   player: UnionVal<typeof Player>;
+  score: number;
 }
-const PlayerInformation: React.FC<PlayerInformationProps> = ({ player }) => {
+const PlayerInformation: React.FC<PlayerInformationProps> = ({
+  player,
+  score,
+}) => {
   return (
     <Wrapper>
       {player === Player.WHITE && (
@@ -17,7 +21,7 @@ const PlayerInformation: React.FC<PlayerInformationProps> = ({ player }) => {
         </Inner>
       )}
 
-      <Score>2</Score>
+      <Score>{score}</Score>
 
       {player === Player.BLACK && (
         <Inner>

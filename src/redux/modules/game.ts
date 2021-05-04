@@ -35,12 +35,20 @@ type UpdateCurrentPlayer = {
   type: typeof UPDATE_CURRENT_PLAYER;
   payload: UnionVal<typeof Player>;
 };
+type UpdateScore = {
+  type: typeof UPDATE_SCORE;
+  payload: {
+    white: number;
+    black: number;
+  };
+};
 
 type ActionType =
   | UpdateGameStartFlag
   | UpdateSideSquaresCount
   | UpdateBoard
-  | UpdateCurrentPlayer;
+  | UpdateCurrentPlayer
+  | UpdateScore;
 
 /**
  * initial state
@@ -51,8 +59,8 @@ const initialState = {
   board: [],
   currentPlayer: Player.NONE,
   score: {
-    [Player.WHITE]: 0,
-    [Player.BLACK]: 0,
+    white: 0,
+    black: 0,
   },
 };
 
@@ -84,6 +92,11 @@ export default (
         ...state,
         currentPlayer: action.payload,
       };
+    case UPDATE_SCORE:
+      return {
+        ...state,
+        score: action.payload,
+      };
     default:
       return state;
   }
@@ -111,6 +124,14 @@ export const updateCurrentPlayer = (
 ): UpdateCurrentPlayer => ({
   type: UPDATE_CURRENT_PLAYER,
   payload: stagingPlayer,
+});
+
+export const updateScore = (stagingScore: {
+  white: number;
+  black: number;
+}): UpdateScore => ({
+  type: UPDATE_SCORE,
+  payload: stagingScore,
 });
 
 export const initializeBoard = (sideSquaresCount: number) => (
@@ -188,4 +209,29 @@ export const changeGamesTurn = (
 
   dispatch(updateBoard(stagingBoard));
   dispatch(updateCurrentPlayer(nextPlayer));
+  countScore();
+};
+
+export const countScore = () => (
+  dispatch: Dispatch,
+  getState: () => Store,
+): void => {
+  const {
+    game: { board },
+  } = getState();
+
+  const whitePiecesCount = board.reduce((prev, square) => {
+    return prev + (square.val === Player.WHITE ? 1 : 0);
+  }, 0);
+
+  const blackPiecesCount = board.reduce((prev, square) => {
+    return prev + (square.val === Player.BLACK ? 1 : 0);
+  }, 0);
+
+  dispatch(
+    updateScore({
+      white: whitePiecesCount,
+      black: blackPiecesCount,
+    }),
+  );
 };
