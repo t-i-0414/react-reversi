@@ -6,11 +6,12 @@ const { Player } = Const;
 /**
  * action
  */
-const UPDATE_GAME_START_FLAG = 'reversi/store/game/UPDATE_GAME_START_FLAG';
+const UPDATE_GAME_START_FLAG = 'reversi/store/game/update-game-start-flag';
 const UPDATE_SIDE_SQUARES_COUNT =
-  'reversi/store/game/UPDATE_SIDE_SQUARES_COUNT';
-const UPDATE_BOARD = 'reversi/store/game/UPDATE_BOARD';
-const UPDATE_CURRENT_PLAYER = 'reversi/store/game/UPDATE_CURRENT_PLAYER';
+  'reversi/store/game/update-side-squares-count';
+const UPDATE_BOARD = 'reversi/store/game/update-board';
+const UPDATE_CURRENT_PLAYER = 'reversi/store/game/update-current-player';
+const UPDATE_SCORE = 'reservi/store/game/update-score';
 
 /**
  * action types
