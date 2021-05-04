@@ -7,7 +7,7 @@ exports[`Square unit test snapshot(Player Black) 1`] = `
   <span
     className="sc-hKFyIo izrEJU"
   >
-    2
+    0
   </span>
   <div
     className="sc-dlnjPT jUuLpY"
@@ -35,7 +35,7 @@ exports[`Square unit test snapshot(Player White) 1`] = `
   <span
     className="sc-hKFyIo izrEJU"
   >
-    2
+    0
   </span>
 </div>
 `;
