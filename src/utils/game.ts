@@ -1,3 +1,4 @@
+import PieceColor from 'src/const/piece-color';
 import store from 'src/redux/create-store';
 
 /**
@@ -96,14 +97,14 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
 
   eachDirectionSquaresArray.forEach((squareArray) => {
     const emptySquareIndex: number = squareArray.findIndex(
-      (square) => square.val === 0,
+      (square) => square.pieceColor === PieceColor.INVISIBLE,
     );
     if (emptySquareIndex !== -1) {
       squareArray.splice(emptySquareIndex, squareArray.length);
     }
 
     const endpointSquareIndex: number = squareArray.findIndex(
-      (square) => square.val === currentPlayer,
+      (square) => square.pieceColor === currentPlayer,
     );
     squareArray.splice(Math.max(0, endpointSquareIndex), squareArray.length);
 

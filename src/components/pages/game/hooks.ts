@@ -8,7 +8,7 @@ import {
 } from 'src/redux/modules/game';
 import Const from 'src/const';
 
-const { Player } = Const;
+const { PieceColor } = Const;
 
 const useGame = (): {
   isGameStart: boolean;
@@ -25,7 +25,7 @@ const useGame = (): {
   const startGame = (sideSquaresCount: number) => {
     dispatch(updateGameStartFlg(true));
     dispatch(initializeBoard(sideSquaresCount));
-    dispatch(updateCurrentPlayer(Player.BLACK));
+    dispatch(updateCurrentPlayer(PieceColor.BLACK));
     dispatch(countScore());
   };
 

@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import Const from 'src/const';
 
-const { Player } = Const;
+const { PieceColor } = Const;
 
 /**
  * action
@@ -33,7 +33,7 @@ type UpdateBoard = {
 
 type UpdateCurrentPlayer = {
   type: typeof UPDATE_CURRENT_PLAYER;
-  payload: UnionVal<typeof Player>;
+  payload: UnionVal<typeof PieceColor>;
 };
 type UpdateScore = {
   type: typeof UPDATE_SCORE;
@@ -57,7 +57,7 @@ const initialState = {
   isGameStart: false,
   sideSquaresCount: 0,
   board: [],
-  currentPlayer: Player.NONE,
+  currentPlayer: PieceColor.INVISIBLE,
   score: {
     white: 0,
     black: 0,
@@ -120,7 +120,7 @@ export const updateBoard = (stagingBoard: Board): UpdateBoard => ({
 });
 
 export const updateCurrentPlayer = (
-  stagingPlayer: UnionVal<typeof Player>,
+  stagingPlayer: UnionVal<typeof PieceColor>,
 ): UpdateCurrentPlayer => ({
   type: UPDATE_CURRENT_PLAYER,
   payload: stagingPlayer,
@@ -148,12 +148,12 @@ export const initializeBoard = (sideSquaresCount: number) => (
     const key = squareCount;
     const column = squareCount % sideSquaresCount;
     const row = Math.floor(squareCount / sideSquaresCount);
-    let val: UnionVal<typeof Player> = Player.NONE;
+    let pieceColor: UnionVal<typeof PieceColor> = PieceColor.INVISIBLE;
 
     // place four stones when the board is initially rendered
     // upprer left square
     if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2 - 1) {
-      val = Player.WHITE;
+      pieceColor = PieceColor.WHITE;
     }
 
     // upper right square
@@ -161,24 +161,24 @@ export const initializeBoard = (sideSquaresCount: number) => (
       column === sideSquaresCount / 2 - 1 &&
       row === sideSquaresCount / 2 - 1
     ) {
-      val = Player.BLACK;
+      pieceColor = PieceColor.BLACK;
     }
 
     // lower left square
     if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2) {
-      val = Player.BLACK;
+      pieceColor = PieceColor.BLACK;
     }
 
     // lower right square
     if (column === sideSquaresCount / 2 - 1 && row === sideSquaresCount / 2) {
-      val = Player.WHITE;
+      pieceColor = PieceColor.WHITE;
     }
 
     stagingBoard.push({
       key,
       column,
       row,
-      val,
+      pieceColor,
     });
   }
 
@@ -197,15 +197,15 @@ export const changeGamesTurn = (
 
   // change each the value of squares for pieces to be turn over
   updatableSquaresArray.forEach((updatableSquare: Square) => {
-    stagingBoard[updatableSquare.key].val = currentPlayer;
+    stagingBoard[updatableSquare.key].pieceColor = currentPlayer;
   });
 
   // change the value of clicked square
-  clickedSquare.val = currentPlayer;
+  clickedSquare.pieceColor = currentPlayer;
 
   // switch the current player
   const nextPlayer =
-    currentPlayer === Player.BLACK ? Player.WHITE : Player.BLACK;
+    currentPlayer === PieceColor.BLACK ? PieceColor.WHITE : PieceColor.BLACK;
 
   dispatch(updateBoard(stagingBoard));
   dispatch(updateCurrentPlayer(nextPlayer));
@@ -221,11 +221,11 @@ export const countScore = () => (
   } = getState();
 
   const whitePiecesCount = board.reduce((prev, square) => {
-    return prev + (square.val === Player.WHITE ? 1 : 0);
+    return prev + (square.pieceColor === PieceColor.WHITE ? 1 : 0);
   }, 0);
 
   const blackPiecesCount = board.reduce((prev, square) => {
-    return prev + (square.val === Player.BLACK ? 1 : 0);
+    return prev + (square.pieceColor === PieceColor.BLACK ? 1 : 0);
   }, 0);
 
   dispatch(

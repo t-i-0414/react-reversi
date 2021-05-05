@@ -3,18 +3,18 @@ import renderer from 'react-test-renderer';
 import Const from 'src/const';
 import PlayerInformation from '.';
 
-const { Player } = Const;
+const { PieceColor } = Const;
 
-describe('Square unit test', () => {
-  it('snapshot(Player White)', () => {
+describe('PlayerInformation unit test', () => {
+  it('snapshot(PieceColor White)', () => {
     const component = renderer.create(
-      <PlayerInformation player={Player.WHITE} score={0} />,
+      <PlayerInformation pieceColor={PieceColor.WHITE} score={0} />,
     );
     expect(component).toMatchSnapshot();
   });
-  it('snapshot(Player Black)', () => {
+  it('snapshot(PieceColor Black)', () => {
     const component = renderer.create(
-      <PlayerInformation player={Player.BLACK} score={0} />,
+      <PlayerInformation pieceColor={PieceColor.BLACK} score={0} />,
     );
     expect(component).toMatchSnapshot();
   });

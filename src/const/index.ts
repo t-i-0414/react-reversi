@@ -1,9 +1,9 @@
 import Size from 'src/const/size';
 import Color from 'src/const/color';
-import Player from 'src/const/player-val';
+import PieceColor from 'src/const/piece-color';
 
 export default {
   Size,
   Color,
-  Player,
+  PieceColor,
 } as const;

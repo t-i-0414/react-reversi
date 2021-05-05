@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Square unit test snapshot(Player Black) 1`] = `
+exports[`PlayerInformation unit test snapshot(PieceColor Black) 1`] = `
 <div
   className="sc-gtssRu hAvyXn"
 >
@@ -20,7 +20,7 @@ exports[`Square unit test snapshot(Player Black) 1`] = `
 </div>
 `;
 
-exports[`Square unit test snapshot(Player White) 1`] = `
+exports[`PlayerInformation unit test snapshot(PieceColor White) 1`] = `
 <div
   className="sc-gtssRu hAvyXn"
 >

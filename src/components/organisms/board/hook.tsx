@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import PieceColor from 'src/const/piece-color';
 import { changeGamesTurn, countScore } from 'src/redux/modules/game';
 import Utils from 'src/utils';
 
@@ -20,12 +21,15 @@ const useBoard = (): {
   const hasCanBeTurnOverPieces = (square: Square): boolean => {
     const updatableSquaresArray: Square[] = getUpdatableSquaresArray(square);
 
-    return !!(square.val === 0) && !!(updatableSquaresArray.length > 0);
+    return (
+      !!(square.pieceColor === PieceColor.INVISIBLE) &&
+      !!(updatableSquaresArray.length > 0)
+    );
   };
 
   // check if a stone has already been placed
   const hasPlacedPiece = (square: Square): boolean => {
-    return !!(square.val !== 0);
+    return !!(square.pieceColor !== PieceColor.INVISIBLE);
   };
 
   // turn over the stone that was trapped when the stone was placed and switch the current player
