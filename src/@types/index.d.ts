@@ -10,15 +10,15 @@ declare type Square = {
   key: number;
   column: number;
   row: number;
-  val: number;
+  pieceColor: UnionVal<PieceColorType>;
 };
 
 declare type Board = Square[];
 
-declare type Player = {
-  WHITE: 1;
-  BLACK: -1;
-  NONE: 0;
+declare type PieceColorType = {
+  WHITE: 'white';
+  BLACK: 'black';
+  INVISIBLE: 'invisible';
 };
 
 interface Store {
@@ -26,7 +26,7 @@ interface Store {
     isGameStart: boolean;
     board: Board;
     sideSquaresCount: number;
-    currentPlayer: UnionVal<Player>;
+    currentPlayer: UnionVal<PieceColorType>;
     score: {
       white: number;
       black: number;

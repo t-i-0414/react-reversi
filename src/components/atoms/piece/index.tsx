@@ -2,20 +2,20 @@ import React from 'react';
 import Const from 'src/const';
 import styled, { css } from 'styled-components';
 
-const { Color, Player } = Const;
+const { Color, PieceColor } = Const;
 
 export interface PieceProps {
-  playerVal: number;
+  pieceColor: UnionVal<PieceColorType>;
   onclick?: () => void;
   dataCy?: string;
 }
-const Piece: React.FC<PieceProps> = ({ playerVal, onclick, dataCy }) => {
-  switch (playerVal) {
-    case Player.WHITE:
+const Piece: React.FC<PieceProps> = ({ pieceColor, onclick, dataCy }) => {
+  switch (pieceColor) {
+    case PieceColor.WHITE:
       return <StyledPiece color={Color.PC_WHITE} />;
-    case Player.BLACK:
+    case PieceColor.BLACK:
       return <StyledPiece color={Color.PC_BLACK} />;
-    default:
+    case PieceColor.INVISIBLE:
       return (
         <StyledPiece
           color={Color.PC_INVISIBLE}
@@ -23,6 +23,11 @@ const Piece: React.FC<PieceProps> = ({ playerVal, onclick, dataCy }) => {
           data-cy={dataCy}
         />
       );
+    default: {
+      const exhaustiveCheck: never = pieceColor;
+
+      return exhaustiveCheck;
+    }
   }
 };
 

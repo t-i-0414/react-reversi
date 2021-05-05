@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import useScore from './hooks';
 import PlayerInformation from './player-information';
 
-const { Color, Size, Player } = Const;
+const { Color, Size, PieceColor } = Const;
 
 const Information: React.FC = () => {
   const { currentPlayer, score } = useScore();
@@ -14,13 +14,13 @@ const Information: React.FC = () => {
       <ContentHeader>Score</ContentHeader>
 
       <Container indicator={currentPlayer}>
-        <PlayerInformation player={Player.WHITE} score={score.white} />
+        <PlayerInformation pieceColor={PieceColor.WHITE} score={score.white} />
 
         <Separator>
           <Line />
         </Separator>
 
-        <PlayerInformation player={Player.BLACK} score={score.black} />
+        <PlayerInformation pieceColor={PieceColor.BLACK} score={score.black} />
       </Container>
     </Wrapper>
   );
@@ -40,7 +40,7 @@ const ContentHeader = styled.p`
 `;
 
 interface ContainerProps {
-  indicator: UnionVal<typeof Player>;
+  indicator: UnionVal<typeof PieceColor>;
 }
 const Container = styled.div<ContainerProps>`
   position: relative;
@@ -48,15 +48,15 @@ const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 232px;
+  width: fit-content;
   margin: 0 auto;
 
   ${(props) =>
-    props.indicator === Player.WHITE &&
+    props.indicator === PieceColor.WHITE &&
     css`
       &::before {
         position: absolute;
-        left: 0;
+        left: -28px;
         display: block;
         width: 0;
         height: 0;
@@ -68,11 +68,11 @@ const Container = styled.div<ContainerProps>`
     `}
 
   ${(props) =>
-    props.indicator === Player.BLACK &&
+    props.indicator === PieceColor.BLACK &&
     css`
       &::after {
         position: absolute;
-        right: 0;
+        right: -28px;
         display: block;
         width: 0;
         height: 0;

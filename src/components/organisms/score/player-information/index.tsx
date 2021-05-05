@@ -3,29 +3,29 @@ import Const from 'src/const';
 import styled from 'styled-components';
 import Piece from 'src/components/atoms/piece';
 
-const { Size, Player } = Const;
+const { Size, PieceColor } = Const;
 
 interface PlayerInformationProps {
-  player: UnionVal<typeof Player>;
+  pieceColor: UnionVal<typeof PieceColor>;
   score: number;
 }
 const PlayerInformation: React.FC<PlayerInformationProps> = ({
-  player,
+  pieceColor,
   score,
 }) => {
   return (
     <Wrapper>
-      {player === Player.WHITE && (
+      {pieceColor === PieceColor.WHITE && (
         <Inner>
-          <Piece playerVal={Player.WHITE} />
+          <Piece pieceColor={PieceColor.WHITE} />
         </Inner>
       )}
 
       <Score>{score}</Score>
 
-      {player === Player.BLACK && (
+      {pieceColor === PieceColor.BLACK && (
         <Inner>
-          <Piece playerVal={Player.BLACK} />
+          <Piece pieceColor={PieceColor.BLACK} />
         </Inner>
       )}
     </Wrapper>

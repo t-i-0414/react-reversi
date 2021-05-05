@@ -26,14 +26,14 @@ const Board: React.FC<BoardProps> = ({ dataCy }) => {
           <Square key={square.key} dataCy={`square-${square.key}`}>
             {hasCanBeTurnOverPieces(square) && (
               <Piece
-                playerVal={square.val}
+                pieceColor={square.pieceColor}
                 onclick={() => {
                   placePiece(square);
                 }}
                 dataCy="clickable"
               />
             )}
-            {hasPlacedPiece(square) && <Piece playerVal={square.val} />}
+            {hasPlacedPiece(square) && <Piece pieceColor={square.pieceColor} />}
           </Square>
         );
       })}
