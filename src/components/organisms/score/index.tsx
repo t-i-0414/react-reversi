@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import useScore from './hooks';
 import PlayerInformation from './player-information';
 
-const { Color, Size, PieceColor } = Const;
+const { Color, Size, PieceColor, Player } = Const;
 
 const Information: React.FC = () => {
   const { currentPlayer, score } = useScore();
@@ -14,13 +14,21 @@ const Information: React.FC = () => {
       <ContentHeader>Score</ContentHeader>
 
       <Container indicator={currentPlayer}>
-        <PlayerInformation pieceColor={PieceColor.WHITE} score={score.white} />
+        <PlayerInformation
+          player={Player.PLAYER_1}
+          pieceColor={PieceColor.WHITE}
+          score={score.white}
+        />
 
         <Separator>
           <Line />
         </Separator>
 
-        <PlayerInformation pieceColor={PieceColor.BLACK} score={score.black} />
+        <PlayerInformation
+          player={Player.PLAYER_2}
+          pieceColor={PieceColor.BLACK}
+          score={score.black}
+        />
       </Container>
     </Wrapper>
   );

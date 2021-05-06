@@ -15,6 +15,12 @@ declare type Square = {
 
 declare type Board = Square[];
 
+declare type PlayerType = {
+  PLAYER_1: 'P1';
+  PLAYER_2: 'P2';
+  COM: 'com';
+};
+
 declare type PieceColorType = {
   WHITE: 'white';
   BLACK: 'black';
