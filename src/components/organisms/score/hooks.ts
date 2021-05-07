@@ -1,10 +1,7 @@
 import { useSelector } from 'react-redux';
-import Const from 'src/const';
-
-const { PieceColor } = Const;
 
 const useScore = (): {
-  currentPlayer: UnionVal<typeof PieceColor>;
+  currentPlayer: CurrentPlayer;
   score: Store['game']['score'];
 } => {
   const { currentPlayer, score } = useSelector((store: Store) => store.game);
