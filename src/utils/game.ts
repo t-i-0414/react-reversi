@@ -1,16 +1,17 @@
+import PieceColor from 'src/const/piece-color';
 import store from 'src/redux/create-store';
 
 /**
  * Method to get arrays of the square that has piece that can be turn over in each directions from the passed square
  */
 const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
-  const { boardState, sideSquaresCount, currentPlayer } = store.getState().game;
+  const { board, sideSquaresCount, currentPlayer } = store.getState().game;
 
   const eachDirectionSquaresArray: Array<Square[]> = [];
 
   // Get an array of squares from the passed square to the left
   eachDirectionSquaresArray.push(
-    boardState
+    board
       .filter((square) => {
         return !!(
           square.row === passedSquare.row && square.column < passedSquare.column
@@ -21,7 +22,7 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
 
   // Get an array of squares from the passed square to the right side
   eachDirectionSquaresArray.push(
-    boardState.filter((square) => {
+    board.filter((square) => {
       return !!(
         square.row === passedSquare.row && square.column > passedSquare.column
       );
@@ -30,7 +31,7 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
 
   // Get an array of squares from the passed square to the top
   eachDirectionSquaresArray.push(
-    boardState
+    board
       .filter((square) => {
         return !!(
           square.row < passedSquare.row && square.column === passedSquare.column
@@ -41,7 +42,7 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
 
   // Get an array of squares from the passed square to the bottom
   eachDirectionSquaresArray.push(
-    boardState.filter((square) => {
+    board.filter((square) => {
       return !!(
         square.row > passedSquare.row && square.column === passedSquare.column
       );
@@ -53,8 +54,8 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key - sideSquaresCount * count - count;
-    if (squareId >= 0 && squareId < boardState.length) {
-      upperLeftSquaresArray.push(boardState[squareId]);
+    if (squareId >= 0 && squareId < board.length) {
+      upperLeftSquaresArray.push(board[squareId]);
     }
   }
   eachDirectionSquaresArray.push(upperLeftSquaresArray);
@@ -64,8 +65,8 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key - sideSquaresCount * count + count;
-    if (squareId > 0 && squareId < boardState.length) {
-      upperRightSquaresArray.push(boardState[squareId]);
+    if (squareId > 0 && squareId < board.length) {
+      upperRightSquaresArray.push(board[squareId]);
     }
   }
   eachDirectionSquaresArray.push(upperRightSquaresArray);
@@ -75,8 +76,8 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key + sideSquaresCount * count - count;
-    if (squareId >= 0 && squareId < boardState.length - 1) {
-      lowerLeftSquaresArray.push(boardState[squareId]);
+    if (squareId >= 0 && squareId < board.length - 1) {
+      lowerLeftSquaresArray.push(board[squareId]);
     }
   }
   eachDirectionSquaresArray.push(lowerLeftSquaresArray);
@@ -86,8 +87,8 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key + sideSquaresCount * count + count;
-    if (squareId >= 0 && squareId < boardState.length) {
-      lowerRightSquaresArray.push(boardState[squareId]);
+    if (squareId >= 0 && squareId < board.length) {
+      lowerRightSquaresArray.push(board[squareId]);
     }
   }
   eachDirectionSquaresArray.push(lowerRightSquaresArray);
@@ -96,14 +97,14 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
 
   eachDirectionSquaresArray.forEach((squareArray) => {
     const emptySquareIndex: number = squareArray.findIndex(
-      (square) => square.val === 0,
+      (square) => square.pieceColor === PieceColor.INVISIBLE,
     );
     if (emptySquareIndex !== -1) {
       squareArray.splice(emptySquareIndex, squareArray.length);
     }
 
     const endpointSquareIndex: number = squareArray.findIndex(
-      (square) => square.val === currentPlayer,
+      (square) => square.pieceColor === currentPlayer.pieceColor,
     );
     squareArray.splice(Math.max(0, endpointSquareIndex), squareArray.length);
 

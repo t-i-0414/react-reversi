@@ -2,21 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { Story } from '@storybook/react/types-6-0';
 import Const from 'src/const';
-import Piece, { PieceProps } from './component';
+import Piece, { PieceProps } from '.';
 
-const { PlayerVal } = Const;
+const { PieceColor } = Const;
 
 export default {
   title: 'Atoms/Piece',
   component: Piece,
   argTypes: {
-    playerVal: {
+    pieceColor: {
       control: {
         type: 'select',
         options: {
-          white: PlayerVal.WHITE,
-          black: PlayerVal.BLACK,
-          invisible: PlayerVal.NONE,
+          white: PieceColor.WHITE,
+          black: PieceColor.BLACK,
+          invisible: PieceColor.INVISIBLE,
         },
       },
     },
@@ -32,7 +32,7 @@ const Template: Story<PieceProps> = (args) => (
 export const normal = Template.bind({});
 
 normal.args = {
-  playerVal: PlayerVal.WHITE,
+  pieceColor: PieceColor.WHITE,
 };
 
 const Base = styled.div`

@@ -1,44 +1,55 @@
 import { Dispatch } from 'redux';
 import Const from 'src/const';
 
-const { PlayerVal } = Const;
+const { Player, PieceColor } = Const;
 
 /**
  * action
  */
-const SET_GAME_START_FLAG = 'reversi/store/game/SET_GAME_START_FLAG';
-const SET_SIDE_SQUARES_COUNT = 'reversi/store/game/SET_SIDE_SQUARES_COUNT';
-const SET_BOARD_STATE = 'reversi/store/game/SET_BOARD_STATE';
-const UPDATE_CURRENT_PLAYER = 'reversi/store/game/UPDATE_CURRENT_PLAYER';
+const UPDATE_GAME_START_FLAG = 'reversi/store/game/update-game-start-flag';
+const UPDATE_SIDE_SQUARES_COUNT =
+  'reversi/store/game/update-side-squares-count';
+const UPDATE_BOARD = 'reversi/store/game/update-board';
+const UPDATE_CURRENT_PLAYER = 'reversi/store/game/update-current-player';
+const UPDATE_SCORE = 'reservi/store/game/update-score';
 
 /**
  * action types
  */
-type SetGameStartFlag = {
-  type: typeof SET_GAME_START_FLAG;
+type UpdateGameStartFlag = {
+  type: typeof UPDATE_GAME_START_FLAG;
   payload: boolean;
 };
 
-type SetSideSquaresCount = {
-  type: typeof SET_SIDE_SQUARES_COUNT;
+type UpdateSideSquaresCount = {
+  type: typeof UPDATE_SIDE_SQUARES_COUNT;
   payload: number;
 };
 
-type setBoardState = {
-  type: typeof SET_BOARD_STATE;
+type UpdateBoard = {
+  type: typeof UPDATE_BOARD;
   payload: Board;
 };
 
-type updateCurrentPlayer = {
+type UpdateCurrentPlayer = {
   type: typeof UPDATE_CURRENT_PLAYER;
-  payload: UnionValType<typeof PlayerVal>;
+  payload: CurrentPlayer;
+};
+
+type UpdateScore = {
+  type: typeof UPDATE_SCORE;
+  payload: {
+    white: number;
+    black: number;
+  };
 };
 
 type ActionType =
-  | SetGameStartFlag
-  | SetSideSquaresCount
-  | setBoardState
-  | updateCurrentPlayer;
+  | UpdateGameStartFlag
+  | UpdateSideSquaresCount
+  | UpdateBoard
+  | UpdateCurrentPlayer
+  | UpdateScore;
 
 /**
  * initial state
@@ -46,8 +57,15 @@ type ActionType =
 const initialState = {
   isGameStart: false,
   sideSquaresCount: 0,
-  boardState: [],
-  currentPlayer: PlayerVal.NONE,
+  board: [],
+  currentPlayer: {
+    player: Player.NONE,
+    pieceColor: PieceColor.INVISIBLE,
+  },
+  score: {
+    white: 0,
+    black: 0,
+  },
 };
 
 /**
@@ -58,39 +76,67 @@ export default (
   action: ActionType,
 ): Store['game'] => {
   switch (action.type) {
-    case SET_GAME_START_FLAG:
+    case UPDATE_GAME_START_FLAG:
       return {
         ...state,
         isGameStart: action.payload,
       };
-    case SET_SIDE_SQUARES_COUNT:
+    case UPDATE_SIDE_SQUARES_COUNT:
       return {
         ...state,
         sideSquaresCount: action.payload,
       };
-    case SET_BOARD_STATE:
+    case UPDATE_BOARD:
       return {
         ...state,
-        boardState: action.payload,
+        board: action.payload,
       };
     case UPDATE_CURRENT_PLAYER:
       return {
         ...state,
         currentPlayer: action.payload,
       };
+    case UPDATE_SCORE:
+      return {
+        ...state,
+        score: action.payload,
+      };
     default:
       return state;
   }
 };
 
-export const setGameStartFlg = (flag: boolean) => (
-  dispatch: Dispatch,
-): void => {
-  dispatch({
-    type: SET_GAME_START_FLAG,
-    payload: flag,
-  });
-};
+export const updateGameStartFlg = (flag: boolean): UpdateGameStartFlag => ({
+  type: UPDATE_GAME_START_FLAG,
+  payload: flag,
+});
+
+export const updateSideSquaresCount = (
+  sideSquaresCount: number,
+): UpdateSideSquaresCount => ({
+  type: UPDATE_SIDE_SQUARES_COUNT,
+  payload: sideSquaresCount,
+});
+
+export const updateBoard = (stagingBoard: Board): UpdateBoard => ({
+  type: UPDATE_BOARD,
+  payload: stagingBoard,
+});
+
+export const updateCurrentPlayer = (
+  stagingPlayer: CurrentPlayer,
+): UpdateCurrentPlayer => ({
+  type: UPDATE_CURRENT_PLAYER,
+  payload: stagingPlayer,
+});
+
+export const updateScore = (stagingScore: {
+  white: number;
+  black: number;
+}): UpdateScore => ({
+  type: UPDATE_SCORE,
+  payload: stagingScore,
+});
 
 export const initializeBoard = (sideSquaresCount: number) => (
   dispatch: Dispatch,
@@ -106,12 +152,12 @@ export const initializeBoard = (sideSquaresCount: number) => (
     const key = squareCount;
     const column = squareCount % sideSquaresCount;
     const row = Math.floor(squareCount / sideSquaresCount);
-    let val: UnionValType<typeof PlayerVal> = PlayerVal.NONE;
+    let pieceColor: UnionVal<typeof PieceColor> = PieceColor.INVISIBLE;
 
     // place four stones when the board is initially rendered
     // upprer left square
     if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2 - 1) {
-      val = PlayerVal.WHITE;
+      pieceColor = PieceColor.WHITE;
     }
 
     // upper right square
@@ -119,54 +165,29 @@ export const initializeBoard = (sideSquaresCount: number) => (
       column === sideSquaresCount / 2 - 1 &&
       row === sideSquaresCount / 2 - 1
     ) {
-      val = PlayerVal.BLACK;
+      pieceColor = PieceColor.BLACK;
     }
 
     // lower left square
     if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2) {
-      val = PlayerVal.BLACK;
+      pieceColor = PieceColor.BLACK;
     }
 
     // lower right square
     if (column === sideSquaresCount / 2 - 1 && row === sideSquaresCount / 2) {
-      val = PlayerVal.WHITE;
+      pieceColor = PieceColor.WHITE;
     }
 
     stagingBoard.push({
       key,
       column,
       row,
-      val,
+      pieceColor,
     });
   }
 
-  dispatch({
-    type: SET_SIDE_SQUARES_COUNT,
-    payload: sideSquaresCount,
-  });
-
-  dispatch({
-    type: SET_BOARD_STATE,
-    payload: stagingBoard,
-  });
-};
-
-export const updateBoardState = (stagingBoard: Board) => (
-  dispatch: Dispatch,
-): void => {
-  dispatch({
-    type: SET_BOARD_STATE,
-    payload: stagingBoard,
-  });
-};
-
-export const updateCurrentPlayer = (
-  stagingPlayer: UnionValType<typeof PlayerVal>,
-) => (dispatch: Dispatch): void => {
-  dispatch({
-    type: UPDATE_CURRENT_PLAYER,
-    payload: stagingPlayer,
-  });
+  dispatch(updateSideSquaresCount(sideSquaresCount));
+  dispatch(updateBoard(stagingBoard));
 };
 
 export const changeGamesTurn = (
@@ -174,28 +195,55 @@ export const changeGamesTurn = (
   updatableSquaresArray: Square[],
 ) => (dispatch: Dispatch, getState: () => Store): void => {
   const {
-    game: { boardState: stagingBoardState, currentPlayer },
+    game: { board: stagingBoard, currentPlayer },
   } = getState();
-  const clickedSquare: Square = stagingBoardState[square.key];
+  const clickedSquare: Square = stagingBoard[square.key];
 
   // change each the value of squares for pieces to be turn over
   updatableSquaresArray.forEach((updatableSquare: Square) => {
-    stagingBoardState[updatableSquare.key].val = currentPlayer;
+    stagingBoard[updatableSquare.key].pieceColor = currentPlayer.pieceColor;
   });
 
   // change the value of clicked square
-  clickedSquare.val = currentPlayer;
+  clickedSquare.pieceColor = currentPlayer.pieceColor;
 
   // switch the current player
   const nextPlayer =
-    currentPlayer === PlayerVal.BLACK ? PlayerVal.WHITE : PlayerVal.BLACK;
+    currentPlayer.pieceColor === PieceColor.BLACK
+      ? {
+          player: Player.PLAYER_1,
+          pieceColor: PieceColor.WHITE,
+        }
+      : {
+          player: Player.PLAYER_2,
+          pieceColor: PieceColor.BLACK,
+        };
 
-  dispatch({
-    type: SET_BOARD_STATE,
-    payload: stagingBoardState,
-  });
-  dispatch({
-    type: UPDATE_CURRENT_PLAYER,
-    payload: nextPlayer,
-  });
+  dispatch(updateBoard(stagingBoard));
+  dispatch(updateCurrentPlayer(nextPlayer));
+  countScore();
+};
+
+export const countScore = () => (
+  dispatch: Dispatch,
+  getState: () => Store,
+): void => {
+  const {
+    game: { board },
+  } = getState();
+
+  const whitePiecesCount = board.reduce((prev, square) => {
+    return prev + (square.pieceColor === PieceColor.WHITE ? 1 : 0);
+  }, 0);
+
+  const blackPiecesCount = board.reduce((prev, square) => {
+    return prev + (square.pieceColor === PieceColor.BLACK ? 1 : 0);
+  }, 0);
+
+  dispatch(
+    updateScore({
+      white: whitePiecesCount,
+      black: blackPiecesCount,
+    }),
+  );
 };

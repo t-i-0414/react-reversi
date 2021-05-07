@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Square from './component';
+import Square from '.';
 
 describe('Square unit test', () => {
   it('snapshot', () => {

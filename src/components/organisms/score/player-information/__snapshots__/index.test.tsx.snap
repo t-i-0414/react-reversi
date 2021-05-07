@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayerInformation unit test snapshot(PieceColor Black) 1`] = `
+<div
+  className="sc-gtssRu hAvyXn"
+>
+  <span
+    className="sc-jSFkmK YwpPE"
+  >
+    0
+  </span>
+  <div
+    className="sc-dlnjPT gKHeiO"
+  >
+    <span
+      className="sc-bdnylx kjkACR"
+      color="#000"
+    />
+    <p
+      className="sc-eCApGN gvQTVl"
+      color="#fff"
+    >
+      P1
+    </p>
+  </div>
+</div>
+`;
+
+exports[`PlayerInformation unit test snapshot(PieceColor White) 1`] = `
+<div
+  className="sc-gtssRu hAvyXn"
+>
+  <div
+    className="sc-dlnjPT gKHeiO"
+  >
+    <span
+      className="sc-bdnylx hEHfkv"
+      color="#fff"
+    />
+    <p
+      className="sc-eCApGN chUDyK"
+      color="#555"
+    >
+      P1
+    </p>
+  </div>
+  <span
+    className="sc-jSFkmK YwpPE"
+  >
+    0
+  </span>
+</div>
+`;

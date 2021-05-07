@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Story } from '@storybook/react/types-6-0';
-import Button, { ButtonProps } from './component';
+import Button, { ButtonProps } from '.';
 
 export default {
   title: 'Atoms/Button',

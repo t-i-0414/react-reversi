@@ -1,7 +1,7 @@
 /**
  * Utility Types
  */
-declare type UnionValType<T> = T[keyof T];
+declare type UnionVal<T> = T[keyof T];
 
 /**
  * State Types
@@ -10,22 +10,38 @@ declare type Square = {
   key: number;
   column: number;
   row: number;
-  val: number;
+  pieceColor: UnionVal<PieceColorType>;
 };
 
 declare type Board = Square[];
 
-declare type PlayerValState = {
-  WHITE: 1;
-  BLACK: -1;
-  NONE: 0;
+declare type PlayerType = {
+  PLAYER_1: 'P1';
+  PLAYER_2: 'P2';
+  COM: 'com';
+  NONE: 'none';
+};
+
+declare type PieceColorType = {
+  WHITE: 'white';
+  BLACK: 'black';
+  INVISIBLE: 'invisible';
+};
+
+declare type CurrentPlayer = {
+  player: UnionVal<PlayerType>;
+  pieceColor: UnionVal<PieceColorType>;
 };
 
 interface Store {
   game: {
     isGameStart: boolean;
-    boardState: Board;
+    board: Board;
     sideSquaresCount: number;
-    currentPlayer: UnionValType<PlayerValState>;
+    currentPlayer: CurrentPlayer;
+    score: {
+      white: number;
+      black: number;
+    };
   };
 }
