@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import Const from 'src/const';
 
-const { PieceColor } = Const;
+const { Player, PieceColor } = Const;
 
 /**
  * action
@@ -33,8 +33,9 @@ type UpdateBoard = {
 
 type UpdateCurrentPlayer = {
   type: typeof UPDATE_CURRENT_PLAYER;
-  payload: UnionVal<typeof PieceColor>;
+  payload: CurrentPlayer;
 };
+
 type UpdateScore = {
   type: typeof UPDATE_SCORE;
   payload: {
@@ -57,7 +58,10 @@ const initialState = {
   isGameStart: false,
   sideSquaresCount: 0,
   board: [],
-  currentPlayer: PieceColor.INVISIBLE,
+  currentPlayer: {
+    player: Player.NONE,
+    pieceColor: PieceColor.INVISIBLE,
+  },
   score: {
     white: 0,
     black: 0,
@@ -120,7 +124,7 @@ export const updateBoard = (stagingBoard: Board): UpdateBoard => ({
 });
 
 export const updateCurrentPlayer = (
-  stagingPlayer: UnionVal<typeof PieceColor>,
+  stagingPlayer: CurrentPlayer,
 ): UpdateCurrentPlayer => ({
   type: UPDATE_CURRENT_PLAYER,
   payload: stagingPlayer,
@@ -197,15 +201,23 @@ export const changeGamesTurn = (
 
   // change each the value of squares for pieces to be turn over
   updatableSquaresArray.forEach((updatableSquare: Square) => {
-    stagingBoard[updatableSquare.key].pieceColor = currentPlayer;
+    stagingBoard[updatableSquare.key].pieceColor = currentPlayer.pieceColor;
   });
 
   // change the value of clicked square
-  clickedSquare.pieceColor = currentPlayer;
+  clickedSquare.pieceColor = currentPlayer.pieceColor;
 
   // switch the current player
   const nextPlayer =
-    currentPlayer === PieceColor.BLACK ? PieceColor.WHITE : PieceColor.BLACK;
+    currentPlayer.pieceColor === PieceColor.BLACK
+      ? {
+          player: Player.PLAYER_1,
+          pieceColor: PieceColor.WHITE,
+        }
+      : {
+          player: Player.PLAYER_2,
+          pieceColor: PieceColor.BLACK,
+        };
 
   dispatch(updateBoard(stagingBoard));
   dispatch(updateCurrentPlayer(nextPlayer));

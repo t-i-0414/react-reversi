@@ -19,6 +19,7 @@ declare type PlayerType = {
   PLAYER_1: 'P1';
   PLAYER_2: 'P2';
   COM: 'com';
+  NONE: 'none';
 };
 
 declare type PieceColorType = {
@@ -27,12 +28,17 @@ declare type PieceColorType = {
   INVISIBLE: 'invisible';
 };
 
+declare type CurrentPlayer = {
+  player: UnionVal<PlayerType>;
+  pieceColor: UnionVal<PieceColorType>;
+};
+
 interface Store {
   game: {
     isGameStart: boolean;
     board: Board;
     sideSquaresCount: number;
-    currentPlayer: UnionVal<PieceColorType>;
+    currentPlayer: CurrentPlayer;
     score: {
       white: number;
       black: number;

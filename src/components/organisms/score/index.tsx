@@ -13,7 +13,7 @@ const Information: React.FC = () => {
     <Wrapper>
       <ContentHeader>Score</ContentHeader>
 
-      <Container indicator={currentPlayer}>
+      <Container currentPlayer={currentPlayer}>
         <PlayerInformation
           player={Player.PLAYER_1}
           pieceColor={PieceColor.WHITE}
@@ -48,7 +48,7 @@ const ContentHeader = styled.p`
 `;
 
 interface ContainerProps {
-  indicator: UnionVal<typeof PieceColor>;
+  currentPlayer: CurrentPlayer;
 }
 const Container = styled.div<ContainerProps>`
   position: relative;
@@ -60,7 +60,7 @@ const Container = styled.div<ContainerProps>`
   margin: 0 auto;
 
   ${(props) =>
-    props.indicator === PieceColor.WHITE &&
+    props.currentPlayer.pieceColor === PieceColor.WHITE &&
     css`
       &::before {
         position: absolute;
@@ -76,7 +76,7 @@ const Container = styled.div<ContainerProps>`
     `}
 
   ${(props) =>
-    props.indicator === PieceColor.BLACK &&
+    props.currentPlayer.pieceColor === PieceColor.BLACK &&
     css`
       &::after {
         position: absolute;

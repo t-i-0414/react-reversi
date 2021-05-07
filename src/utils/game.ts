@@ -104,7 +104,7 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
     }
 
     const endpointSquareIndex: number = squareArray.findIndex(
-      (square) => square.pieceColor === currentPlayer,
+      (square) => square.pieceColor === currentPlayer.pieceColor,
     );
     squareArray.splice(Math.max(0, endpointSquareIndex), squareArray.length);
 
