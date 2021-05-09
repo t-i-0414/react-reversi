@@ -12,6 +12,16 @@ export default {
         type: 'text',
       },
     },
+    type: {
+      control: {
+        type: 'select',
+        options: {
+          submit: 'submit',
+          button: 'button',
+          reset: 'reset',
+        },
+      },
+    },
   },
 };
 
@@ -25,6 +35,7 @@ export const normal = Template.bind({});
 
 normal.args = {
   text: 'Game Start',
+  type: 'submit',
 };
 
 const Base = styled.div`
