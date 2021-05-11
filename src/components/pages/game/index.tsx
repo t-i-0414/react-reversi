@@ -37,7 +37,10 @@ const Game: React.FC<GameProps> = ({ dataCy }) => {
       ) : (
         <>
           <form onSubmit={onSubmit}>
-            <input {...register('sideSquaresCount', { required: true })} />
+            <input
+              data-cy="input-sideSquaresCount"
+              {...register('sideSquaresCount', { required: true })}
+            />
             {errors.sideSquaresCount && <span>This field is required</span>}
 
             <Button text="Game Start" type="submit" dataCy="start" />
