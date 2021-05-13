@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  // add comment
+  // add comment.
+
   updateGameStartFlg,
   initializeBoard,
   updateCurrentPlayer,
