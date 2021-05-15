@@ -1,31 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from 'src/components/atoms/button';
 import Board from 'src/components/organisms/board';
 import Information from 'src/components/organisms/score';
 import Const from 'src/const';
-import { useForm } from 'react-hook-form';
+import SettingForm from 'src/components/organisms/setting-form';
 import useGame from './hooks';
 
 const { Color } = Const;
-
-interface Inputs {
-  sideSquaresCount: number;
-}
 
 export interface GameProps {
   dataCy: string;
 }
 const Game: React.FC<GameProps> = ({ dataCy }) => {
-  const { isGameStart, startGame } = useGame();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit = handleSubmit((data: Inputs) =>
-    startGame(data.sideSquaresCount),
-  );
+  const { isGameStart } = useGame();
 
   return (
     <StyledGameWrapper data-cy={dataCy}>
@@ -35,17 +22,7 @@ const Game: React.FC<GameProps> = ({ dataCy }) => {
           <Information />
         </>
       ) : (
-        <>
-          <form onSubmit={onSubmit}>
-            <input
-              data-cy="input-sideSquaresCount"
-              {...register('sideSquaresCount', { required: true })}
-            />
-            {errors.sideSquaresCount && <span>This field is required</span>}
-
-            <Button text="Game Start" type="submit" dataCy="start" />
-          </form>
-        </>
+        <SettingForm />
       )}
     </StyledGameWrapper>
   );
