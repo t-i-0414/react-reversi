@@ -6,7 +6,7 @@ import PlayerInformation from './player-information';
 
 const { Color, Size, PieceColor, Player } = Const;
 
-const Information: React.FC = () => {
+const Score: React.FC = () => {
   const { currentPlayer, score } = useScore();
 
   return (
@@ -34,7 +34,7 @@ const Information: React.FC = () => {
   );
 };
 
-export default Information;
+export default Score;
 
 const Wrapper = styled.div`
   width: 512px;
