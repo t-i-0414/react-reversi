@@ -26,7 +26,7 @@ describe('The Game Page', () => {
   });
 
   it('Successfully Square click', () => {
-    cy.get('[data-cy="input-sideSquaresCount"]').type("8");
+    cy.get('[data-cy="input-sideSquaresCount"]').as('range').invoke('val', 8).trigger('change')
     cy.get('[data-cy="start"]').click();
     for (let n = 0; n < 60; n++) {
       if (n % 2 === 0) {
