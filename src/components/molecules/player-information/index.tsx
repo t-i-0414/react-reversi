@@ -5,7 +5,7 @@ import Piece from 'src/components/atoms/piece';
 
 const { Color, Size, PieceColor, Player } = Const;
 
-interface PlayerInformationProps {
+export interface PlayerInformationProps {
   player: UnionVal<typeof Player>;
   pieceColor: UnionVal<typeof PieceColor>;
   score: number;

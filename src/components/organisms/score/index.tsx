@@ -1,8 +1,8 @@
 import React from 'react';
 import Const from 'src/const';
 import styled, { css } from 'styled-components';
+import PlayerInformation from 'src/components/molecules/player-information/index';
 import useScore from './hooks';
-import PlayerInformation from './player-information';
 
 const { Color, Size, PieceColor, Player } = Const;
 
