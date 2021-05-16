@@ -1,55 +1,68 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Square from 'src/components/atoms/square';
 import Piece from 'src/components/atoms/piece';
 import Const from 'src/const';
-import useBoard from './hook';
+import { useBoardSelector, useBoardFunctions, useBoardScroll } from './hook';
 
-const { Size, Color } = Const;
+const { Color } = Const;
 
 export interface BoardProps {
   dataCy: string;
 }
 const Board: React.FC<BoardProps> = ({ dataCy }) => {
+  const { squareList, boardSize } = useBoardSelector();
+
+  const wrapperRef = useRef(null);
+  useBoardScroll(wrapperRef, boardSize);
+
   const {
-    board,
-    sideSquaresCount,
     hasCanBeTurnOverPieces,
     hasPlacedPiece,
     placePiece,
-  } = useBoard();
+  } = useBoardFunctions();
 
   return (
-    <Wrapper size={sideSquaresCount * Size.SQUARE_SIZE} data-cy={dataCy}>
-      {board.map((square: Square) => {
-        return (
-          <Square key={square.key} dataCy={`square-${square.key}`}>
-            {hasCanBeTurnOverPieces(square) && (
-              <Piece
-                pieceColor={square.pieceColor}
-                onclick={() => {
-                  placePiece(square);
-                }}
-                dataCy="clickable"
-              />
-            )}
-            {hasPlacedPiece(square) && <Piece pieceColor={square.pieceColor} />}
-          </Square>
-        );
-      })}
+    <Wrapper ref={wrapperRef}>
+      <Container size={boardSize} data-cy={dataCy}>
+        {squareList.map((square: Square) => {
+          return (
+            <Square key={square.key} dataCy={`square-${square.key}`}>
+              {hasCanBeTurnOverPieces(square) && (
+                <Piece
+                  pieceColor={square.pieceColor}
+                  onclick={() => {
+                    placePiece(square);
+                  }}
+                  dataCy="clickable"
+                />
+              )}
+              {hasPlacedPiece(square) && (
+                <Piece pieceColor={square.pieceColor} />
+              )}
+            </Square>
+          );
+        })}
+      </Container>
     </Wrapper>
   );
 };
 
-interface StyledBoardProps {
+const Wrapper = styled.div`
+  max-width: 100%;
+  max-height: 100%;
+  margin-bottom: 16px;
+  overflow: scroll;
+`;
+
+interface ContainerProps {
   size: number;
 }
-const Wrapper = styled.div<StyledBoardProps>`
+const Container = styled.div<ContainerProps>`
   display: flex;
   flex-wrap: wrap;
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
-  margin-bottom: 16px;
   border: 1px solid ${Color.BD_BLACK};
 `;
 

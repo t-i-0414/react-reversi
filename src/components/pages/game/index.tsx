@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Board from 'src/components/organisms/board';
-import Information from 'src/components/organisms/score';
+import Score from 'src/components/organisms/score';
 import Const from 'src/const';
 import SettingForm from 'src/components/organisms/setting-form';
 import useGame from './hooks';
@@ -19,7 +19,7 @@ const Game: React.FC<GameProps> = ({ dataCy }) => {
       {isGameStart ? (
         <>
           <Board dataCy="board" />
-          <Information />
+          <Score />
         </>
       ) : (
         <SettingForm />

@@ -9,11 +9,17 @@ interface Inputs {
 
 const SettingForm: React.FC = () => {
   const { startGame } = useSettingForm();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      sideSquaresCount: 8,
+    },
+  });
+
   const onSubmit = handleSubmit((data: Inputs) =>
     startGame(data.sideSquaresCount),
   );
@@ -21,8 +27,14 @@ const SettingForm: React.FC = () => {
   return (
     <form onSubmit={onSubmit}>
       <input
+        type="range"
+        {...register('sideSquaresCount', {
+          required: true,
+        })}
+        min="4"
+        max="16"
+        step="2"
         data-cy="input-sideSquaresCount"
-        {...register('sideSquaresCount', { required: true })}
       />
       {errors.sideSquaresCount && <span>This field is required</span>}
 
