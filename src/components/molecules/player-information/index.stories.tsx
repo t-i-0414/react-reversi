@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Story } from '@storybook/react/types-6-0';
 import Const from 'src/const';
 import PlayerInformation, { PlayerInformationProps } from '.';
@@ -37,9 +36,7 @@ export default {
 };
 
 const Template: Story<PlayerInformationProps> = (args) => (
-  <Base>
-    <PlayerInformation {...args} />
-  </Base>
+  <PlayerInformation {...args} />
 );
 
 export const normal = Template.bind({});
@@ -49,11 +46,3 @@ normal.args = {
   player: Player.PLAYER_1,
   score: 10,
 };
-
-const Base = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-`;

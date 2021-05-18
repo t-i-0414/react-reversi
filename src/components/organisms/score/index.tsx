@@ -48,7 +48,7 @@ const ContentHeader = styled.p`
 `;
 
 interface ContainerProps {
-  currentPlayer: CurrentPlayer;
+  currentPlayer: GamePlayer;
 }
 const Container = styled.div<ContainerProps>`
   position: relative;

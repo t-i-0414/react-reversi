@@ -28,7 +28,7 @@ declare type PieceColorType = {
   INVISIBLE: 'invisible';
 };
 
-declare type CurrentPlayer = {
+declare type GamePlayer = {
   player: UnionVal<PlayerType>;
   pieceColor: UnionVal<PieceColorType>;
 };
@@ -38,7 +38,7 @@ interface Store {
     isGameStart: boolean;
     board: Board;
     sideSquaresCount: number;
-    currentPlayer: CurrentPlayer;
+    currentPlayer: GamePlayer;
     score: {
       white: number;
       black: number;

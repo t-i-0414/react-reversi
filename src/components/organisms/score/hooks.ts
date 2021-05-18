@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
 const useScore = (): {
-  currentPlayer: CurrentPlayer;
+  currentPlayer: GamePlayer;
   score: Store['game']['score'];
 } => {
   const { currentPlayer, score } = useSelector((store: Store) => store.game);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import Button from 'src/components/atoms/button';
 import useSettingForm from './hooks';
 
@@ -11,8 +11,9 @@ const SettingForm: React.FC = () => {
   const { startGame } = useSettingForm();
 
   const {
-    register,
+    getValues,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
@@ -26,17 +27,28 @@ const SettingForm: React.FC = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <input
-        type="range"
-        {...register('sideSquaresCount', {
-          required: true,
-        })}
-        min="4"
-        max="16"
-        step="2"
-        data-cy="input-sideSquaresCount"
+      <Controller
+        control={control}
+        name="sideSquaresCount"
+        render={({ field: { onChange, value } }) => (
+          <>
+            <label htmlFor="sideSquaresCount">
+              sideSquaresCount：
+              <input
+                type="range"
+                value={value}
+                min="4"
+                max="16"
+                step="2"
+                data-cy="input-sideSquaresCount"
+                onChange={onChange}
+              />
+            </label>
+            <span>{getValues('sideSquaresCount')}</span>
+            {errors.sideSquaresCount && <span>This field is required</span>}
+          </>
+        )}
       />
-      {errors.sideSquaresCount && <span>This field is required</span>}
 
       <Button text="Game Start" type="submit" dataCy="start" />
     </form>
