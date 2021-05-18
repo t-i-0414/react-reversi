@@ -9,7 +9,6 @@ import Const from 'src/const';
 
 const { Player, PieceColor } = Const;
 
-// comments
 const useSettingForm = (): {
   startGame: (sideSquaresCount: number) => void;
 } => {
