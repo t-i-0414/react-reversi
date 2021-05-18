@@ -33,7 +33,7 @@ type UpdateBoard = {
 
 type UpdateCurrentPlayer = {
   type: typeof UPDATE_CURRENT_PLAYER;
-  payload: CurrentPlayer;
+  payload: GamePlayer;
 };
 
 type UpdateScore = {
@@ -124,7 +124,7 @@ export const updateBoard = (stagingBoard: Board): UpdateBoard => ({
 });
 
 export const updateCurrentPlayer = (
-  stagingPlayer: CurrentPlayer,
+  stagingPlayer: GamePlayer,
 ): UpdateCurrentPlayer => ({
   type: UPDATE_CURRENT_PLAYER,
   payload: stagingPlayer,
