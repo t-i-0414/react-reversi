@@ -15,18 +15,25 @@ const Game: React.FC<GameProps> = ({ dataCy }) => {
   const { isGameStarted } = useGame();
 
   return (
-    <StyledGameWrapper data-cy={dataCy}>
-      {isGameStarted ? (
-        <>
-          <Board dataCy="board" />
-          <Score />
-        </>
-      ) : (
-        <SettingForm />
-      )}
-    </StyledGameWrapper>
+    <>
+      <StyledHeading>React Reversi</StyledHeading>
+      <StyledGameWrapper data-cy={dataCy}>
+        {isGameStarted ? (
+          <>
+            <Board dataCy="board" />
+            <Score />
+          </>
+        ) : (
+          <SettingForm />
+        )}
+      </StyledGameWrapper>
+    </>
   );
 };
+
+const StyledHeading = styled.h1`
+  text-align: center;
+`;
 
 const StyledGameWrapper = styled.div`
   display: flex;
