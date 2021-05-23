@@ -12,7 +12,7 @@ describe('The Game Page', () => {
   });
 
   it('Game App Title exists', () => {
-    cy.title().should('eq', 'React App');
+    cy.title().should('eq', 'React Reversi');
   });
 
   it('Unsuccessfully Game Start', () => {
