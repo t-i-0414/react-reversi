@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   updateGameStartFlg,
   initializeBoard,
@@ -7,32 +7,32 @@ import {
 } from 'src/redux/modules/game';
 import Const from 'src/const';
 
-const { Player, PieceColor } = Const;
-export interface Inputs {
+const { Player } = Const;
+export interface SettingFormInputs {
   sideSquaresCount: number;
-  blackPiecePlayer: string;
-  whitePiecePlayer: string;
+  blackPiecePlayer: keyof Pick<typeof Player, 'PLAYER_1' | 'PLAYER_2'>;
+  whitePiecePlayer: keyof Pick<typeof Player, 'PLAYER_1' | 'PLAYER_2'>;
 }
 
 const useSettingForm = (): {
-  startGame: (data: Inputs) => void;
+  startGame: (data: SettingFormInputs) => void;
 } => {
   const dispatch = useDispatch();
 
-  const startGame = (data: Inputs) => {
+  const {
+    players: { black, white },
+  } = useSelector((store: Store) => store.game);
+
+  const startGame = (data: SettingFormInputs) => {
     dispatch(
       updatePlayers({
         black: {
+          ...black,
           player: Player[data.blackPiecePlayer],
-          pieceColor: PieceColor.BLACK,
-          current: true,
-          score: 0,
         },
         white: {
+          ...white,
           player: Player[data.whitePiecePlayer],
-          pieceColor: PieceColor.WHITE,
-          current: false,
-          score: 0,
         },
       }),
     );

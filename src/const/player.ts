@@ -1,19 +1,18 @@
-const Player: PlayerType = {
+const Player = {
   PLAYER_1: {
     name: 'Player 1',
-    value: 'P1',
+    shortName: 'P1',
+    value: '1',
   },
   PLAYER_2: {
     name: 'Player 2',
-    value: 'P2',
-  },
-  COM: {
-    name: 'Player COM',
-    value: 'COM',
+    shortName: 'P2',
+    value: '2',
   },
   NONE: {
     name: 'NONE',
-    value: 'NONE',
+    shortName: 'NONE',
+    value: '0',
   },
 } as const;
 

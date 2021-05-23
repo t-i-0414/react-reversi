@@ -9,7 +9,7 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
 
   const currentPlayerIndex = Object.entries(players).find(
     ([_id, player]) => player.current === true,
-  )?.[0] as UnionVal<PieceColorType>;
+  )?.[0] as keyof Store['game']['players'];
   const currentPlayer = players[currentPlayerIndex];
 
   const eachDirectionSquaresArray: Array<Square[]> = [];

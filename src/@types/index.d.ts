@@ -18,6 +18,7 @@ declare type Board = Square[];
 declare type PlayerType = {
   [index: string]: {
     name: string;
+    shortName: string;
     value: string;
   };
 };
@@ -29,19 +30,19 @@ declare type PieceColorType = {
 };
 
 declare type GamePlayer = {
-  player: PlayerType[keyof PlayerType];
-  pieceColor: UnionVal<PieceColorType>;
+  player: UnionVal<PlayerType>;
+  pieceColor: UnionVal<Pick<PieceColorType, 'WHITE' | 'BLACK'>>;
   score: number;
   current: boolean;
 };
 
 interface Store {
   game: {
-    isGameStart: boolean;
+    isGameStarted: boolean;
     board: Board;
     sideSquaresCount: number;
     players: {
-      [index: string]: GamePlayer;
+      [key in 'white' | 'black']: GamePlayer;
     };
   };
 }

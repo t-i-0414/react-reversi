@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 const useScore = (): {
   players: Store['game']['players'];
-  currentPlayer: GamePlayer;
+  currentPlayersPieceColor: GamePlayer['pieceColor'];
   score: {
     white: number;
     black: number;
@@ -12,15 +12,15 @@ const useScore = (): {
 
   const currentPlayerIndex = Object.entries(players).find(
     ([_id, player]) => player.current === true,
-  )?.[0] as UnionVal<PieceColorType>;
-  const currentPlayer = players[currentPlayerIndex];
+  )?.[0] as keyof Store['game']['players'];
+  const currentPlayersPieceColor = players[currentPlayerIndex].pieceColor;
 
   const score = {
     white: players.white.score,
     black: players.black.score,
   };
 
-  return { players, currentPlayer, score };
+  return { players, currentPlayersPieceColor, score };
 };
 
 export default useScore;

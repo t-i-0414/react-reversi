@@ -7,28 +7,20 @@ import useScore from './hooks';
 const { Color, Size, PieceColor } = Const;
 
 const Score: React.FC = () => {
-  const { players, currentPlayer, score } = useScore();
+  const { players, currentPlayersPieceColor } = useScore();
 
   return (
     <Wrapper>
       <ContentHeader>Score</ContentHeader>
 
-      <Container currentPlayer={currentPlayer}>
-        <PlayerInformation
-          player={players.black.player.value}
-          pieceColor={players.black.pieceColor}
-          score={score.black}
-        />
+      <Container currentPlayersPieceColor={currentPlayersPieceColor}>
+        <PlayerInformation gamePlayer={players.black} />
 
         <Separator>
           <Line />
         </Separator>
 
-        <PlayerInformation
-          player={players.white.player.value}
-          pieceColor={players.white.pieceColor}
-          score={score.white}
-        />
+        <PlayerInformation gamePlayer={players.white} />
       </Container>
     </Wrapper>
   );
@@ -48,7 +40,7 @@ const ContentHeader = styled.p`
 `;
 
 interface ContainerProps {
-  currentPlayer: GamePlayer;
+  currentPlayersPieceColor: GamePlayer['pieceColor'];
 }
 const Container = styled.div<ContainerProps>`
   position: relative;
@@ -60,7 +52,7 @@ const Container = styled.div<ContainerProps>`
   margin: 0 auto;
 
   ${(props) =>
-    props.currentPlayer.pieceColor === PieceColor.BLACK &&
+    props.currentPlayersPieceColor === PieceColor.BLACK &&
     css`
       &::before {
         position: absolute;
@@ -76,7 +68,7 @@ const Container = styled.div<ContainerProps>`
     `}
 
   ${(props) =>
-    props.currentPlayer.pieceColor === PieceColor.WHITE &&
+    props.currentPlayersPieceColor === PieceColor.WHITE &&
     css`
       &::after {
         position: absolute;

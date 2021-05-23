@@ -6,21 +6,21 @@ import Piece from 'src/components/atoms/piece';
 const { Color, Size, PieceColor } = Const;
 
 export interface PlayerInformationProps {
-  player: string;
-  pieceColor: UnionVal<PieceColorType>;
-  score: number;
+  gamePlayer: GamePlayer;
 }
 const PlayerInformation: React.FC<PlayerInformationProps> = ({
-  player,
-  pieceColor,
-  score,
+  gamePlayer: {
+    player: { shortName },
+    pieceColor,
+    score,
+  },
 }) => {
   return (
     <Wrapper>
       {pieceColor === PieceColor.BLACK && (
         <Inner>
           <StyledPiece pieceColor={PieceColor.BLACK} />
-          <StyledPlayer color={Color.TX_WHITE}>{player}</StyledPlayer>
+          <StyledPlayer color={Color.TX_WHITE}>{shortName}</StyledPlayer>
         </Inner>
       )}
 
@@ -29,7 +29,7 @@ const PlayerInformation: React.FC<PlayerInformationProps> = ({
       {pieceColor === PieceColor.WHITE && (
         <Inner>
           <StyledPiece pieceColor={PieceColor.WHITE} />
-          <StyledPlayer color={Color.TX_BLACK}>{player}</StyledPlayer>
+          <StyledPlayer color={Color.TX_BLACK}>{shortName}</StyledPlayer>
         </Inner>
       )}
     </Wrapper>

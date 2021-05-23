@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import Const from 'src/const';
 
-const { PieceColor } = Const;
+const { Player, PieceColor } = Const;
 
 /**
  * action
@@ -44,25 +44,19 @@ type ActionType =
 /**
  * initial state
  */
-const initialState: Store['game'] = {
-  isGameStart: false,
+export const initialState: Store['game'] = {
+  isGameStarted: false,
   sideSquaresCount: 0,
   board: [],
   players: {
     black: {
-      player: {
-        name: '',
-        value: '',
-      },
+      player: { ...Player.PLAYER_1 },
       pieceColor: PieceColor.BLACK,
       score: 0,
-      current: false,
+      current: true,
     },
     white: {
-      player: {
-        name: '',
-        value: '',
-      },
+      player: { ...Player.PLAYER_2 },
       pieceColor: PieceColor.WHITE,
       score: 0,
       current: false,
@@ -81,7 +75,7 @@ export default (
     case UPDATE_GAME_START_FLAG:
       return {
         ...state,
-        isGameStart: action.payload,
+        isGameStarted: action.payload,
       };
     case UPDATE_SIDE_SQUARES_COUNT:
       return {
@@ -192,7 +186,7 @@ export const changeGamesTurn = (
 
   const currentPlayerIndex = Object.entries(players).find(
     ([_id, player]) => player.current === true,
-  )?.[0] as UnionVal<PieceColorType>;
+  )?.[0] as keyof Store['game']['players'];
   const currentPlayer = players[currentPlayerIndex];
 
   // change each the value of squares for pieces to be turn over
@@ -211,7 +205,7 @@ export const changeGamesTurn = (
 
       return [key, stagingPlayer];
     }),
-  );
+  ) as Store['game']['players'];
 
   dispatch(updateBoard(stagingBoard));
   dispatch(updatePlayers(stagingPlayers));

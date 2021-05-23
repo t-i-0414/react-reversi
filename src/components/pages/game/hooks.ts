@@ -3,17 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateGameStartFlg } from 'src/redux/modules/game';
 
 const useGame = (): {
-  isGameStart: boolean;
+  isGameStarted: boolean;
 } => {
   const dispatch = useDispatch();
-  const { isGameStart } = useSelector((store: Store) => store.game);
+  const { isGameStarted } = useSelector((store: Store) => store.game);
 
   useEffect(() => {
     dispatch(updateGameStartFlg(false));
   }, [dispatch]);
 
   return {
-    isGameStart,
+    isGameStarted,
   };
 };
 export default useGame;
