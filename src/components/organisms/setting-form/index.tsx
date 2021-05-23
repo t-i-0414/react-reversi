@@ -1,29 +1,21 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Button from 'src/components/atoms/button';
-import useSettingForm from './hooks';
+import Const from 'src/const';
+import useSettingForm, { Inputs } from './hooks';
 
-interface Inputs {
-  sideSquaresCount: number;
-}
+const { Player } = Const;
 
 const SettingForm: React.FC = () => {
   const { startGame } = useSettingForm();
 
-  const {
-    getValues,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<Inputs>({
+  const { register, getValues, handleSubmit, control } = useForm<Inputs>({
     defaultValues: {
       sideSquaresCount: 8,
     },
   });
 
-  const onSubmit = handleSubmit((data: Inputs) =>
-    startGame(data.sideSquaresCount),
-  );
+  const onSubmit = handleSubmit((data: Inputs) => startGame(data));
 
   return (
     <form onSubmit={onSubmit}>
@@ -32,8 +24,11 @@ const SettingForm: React.FC = () => {
         name="sideSquaresCount"
         render={({ field: { onChange, value } }) => (
           <>
-            <label htmlFor="sideSquaresCount">
-              sideSquaresCount：
+            <div>
+              <span>Squares on board&apos;s one side:</span>
+              <span>{getValues('sideSquaresCount')}</span>
+            </div>
+            <div>
               <input
                 type="range"
                 value={value}
@@ -43,12 +38,30 @@ const SettingForm: React.FC = () => {
                 data-cy="input-sideSquaresCount"
                 onChange={onChange}
               />
-            </label>
-            <span>{getValues('sideSquaresCount')}</span>
-            {errors.sideSquaresCount && <span>This field is required</span>}
+            </div>
           </>
         )}
       />
+
+      <div>
+        <span>Black piece player:</span>
+      </div>
+      <div>
+        <select {...register('blackPiecePlayer')} value="PLAYER_1">
+          <option value="PLAYER_1">{Player.PLAYER_1.name}</option>
+          <option value="PLAYER_2">{Player.PLAYER_2.name}</option>
+        </select>
+      </div>
+
+      <div>
+        <span>White piece player:</span>
+      </div>
+      <div>
+        <select {...register('whitePiecePlayer')} value="PLAYER_2">
+          <option value="PLAYER_1">{Player.PLAYER_1.name}</option>
+          <option value="PLAYER_2">{Player.PLAYER_2.name}</option>
+        </select>
+      </div>
 
       <Button text="Game Start" type="submit" dataCy="start" />
     </form>

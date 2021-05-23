@@ -13,8 +13,8 @@ export default {
       control: {
         type: 'select',
         options: {
-          Player1: Player.PLAYER_1,
-          Player2: Player.PLAYER_2,
+          Player1: Player.PLAYER_1.value,
+          Player2: Player.PLAYER_2.value,
           PlayerCOM: Player.COM,
         },
       },
@@ -25,7 +25,6 @@ export default {
         options: {
           white: PieceColor.WHITE,
           black: PieceColor.BLACK,
-          invisible: PieceColor.INVISIBLE,
         },
       },
     },
@@ -43,6 +42,6 @@ export const normal = Template.bind({});
 
 normal.args = {
   pieceColor: PieceColor.WHITE,
-  player: Player.PLAYER_1,
+  player: Player.PLAYER_1.value,
   score: 10,
 };
