@@ -12,11 +12,11 @@ export interface GameProps {
   dataCy: string;
 }
 const Game: React.FC<GameProps> = ({ dataCy }) => {
-  const { isGameStart } = useGame();
+  const { isGameStarted } = useGame();
 
   return (
     <StyledGameWrapper data-cy={dataCy}>
-      {isGameStart ? (
+      {isGameStarted ? (
         <>
           <Board dataCy="board" />
           <Score />
@@ -33,7 +33,7 @@ const StyledGameWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 992px;
+  width: 1026px;
   height: 768px;
   margin: 0 auto;
   color: ${Color.TX_BLACK};

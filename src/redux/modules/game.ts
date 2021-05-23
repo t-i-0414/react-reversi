@@ -10,8 +10,7 @@ const UPDATE_GAME_START_FLAG = 'reversi/store/game/update-game-start-flag';
 const UPDATE_SIDE_SQUARES_COUNT =
   'reversi/store/game/update-side-squares-count';
 const UPDATE_BOARD = 'reversi/store/game/update-board';
-const UPDATE_CURRENT_PLAYER = 'reversi/store/game/update-current-player';
-const UPDATE_SCORE = 'reservi/store/game/update-score';
+const UPDATE_PLAYERS = 'reversi/store/game/update-players';
 
 /**
  * action types
@@ -31,40 +30,37 @@ type UpdateBoard = {
   payload: Board;
 };
 
-type UpdateCurrentPlayer = {
-  type: typeof UPDATE_CURRENT_PLAYER;
-  payload: GamePlayer;
-};
-
-type UpdateScore = {
-  type: typeof UPDATE_SCORE;
-  payload: {
-    white: number;
-    black: number;
-  };
+type UpdatePlayers = {
+  type: typeof UPDATE_PLAYERS;
+  payload: Store['game']['players'];
 };
 
 type ActionType =
   | UpdateGameStartFlag
   | UpdateSideSquaresCount
   | UpdateBoard
-  | UpdateCurrentPlayer
-  | UpdateScore;
+  | UpdatePlayers;
 
 /**
  * initial state
  */
-const initialState = {
-  isGameStart: false,
+export const initialState: Store['game'] = {
+  isGameStarted: false,
   sideSquaresCount: 0,
   board: [],
-  currentPlayer: {
-    player: Player.NONE,
-    pieceColor: PieceColor.INVISIBLE,
-  },
-  score: {
-    white: 0,
-    black: 0,
+  players: {
+    black: {
+      player: { ...Player.PLAYER_1 },
+      pieceColor: PieceColor.BLACK,
+      score: 0,
+      current: true,
+    },
+    white: {
+      player: { ...Player.PLAYER_2 },
+      pieceColor: PieceColor.WHITE,
+      score: 0,
+      current: false,
+    },
   },
 };
 
@@ -79,7 +75,7 @@ export default (
     case UPDATE_GAME_START_FLAG:
       return {
         ...state,
-        isGameStart: action.payload,
+        isGameStarted: action.payload,
       };
     case UPDATE_SIDE_SQUARES_COUNT:
       return {
@@ -91,15 +87,10 @@ export default (
         ...state,
         board: action.payload,
       };
-    case UPDATE_CURRENT_PLAYER:
+    case UPDATE_PLAYERS:
       return {
         ...state,
-        currentPlayer: action.payload,
-      };
-    case UPDATE_SCORE:
-      return {
-        ...state,
-        score: action.payload,
+        players: action.payload,
       };
     default:
       return state;
@@ -123,19 +114,11 @@ export const updateBoard = (stagingBoard: Board): UpdateBoard => ({
   payload: stagingBoard,
 });
 
-export const updateCurrentPlayer = (
-  stagingPlayer: GamePlayer,
-): UpdateCurrentPlayer => ({
-  type: UPDATE_CURRENT_PLAYER,
-  payload: stagingPlayer,
-});
-
-export const updateScore = (stagingScore: {
-  white: number;
-  black: number;
-}): UpdateScore => ({
-  type: UPDATE_SCORE,
-  payload: stagingScore,
+export const updatePlayers = (
+  stagingPlayers: Store['game']['players'],
+): UpdatePlayers => ({
+  type: UPDATE_PLAYERS,
+  payload: stagingPlayers,
 });
 
 export const initializeBoard = (sideSquaresCount: number) => (
@@ -154,7 +137,9 @@ export const initializeBoard = (sideSquaresCount: number) => (
     const row = Math.floor(squareCount / sideSquaresCount);
     let pieceColor: UnionVal<typeof PieceColor> = PieceColor.INVISIBLE;
 
-    // place four stones when the board is initially rendered
+    /**
+     * place four stones when the board is initially rendered
+     */
     // upprer left square
     if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2 - 1) {
       pieceColor = PieceColor.WHITE;
@@ -195,9 +180,14 @@ export const changeGamesTurn = (
   updatableSquaresArray: Square[],
 ) => (dispatch: Dispatch, getState: () => Store): void => {
   const {
-    game: { board: stagingBoard, currentPlayer },
+    game: { board: stagingBoard, players },
   } = getState();
   const clickedSquare: Square = stagingBoard[square.key];
+
+  const currentPlayerIndex = Object.entries(players).find(
+    ([_id, player]) => player.current === true,
+  )?.[0] as keyof Store['game']['players'];
+  const currentPlayer = players[currentPlayerIndex];
 
   // change each the value of squares for pieces to be turn over
   updatableSquaresArray.forEach((updatableSquare: Square) => {
@@ -208,19 +198,17 @@ export const changeGamesTurn = (
   clickedSquare.pieceColor = currentPlayer.pieceColor;
 
   // switch the current player
-  const nextPlayer =
-    currentPlayer.pieceColor === PieceColor.BLACK
-      ? {
-          player: Player.PLAYER_1,
-          pieceColor: PieceColor.WHITE,
-        }
-      : {
-          player: Player.PLAYER_2,
-          pieceColor: PieceColor.BLACK,
-        };
+  const stagingPlayers = Object.fromEntries(
+    Object.entries(players).map(([key, player]) => {
+      const stagingPlayer = { ...player };
+      stagingPlayer.current = !stagingPlayer.current;
+
+      return [key, stagingPlayer];
+    }),
+  ) as Store['game']['players'];
 
   dispatch(updateBoard(stagingBoard));
-  dispatch(updateCurrentPlayer(nextPlayer));
+  dispatch(updatePlayers(stagingPlayers));
   countScore();
 };
 
@@ -229,7 +217,7 @@ export const countScore = () => (
   getState: () => Store,
 ): void => {
   const {
-    game: { board },
+    game: { board, players },
   } = getState();
 
   const whitePiecesCount = board.reduce((prev, square) => {
@@ -240,10 +228,10 @@ export const countScore = () => (
     return prev + (square.pieceColor === PieceColor.BLACK ? 1 : 0);
   }, 0);
 
-  dispatch(
-    updateScore({
-      white: whitePiecesCount,
-      black: blackPiecesCount,
-    }),
-  );
+  const stagingPlayers = { ...players };
+
+  stagingPlayers.white.score = whitePiecesCount;
+  stagingPlayers.black.score = blackPiecesCount;
+
+  dispatch(updatePlayers(stagingPlayers));
 };

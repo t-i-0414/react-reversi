@@ -1,28 +1,18 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Const from 'src/const';
+import { initialState } from 'src/redux/modules/game';
 import PlayerInformation from '.';
-
-const { PieceColor, Player } = Const;
 
 describe('PlayerInformation unit test', () => {
   it('snapshot(PieceColor White)', () => {
     const component = renderer.create(
-      <PlayerInformation
-        player={Player.PLAYER_1}
-        pieceColor={PieceColor.WHITE}
-        score={0}
-      />,
+      <PlayerInformation gamePlayer={initialState.players.black} />,
     );
     expect(component).toMatchSnapshot();
   });
   it('snapshot(PieceColor Black)', () => {
     const component = renderer.create(
-      <PlayerInformation
-        player={Player.PLAYER_1}
-        pieceColor={PieceColor.BLACK}
-        score={0}
-      />,
+      <PlayerInformation gamePlayer={initialState.players.white} />,
     );
     expect(component).toMatchSnapshot();
   });

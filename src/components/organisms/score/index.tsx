@@ -4,31 +4,23 @@ import styled, { css } from 'styled-components';
 import PlayerInformation from 'src/components/molecules/player-information/index';
 import useScore from './hooks';
 
-const { Color, Size, PieceColor, Player } = Const;
+const { Color, Size, PieceColor } = Const;
 
 const Score: React.FC = () => {
-  const { currentPlayer, score } = useScore();
+  const { players, currentPlayersPieceColor } = useScore();
 
   return (
     <Wrapper>
       <ContentHeader>Score</ContentHeader>
 
-      <Container currentPlayer={currentPlayer}>
-        <PlayerInformation
-          player={Player.PLAYER_1}
-          pieceColor={PieceColor.WHITE}
-          score={score.white}
-        />
+      <Container currentPlayersPieceColor={currentPlayersPieceColor}>
+        <PlayerInformation gamePlayer={players.black} />
 
         <Separator>
           <Line />
         </Separator>
 
-        <PlayerInformation
-          player={Player.PLAYER_2}
-          pieceColor={PieceColor.BLACK}
-          score={score.black}
-        />
+        <PlayerInformation gamePlayer={players.white} />
       </Container>
     </Wrapper>
   );
@@ -48,7 +40,7 @@ const ContentHeader = styled.p`
 `;
 
 interface ContainerProps {
-  currentPlayer: GamePlayer;
+  currentPlayersPieceColor: GamePlayer['pieceColor'];
 }
 const Container = styled.div<ContainerProps>`
   position: relative;
@@ -60,7 +52,7 @@ const Container = styled.div<ContainerProps>`
   margin: 0 auto;
 
   ${(props) =>
-    props.currentPlayer.pieceColor === PieceColor.WHITE &&
+    props.currentPlayersPieceColor === PieceColor.BLACK &&
     css`
       &::before {
         position: absolute;
@@ -76,7 +68,7 @@ const Container = styled.div<ContainerProps>`
     `}
 
   ${(props) =>
-    props.currentPlayer.pieceColor === PieceColor.BLACK &&
+    props.currentPlayersPieceColor === PieceColor.WHITE &&
     css`
       &::after {
         position: absolute;
