@@ -10,6 +10,7 @@ describe('Button unit test', () => {
           return true;
         }}
         text="Game Start"
+        type="button"
         dataCy="start"
       />,
     );

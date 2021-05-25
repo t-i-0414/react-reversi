@@ -1,21 +1,52 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PieceColor from 'src/const/piece-color';
 import { changeGamesTurn, countScore } from 'src/redux/modules/game';
+import Const from 'src/const';
 import Utils from 'src/utils';
+
+const { Size } = Const;
 
 const {
   Game: { getUpdatableSquaresArray },
 } = Utils;
 
-const useBoard = (): {
-  board: Board;
-  sideSquaresCount: number;
+const useBoardSelector = (): {
+  squareList: Board;
+  boardSize: number;
+} => {
+  const { sideSquaresCount, board: squareList } = useSelector(
+    (store: Store) => store.game,
+  );
+
+  const boardSize = sideSquaresCount * Size.SQUARE_SIZE;
+
+  return {
+    squareList,
+    boardSize,
+  };
+};
+
+const useBoardScroll = (
+  ref: React.RefObject<HTMLDivElement>,
+  boardSize: number,
+): void => {
+  useEffect(() => {
+    if (ref.current) {
+      const refCurrent = ref.current;
+      const rect = refCurrent.getBoundingClientRect();
+      refCurrent.scrollTop = boardSize / 2 - rect.height / 2;
+      refCurrent.scrollLeft = boardSize / 2 - rect.width / 2;
+    }
+  }, [ref, boardSize]);
+};
+
+const useBoardFunctions = (): {
   hasCanBeTurnOverPieces: (square: Square) => boolean;
   hasPlacedPiece: (square: Square) => boolean;
   placePiece: (square: Square) => void;
 } => {
   const dispatch = useDispatch();
-  const { sideSquaresCount, board } = useSelector((store: Store) => store.game);
 
   // check if there is a stone that can be turned over
   const hasCanBeTurnOverPieces = (square: Square): boolean => {
@@ -43,12 +74,10 @@ const useBoard = (): {
   };
 
   return {
-    board,
-    sideSquaresCount,
     hasCanBeTurnOverPieces,
     hasPlacedPiece,
     placePiece,
   };
 };
 
-export default useBoard;
+export { useBoardSelector, useBoardScroll, useBoardFunctions };

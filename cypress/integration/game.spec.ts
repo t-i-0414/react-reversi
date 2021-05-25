@@ -1,4 +1,8 @@
 describe('The Game Page', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/')
+  })
+
   it('Successfully loads', () => {
     cy.visit('/');
   });
@@ -8,7 +12,7 @@ describe('The Game Page', () => {
   });
 
   it('Game App Title exists', () => {
-    cy.title().should('eq', 'React App');
+    cy.title().should('eq', 'React Reversi');
   });
 
   it('Unsuccessfully Game Start', () => {
@@ -16,11 +20,14 @@ describe('The Game Page', () => {
   });
 
   it('Successfully Game Start', () => {
+    cy.get('[data-cy="input-sideSquaresCount"]').type("8");
     cy.get('[data-cy="start"]').click();
     expect(cy.get('[data-cy="board"]')).to.exist;
   });
 
   it('Successfully Square click', () => {
+    cy.get('[data-cy="input-sideSquaresCount"]').as('range').invoke('val', 8).trigger('change')
+    cy.get('[data-cy="start"]').click();
     for (let n = 0; n < 60; n++) {
       if (n % 2 === 0) {
         cy.get('[data-cy="clickable"]').first().click();

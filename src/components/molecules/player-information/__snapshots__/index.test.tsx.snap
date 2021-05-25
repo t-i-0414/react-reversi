@@ -13,14 +13,14 @@ exports[`PlayerInformation unit test snapshot(PieceColor Black) 1`] = `
     className="sc-dlnjPT gKHeiO"
   >
     <span
-      className="sc-bdnylx kjkACR"
-      color="#000"
+      className="sc-bdnylx hEHfkv"
+      color="#fff"
     />
     <p
-      className="sc-eCApGN gvQTVl"
-      color="#fff"
+      className="sc-eCApGN chUDyK"
+      color="#555"
     >
-      P1
+      P2
     </p>
   </div>
 </div>
@@ -34,12 +34,12 @@ exports[`PlayerInformation unit test snapshot(PieceColor White) 1`] = `
     className="sc-dlnjPT gKHeiO"
   >
     <span
-      className="sc-bdnylx hEHfkv"
-      color="#fff"
+      className="sc-bdnylx kjkACR"
+      color="#000"
     />
     <p
-      className="sc-eCApGN chUDyK"
-      color="#555"
+      className="sc-eCApGN gvQTVl"
+      color="#fff"
     >
       P1
     </p>

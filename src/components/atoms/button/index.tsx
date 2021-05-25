@@ -6,12 +6,13 @@ const { Color, Size } = Const;
 
 export interface ButtonProps {
   text: string;
-  onClick: () => void;
+  type: 'submit' | 'button' | 'reset';
+  onClick?: () => void;
   dataCy: string;
 }
-const Button: React.FC<ButtonProps> = ({ text, onClick, dataCy }) => {
+const Button: React.FC<ButtonProps> = ({ text, type, onClick, dataCy }) => {
   return (
-    <StyledBottun type="button" onClick={onClick} data-cy={dataCy}>
+    <StyledBottun type={type} onClick={onClick} data-cy={dataCy}>
       {text}
     </StyledBottun>
   );

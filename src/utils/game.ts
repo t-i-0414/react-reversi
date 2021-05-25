@@ -2,10 +2,15 @@ import PieceColor from 'src/const/piece-color';
 import store from 'src/redux/create-store';
 
 /**
- * Method to get arrays of the square that has piece that can be turn over in each directions from the passed square
+ * Function to get arrays of the square that has piece that can be turn over in each directions from the passed square
  */
 const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
-  const { board, sideSquaresCount, currentPlayer } = store.getState().game;
+  const { board, sideSquaresCount, players } = store.getState().game;
+
+  const currentPlayerIndex = Object.entries(players).find(
+    ([_id, player]) => player.current === true,
+  )?.[0] as keyof Store['game']['players'];
+  const currentPlayer = players[currentPlayerIndex];
 
   const eachDirectionSquaresArray: Array<Square[]> = [];
 
