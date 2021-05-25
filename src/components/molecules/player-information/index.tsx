@@ -3,33 +3,33 @@ import Const from 'src/const';
 import styled from 'styled-components';
 import Piece from 'src/components/atoms/piece';
 
-const { Color, Size, PieceColor, Player } = Const;
+const { Color, Size, PieceColor } = Const;
 
-interface PlayerInformationProps {
-  player: UnionVal<typeof Player>;
-  pieceColor: UnionVal<typeof PieceColor>;
-  score: number;
+export interface PlayerInformationProps {
+  gamePlayer: GamePlayer;
 }
 const PlayerInformation: React.FC<PlayerInformationProps> = ({
-  player,
-  pieceColor,
-  score,
+  gamePlayer: {
+    player: { shortName },
+    pieceColor,
+    score,
+  },
 }) => {
   return (
     <Wrapper>
-      {pieceColor === PieceColor.WHITE && (
+      {pieceColor === PieceColor.BLACK && (
         <Inner>
-          <StyledPiece pieceColor={PieceColor.WHITE} />
-          <StyledPlayer color={Color.TX_BLACK}>{player}</StyledPlayer>
+          <StyledPiece pieceColor={PieceColor.BLACK} />
+          <StyledPlayer color={Color.TX_WHITE}>{shortName}</StyledPlayer>
         </Inner>
       )}
 
       <Score>{score}</Score>
 
-      {pieceColor === PieceColor.BLACK && (
+      {pieceColor === PieceColor.WHITE && (
         <Inner>
-          <StyledPiece pieceColor={PieceColor.BLACK} />
-          <StyledPlayer color={Color.TX_WHITE}>{player}</StyledPlayer>
+          <StyledPiece pieceColor={PieceColor.WHITE} />
+          <StyledPlayer color={Color.TX_BLACK}>{shortName}</StyledPlayer>
         </Inner>
       )}
     </Wrapper>

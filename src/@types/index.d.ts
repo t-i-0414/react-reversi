@@ -16,10 +16,11 @@ declare type Square = {
 declare type Board = Square[];
 
 declare type PlayerType = {
-  PLAYER_1: 'P1';
-  PLAYER_2: 'P2';
-  COM: 'com';
-  NONE: 'none';
+  [index: string]: {
+    name: string;
+    shortName: string;
+    value: string;
+  };
 };
 
 declare type PieceColorType = {
@@ -28,20 +29,20 @@ declare type PieceColorType = {
   INVISIBLE: 'invisible';
 };
 
-declare type CurrentPlayer = {
+declare type GamePlayer = {
   player: UnionVal<PlayerType>;
-  pieceColor: UnionVal<PieceColorType>;
+  pieceColor: UnionVal<Pick<PieceColorType, 'WHITE' | 'BLACK'>>;
+  score: number;
+  current: boolean;
 };
 
 interface Store {
   game: {
-    isGameStart: boolean;
+    isGameStarted: boolean;
     board: Board;
     sideSquaresCount: number;
-    currentPlayer: CurrentPlayer;
-    score: {
-      white: number;
-      black: number;
+    players: {
+      [key in 'white' | 'black']: GamePlayer;
     };
   };
 }

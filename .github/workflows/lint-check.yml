@@ -31,7 +31,7 @@ jobs:
         if: failure()
         env:
           SLACK_CHANNEL: react-reversi-gh
-          SLACK_TITLE: CI Test Success
+          SLACK_TITLE: CI Test Failure
           SLACK_MESSAGE: 'Lint Check Failed! :boom:'
           SLACK_COLOR: danger
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

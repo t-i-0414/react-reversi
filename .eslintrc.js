@@ -93,14 +93,6 @@ module.exports = {
         extensions: ['.jsx', '.tsx'],
       },
     ],
-    'react/jsx-props-no-spreading': [
-      'error',
-      {
-        html: 'enforce',
-        custom: 'enforce',
-        explicitSpread: 'ignore',
-      },
-    ],
     'prefer-arrow/prefer-arrow-functions': [
       'error',
       {
@@ -118,7 +110,7 @@ module.exports = {
       },
     },
     {
-      files: ['*.stories.tsx'],
+      files: ['*.tsx'],
       rules: {
         'react/jsx-props-no-spreading': 'off',
       },
