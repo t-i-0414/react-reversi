@@ -17,16 +17,17 @@ const Game: React.FC<GameProps> = ({ dataCy }) => {
   return (
     <>
       <StyledHeading>React Reversi</StyledHeading>
-      <StyledGameWrapper data-cy={dataCy}>
-        {isGameStarted ? (
-          <>
-            <Board dataCy="board" />
-            <Score />
-          </>
-        ) : (
+
+      {isGameStarted ? (
+        <GameWrapper data-cy={dataCy}>
+          <Board dataCy="board" />
+          <Score />
+        </GameWrapper>
+      ) : (
+        <FormWrapper>
           <SettingForm />
-        )}
-      </StyledGameWrapper>
+        </FormWrapper>
+      )}
     </>
   );
 };
@@ -37,7 +38,7 @@ const StyledHeading = styled.h1`
   text-align: center;
 `;
 
-const StyledGameWrapper = styled.div`
+const GameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,6 +46,12 @@ const StyledGameWrapper = styled.div`
   width: 1026px;
   height: 768px;
   margin: 0 auto;
+  color: ${Color.TX_BLACK};
+`;
+
+const FormWrapper = styled.div`
+  width: fit-content;
+  margin: 48px auto 0;
   color: ${Color.TX_BLACK};
 `;
 
