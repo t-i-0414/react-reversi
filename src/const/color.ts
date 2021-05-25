@@ -3,6 +3,7 @@ export default {
   WHITE: 'fff',
 
   // text colors
+  TX_DEEP_BLACK: '#000',
   TX_BLACK: '#555',
   TX_WHITE: '#fff',
 

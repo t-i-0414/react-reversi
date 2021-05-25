@@ -33,6 +33,7 @@ const Game: React.FC<GameProps> = ({ dataCy }) => {
 
 const StyledHeading = styled.h1`
   margin: 12px 0;
+  color: ${Color.TX_DEEP_BLACK};
   text-align: center;
 `;
 
