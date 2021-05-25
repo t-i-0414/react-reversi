@@ -24,7 +24,7 @@ const Game: React.FC<GameProps> = ({ dataCy }) => {
           <Score />
         </GameWrapper>
       ) : (
-        <FormWrapper>
+        <FormWrapper data-cy={dataCy}>
           <SettingForm />
         </FormWrapper>
       )}
