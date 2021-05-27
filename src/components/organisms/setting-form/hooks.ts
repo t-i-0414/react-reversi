@@ -3,7 +3,7 @@ import {
   updateGameStartFlg,
   initializeBoard,
   updatePlayers,
-  countScore,
+  updateScore,
 } from 'src/redux/modules/game';
 import Const from 'src/const';
 
@@ -39,7 +39,7 @@ const useSettingForm = (): {
 
     dispatch(initializeBoard(data.sideSquaresCount));
 
-    dispatch(countScore());
+    dispatch(updateScore());
 
     dispatch(updateGameStartFlg(true));
   };
