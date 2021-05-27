@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PieceColor from 'src/const/piece-color';
-import { changeGamesTurn, countScore } from 'src/redux/modules/game';
+import { changeGamesTurn, updateScore } from 'src/redux/modules/game';
 import Const from 'src/const';
 import Utils from 'src/utils';
 
@@ -70,7 +70,7 @@ const useBoardFunctions = (): {
     );
 
     dispatch(changeGamesTurn(clickedSquare, updatableSquaresArray));
-    dispatch(countScore());
+    dispatch(updateScore());
   };
 
   return {

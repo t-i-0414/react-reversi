@@ -209,10 +209,10 @@ export const changeGamesTurn = (
 
   dispatch(updateBoard(stagingBoard));
   dispatch(updatePlayers(stagingPlayers));
-  countScore();
+  updateScore();
 };
 
-export const countScore = () => (
+export const updateScore = () => (
   dispatch: Dispatch,
   getState: () => Store,
 ): void => {
