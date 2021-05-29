@@ -8,7 +8,7 @@ import { useBoardSelector, useBoardFunctions, useBoardScroll } from './hook';
 const { Color } = Const;
 
 export interface BoardProps {
-  dataCy: string;
+  dataCy?: string;
 }
 const Board: React.FC<BoardProps> = ({ dataCy }) => {
   const { squareList, boardSize } = useBoardSelector();
@@ -16,11 +16,8 @@ const Board: React.FC<BoardProps> = ({ dataCy }) => {
   const wrapperRef = useRef(null);
   useBoardScroll(wrapperRef, boardSize);
 
-  const {
-    hasCanBeTurnOverPieces,
-    hasPlacedPiece,
-    placePiece,
-  } = useBoardFunctions();
+  const { hasCanBeTurnOverPieces, hasPlacedPiece, placePiece } =
+    useBoardFunctions();
 
   return (
     <Wrapper ref={wrapperRef}>

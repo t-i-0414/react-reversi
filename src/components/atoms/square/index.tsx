@@ -5,7 +5,7 @@ import Const from 'src/const';
 const { Size, Color } = Const;
 
 export interface SquareProps {
-  dataCy: string;
+  dataCy?: string;
 }
 const Square: React.FC<SquareProps> = ({ children, dataCy }) => {
   return <Wrapper data-cy={dataCy}>{children}</Wrapper>;

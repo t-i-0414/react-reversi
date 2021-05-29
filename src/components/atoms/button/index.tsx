@@ -8,7 +8,7 @@ export interface ButtonProps {
   text: string;
   type: 'submit' | 'button' | 'reset';
   onClick?: () => void;
-  dataCy: string;
+  dataCy?: string;
 }
 const Button: React.FC<ButtonProps> = ({ text, type, onClick, dataCy }) => {
   return (

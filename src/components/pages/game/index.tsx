@@ -9,7 +9,7 @@ import useGame from './hooks';
 const { Color } = Const;
 
 export interface GameProps {
-  dataCy: string;
+  dataCy?: string;
 }
 const Game: React.FC<GameProps> = ({ dataCy }) => {
   const { isGameStarted } = useGame();
@@ -44,7 +44,7 @@ const GameWrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 1026px;
-  height: 768px;
+  height: 760px;
   margin: 0 auto;
   color: ${Color.TX_BLACK};
 `;

@@ -2,22 +2,22 @@
 
 exports[`PlayerInformation unit test snapshot(PieceColor Black) 1`] = `
 <div
-  className="sc-gtssRu hAvyXn"
+  className="sc-gtsrHT ljPrYI"
 >
   <span
-    className="sc-jSFkmK YwpPE"
+    className="sc-jSFjdj bsAtwI"
   >
     0
   </span>
   <div
-    className="sc-dlnjPT gKHeiO"
+    className="sc-dlnjwi gFWwNh"
   >
     <span
-      className="sc-bdnylx hEHfkv"
+      className="sc-bdnxRM bGNMMU"
       color="#fff"
     />
     <p
-      className="sc-eCApGN chUDyK"
+      className="sc-eCApnc btUvBL"
       color="#555"
     >
       P2
@@ -28,24 +28,24 @@ exports[`PlayerInformation unit test snapshot(PieceColor Black) 1`] = `
 
 exports[`PlayerInformation unit test snapshot(PieceColor White) 1`] = `
 <div
-  className="sc-gtssRu hAvyXn"
+  className="sc-gtsrHT ljPrYI"
 >
   <div
-    className="sc-dlnjPT gKHeiO"
+    className="sc-dlnjwi gFWwNh"
   >
     <span
-      className="sc-bdnylx kjkACR"
+      className="sc-bdnxRM kIMDaa"
       color="#000"
     />
     <p
-      className="sc-eCApGN gvQTVl"
+      className="sc-eCApnc jWhorU"
       color="#fff"
     >
       P1
     </p>
   </div>
   <span
-    className="sc-jSFkmK YwpPE"
+    className="sc-jSFjdj bsAtwI"
   >
     0
   </span>

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PieceColor from 'src/const/piece-color';
-import { changeGamesTurn, countScore } from 'src/redux/modules/game';
+import { changeGamesTurn, updateScore } from 'src/redux/modules/game';
 import Const from 'src/const';
 import Utils from 'src/utils';
 
@@ -65,12 +65,11 @@ const useBoardFunctions = (): {
 
   // turn over the stone that was trapped when the stone was placed and switch the current player
   const placePiece = (clickedSquare: Square) => {
-    const updatableSquaresArray: Square[] = getUpdatableSquaresArray(
-      clickedSquare,
-    );
+    const updatableSquaresArray: Square[] =
+      getUpdatableSquaresArray(clickedSquare);
 
     dispatch(changeGamesTurn(clickedSquare, updatableSquaresArray));
-    dispatch(countScore());
+    dispatch(updateScore());
   };
 
   return {
