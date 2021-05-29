@@ -7,7 +7,6 @@ import {
 } from 'src/redux/modules/game';
 import Const from 'src/const';
 
-// hooks
 const { Player } = Const;
 export interface SettingFormInputs {
   sideSquaresCount: number;
