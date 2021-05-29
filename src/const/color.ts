@@ -6,6 +6,7 @@ export default {
   TX_DEEP_BLACK: '#000',
   TX_BLACK: '#555',
   TX_WHITE: '#fff',
+  TX_RED: '#F62043',
 
   // background colors
   BG_GREEN: '#38A34B',

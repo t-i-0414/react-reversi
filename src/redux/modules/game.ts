@@ -121,117 +121,115 @@ export const updatePlayers = (
   payload: stagingPlayers,
 });
 
-export const initializeBoard = (sideSquaresCount: number) => (
-  dispatch: Dispatch,
-): void => {
-  const squaresCountAmount: number = sideSquaresCount ** 2;
-  const stagingBoard: Board = [];
+export const initializeBoard =
+  (sideSquaresCount: number) =>
+  (dispatch: Dispatch): void => {
+    const squaresCountAmount: number = sideSquaresCount ** 2;
+    const stagingBoard: Board = [];
 
-  for (
-    let squareCount = 0;
-    squareCount < squaresCountAmount;
-    squareCount += 1
-  ) {
-    const key = squareCount;
-    const column = squareCount % sideSquaresCount;
-    const row = Math.floor(squareCount / sideSquaresCount);
-    let pieceColor: UnionVal<typeof PieceColor> = PieceColor.INVISIBLE;
-
-    /**
-     * place four stones when the board is initially rendered
-     */
-    // upprer left square
-    if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2 - 1) {
-      pieceColor = PieceColor.WHITE;
-    }
-
-    // upper right square
-    if (
-      column === sideSquaresCount / 2 - 1 &&
-      row === sideSquaresCount / 2 - 1
+    for (
+      let squareCount = 0;
+      squareCount < squaresCountAmount;
+      squareCount += 1
     ) {
-      pieceColor = PieceColor.BLACK;
+      const key = squareCount;
+      const column = squareCount % sideSquaresCount;
+      const row = Math.floor(squareCount / sideSquaresCount);
+      let pieceColor: UnionVal<typeof PieceColor> = PieceColor.INVISIBLE;
+
+      /**
+       * place four stones when the board is initially rendered
+       */
+      // upprer left square
+      if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2 - 1) {
+        pieceColor = PieceColor.WHITE;
+      }
+
+      // upper right square
+      if (
+        column === sideSquaresCount / 2 - 1 &&
+        row === sideSquaresCount / 2 - 1
+      ) {
+        pieceColor = PieceColor.BLACK;
+      }
+
+      // lower left square
+      if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2) {
+        pieceColor = PieceColor.BLACK;
+      }
+
+      // lower right square
+      if (column === sideSquaresCount / 2 - 1 && row === sideSquaresCount / 2) {
+        pieceColor = PieceColor.WHITE;
+      }
+
+      stagingBoard.push({
+        key,
+        column,
+        row,
+        pieceColor,
+      });
     }
 
-    // lower left square
-    if (column === sideSquaresCount / 2 && row === sideSquaresCount / 2) {
-      pieceColor = PieceColor.BLACK;
-    }
+    dispatch(updateSideSquaresCount(sideSquaresCount));
+    dispatch(updateBoard(stagingBoard));
+  };
 
-    // lower right square
-    if (column === sideSquaresCount / 2 - 1 && row === sideSquaresCount / 2) {
-      pieceColor = PieceColor.WHITE;
-    }
+export const changeGamesTurn =
+  (square: Square, updatableSquaresArray: Square[]) =>
+  (dispatch: Dispatch, getState: () => Store): void => {
+    const {
+      game: { board: stagingBoard, players },
+    } = getState();
+    const clickedSquare: Square = stagingBoard[square.key];
 
-    stagingBoard.push({
-      key,
-      column,
-      row,
-      pieceColor,
+    const currentPlayerIndex = Object.entries(players).find(
+      ([_id, player]) => player.current === true,
+    )?.[0] as keyof Store['game']['players'];
+    const currentPlayer = players[currentPlayerIndex];
+
+    // change each the value of squares for pieces to be turn over
+    updatableSquaresArray.forEach((updatableSquare: Square) => {
+      stagingBoard[updatableSquare.key].pieceColor = currentPlayer.pieceColor;
     });
-  }
 
-  dispatch(updateSideSquaresCount(sideSquaresCount));
-  dispatch(updateBoard(stagingBoard));
-};
+    // change the value of clicked square
+    clickedSquare.pieceColor = currentPlayer.pieceColor;
 
-export const changeGamesTurn = (
-  square: Square,
-  updatableSquaresArray: Square[],
-) => (dispatch: Dispatch, getState: () => Store): void => {
-  const {
-    game: { board: stagingBoard, players },
-  } = getState();
-  const clickedSquare: Square = stagingBoard[square.key];
+    // switch the current player
+    const stagingPlayers = Object.fromEntries(
+      Object.entries(players).map(([key, player]) => {
+        const stagingPlayer = { ...player };
+        stagingPlayer.current = !stagingPlayer.current;
 
-  const currentPlayerIndex = Object.entries(players).find(
-    ([_id, player]) => player.current === true,
-  )?.[0] as keyof Store['game']['players'];
-  const currentPlayer = players[currentPlayerIndex];
+        return [key, stagingPlayer];
+      }),
+    ) as Store['game']['players'];
 
-  // change each the value of squares for pieces to be turn over
-  updatableSquaresArray.forEach((updatableSquare: Square) => {
-    stagingBoard[updatableSquare.key].pieceColor = currentPlayer.pieceColor;
-  });
+    dispatch(updateBoard(stagingBoard));
+    dispatch(updatePlayers(stagingPlayers));
+    updateScore();
+  };
 
-  // change the value of clicked square
-  clickedSquare.pieceColor = currentPlayer.pieceColor;
+export const updateScore =
+  () =>
+  (dispatch: Dispatch, getState: () => Store): void => {
+    const {
+      game: { board, players },
+    } = getState();
 
-  // switch the current player
-  const stagingPlayers = Object.fromEntries(
-    Object.entries(players).map(([key, player]) => {
-      const stagingPlayer = { ...player };
-      stagingPlayer.current = !stagingPlayer.current;
+    const whitePiecesCount = board.reduce((prev, square) => {
+      return prev + (square.pieceColor === PieceColor.WHITE ? 1 : 0);
+    }, 0);
 
-      return [key, stagingPlayer];
-    }),
-  ) as Store['game']['players'];
+    const blackPiecesCount = board.reduce((prev, square) => {
+      return prev + (square.pieceColor === PieceColor.BLACK ? 1 : 0);
+    }, 0);
 
-  dispatch(updateBoard(stagingBoard));
-  dispatch(updatePlayers(stagingPlayers));
-  countScore();
-};
+    const stagingPlayers = { ...players };
 
-export const countScore = () => (
-  dispatch: Dispatch,
-  getState: () => Store,
-): void => {
-  const {
-    game: { board, players },
-  } = getState();
+    stagingPlayers.white.score = whitePiecesCount;
+    stagingPlayers.black.score = blackPiecesCount;
 
-  const whitePiecesCount = board.reduce((prev, square) => {
-    return prev + (square.pieceColor === PieceColor.WHITE ? 1 : 0);
-  }, 0);
-
-  const blackPiecesCount = board.reduce((prev, square) => {
-    return prev + (square.pieceColor === PieceColor.BLACK ? 1 : 0);
-  }, 0);
-
-  const stagingPlayers = { ...players };
-
-  stagingPlayers.white.score = whitePiecesCount;
-  stagingPlayers.black.score = blackPiecesCount;
-
-  dispatch(updatePlayers(stagingPlayers));
-};
+    dispatch(updatePlayers(stagingPlayers));
+  };

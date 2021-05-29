@@ -12,9 +12,13 @@ const { Player } = Const;
 const SettingForm: React.FC = () => {
   const { startGame } = useSettingForm();
 
-  const { register, getValues, handleSubmit, control } = useForm<
-    SettingFormInputs
-  >({
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<SettingFormInputs>({
     defaultValues: {
       sideSquaresCount: 8,
       blackPiecePlayer: 'PLAYER_1',
@@ -54,7 +58,11 @@ const SettingForm: React.FC = () => {
           <StyledLabel>Black piece player</StyledLabel>
           <FieldContainer>
             <StyledSelect>
-              <select {...register('blackPiecePlayer')}>
+              <select
+                {...register('blackPiecePlayer', {
+                  validate: (value) => value !== getValues('whitePiecePlayer'),
+                })}
+              >
                 <option value="PLAYER_1">{Player.PLAYER_1.name}</option>
                 <option value="PLAYER_2">{Player.PLAYER_2.name}</option>
               </select>
@@ -66,7 +74,11 @@ const SettingForm: React.FC = () => {
           <StyledLabel>White piece player</StyledLabel>
           <FieldContainer>
             <StyledSelect>
-              <select {...register('whitePiecePlayer')}>
+              <select
+                {...register('whitePiecePlayer', {
+                  validate: (value) => value !== getValues('blackPiecePlayer'),
+                })}
+              >
                 <option value="PLAYER_1">{Player.PLAYER_1.name}</option>
                 <option value="PLAYER_2">{Player.PLAYER_2.name}</option>
               </select>
@@ -76,6 +88,11 @@ const SettingForm: React.FC = () => {
 
         <Button text="Game Start" type="submit" dataCy="start" />
       </StyledForm>
+      {(errors.blackPiecePlayer || errors.whitePiecePlayer) && (
+        <ErrorMessage>
+          The same player has been selected. Please select a unique player.
+        </ErrorMessage>
+      )}
     </Wrapper>
   );
 };
@@ -198,4 +215,8 @@ const StyledSelect = styled.div`
       display: none;
     }
   }
+`;
+
+const ErrorMessage = styled.p`
+  color: ${Color.TX_RED};
 `;
