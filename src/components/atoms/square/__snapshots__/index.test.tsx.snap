@@ -2,7 +2,7 @@
 
 exports[`Square unit test snapshot 1`] = `
 <div
-  className="sc-bdnylx gSujLr"
+  className="sc-bdnxRM cmyxMg"
   data-cy="square-1"
 />
 `;

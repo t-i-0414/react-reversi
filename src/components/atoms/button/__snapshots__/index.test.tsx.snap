@@ -2,7 +2,7 @@
 
 exports[`Button unit test snapshot 1`] = `
 <button
-  className="sc-bdnylx kVHIhl"
+  className="sc-bdnxRM ewEji"
   data-cy="start"
   onClick={[Function]}
   type="button"

@@ -25,9 +25,9 @@ export default {
   },
 };
 
-const Template: Story<ButtonProps> = (args) => (
+const Template: Story<ButtonProps> = ({ type, text }) => (
   <Base>
-    <Button {...args}>{args.text}</Button>
+    <Button type={type} text={text} />
   </Base>
 );
 

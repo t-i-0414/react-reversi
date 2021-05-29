@@ -65,9 +65,8 @@ const useBoardFunctions = (): {
 
   // turn over the stone that was trapped when the stone was placed and switch the current player
   const placePiece = (clickedSquare: Square) => {
-    const updatableSquaresArray: Square[] = getUpdatableSquaresArray(
-      clickedSquare,
-    );
+    const updatableSquaresArray: Square[] =
+      getUpdatableSquaresArray(clickedSquare);
 
     dispatch(changeGamesTurn(clickedSquare, updatableSquaresArray));
     dispatch(updateScore());
