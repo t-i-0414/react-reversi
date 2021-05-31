@@ -46,6 +46,7 @@ type ActionType =
  */
 export const initialState: Store['game'] = {
   isGameStarted: false,
+  isGameFinished: false,
   sideSquaresCount: 0,
   board: [],
   players: {
