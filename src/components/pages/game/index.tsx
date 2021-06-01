@@ -12,18 +12,26 @@ export interface GameProps {
   dataCy?: string;
 }
 const Game: React.FC<GameProps> = ({ dataCy }) => {
-  const { isGameStarted } = useGame();
+  const { isGameStarted, isGameFinished } = useGame();
 
   return (
     <>
       <StyledHeading>React Reversi</StyledHeading>
 
-      {isGameStarted ? (
+      {isGameStarted && (
         <GameWrapper data-cy={dataCy}>
           <Board dataCy="board" />
           <Score />
         </GameWrapper>
-      ) : (
+      )}
+
+      {isGameFinished && (
+        <OverLay>
+          <p>Game is over</p>
+        </OverLay>
+      )}
+
+      {!isGameStarted && (
         <FormWrapper data-cy={dataCy}>
           <SettingForm />
         </FormWrapper>
@@ -53,6 +61,19 @@ const FormWrapper = styled.div`
   width: fit-content;
   margin: 48px auto 0;
   color: ${Color.TX_BLACK};
+`;
+
+const OverLay = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${Color.BG_BLACK};
+  opacity: 0.3;
 `;
 
 export default Game;
