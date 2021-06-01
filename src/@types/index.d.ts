@@ -39,7 +39,6 @@ declare type GamePlayer = {
 interface Store {
   game: {
     isGameStarted: boolean;
-    isGameFinished: boolean;
     board: Board;
     sideSquaresCount: number;
     players: {
