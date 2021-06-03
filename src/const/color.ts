@@ -13,6 +13,7 @@ export default {
   BG_WHITE: '#fff',
   BG_LIGHT_BLACK: '#262626',
   BG_BLACK: '#000',
+  BG_BLACK_ALPHA30: 'rgba(0, 0, 0, 0.3)',
   BG_LIGHT_GRAY: '#c7c7c7',
 
   // border colors
