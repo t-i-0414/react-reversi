@@ -7,13 +7,13 @@ import useResetModal from './hooks';
 const { Color, Size } = Const;
 
 const ResetModal: React.FC = () => {
-  const onReset = useResetModal();
+  const { onReset, gameResultText } = useResetModal();
 
   return (
     <OverLay>
       <Wrapper>
         <Title>Game Result</Title>
-        <Result>Player2 win!</Result>
+        <Result>{gameResultText}</Result>
         <Button
           text="Game Reset"
           type="submit"
