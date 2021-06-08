@@ -59,8 +59,16 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key - sideSquaresCount * count - count;
-    if (squareId >= 0 && squareId < board.length) {
-      upperLeftSquaresArray.push(board[squareId]);
+
+    const upperLeftSquare = board[squareId];
+
+    if (
+      upperLeftSquare &&
+      upperLeftSquare.key < passedSquare.key &&
+      upperLeftSquare.column < passedSquare.column &&
+      upperLeftSquare.row < passedSquare.row
+    ) {
+      upperLeftSquaresArray.push(upperLeftSquare);
     }
   }
   eachDirectionSquaresArray.push(upperLeftSquaresArray);
@@ -70,8 +78,16 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key - sideSquaresCount * count + count;
-    if (squareId > 0 && squareId < board.length) {
-      upperRightSquaresArray.push(board[squareId]);
+
+    const upperRightSquare = board[squareId];
+
+    if (
+      upperRightSquare &&
+      upperRightSquare.key < passedSquare.key &&
+      upperRightSquare.column > passedSquare.column &&
+      upperRightSquare.row < passedSquare.row
+    ) {
+      upperRightSquaresArray.push(upperRightSquare);
     }
   }
   eachDirectionSquaresArray.push(upperRightSquaresArray);
@@ -81,8 +97,16 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key + sideSquaresCount * count - count;
-    if (squareId >= 0 && squareId < board.length - 1) {
-      lowerLeftSquaresArray.push(board[squareId]);
+
+    const lowerLeftSquare = board[squareId];
+
+    if (
+      lowerLeftSquare &&
+      lowerLeftSquare.key > passedSquare.key &&
+      lowerLeftSquare.column < passedSquare.column &&
+      lowerLeftSquare.row > passedSquare.row
+    ) {
+      lowerLeftSquaresArray.push(lowerLeftSquare);
     }
   }
   eachDirectionSquaresArray.push(lowerLeftSquaresArray);
@@ -92,8 +116,16 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
   for (let count = 1; count < sideSquaresCount; count += 1) {
     const squareId: number =
       passedSquare.key + sideSquaresCount * count + count;
-    if (squareId >= 0 && squareId < board.length) {
-      lowerRightSquaresArray.push(board[squareId]);
+
+    const lowerRightSquare = board[squareId];
+
+    if (
+      lowerRightSquare &&
+      lowerRightSquare.key > passedSquare.key &&
+      lowerRightSquare.column > passedSquare.column &&
+      lowerRightSquare.row > passedSquare.row
+    ) {
+      lowerRightSquaresArray.push(lowerRightSquare);
     }
   }
   eachDirectionSquaresArray.push(lowerRightSquaresArray);

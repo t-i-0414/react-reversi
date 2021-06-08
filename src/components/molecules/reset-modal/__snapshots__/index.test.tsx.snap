@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResetModal snapshot(Draw) 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gtsrHT iBzBKB"
+  >
+    <div
+      class="sc-dlnjwi laUVez"
+    >
+      <p
+        class="sc-hKFxyN bnINoU"
+      >
+        Game Result
+      </p>
+      <p
+        class="sc-eCApnc krybIm"
+      >
+        Draw!
+      </p>
+      <button
+        class="sc-bdnxRM jTgbIw"
+        data-cy="reset"
+        type="submit"
+      >
+        Game Reset
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ResetModal snapshot(Player 1) 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gtsrHT iBzBKB"
+  >
+    <div
+      class="sc-dlnjwi laUVez"
+    >
+      <p
+        class="sc-hKFxyN bnINoU"
+      >
+        Game Result
+      </p>
+      <p
+        class="sc-eCApnc krybIm"
+      >
+        Player 1 win!
+      </p>
+      <button
+        class="sc-bdnxRM jTgbIw"
+        data-cy="reset"
+        type="submit"
+      >
+        Game Reset
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ResetModal snapshot(Player 2) 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gtsrHT iBzBKB"
+  >
+    <div
+      class="sc-dlnjwi laUVez"
+    >
+      <p
+        class="sc-hKFxyN bnINoU"
+      >
+        Game Result
+      </p>
+      <p
+        class="sc-eCApnc krybIm"
+      >
+        Player 2 win!
+      </p>
+      <button
+        class="sc-bdnxRM jTgbIw"
+        data-cy="reset"
+        type="submit"
+      >
+        Game Reset
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

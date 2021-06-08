@@ -11,6 +11,7 @@ const UPDATE_SIDE_SQUARES_COUNT =
   'reversi/store/game/update-side-squares-count';
 const UPDATE_BOARD = 'reversi/store/game/update-board';
 const UPDATE_PLAYERS = 'reversi/store/game/update-players';
+const CLEAR_STATE = 'reversi/store/game/clear-state';
 
 /**
  * action types
@@ -35,11 +36,16 @@ type UpdatePlayers = {
   payload: Store['game']['players'];
 };
 
+type ClearState = {
+  type: typeof CLEAR_STATE;
+};
+
 type ActionType =
   | UpdateGameStartFlag
   | UpdateSideSquaresCount
   | UpdateBoard
-  | UpdatePlayers;
+  | UpdatePlayers
+  | ClearState;
 
 /**
  * initial state
@@ -92,6 +98,10 @@ export default (
         ...state,
         players: action.payload,
       };
+    case CLEAR_STATE:
+      return {
+        ...initialState,
+      };
     default:
       return state;
   }
@@ -119,6 +129,10 @@ export const updatePlayers = (
 ): UpdatePlayers => ({
   type: UPDATE_PLAYERS,
   payload: stagingPlayers,
+});
+
+export const clearState = (): ClearState => ({
+  type: CLEAR_STATE,
 });
 
 export const initializeBoard =

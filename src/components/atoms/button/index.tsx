@@ -21,6 +21,7 @@ export default Button;
 
 const StyledBottun = styled.button`
   position: relative;
+  z-index: 0;
   display: block;
   padding: 8px 16px;
   margin: 0 auto;
