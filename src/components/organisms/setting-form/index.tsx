@@ -9,7 +9,10 @@ const { Color, Size } = Const;
 
 const { Player } = Const;
 
-const SettingForm: React.FC = () => {
+interface Props {
+  dataCy?: string;
+}
+const SettingForm: React.FC<Props> = ({ dataCy }) => {
   const { startGame } = useSettingForm();
 
   const {
@@ -29,7 +32,7 @@ const SettingForm: React.FC = () => {
   const onSubmit = handleSubmit((data: SettingFormInputs) => startGame(data));
 
   return (
-    <Wrapper>
+    <Wrapper data-cy={dataCy}>
       <FormTitle>Game config</FormTitle>
       <StyledForm onSubmit={onSubmit}>
         <Controller
@@ -103,6 +106,8 @@ const Wrapper = styled.div`
   box-sizing: border-box;
   width: 480px;
   padding: 32px 24px;
+  margin: 48px auto 0;
+  color: ${Color.TX_BLACK};
   border-radius: 24px;
   box-shadow: 0 0 13px 5px rgba(0, 0, 0, 0.15);
 `;

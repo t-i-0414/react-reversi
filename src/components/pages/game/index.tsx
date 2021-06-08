@@ -4,6 +4,7 @@ import Board from 'src/components/organisms/board';
 import Score from 'src/components/organisms/score';
 import Const from 'src/const';
 import SettingForm from 'src/components/organisms/setting-form';
+import ResetModal from 'src/components/molecules/reset-modal';
 import useGame from './hooks';
 
 const { Color } = Const;
@@ -19,23 +20,16 @@ const Game: React.FC<GameProps> = ({ dataCy }) => {
       <StyledHeading>React Reversi</StyledHeading>
 
       {isGameStarted && (
-        <GameWrapper data-cy={dataCy}>
-          <Board dataCy="board" />
-          <Score />
-        </GameWrapper>
+        <>
+          <GameWrapper data-cy={dataCy}>
+            <Board dataCy="board" />
+            <Score />
+          </GameWrapper>
+          {isGameFinished && <ResetModal />}
+        </>
       )}
 
-      {isGameFinished && (
-        <OverLay>
-          <p>Game is over</p>
-        </OverLay>
-      )}
-
-      {!isGameStarted && (
-        <FormWrapper data-cy={dataCy}>
-          <SettingForm />
-        </FormWrapper>
-      )}
+      {!isGameStarted && <SettingForm dataCy={dataCy} />}
     </>
   );
 };
@@ -55,25 +49,6 @@ const GameWrapper = styled.div`
   height: 760px;
   margin: 0 auto;
   color: ${Color.TX_BLACK};
-`;
-
-const FormWrapper = styled.div`
-  width: fit-content;
-  margin: 48px auto 0;
-  color: ${Color.TX_BLACK};
-`;
-
-const OverLay = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${Color.BG_BLACK};
-  opacity: 0.3;
 `;
 
 export default Game;
