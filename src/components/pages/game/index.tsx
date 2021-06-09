@@ -4,6 +4,7 @@ import Board from 'src/components/organisms/board';
 import Score from 'src/components/organisms/score';
 import Const from 'src/const';
 import SettingForm from 'src/components/organisms/setting-form';
+import ResetModal from 'src/components/molecules/reset-modal';
 import useGame from './hooks';
 
 const { Color } = Const;
@@ -12,22 +13,23 @@ export interface GameProps {
   dataCy?: string;
 }
 const Game: React.FC<GameProps> = ({ dataCy }) => {
-  const { isGameStarted } = useGame();
+  const { isGameStarted, isGameFinished } = useGame();
 
   return (
     <>
       <StyledHeading>React Reversi</StyledHeading>
 
-      {isGameStarted ? (
-        <GameWrapper data-cy={dataCy}>
-          <Board dataCy="board" />
-          <Score />
-        </GameWrapper>
-      ) : (
-        <FormWrapper data-cy={dataCy}>
-          <SettingForm />
-        </FormWrapper>
+      {isGameStarted && (
+        <>
+          <GameWrapper data-cy={dataCy}>
+            <Board dataCy="board" />
+            <Score />
+          </GameWrapper>
+          {isGameFinished && <ResetModal />}
+        </>
       )}
+
+      {!isGameStarted && <SettingForm dataCy={dataCy} />}
     </>
   );
 };
@@ -46,12 +48,6 @@ const GameWrapper = styled.div`
   width: 1026px;
   height: 760px;
   margin: 0 auto;
-  color: ${Color.TX_BLACK};
-`;
-
-const FormWrapper = styled.div`
-  width: fit-content;
-  margin: 48px auto 0;
   color: ${Color.TX_BLACK};
 `;
 
