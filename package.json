@@ -77,7 +77,7 @@
     "test": "NODE_OPTIONS='--openssl-legacy-provider' react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "NODE_OPTIONS='--openssl-legacy-provider' cypress open",
-    "cypress:run": "NODE_OPTIONS='--openssl-legacy-provider' cypress run -s cypress/e2e/game.cy.ts",
+    "cypress:run": "NODE_OPTIONS='--openssl-legacy-provider' cypress run -s cypress/e2e/game.cy.ts cypress open --config-file=cypress.config.ts",
     "lint": "yarn lint:es && yarn lint:style",
     "lint:fix": "yarn lint:es:fix && yarn lint:style:fix",
     "lint:es": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
