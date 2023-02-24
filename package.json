@@ -38,7 +38,7 @@
     "@types/testing-library__jest-dom": "^5.9.4",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
-    "cypress": "^8.6.0",
+    "cypress": "^12.6.0",
     "eslint": "6.6.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.12.0",
@@ -72,12 +72,12 @@
     "typesync": "^0.7.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "NODE_OPTIONS='--openssl-legacy-provider' react-scripts start",
+    "build": "NODE_OPTIONS='--openssl-legacy-provider' react-scripts build",
+    "test": "NODE_OPTIONS='--openssl-legacy-provider' react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run -s cypress/integration/game.spec.js",
+    "cypress:open": "NODE_OPTIONS='--openssl-legacy-provider' cypress open",
+    "cypress:run": "NODE_OPTIONS='--openssl-legacy-provider' cypress run -s cypress/e2e/game.cy.ts cypress open",
     "lint": "yarn lint:es && yarn lint:style",
     "lint:fix": "yarn lint:es:fix && yarn lint:style:fix",
     "lint:es": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
@@ -86,8 +86,8 @@
     "lint:style:fix": "stylelint --fix 'src/**/*.{css,scss,jsx,ts,tsx}'",
     "lint:conflict": "npx eslint --print-config .eslintrc.js | npx eslint-config-prettier-check",
     "postinstall": "typesync",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
+    "storybook": "NODE_OPTIONS='--openssl-legacy-provider' start-storybook -p 6006 -s public",
+    "build-storybook": "NODE_OPTIONS='--openssl-legacy-provider' build-storybook -s public",
     "type-check": "yarn tsc --noEmit --skipLibCheck"
   },
   "eslintConfig": {
@@ -118,9 +118,5 @@
     "src/**/*.{css,scss,jsx,ts,tsx}": [
       "yarn lint:style:fix"
     ]
-  },
-  "volta": {
-    "node": "16.13.0",
-    "yarn": "1.22.17"
   }
 }
