@@ -10,30 +10,30 @@ This is an Othello application that can be enjoyed in a web browser using React.
 
 ## Procedure for setting up the environment
 
-### Installing Node.js and yarn
+### Installing Node.js and pnpm
 
-Install the .node-version version of Node.js. Then install yarn as a package manager.  
+Install the .node-version version of Node.js. Then install pnpm as a package manager.  
 
 ### Install dependent modules
 
 ```bash
-yarn
+pnpm
 ```
 
 ### Starting the Local Server
 
 ```bash
-yarn start
+pnpm start
 ```
 
 ### Run Cypress's Integration Test
 
 ```bash
-yarn run cypress:run
+pnpm run cypress:run
 ```
 
 or
 
 ```bash
-yarn run cypress:open
+pnpm run cypress:open
 ```

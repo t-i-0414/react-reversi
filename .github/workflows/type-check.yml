@@ -14,6 +14,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
       - name: Type Check run
-        run: yarn type-check
+        run: pnpm type-check

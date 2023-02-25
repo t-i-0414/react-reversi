@@ -16,18 +16,18 @@
     "cypress:run": "NODE_OPTIONS='--openssl-legacy-provider' cypress run -s cypress/e2e/game.cy.ts cypress open",
     "eject": "react-scripts eject",
     "postinstall": "typesync",
-    "lint": "yarn lint:es && yarn lint:style",
+    "lint": "pnpm lint:es && pnpm lint:style",
     "lint:conflict": "npx eslint --print-config .eslintrc.js | npx eslint-config-prettier-check",
     "lint:es": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:es:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "yarn lint:es:fix && yarn lint:style:fix",
+    "lint:fix": "pnpm lint:es:fix && pnpm lint:style:fix",
     "lint:style": "stylelint 'src/**/*.{css,scss,jsx,ts,tsx}'",
     "lint:style:fix": "stylelint --fix 'src/**/*.{css,scss,jsx,ts,tsx}'",
     "prepare": "husky install",
     "start": "NODE_OPTIONS='--openssl-legacy-provider' react-scripts start",
     "storybook": "NODE_OPTIONS='--openssl-legacy-provider' start-storybook -p 6006 -s public",
     "test": "NODE_OPTIONS='--openssl-legacy-provider' react-scripts test",
-    "type-check": "yarn tsc --noEmit --skipLibCheck"
+    "type-check": "pnpm tsc --noEmit --skipLibCheck"
   },
   "browserslist": {
     "production": [
@@ -45,7 +45,17 @@
     "extends": "react-app"
   },
   "dependencies": {
-    "sort-package-json": "^2.4.1"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-hook-form": "^7.4.2",
+    "react-redux": "^7.2.2",
+    "react-scripts": "5.0.1",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.2.0",
+    "typescript": "4.2.4",
+    "typesync": "^0.7.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.1.17",
@@ -87,22 +97,12 @@
     "lint-staged": "^13.1.2",
     "prettier": "^2.1.2",
     "prettier-stylelint": "^0.4.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-hook-form": "^7.4.2",
-    "react-redux": "^7.2.2",
-    "react-scripts": "5.0.1",
     "react-test-renderer": "^17.0.1",
-    "redux": "^4.0.5",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0",
-    "styled-components": "^5.2.0",
+    "sort-package-json": "^2.4.1",
     "stylelint": "^13.7.2",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recess-order": "^2.1.0",
     "stylelint-config-standard": "^20.0.0",
-    "stylelint-order": "^4.1.0",
-    "typescript": "4.2.4",
-    "typesync": "^0.7.0"
+    "stylelint-order": "^4.1.0"
   }
 }
