@@ -1,4 +1,5 @@
 {
   "src/**/*.{js,jsx,ts,tsx}": ["yarn prettier --write", "yarn lint:es:fix"],
-  "src/**/*.{css,scss,jsx,ts,tsx}": ["yarn lint:style:fix"]
+  "src/**/*.{css,scss,jsx,ts,tsx}": ["yarn lint:style:fix"],
+  "./package.json": ["sort-package-json", "sort-package-json --check"]
 }
