@@ -1,5 +1,7 @@
 # react-reversi
 
+https://happy-williams-02dc8b.netlify.app/
+
 This is an Othello application that can be enjoyed in a web browser using React.  
 
 <img width="900" alt="スクリーンショット 2021-06-03 21 23 01" src="https://user-images.githubusercontent.com/54778335/120644291-23df6d80-c4b2-11eb-9d13-ec47cd66a5a7.png">
