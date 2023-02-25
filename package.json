@@ -1,16 +1,12 @@
 {
   "name": "react-reversi",
-  "version": "1.1.0",
-  "author": {
-    "name": "Takuya Iwashiro",
-    "email": "gutlo.ol0414@gmail.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/iwashiro-takuya/react-reversi.git"
-  },
+  "version": "1.8.0",
+  "author": "t-i-0414 <gutlo.ol0414@gmail.com> (https://github.com/t-i-0414/)",
+  "homepage": "https://github.com/t-i-0414/react-reversi#readme",
+  "repository": "git@github.com:t-i-0414/react-reversi.git",
   "bugs": {
-    "url": "https://github.com/iwashiro-takuya/react-reversi/issues"
+    "url": "https://github.com/t-i-0414/react-reversi/issues",
+    "email": "gutlo.ol0414@gmail.com"
   },
   "license": "MIT",
   "devDependencies": {
@@ -36,10 +32,10 @@
     "@types/styled-components": "^5.1.4",
     "@types/stylelint": "^9.10.1",
     "@types/testing-library__jest-dom": "^5.9.4",
-    "@typescript-eslint/eslint-plugin": "^4.4.0",
-    "@typescript-eslint/parser": "^4.4.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
     "cypress": "^12.6.0",
-    "eslint": "6.6.0",
+    "eslint": "8.34.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-import": "^2.22.1",
@@ -49,15 +45,15 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.4",
     "eslint-plugin-react-hooks": "^4.1.2",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.4.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.1.2",
     "prettier": "^2.1.2",
     "prettier-stylelint": "^0.4.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^7.4.2",
     "react-redux": "^7.2.2",
-    "react-scripts": "3.4.3",
+    "react-scripts": "5.0.1",
     "react-test-renderer": "^17.0.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
@@ -88,7 +84,8 @@
     "postinstall": "typesync",
     "storybook": "NODE_OPTIONS='--openssl-legacy-provider' start-storybook -p 6006 -s public",
     "build-storybook": "NODE_OPTIONS='--openssl-legacy-provider' build-storybook -s public",
-    "type-check": "yarn tsc --noEmit --skipLibCheck"
+    "type-check": "yarn tsc --noEmit --skipLibCheck",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -103,20 +100,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "yarn prettier --write",
-      "yarn lint:es:fix"
-    ],
-    "src/**/*.{css,scss,jsx,ts,tsx}": [
-      "yarn lint:style:fix"
     ]
   }
 }
