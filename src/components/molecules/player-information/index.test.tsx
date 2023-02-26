@@ -6,16 +6,12 @@ import PlayerInformation from '.';
 
 describe('playerInformation unit test', () => {
   it('snapshot(PieceColor White)', () => {
-    expect.hasAssertions();
-
     const component = renderer.create(
       <PlayerInformation gamePlayer={initialState.players.black} />,
     );
     expect(component).toMatchSnapshot();
   });
   it('snapshot(PieceColor Black)', () => {
-    expect.hasAssertions();
-
     const component = renderer.create(
       <PlayerInformation gamePlayer={initialState.players.white} />,
     );

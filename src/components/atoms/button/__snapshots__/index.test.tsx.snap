@@ -1,16 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button unit test snapshot 1`] = `
-<button
-  className="sc-bcXHqe htMQdM"
-  data-cy="start"
-  onClick={[Function]}
-  type="button"
->
-  Game Start
-</button>
-`;
-
 exports[`button unit test snapshot 1`] = `
 <button
   className="sc-bcXHqe htMQdM"

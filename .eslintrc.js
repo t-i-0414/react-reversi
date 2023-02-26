@@ -132,6 +132,7 @@ module.exports = {
     {
       files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
       extends: ['plugin:jest/all', 'plugin:testing-library/react'],
+      rules: { 'jest/prefer-expect-assertions': 'off' },
     },
     {
       files: ['*.d.ts'],

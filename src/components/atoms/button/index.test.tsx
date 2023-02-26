@@ -5,8 +5,6 @@ import Button from '.';
 
 describe('button unit test', () => {
   it('snapshot', () => {
-    expect.hasAssertions();
-
     const component = renderer.create(
       <Button
         onClick={() => true}

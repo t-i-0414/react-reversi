@@ -1,6 +1,7 @@
 import { expect } from '@jest/globals';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { PlayerMap } from '~/const';
 import useResetModal from './hooks';
 import ResetModal from '.';
@@ -14,35 +15,29 @@ describe('resetModal', () => {
   afterEach(cleanup);
 
   it(`snapshot(${PlayerMap.PLAYER_1.name})`, () => {
-    expect.hasAssertions();
-
     useResetModalMock.mockReturnValue({
       onReset: () => true,
       gameResultText: `${PlayerMap.PLAYER_1.name} win!`,
     });
-    const { asFragment } = render(<ResetModal />);
-    expect(asFragment()).toMatchSnapshot();
+    const component = renderer.create(<ResetModal />);
+    expect(component).toMatchSnapshot();
   });
 
   it(`snapshot(${PlayerMap.PLAYER_2.name})`, () => {
-    expect.hasAssertions();
-
     useResetModalMock.mockReturnValue({
       onReset: () => true,
       gameResultText: `${PlayerMap.PLAYER_2.name} win!`,
     });
-    const { asFragment } = render(<ResetModal />);
-    expect(asFragment()).toMatchSnapshot();
+    const component = renderer.create(<ResetModal />);
+    expect(component).toMatchSnapshot();
   });
 
   it(`snapshot(Draw)`, () => {
-    expect.hasAssertions();
-
     useResetModalMock.mockReturnValue({
       onReset: () => true,
       gameResultText: `Draw!`,
     });
-    const { asFragment } = render(<ResetModal />);
-    expect(asFragment()).toMatchSnapshot();
+    const component = renderer.create(<ResetModal />);
+    expect(component).toMatchSnapshot();
   });
 });
