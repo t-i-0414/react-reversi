@@ -20,8 +20,7 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     "incremental": true,
-    "isolatedModules": true,
-    "rootDir": "."
+    "isolatedModules": true
   },
-  "exclude": ["node_modules", "cypress"]
+  "exclude": ["node_modules"]
 }

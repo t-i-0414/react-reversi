@@ -1,16 +1,8 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
     "module": "commonjs",
-    "lib": [
-      "dom",
-      "es6"
-    ],
-    "types": [
-      "cypress"
-    ],
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "types": ["cypress"],
+    "isolatedModules": false
   }
 }
