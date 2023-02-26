@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import type { Store } from '~/types';
+import { PlayerMap } from '~/const';
 import {
   updateGameStartFlg,
   initializeBoard,
   updatePlayers,
   updateScore,
 } from '~/redux/modules/game';
-import { PlayerMap } from '~/const';
 
 export interface SettingFormInputs {
   sideSquaresCount: number;
