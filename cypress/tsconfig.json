@@ -4,5 +4,6 @@
     "module": "commonjs",
     "types": ["cypress"],
     "isolatedModules": false
-  }
+  },
+  "exclude": ["node_modules"]
 }
