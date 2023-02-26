@@ -27,7 +27,7 @@
     "test": "react-scripts test",
     "type-check": "pnpm tsc --noEmit",
     "typesync": "pnpm dlx typesync",
-    "upgrade-interactive": "npm-check"
+    "upgrade-interactive": "npm-check -u"
   },
   "browserslist": {
     "production": [
