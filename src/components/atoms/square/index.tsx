@@ -4,6 +4,7 @@ import { SizeMap, ColorMap } from '~/const';
 
 export interface SquareProps {
   dataCy?: string;
+  children?: React.ReactNode;
 }
 const Square: React.FC<SquareProps> = ({ children, dataCy }) => (
   <Wrapper data-cy={dataCy}>{children}</Wrapper>
