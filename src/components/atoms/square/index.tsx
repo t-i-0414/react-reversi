@@ -1,25 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import Const from 'src/const';
-
-const { Size, Color } = Const;
+import { SizeMap, ColorMap } from '~/const';
 
 export interface SquareProps {
   dataCy?: string;
 }
-const Square: React.FC<SquareProps> = ({ children, dataCy }) => {
-  return <Wrapper data-cy={dataCy}>{children}</Wrapper>;
-};
+const Square: React.FC<SquareProps> = ({ children, dataCy }) => (
+  <Wrapper data-cy={dataCy}>{children}</Wrapper>
+);
 
 const Wrapper = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${Size.SQUARE_SIZE}px;
-  height: ${Size.SQUARE_SIZE}px;
-  background-color: ${Color.BG_GREEN};
-  border: 1px solid ${Color.BD_BLACK};
+  width: ${SizeMap.SQUARE_SIZE}px;
+  height: ${SizeMap.SQUARE_SIZE}px;
+  background-color: ${ColorMap.BG_GREEN};
+  border: 1px solid ${ColorMap.BD_BLACK};
 `;
 
 export default Square;

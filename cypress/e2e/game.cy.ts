@@ -31,7 +31,7 @@ describe('The Game Page', () => {
       .invoke('val', 8)
       .trigger('change');
     cy.get('[data-cy="start"]').click();
-    for (let n = 0; n < 60; n++) {
+    for (let n = 0; n < 60; n += 1) {
       cy.get('[data-cy="clickable"]').first().click();
     }
   });

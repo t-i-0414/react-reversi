@@ -51,3 +51,55 @@ exports[`PlayerInformation unit test snapshot(PieceColor White) 1`] = `
   </span>
 </div>
 `;
+
+exports[`playerInformation unit test snapshot(PieceColor Black) 1`] = `
+<div
+  className="sc-gswNZR bVisuh"
+>
+  <span
+    className="sc-jSUZER hwzVxA"
+  >
+    0
+  </span>
+  <div
+    className="sc-dkrFOg iIhfqe"
+  >
+    <span
+      className="sc-bcXHqe dJWbKk"
+      color="#fff"
+    />
+    <p
+      className="sc-eDvSVe bgZpqQ"
+      color="#555"
+    >
+      P2
+    </p>
+  </div>
+</div>
+`;
+
+exports[`playerInformation unit test snapshot(PieceColor White) 1`] = `
+<div
+  className="sc-gswNZR bVisuh"
+>
+  <div
+    className="sc-dkrFOg iIhfqe"
+  >
+    <span
+      className="sc-bcXHqe JfklG"
+      color="#000"
+    />
+    <p
+      className="sc-eDvSVe dtPnEb"
+      color="#fff"
+    >
+      P1
+    </p>
+  </div>
+  <span
+    className="sc-jSUZER hwzVxA"
+  >
+    0
+  </span>
+</div>
+`;

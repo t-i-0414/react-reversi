@@ -89,3 +89,93 @@ exports[`ResetModal snapshot(Player 2) 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`resetModal snapshot(Draw) 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR bzPwzc"
+  >
+    <div
+      class="sc-dkrFOg iUmvDk"
+    >
+      <p
+        class="sc-hLBbgP hbXarv"
+      >
+        Game Result
+      </p>
+      <p
+        class="sc-eDvSVe eQuYVd"
+      >
+        Draw!
+      </p>
+      <button
+        class="sc-bcXHqe htMQdM"
+        data-cy="reset"
+        type="submit"
+      >
+        Game Reset
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`resetModal snapshot(Player 1) 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR bzPwzc"
+  >
+    <div
+      class="sc-dkrFOg iUmvDk"
+    >
+      <p
+        class="sc-hLBbgP hbXarv"
+      >
+        Game Result
+      </p>
+      <p
+        class="sc-eDvSVe eQuYVd"
+      >
+        Player 1 win!
+      </p>
+      <button
+        class="sc-bcXHqe htMQdM"
+        data-cy="reset"
+        type="submit"
+      >
+        Game Reset
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`resetModal snapshot(Player 2) 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR bzPwzc"
+  >
+    <div
+      class="sc-dkrFOg iUmvDk"
+    >
+      <p
+        class="sc-hLBbgP hbXarv"
+      >
+        Game Result
+      </p>
+      <p
+        class="sc-eDvSVe eQuYVd"
+      >
+        Player 2 win!
+      </p>
+      <button
+        class="sc-bcXHqe htMQdM"
+        data-cy="reset"
+        type="submit"
+      >
+        Game Reset
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

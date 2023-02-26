@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux';
-import Const from 'src/const';
-
-const { Player, PieceColor } = Const;
+import type { Square, Board, Store, MapValues } from '~/types';
+import { PlayerMap, PieceColor } from '~/const';
 
 /**
  * action
@@ -12,6 +11,7 @@ const UPDATE_SIDE_SQUARES_COUNT =
 const UPDATE_BOARD = 'reversi/store/game/update-board';
 const UPDATE_PLAYERS = 'reversi/store/game/update-players';
 const CLEAR_STATE = 'reversi/store/game/clear-state';
+const DO_NOTHING = 'reversi/store/game/do-nothing';
 
 /**
  * action types
@@ -40,12 +40,17 @@ type ClearState = {
   type: typeof CLEAR_STATE;
 };
 
+type DoNothing = {
+  type: typeof DO_NOTHING;
+};
+
 type ActionType =
   | UpdateGameStartFlag
   | UpdateSideSquaresCount
   | UpdateBoard
   | UpdatePlayers
-  | ClearState;
+  | ClearState
+  | DoNothing;
 
 /**
  * initial state
@@ -56,13 +61,13 @@ export const initialState: Store['game'] = {
   board: [],
   players: {
     black: {
-      player: { ...Player.PLAYER_1 },
+      ...PlayerMap.PLAYER_1,
       pieceColor: PieceColor.BLACK,
       score: 0,
       current: true,
     },
     white: {
-      player: { ...Player.PLAYER_2 },
+      ...PlayerMap.PLAYER_2,
       pieceColor: PieceColor.WHITE,
       score: 0,
       current: false,
@@ -73,9 +78,11 @@ export const initialState: Store['game'] = {
 /**
  * reducer
  */
-export default (
+export const gameReducer = (
   state: Store['game'] = initialState,
-  action: ActionType,
+  action: ActionType = {
+    type: 'reversi/store/game/do-nothing',
+  },
 ): Store['game'] => {
   switch (action.type) {
     case UPDATE_GAME_START_FLAG:
@@ -102,8 +109,13 @@ export default (
       return {
         ...initialState,
       };
-    default:
+    case DO_NOTHING:
       return state;
+    default: {
+      const _unreachable: never = action;
+
+      return state;
+    }
   }
 };
 
@@ -149,7 +161,7 @@ export const initializeBoard =
       const key = squareCount;
       const column = squareCount % sideSquaresCount;
       const row = Math.floor(squareCount / sideSquaresCount);
-      let pieceColor: UnionVal<typeof PieceColor> = PieceColor.INVISIBLE;
+      let pieceColor: MapValues<typeof PieceColor> = PieceColor.INVISIBLE;
 
       /**
        * place four stones when the board is initially rendered
@@ -189,6 +201,31 @@ export const initializeBoard =
     dispatch(updateBoard(stagingBoard));
   };
 
+export const updateScore =
+  () =>
+  (dispatch: Dispatch, getState: () => Store): void => {
+    const {
+      game: { board, players },
+    } = getState();
+
+    const whitePiecesCount = board.reduce(
+      (prev, square) => prev + (square.pieceColor === PieceColor.WHITE ? 1 : 0),
+      0,
+    );
+
+    const blackPiecesCount = board.reduce(
+      (prev, square) => prev + (square.pieceColor === PieceColor.BLACK ? 1 : 0),
+      0,
+    );
+
+    const stagingPlayers = { ...players };
+
+    stagingPlayers.white.score = whitePiecesCount;
+    stagingPlayers.black.score = blackPiecesCount;
+
+    dispatch(updatePlayers(stagingPlayers));
+  };
+
 export const changeGamesTurn =
   (square: Square, updatableSquaresArray: Square[]) =>
   (dispatch: Dispatch, getState: () => Store): void => {
@@ -223,27 +260,4 @@ export const changeGamesTurn =
     dispatch(updateBoard(stagingBoard));
     dispatch(updatePlayers(stagingPlayers));
     updateScore();
-  };
-
-export const updateScore =
-  () =>
-  (dispatch: Dispatch, getState: () => Store): void => {
-    const {
-      game: { board, players },
-    } = getState();
-
-    const whitePiecesCount = board.reduce((prev, square) => {
-      return prev + (square.pieceColor === PieceColor.WHITE ? 1 : 0);
-    }, 0);
-
-    const blackPiecesCount = board.reduce((prev, square) => {
-      return prev + (square.pieceColor === PieceColor.BLACK ? 1 : 0);
-    }, 0);
-
-    const stagingPlayers = { ...players };
-
-    stagingPlayers.white.score = whitePiecesCount;
-    stagingPlayers.black.score = blackPiecesCount;
-
-    dispatch(updatePlayers(stagingPlayers));
   };

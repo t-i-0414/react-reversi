@@ -1,8 +1,8 @@
-import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import Player from 'src/const/player';
-import ResetModal from '.';
+import React from 'react';
 import useResetModal from './hooks';
+import ResetModal from '.';
+import Player from '~/const/playerMap';
 
 jest.mock('./hooks');
 const useResetModalMock = useResetModal as jest.MockedFunction<
@@ -11,12 +11,10 @@ const useResetModalMock = useResetModal as jest.MockedFunction<
 
 afterEach(cleanup);
 
-describe('ResetModal', () => {
+describe('resetModal', () => {
   it(`snapshot(${Player.PLAYER_1.name})`, () => {
     useResetModalMock.mockReturnValue({
-      onReset: () => {
-        return true;
-      },
+      onReset: () => true,
       gameResultText: `${Player.PLAYER_1.name} win!`,
     });
     const { asFragment } = render(<ResetModal />);
@@ -25,9 +23,7 @@ describe('ResetModal', () => {
 
   it(`snapshot(${Player.PLAYER_2.name})`, () => {
     useResetModalMock.mockReturnValue({
-      onReset: () => {
-        return true;
-      },
+      onReset: () => true,
       gameResultText: `${Player.PLAYER_2.name} win!`,
     });
     const { asFragment } = render(<ResetModal />);
@@ -36,9 +32,7 @@ describe('ResetModal', () => {
 
   it(`snapshot(Draw)`, () => {
     useResetModalMock.mockReturnValue({
-      onReset: () => {
-        return true;
-      },
+      onReset: () => true,
       gameResultText: `Draw!`,
     });
     const { asFragment } = render(<ResetModal />);

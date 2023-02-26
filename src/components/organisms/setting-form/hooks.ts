@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
+import type { Store } from '~/types';
 import {
   updateGameStartFlg,
   initializeBoard,
   updatePlayers,
   updateScore,
-} from 'src/redux/modules/game';
-import Const from 'src/const';
+} from '~/redux/modules/game';
+import { PlayerMap } from '~/const';
 
-const { Player } = Const;
 export interface SettingFormInputs {
   sideSquaresCount: number;
-  blackPiecePlayer: keyof Pick<typeof Player, 'PLAYER_1' | 'PLAYER_2'>;
-  whitePiecePlayer: keyof Pick<typeof Player, 'PLAYER_1' | 'PLAYER_2'>;
+  blackPiecePlayer: keyof Pick<typeof PlayerMap, 'PLAYER_1' | 'PLAYER_2'>;
+  whitePiecePlayer: keyof Pick<typeof PlayerMap, 'PLAYER_1' | 'PLAYER_2'>;
 }
 
 const useSettingForm = (): {
@@ -28,11 +28,11 @@ const useSettingForm = (): {
       updatePlayers({
         black: {
           ...black,
-          player: Player[data.blackPiecePlayer],
+          ...PlayerMap[data.blackPiecePlayer],
         },
         white: {
           ...white,
-          player: Player[data.whitePiecePlayer],
+          ...PlayerMap[data.whitePiecePlayer],
         },
       }),
     );

@@ -6,3 +6,10 @@ exports[`Square unit test snapshot 1`] = `
   data-cy="square-1"
 />
 `;
+
+exports[`square unit test snapshot 1`] = `
+<div
+  className="sc-bcXHqe jFKlnU"
+  data-cy="square-1"
+/>
+`;

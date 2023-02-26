@@ -1,9 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { initialState } from 'src/redux/modules/game';
 import PlayerInformation from '.';
+import { initialState } from '~/redux/modules/game';
 
-describe('PlayerInformation unit test', () => {
+describe('playerInformation unit test', () => {
   it('snapshot(PieceColor White)', () => {
     const component = renderer.create(
       <PlayerInformation gamePlayer={initialState.players.black} />,

@@ -1,10 +1,8 @@
+import { Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import styled from 'styled-components';
-import { Story } from '@storybook/react/types-6-0';
-import Const from 'src/const';
 import Piece, { PieceProps } from '.';
-
-const { PieceColor } = Const;
+import { PieceColor } from '~/const';
 
 export default {
   title: 'Atoms/Piece',
@@ -23,15 +21,15 @@ export default {
   },
 };
 
-const Template: Story<PieceProps> = (args) => (
+const Template: Story<PieceProps> = args => (
   <Base>
     <Piece {...args} />
   </Base>
 );
 
-export const normal = Template.bind({});
+export const Normal = Template.bind({});
 
-normal.args = {
+Normal.args = {
   pieceColor: PieceColor.WHITE,
 };
 

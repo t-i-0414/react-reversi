@@ -1,10 +1,9 @@
 import React from 'react';
-import Const from 'src/const';
 import styled, { css } from 'styled-components';
-import PlayerInformation from 'src/components/molecules/player-information/index';
 import useScore from './hooks';
-
-const { Color, Size, PieceColor } = Const;
+import type { GamePlayer } from '~/types';
+import PlayerInformation from '~/components/molecules/player-information/index';
+import { ColorMap, SizeMap, PieceColor } from '~/const';
 
 const Score: React.FC = () => {
   const { players, currentPlayersPieceColor } = useScore();
@@ -34,7 +33,7 @@ const Wrapper = styled.div`
 
 const ContentHeader = styled.p`
   margin: 0;
-  font-size: ${Size.FS_24};
+  font-size: ${SizeMap.FS_24};
   line-height: 1;
   text-align: center;
 `;
@@ -51,7 +50,7 @@ const Container = styled.div<ContainerProps>`
   width: fit-content;
   margin: 0 auto;
 
-  ${(props) =>
+  ${props =>
     props.currentPlayersPieceColor === PieceColor.BLACK &&
     css`
       &::before {
@@ -67,7 +66,7 @@ const Container = styled.div<ContainerProps>`
       }
     `}
 
-  ${(props) =>
+  ${props =>
     props.currentPlayersPieceColor === PieceColor.WHITE &&
     css`
       &::after {
@@ -95,5 +94,5 @@ const Line = styled.span`
   display: block;
   width: 20px;
   height: 2px;
-  background-color: ${Color.BG_BLACK};
+  background-color: ${ColorMap.BG_BLACK};
 `;
