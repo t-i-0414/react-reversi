@@ -1,69 +1,28 @@
 module.exports = {
+  root: true,
   env: {
     browser: true,
-    es2020: true,
+    es2021: true,
+    node: true,
   },
   extends: [
-    'plugin:react/recommended',
     'airbnb',
     'airbnb/hooks',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:react/recommended',
+    'plugin:promise/recommended',
+    'plugin:storybook/recommended',
     'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    ecmaVersion: 13,
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2020,
-    project: './tsconfig.eslint.json',
-    sourceType: 'module',
-    tsconfigRootDir: __dirname,
   },
-  plugins: [
-    '@typescript-eslint',
-    'import',
-    'jsx-a11y',
-    'prefer-arrow',
-    'react',
-    'react-hooks',
-  ],
-  root: true,
+  plugins: ['@typescript-eslint', 'import', 'react'],
   rules: {
-    'lines-between-class-members': [
-      'error',
-      'always',
-      {
-        exceptAfterSingleLine: true,
-      },
-    ],
-    // should be rewritten as `['error', { allowAsStatement: true }]` in ESLint 7 or later
-    // SEE: https://github.com/typescript-eslint/typescript-eslint/issues/1184
-    'no-void': 'off',
-    'padding-line-between-statements': [
-      'error',
-      {
-        blankLine: 'always',
-        prev: '*',
-        next: 'return',
-      },
-    ],
-    'no-use-before-define': 'off',
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        vars: 'all',
-        args: 'after-used',
-        argsIgnorePattern: '_',
-        ignoreRestSiblings: false,
-        varsIgnorePattern: '_',
-      },
-    ],
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -74,48 +33,112 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'import/no-extraneous-dependencies': [
+    'import/no-extraneous-dependencies': ['off'],
+    'import/order': [
       'error',
       {
-        devDependencies: true,
-        optionalDependencies: false,
+        groups: [
+          'builtin',
+          'external',
+          'parent',
+          'sibling',
+          'index',
+          'object',
+          'type',
+        ],
+        pathGroups: [
+          {
+            pattern: '~/types',
+            group: 'type',
+            position: 'before',
+          },
+          {
+            pattern: '~/**',
+            group: 'external',
+            position: 'after',
+          },
+        ],
+        alphabetize: {
+          order: 'asc',
+        },
+        'newlines-between': 'never',
       },
     ],
-    'import/no-unresolved': 'off',
+    'import/prefer-default-export': ['off'],
+    'no-extra-semi': 'error',
+    'no-duplicate-imports': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        vars: 'all',
+        varsIgnorePattern: '_',
+        args: 'all',
+        ignoreRestSiblings: true,
+        argsIgnorePattern: '_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '_',
+      },
+    ],
+    'no-underscore-dangle': 'off',
+    'no-use-before-define': 'off', // TODO: remove
+    'padding-line-between-statements': [
+      'error',
+      {
+        blankLine: 'always',
+        prev: '*',
+        next: 'return',
+      },
+    ],
+    'react/function-component-definition': [
+      'error',
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
     'react/jsx-filename-extension': [
       'error',
       {
-        extensions: ['.jsx', '.tsx'],
+        extensions: ['.ts', '.tsx'],
       },
     ],
-    'prefer-arrow/prefer-arrow-functions': [
+    'react/react-in-jsx-scope': ['off'],
+    'react/require-default-props': 'off',
+    'react/prop-types': 'off',
+    'react/jsx-props-no-spreading': ['off'],
+    'jest/no-hooks': [
       'error',
       {
-        disallowPrototype: true,
-        singleReturnOnly: false,
-        classPropertiesAllowed: false,
+        allow: ['beforeAll', 'beforeEach', 'afterAll', 'afterEach'],
       },
     ],
   },
-  overrides: [
-    {
-      files: ['*.tsx'],
-      rules: {
-        'react/prop-types': 'off',
-      },
-    },
-    {
-      files: ['*.tsx'],
-      rules: {
-        'react/jsx-props-no-spreading': 'off',
-      },
-    },
-  ],
   settings: {
     'import/resolver': {
       node: {
-        paths: ['src'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
+      typescript: {},
     },
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      parserOptions: {
+        project: ['./tsconfig.json'],
+      },
+    },
+    {
+      files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+      extends: ['plugin:jest/all', 'plugin:testing-library/react'],
+      rules: { 'jest/prefer-expect-assertions': 'off' },
+    },
+    {
+      files: ['*.d.ts'],
+      rules: {
+        'no-unused-vars': 'off',
+      },
+    },
+  ],
 };

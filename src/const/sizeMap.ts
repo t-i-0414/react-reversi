@@ -1,4 +1,4 @@
-export default {
+export const SizeMap = {
   // one side's size of a square(px)
   SQUARE_SIZE: 64,
 

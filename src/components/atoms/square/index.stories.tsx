@@ -1,5 +1,5 @@
-import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
+import React from 'react';
 import Square, { SquareProps } from '.';
 
 export default {
@@ -7,6 +7,6 @@ export default {
   component: Square,
 };
 
-const Template: Story<SquareProps> = () => <Square dataCy="dataCy" />;
+const Template: Story<SquareProps> = () => <Square dataCy='dataCy' />;
 
-export const normal = Template.bind({});
+export const Normal = Template.bind({});

@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
-import PieceColor from 'src/const/piece-color';
-import Utils from 'src/utils';
+import { PieceColor } from '~/const';
+import Utils from '~/utils';
+import type { Store } from '~/types';
 
 const {
   Game: { getUpdatableSquaresArray },
@@ -12,12 +13,12 @@ const useGame = (): {
 } => {
   const { isGameStarted, board } = useSelector((store: Store) => store.game);
 
-  const updatableSquaresArrays = board.filter((square) => {
-    return getUpdatableSquaresArray(square).length > 0;
-  });
+  const updatableSquaresArrays = board.filter(
+    square => getUpdatableSquaresArray(square).length > 0,
+  );
 
   const canPlacePieces = !!updatableSquaresArrays.find(
-    (square) => square.pieceColor === PieceColor.INVISIBLE,
+    square => square.pieceColor === PieceColor.INVISIBLE,
   );
 
   const isGameFinished = isGameStarted && !canPlacePieces;

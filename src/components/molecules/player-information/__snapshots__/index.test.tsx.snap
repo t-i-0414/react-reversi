@@ -1,23 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PlayerInformation unit test snapshot(PieceColor Black) 1`] = `
+exports[`playerInformation unit test snapshot(PieceColor Black) 1`] = `
 <div
-  className="sc-gtsrHT ljPrYI"
+  className="sc-gswNZR bVisuh"
 >
   <span
-    className="sc-jSFjdj bsAtwI"
+    className="sc-jSUZER hwzVxA"
   >
     0
   </span>
   <div
-    className="sc-dlnjwi gFWwNh"
+    className="sc-dkrFOg iIhfqe"
   >
     <span
-      className="sc-bdnxRM bGNMMU"
+      className="sc-bcXHqe dJWbKk"
       color="#fff"
     />
     <p
-      className="sc-eCApnc btUvBL"
+      className="sc-eDvSVe bgZpqQ"
       color="#555"
     >
       P2
@@ -26,26 +26,26 @@ exports[`PlayerInformation unit test snapshot(PieceColor Black) 1`] = `
 </div>
 `;
 
-exports[`PlayerInformation unit test snapshot(PieceColor White) 1`] = `
+exports[`playerInformation unit test snapshot(PieceColor White) 1`] = `
 <div
-  className="sc-gtsrHT ljPrYI"
+  className="sc-gswNZR bVisuh"
 >
   <div
-    className="sc-dlnjwi gFWwNh"
+    className="sc-dkrFOg iIhfqe"
   >
     <span
-      className="sc-bdnxRM kIMDaa"
+      className="sc-bcXHqe JfklG"
       color="#000"
     />
     <p
-      className="sc-eCApnc jWhorU"
+      className="sc-eDvSVe dtPnEb"
       color="#fff"
     >
       P1
     </p>
   </div>
   <span
-    className="sc-jSFjdj bsAtwI"
+    className="sc-jSUZER hwzVxA"
   >
     0
   </span>

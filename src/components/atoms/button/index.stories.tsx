@@ -1,6 +1,6 @@
+import { Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import styled from 'styled-components';
-import { Story } from '@storybook/react/types-6-0';
 import Button, { ButtonProps } from '.';
 
 export default {
@@ -31,9 +31,9 @@ const Template: Story<ButtonProps> = ({ type, text }) => (
   </Base>
 );
 
-export const normal = Template.bind({});
+export const Normal = Template.bind({});
 
-normal.args = {
+Normal.args = {
   text: 'Game Start',
   type: 'submit',
 };

@@ -1,40 +1,33 @@
 import React from 'react';
-import Const from 'src/const';
 import styled from 'styled-components';
-import Piece from 'src/components/atoms/piece';
-
-const { Color, Size, PieceColor } = Const;
+import Piece from '~/components/atoms/piece';
+import { ColorMap, SizeMap, PieceColor } from '~/const';
+import type { GamePlayer } from '~/types';
 
 export interface PlayerInformationProps {
   gamePlayer: GamePlayer;
 }
 const PlayerInformation: React.FC<PlayerInformationProps> = ({
-  gamePlayer: {
-    player: { shortName },
-    pieceColor,
-    score,
-  },
-}) => {
-  return (
-    <Wrapper>
-      {pieceColor === PieceColor.BLACK && (
-        <Inner>
-          <StyledPiece pieceColor={PieceColor.BLACK} />
-          <StyledPlayer color={Color.TX_WHITE}>{shortName}</StyledPlayer>
-        </Inner>
-      )}
+  gamePlayer: { shortName, pieceColor, score },
+}) => (
+  <Wrapper>
+    {pieceColor === PieceColor.BLACK && (
+      <Inner>
+        <StyledPiece pieceColor={PieceColor.BLACK} />
+        <StyledPlayer color={ColorMap.TX_WHITE}>{shortName}</StyledPlayer>
+      </Inner>
+    )}
 
-      <Score>{score}</Score>
+    <Score>{score}</Score>
 
-      {pieceColor === PieceColor.WHITE && (
-        <Inner>
-          <StyledPiece pieceColor={PieceColor.WHITE} />
-          <StyledPlayer color={Color.TX_BLACK}>{shortName}</StyledPlayer>
-        </Inner>
-      )}
-    </Wrapper>
-  );
-};
+    {pieceColor === PieceColor.WHITE && (
+      <Inner>
+        <StyledPiece pieceColor={PieceColor.WHITE} />
+        <StyledPlayer color={ColorMap.TX_BLACK}>{shortName}</StyledPlayer>
+      </Inner>
+    )}
+  </Wrapper>
+);
 
 export default PlayerInformation;
 
@@ -59,19 +52,22 @@ const StyledPiece = styled(Piece)`
   transform: translate(-50%, -50%);
 `;
 
-interface StyledPlayer {
-  color: typeof Color[keyof Pick<typeof Color, 'TX_BLACK' | 'TX_WHITE'>];
-}
-const StyledPlayer = styled.p<StyledPlayer>`
+type TStyledPlayer = {
+  color: (typeof ColorMap)[keyof Pick<
+    typeof ColorMap,
+    'TX_BLACK' | 'TX_WHITE'
+  >];
+};
+const StyledPlayer = styled.p<TStyledPlayer>`
   position: absolute;
   top: 50%;
   left: 50%;
   margin: 0;
-  color: ${(props) => props.color};
+  color: ${props => props.color};
   transform: translate(-50%, -50%);
 `;
 
 const Score = styled.span`
   display: block;
-  font-size: ${Size.FS_24};
+  font-size: ${SizeMap.FS_24};
 `;

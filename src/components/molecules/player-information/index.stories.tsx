@@ -1,6 +1,6 @@
-import React from 'react';
 import { Story } from '@storybook/react/types-6-0';
-import { initialState } from 'src/redux/modules/game';
+import React from 'react';
+import { initialState } from '~/redux/modules/game';
 import PlayerInformation, { PlayerInformationProps } from '.';
 
 export default {
@@ -19,12 +19,12 @@ export default {
   },
 };
 
-const Template: Story<PlayerInformationProps> = (args) => (
+const Template: Story<PlayerInformationProps> = args => (
   <PlayerInformation {...args} />
 );
 
-export const normal = Template.bind({});
+export const Normal = Template.bind({});
 
-normal.args = {
+Normal.args = {
   gamePlayer: initialState.players.black,
 };

@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Piece unit test snapshot(black) 1`] = `
+exports[`piece unit test snapshot(black) 1`] = `
 <span
-  className="sc-bdnxRM kIMDaa"
+  className="sc-bcXHqe JfklG"
   color="#000"
 />
 `;
 
-exports[`Piece unit test snapshot(clickable) 1`] = `
+exports[`piece unit test snapshot(clickable) 1`] = `
 <span
-  className="sc-bdnxRM iWbfmE"
+  className="sc-bcXHqe fSVNNw"
   color="#38A34B"
   data-cy="clickable"
   onClick={[Function]}
 />
 `;
 
-exports[`Piece unit test snapshot(white) 1`] = `
+exports[`piece unit test snapshot(white) 1`] = `
 <span
-  className="sc-bdnxRM bGNMMU"
+  className="sc-bcXHqe dJWbKk"
   color="#fff"
 />
 `;

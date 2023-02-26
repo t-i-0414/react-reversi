@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import type { Store, GamePlayer } from '~/types';
 
 const useScore = (): {
   players: Store['game']['players'];
