@@ -1,8 +1,8 @@
 import { Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import styled from 'styled-components';
-import Piece, { PieceProps } from '.';
 import { PieceColor } from '~/const';
+import Piece, { PieceProps } from '.';
 
 export default {
   title: 'Atoms/Piece',

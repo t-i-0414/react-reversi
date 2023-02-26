@@ -5,9 +5,9 @@ import { action } from '@storybook/addon-actions';
 import { Story } from '@storybook/react/types-6-0';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { PlayerMap, PieceColor } from '~/const';
 import ResetModal from '.';
 import type { Store } from '~/types';
-import { PlayerMap, PieceColor } from '~/const';
 
 const store = {
   getState: (): Store => ({

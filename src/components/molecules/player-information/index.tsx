@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import type { GamePlayer } from '~/types';
 import Piece from '~/components/atoms/piece';
 import { ColorMap, SizeMap, PieceColor } from '~/const';
+import type { GamePlayer } from '~/types';
 
 export interface PlayerInformationProps {
   gamePlayer: GamePlayer;

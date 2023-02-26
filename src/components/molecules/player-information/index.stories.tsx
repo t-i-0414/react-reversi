@@ -1,7 +1,7 @@
 import { Story } from '@storybook/react/types-6-0';
 import React from 'react';
-import PlayerInformation, { PlayerInformationProps } from '.';
 import { initialState } from '~/redux/modules/game';
+import PlayerInformation, { PlayerInformationProps } from '.';
 
 export default {
   title: 'Molecules/PlayerInformation',

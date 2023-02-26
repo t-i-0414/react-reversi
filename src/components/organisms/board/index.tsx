@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { useBoardSelector, useBoardFunctions, useBoardScroll } from './hook';
-import type { Square as TSquare } from '~/types';
 import Piece from '~/components/atoms/piece';
 import Square from '~/components/atoms/square';
 import { ColorMap } from '~/const';
+import { useBoardSelector, useBoardFunctions, useBoardScroll } from './hook';
+import type { Square as TSquare } from '~/types';
 
 export interface BoardProps {
   dataCy?: string;

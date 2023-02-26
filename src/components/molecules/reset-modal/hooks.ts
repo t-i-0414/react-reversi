@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import type { Store } from '~/types';
 import { clearState } from '~/redux/modules/game';
+import type { Store } from '~/types';
 
 export default (): {
   onReset: () => void;

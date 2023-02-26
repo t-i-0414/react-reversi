@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import useResetModal from './hooks';
 import Button from '~/components/atoms/button';
 import { ColorMap, SizeMap } from '~/const';
+import useResetModal from './hooks';
 
 const ResetModal: React.FC = () => {
   const { onReset, gameResultText } = useResetModal();

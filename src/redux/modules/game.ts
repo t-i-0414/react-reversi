@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
-import type { Square, Board, Store, MapValues } from '~/types';
 import { PlayerMap, PieceColor } from '~/const';
+import type { Square, Board, Store, MapValues } from '~/types';
 
 /**
  * action

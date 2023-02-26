@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import type { Board, Store, Square } from '~/types';
 import { PieceColor, SizeMap } from '~/const';
 import { changeGamesTurn, updateScore } from '~/redux/modules/game';
 import Utils from '~/utils';
+import type { Board, Store, Square } from '~/types';
 
 const {
   Game: { getUpdatableSquaresArray },

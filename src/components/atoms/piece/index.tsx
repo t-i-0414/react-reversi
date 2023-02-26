@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import type { MapValues, AllPieceColorMap } from '~/types';
 import { ColorMap, PieceColor } from '~/const';
+import type { MapValues, AllPieceColorMap } from '~/types';
 
 export interface PieceProps {
   pieceColor: MapValues<AllPieceColorMap>;

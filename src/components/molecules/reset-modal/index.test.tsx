@@ -1,9 +1,9 @@
 import { expect } from '@jest/globals';
 import { render, cleanup } from '@testing-library/react';
 import React from 'react';
+import { PlayerMap } from '~/const';
 import useResetModal from './hooks';
 import ResetModal from '.';
-import { PlayerMap } from '~/const';
 
 jest.mock('./hooks');
 const useResetModalMock = useResetModal as jest.MockedFunction<

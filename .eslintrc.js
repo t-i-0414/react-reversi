@@ -46,6 +46,18 @@ module.exports = {
           'object',
           'type',
         ],
+        pathGroups: [
+          {
+            pattern: '~/types',
+            group: 'type',
+            position: 'before',
+          },
+          {
+            pattern: '~/**',
+            group: 'external',
+            position: 'after',
+          },
+        ],
         alphabetize: {
           order: 'asc',
         },

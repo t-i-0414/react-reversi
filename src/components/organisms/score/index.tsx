@@ -1,9 +1,9 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import useScore from './hooks';
-import type { GamePlayer } from '~/types';
 import PlayerInformation from '~/components/molecules/player-information/index';
 import { ColorMap, SizeMap, PieceColor } from '~/const';
+import useScore from './hooks';
+import type { GamePlayer } from '~/types';
 
 const Score: React.FC = () => {
   const { players, currentPlayersPieceColor } = useScore();

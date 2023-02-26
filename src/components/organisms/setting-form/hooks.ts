@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import type { Store } from '~/types';
 import { PlayerMap } from '~/const';
 import {
   updateGameStartFlg,
@@ -7,6 +6,7 @@ import {
   updatePlayers,
   updateScore,
 } from '~/redux/modules/game';
+import type { Store } from '~/types';
 
 export interface SettingFormInputs {
   sideSquaresCount: number;

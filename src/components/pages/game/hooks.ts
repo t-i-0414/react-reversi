@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import type { Store } from '~/types';
 import { PieceColor } from '~/const';
 import Utils from '~/utils';
+import type { Store } from '~/types';
 
 const {
   Game: { getUpdatableSquaresArray },

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import styled from 'styled-components';
-import useSettingForm, { SettingFormInputs } from './hooks';
 import Button from '~/components/atoms/button';
 import { ColorMap, SizeMap, PlayerMap } from '~/const';
+import useSettingForm, { SettingFormInputs } from './hooks';
 
 interface Props {
   dataCy?: string;

@@ -1,8 +1,8 @@
 import { expect } from '@jest/globals';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Piece from '.';
 import { PieceColor } from '~/const';
+import Piece from '.';
 
 describe('piece unit test', () => {
   it('snapshot(white)', () => {

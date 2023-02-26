@@ -1,8 +1,8 @@
 import { expect } from '@jest/globals';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PlayerInformation from '.';
 import { initialState } from '~/redux/modules/game';
+import PlayerInformation from '.';
 
 describe('playerInformation unit test', () => {
   it('snapshot(PieceColor White)', () => {

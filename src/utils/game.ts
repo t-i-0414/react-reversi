@@ -1,6 +1,6 @@
-import type { Square, Store } from '~/types';
 import { PieceColor } from '~/const';
 import { store } from '~/redux';
+import type { Square, Store } from '~/types';
 
 /**
  * Function to get arrays of the square that has piece that can be turn over in each directions from the passed square

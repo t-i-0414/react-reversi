@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import useGame from './hooks';
 import ResetModal from '~/components/molecules/reset-modal';
 import Board from '~/components/organisms/board';
 import Score from '~/components/organisms/score';
 import SettingForm from '~/components/organisms/setting-form';
 import { ColorMap } from '~/const';
+import useGame from './hooks';
 
 export interface GameProps {
   dataCy?: string;
