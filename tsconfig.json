@@ -22,8 +22,7 @@
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "incremental": true,
-    "isolatedModules": true
+    "incremental": true
   },
   "exclude": ["node_modules"]
 }

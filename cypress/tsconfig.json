@@ -2,8 +2,8 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-    "types": ["cypress"],
-    "isolatedModules": false
+    "types": ["cypress"]
   },
+  "include": ["."],
   "exclude": ["node_modules"]
 }
