@@ -1,13 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
-import Button from 'src/components/atoms/button';
-import Const from 'src/const';
+import styled from 'styled-components';
+import Button from '~/components/atoms/button';
+import { ColorMap, SizeMap, PlayerMap } from '~/const';
 import useSettingForm, { SettingFormInputs } from './hooks';
-
-const { Color, Size } = Const;
-
-const { Player } = Const;
 
 interface Props {
   dataCy?: string;
@@ -37,18 +33,18 @@ const SettingForm: React.FC<Props> = ({ dataCy }) => {
       <StyledForm onSubmit={onSubmit}>
         <Controller
           control={control}
-          name="sideSquaresCount"
+          name='sideSquaresCount'
           render={({ field: { onChange, value } }) => (
             <FieldWrapper>
               <StyledLabel>Squares on board&apos;s one side</StyledLabel>
               <FieldContainer>
                 <StyledRange
-                  type="range"
+                  type='range'
                   value={value}
-                  min="4"
-                  max="16"
-                  step="2"
-                  data-cy="input-sideSquaresCount"
+                  min='4'
+                  max='16'
+                  step='2'
+                  data-cy='input-sideSquaresCount'
                   onChange={onChange}
                 />
                 <RangeValue>{getValues('sideSquaresCount')}</RangeValue>
@@ -63,11 +59,11 @@ const SettingForm: React.FC<Props> = ({ dataCy }) => {
             <StyledSelect>
               <select
                 {...register('blackPiecePlayer', {
-                  validate: (value) => value !== getValues('whitePiecePlayer'),
+                  validate: value => value !== getValues('whitePiecePlayer'),
                 })}
               >
-                <option value="PLAYER_1">{Player.PLAYER_1.name}</option>
-                <option value="PLAYER_2">{Player.PLAYER_2.name}</option>
+                <option value='PLAYER_1'>{PlayerMap.PLAYER_1.name}</option>
+                <option value='PLAYER_2'>{PlayerMap.PLAYER_2.name}</option>
               </select>
             </StyledSelect>
           </FieldContainer>
@@ -79,17 +75,17 @@ const SettingForm: React.FC<Props> = ({ dataCy }) => {
             <StyledSelect>
               <select
                 {...register('whitePiecePlayer', {
-                  validate: (value) => value !== getValues('blackPiecePlayer'),
+                  validate: value => value !== getValues('blackPiecePlayer'),
                 })}
               >
-                <option value="PLAYER_1">{Player.PLAYER_1.name}</option>
-                <option value="PLAYER_2">{Player.PLAYER_2.name}</option>
+                <option value='PLAYER_1'>{PlayerMap.PLAYER_1.name}</option>
+                <option value='PLAYER_2'>{PlayerMap.PLAYER_2.name}</option>
               </select>
             </StyledSelect>
           </FieldContainer>
         </FieldWrapper>
 
-        <Button text="Game Start" type="submit" dataCy="start" />
+        <Button text='Game Start' type='submit' dataCy='start' />
       </StyledForm>
       {(errors.blackPiecePlayer || errors.whitePiecePlayer) && (
         <ErrorMessage>
@@ -107,16 +103,16 @@ const Wrapper = styled.div`
   width: 480px;
   padding: 32px 24px;
   margin: 48px auto 0;
-  color: ${Color.TX_BLACK};
+  color: ${ColorMap.TX_BLACK};
   border-radius: 24px;
   box-shadow: 0 0 13px 5px rgba(0, 0, 0, 0.15);
 `;
 
 const FormTitle = styled.p`
   margin: 0 0 16px;
-  font-size: ${Size.FS_24};
+  font-size: ${SizeMap.FS_24};
   font-weight: bold;
-  color: ${Color.TX_DEEP_BLACK};
+  color: ${ColorMap.TX_DEEP_BLACK};
   text-align: center;
 `;
 
@@ -128,18 +124,18 @@ const FieldWrapper = styled.div`
   box-sizing: border-box;
   padding: 24px 8px;
   margin: 0;
-  border-top: 1px solid ${Color.BG_LIGHT_GRAY};
+  border-top: 1px solid ${ColorMap.BG_LIGHT_GRAY};
 
   &:last-of-type {
     margin-bottom: 40px;
-    border-bottom: 1px solid ${Color.BG_LIGHT_GRAY};
+    border-bottom: 1px solid ${ColorMap.BG_LIGHT_GRAY};
   }
 `;
 
 const StyledLabel = styled.label`
   display: block;
   margin: 0 0 12px;
-  font-size: ${Size.FS_16};
+  font-size: ${SizeMap.FS_16};
 `;
 
 const FieldContainer = styled.div`
@@ -153,7 +149,7 @@ const StyledRange = styled.input`
   width: 280px;
   height: 2px;
   appearance: none;
-  background-color: ${Color.BG_LIGHT_GRAY};
+  background-color: ${ColorMap.BG_LIGHT_GRAY};
 
   &:focus,
   &:active {
@@ -167,7 +163,7 @@ const StyledRange = styled.input`
     width: 12px;
     height: 12px;
     cursor: pointer;
-    background-color: ${Color.BG_LIGHT_BLACK};
+    background-color: ${ColorMap.BG_LIGHT_BLACK};
     border: none;
     border-radius: 50%;
   }
@@ -176,7 +172,7 @@ const StyledRange = styled.input`
 const RangeValue = styled.span`
   display: block;
   margin: 0 0 0 8px;
-  font-size: ${Size.FS_20};
+  font-size: ${SizeMap.FS_20};
 `;
 
 const StyledSelect = styled.div`
@@ -185,7 +181,7 @@ const StyledSelect = styled.div`
   margin: 0;
   overflow: hidden;
   text-align: center;
-  background: ${Color.BG_WHITE};
+  background: ${ColorMap.BG_WHITE};
   border-radius: 1em;
   box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.15);
 
@@ -198,7 +194,7 @@ const StyledSelect = styled.div`
     padding: 0;
     pointer-events: none;
     content: '';
-    border-top: 6px solid ${Color.BD_LIGHT_GRAY};
+    border-top: 6px solid ${ColorMap.BD_LIGHT_GRAY};
     border-right: 6px solid transparent;
     border-left: 6px solid transparent;
   }
@@ -206,7 +202,7 @@ const StyledSelect = styled.div`
   select {
     width: 100%;
     padding: 8px 1em 8px 8px;
-    color: ${Color.TX_BLACK};
+    color: ${ColorMap.TX_BLACK};
     text-overflow: ellipsis;
     cursor: pointer;
     background: transparent;
@@ -223,5 +219,5 @@ const StyledSelect = styled.div`
 `;
 
 const ErrorMessage = styled.p`
-  color: ${Color.TX_RED};
+  color: ${ColorMap.TX_RED};
 `;

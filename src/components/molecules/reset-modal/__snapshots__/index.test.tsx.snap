@@ -1,91 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ResetModal snapshot(Draw) 1`] = `
-<DocumentFragment>
+exports[`resetModal snapshot(Draw) 1`] = `
+<div
+  className="sc-gswNZR bzPwzc"
+>
   <div
-    class="sc-gtsrHT iBzBKB"
+    className="sc-dkrFOg iUmvDk"
   >
-    <div
-      class="sc-dlnjwi laUVez"
+    <p
+      className="sc-hLBbgP hbXarv"
     >
-      <p
-        class="sc-hKFxyN bnINoU"
-      >
-        Game Result
-      </p>
-      <p
-        class="sc-eCApnc krybIm"
-      >
-        Draw!
-      </p>
-      <button
-        class="sc-bdnxRM jTgbIw"
-        data-cy="reset"
-        type="submit"
-      >
-        Game Reset
-      </button>
-    </div>
+      Game Result
+    </p>
+    <p
+      className="sc-eDvSVe eQuYVd"
+    >
+      Draw!
+    </p>
+    <button
+      className="sc-bcXHqe htMQdM"
+      data-cy="reset"
+      onClick={[Function]}
+      type="submit"
+    >
+      Game Reset
+    </button>
   </div>
-</DocumentFragment>
+</div>
 `;
 
-exports[`ResetModal snapshot(Player 1) 1`] = `
-<DocumentFragment>
+exports[`resetModal snapshot(Player 1) 1`] = `
+<div
+  className="sc-gswNZR bzPwzc"
+>
   <div
-    class="sc-gtsrHT iBzBKB"
+    className="sc-dkrFOg iUmvDk"
   >
-    <div
-      class="sc-dlnjwi laUVez"
+    <p
+      className="sc-hLBbgP hbXarv"
     >
-      <p
-        class="sc-hKFxyN bnINoU"
-      >
-        Game Result
-      </p>
-      <p
-        class="sc-eCApnc krybIm"
-      >
-        Player 1 win!
-      </p>
-      <button
-        class="sc-bdnxRM jTgbIw"
-        data-cy="reset"
-        type="submit"
-      >
-        Game Reset
-      </button>
-    </div>
+      Game Result
+    </p>
+    <p
+      className="sc-eDvSVe eQuYVd"
+    >
+      Player 1 win!
+    </p>
+    <button
+      className="sc-bcXHqe htMQdM"
+      data-cy="reset"
+      onClick={[Function]}
+      type="submit"
+    >
+      Game Reset
+    </button>
   </div>
-</DocumentFragment>
+</div>
 `;
 
-exports[`ResetModal snapshot(Player 2) 1`] = `
-<DocumentFragment>
+exports[`resetModal snapshot(Player 2) 1`] = `
+<div
+  className="sc-gswNZR bzPwzc"
+>
   <div
-    class="sc-gtsrHT iBzBKB"
+    className="sc-dkrFOg iUmvDk"
   >
-    <div
-      class="sc-dlnjwi laUVez"
+    <p
+      className="sc-hLBbgP hbXarv"
     >
-      <p
-        class="sc-hKFxyN bnINoU"
-      >
-        Game Result
-      </p>
-      <p
-        class="sc-eCApnc krybIm"
-      >
-        Player 2 win!
-      </p>
-      <button
-        class="sc-bdnxRM jTgbIw"
-        data-cy="reset"
-        type="submit"
-      >
-        Game Reset
-      </button>
-    </div>
+      Game Result
+    </p>
+    <p
+      className="sc-eDvSVe eQuYVd"
+    >
+      Player 2 win!
+    </p>
+    <button
+      className="sc-bcXHqe htMQdM"
+      data-cy="reset"
+      onClick={[Function]}
+      type="submit"
+    >
+      Game Reset
+    </button>
   </div>
-</DocumentFragment>
+</div>
 `;

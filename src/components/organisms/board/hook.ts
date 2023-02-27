@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import PieceColor from 'src/const/piece-color';
-import { changeGamesTurn, updateScore } from 'src/redux/modules/game';
-import Const from 'src/const';
-import Utils from 'src/utils';
-
-const { Size } = Const;
+import { PieceColor, SizeMap } from '~/const';
+import { changeGamesTurn, updateScore } from '~/redux/modules/game';
+import Utils from '~/utils';
+import type { Board, Store, Square } from '~/types';
 
 const {
   Game: { getUpdatableSquaresArray },
@@ -19,7 +17,7 @@ const useBoardSelector = (): {
     (store: Store) => store.game,
   );
 
-  const boardSize = sideSquaresCount * Size.SQUARE_SIZE;
+  const boardSize = sideSquaresCount * SizeMap.SQUARE_SIZE;
 
   return {
     squareList,
@@ -59,9 +57,8 @@ const useBoardFunctions = (): {
   };
 
   // check if a stone has already been placed
-  const hasPlacedPiece = (square: Square): boolean => {
-    return !!(square.pieceColor !== PieceColor.INVISIBLE);
-  };
+  const hasPlacedPiece = (square: Square): boolean =>
+    !!(square.pieceColor !== PieceColor.INVISIBLE);
 
   // turn over the stone that was trapped when the stone was placed and switch the current player
   const placePiece = (clickedSquare: Square) => {

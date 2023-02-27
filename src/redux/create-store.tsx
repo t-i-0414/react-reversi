@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { createStore, applyMiddleware, compose } from 'redux';
-import reduxThunk from 'redux-thunk';
+// eslint-disable-next-line camelcase
+import { legacy_createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
-import reducer from './reducer';
+import reduxThunk from 'redux-thunk';
+import { reducer } from './reducer';
 
 const middleware = [reduxThunk];
 
@@ -15,6 +16,7 @@ const composeEnhancers =
   compose;
 
 declare namespace NodeJS {
+  // eslint-disable-next-line no-unused-vars
   interface Global {
     IS_TEST: boolean;
   }
@@ -25,7 +27,7 @@ if (process.env.NODE_ENV !== 'production' && !global.IS_TEST) {
   middleware.push(logger as any);
 }
 
-export default createStore(
+export const store = legacy_createStore(
   reducer,
   composeEnhancers(applyMiddleware(...middleware)),
 );

@@ -1,22 +1,36 @@
-name: Integration Test
+name: 'Run CI'
 
 on:
-  pull_request:
+  push:
     branches:
       - master
       - develop
-      - release/**
+  pull_request:
 
 jobs:
-  integration-test-run:
+  integration-test:
+    name: Integration Test
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cypress.io
-        uses: cypress-io/github-action@v2.7.0
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
         with:
-          build: yarn build
-          start: yarn start
+          node-version-file: '.tool-versions'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - name: Cypress.io
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          build: pnpm build
+          start: pnpm start
           wait-on: 'http://localhost:3000'
-          spec: cypress/integration/game.spec.ts
+          spec: cypress/e2e/game.cy.ts

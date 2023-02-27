@@ -1,5 +1,6 @@
-import PieceColor from 'src/const/piece-color';
-import store from 'src/redux/create-store';
+import { PieceColor } from '~/const';
+import { store } from '~/redux';
+import type { Square, Store } from '~/types';
 
 /**
  * Function to get arrays of the square that has piece that can be turn over in each directions from the passed square
@@ -17,41 +18,47 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
   // Get an array of squares from the passed square to the left
   eachDirectionSquaresArray.push(
     board
-      .filter((square) => {
-        return !!(
-          square.row === passedSquare.row && square.column < passedSquare.column
-        );
-      })
+      .filter(
+        square =>
+          !!(
+            square.row === passedSquare.row &&
+            square.column < passedSquare.column
+          ),
+      )
       .reverse(), // Reverse to use the passed square as a starting point
   );
 
   // Get an array of squares from the passed square to the right side
   eachDirectionSquaresArray.push(
-    board.filter((square) => {
-      return !!(
-        square.row === passedSquare.row && square.column > passedSquare.column
-      );
-    }),
+    board.filter(
+      square =>
+        !!(
+          square.row === passedSquare.row && square.column > passedSquare.column
+        ),
+    ),
   );
 
   // Get an array of squares from the passed square to the top
   eachDirectionSquaresArray.push(
     board
-      .filter((square) => {
-        return !!(
-          square.row < passedSquare.row && square.column === passedSquare.column
-        );
-      })
+      .filter(
+        square =>
+          !!(
+            square.row < passedSquare.row &&
+            square.column === passedSquare.column
+          ),
+      )
       .reverse(), // Reverse to use the passed square as a starting point
   );
 
   // Get an array of squares from the passed square to the bottom
   eachDirectionSquaresArray.push(
-    board.filter((square) => {
-      return !!(
-        square.row > passedSquare.row && square.column === passedSquare.column
-      );
-    }),
+    board.filter(
+      square =>
+        !!(
+          square.row > passedSquare.row && square.column === passedSquare.column
+        ),
+    ),
   );
 
   // Get an array of squares from the passed square to the upper left
@@ -132,16 +139,16 @@ const getUpdatableSquaresArray = (passedSquare: Square): Square[] => {
 
   const updatableSquaresArray: Square[] = [];
 
-  eachDirectionSquaresArray.forEach((squareArray) => {
+  eachDirectionSquaresArray.forEach(squareArray => {
     const emptySquareIndex: number = squareArray.findIndex(
-      (square) => square.pieceColor === PieceColor.INVISIBLE,
+      square => square.pieceColor === PieceColor.INVISIBLE,
     );
     if (emptySquareIndex !== -1) {
       squareArray.splice(emptySquareIndex, squareArray.length);
     }
 
     const endpointSquareIndex: number = squareArray.findIndex(
-      (square) => square.pieceColor === currentPlayer.pieceColor,
+      square => square.pieceColor === currentPlayer.pieceColor,
     );
     squareArray.splice(Math.max(0, endpointSquareIndex), squareArray.length);
 

@@ -1,11 +1,10 @@
+import { expect } from '@jest/globals';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Const from 'src/const';
+import { PieceColor } from '~/const';
 import Piece from '.';
 
-const { PieceColor } = Const;
-
-describe('Piece unit test', () => {
+describe('piece unit test', () => {
   it('snapshot(white)', () => {
     const component = renderer.create(<Piece pieceColor={PieceColor.WHITE} />);
     expect(component).toMatchSnapshot();
@@ -18,10 +17,8 @@ describe('Piece unit test', () => {
     const component = renderer.create(
       <Piece
         pieceColor={PieceColor.INVISIBLE}
-        onclick={() => {
-          return 'This is clickable Piece.';
-        }}
-        dataCy="clickable"
+        onclick={() => 'This is clickable Piece.'}
+        dataCy='clickable'
       />,
     );
     expect(component).toMatchSnapshot();

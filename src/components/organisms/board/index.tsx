@@ -1,11 +1,10 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import Square from 'src/components/atoms/square';
-import Piece from 'src/components/atoms/piece';
-import Const from 'src/const';
+import Piece from '~/components/atoms/piece';
+import Square from '~/components/atoms/square';
+import { ColorMap } from '~/const';
 import { useBoardSelector, useBoardFunctions, useBoardScroll } from './hook';
-
-const { Color } = Const;
+import type { Square as TSquare } from '~/types';
 
 export interface BoardProps {
   dataCy?: string;
@@ -22,24 +21,20 @@ const Board: React.FC<BoardProps> = ({ dataCy }) => {
   return (
     <Wrapper ref={wrapperRef}>
       <Container size={boardSize} data-cy={dataCy}>
-        {squareList.map((square: Square) => {
-          return (
-            <Square key={square.key} dataCy={`square-${square.key}`}>
-              {hasCanBeTurnOverPieces(square) && (
-                <Piece
-                  pieceColor={square.pieceColor}
-                  onclick={() => {
-                    placePiece(square);
-                  }}
-                  dataCy="clickable"
-                />
-              )}
-              {hasPlacedPiece(square) && (
-                <Piece pieceColor={square.pieceColor} />
-              )}
-            </Square>
-          );
-        })}
+        {squareList.map((square: TSquare) => (
+          <Square key={square.key} dataCy={`square-${square.key}`}>
+            {hasCanBeTurnOverPieces(square) && (
+              <Piece
+                pieceColor={square.pieceColor}
+                onclick={() => {
+                  placePiece(square);
+                }}
+                dataCy='clickable'
+              />
+            )}
+            {hasPlacedPiece(square) && <Piece pieceColor={square.pieceColor} />}
+          </Square>
+        ))}
       </Container>
     </Wrapper>
   );
@@ -58,9 +53,9 @@ interface ContainerProps {
 const Container = styled.div<ContainerProps>`
   display: flex;
   flex-wrap: wrap;
-  width: ${(props) => props.size}px;
-  height: ${(props) => props.size}px;
-  border: 1px solid ${Color.BD_BLACK};
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
+  border: 1px solid ${ColorMap.BD_BLACK};
 `;
 
 export default Board;
