@@ -16,7 +16,7 @@ Install the .node-version version of Node.js. Then install pnpm as a package man
 ### Install dependent modules
 
 ```bash
-pnpm
+pnpm install
 ```
 
 ### Starting the Local Server
