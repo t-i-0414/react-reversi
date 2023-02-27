@@ -1,0 +1,97 @@
+name: 'Run CI'
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+
+jobs:
+  install-dependencies:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        uses: ./.github/actions/install-dependencies
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: [install-dependencies]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        uses: ./.github/actions/install-dependencies
+
+      - name: Lint
+        run: pnpm lint
+
+  CodeQL-Analyze:
+    name: CodeQL Analyze
+    runs-on: ubuntu-latest
+    needs: [install-dependencies]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+      - uses: github/codeql-action/init@v2
+      - uses: github/codeql-action/autobuild@v2
+      - uses: github/codeql-action/analyze@v2
+
+  type-check:
+    name: Type Check
+    runs-on: ubuntu-latest
+    needs: [install-dependencies]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        uses: ./.github/actions/install-dependencies
+
+      - name: Type Check
+        run: pnpm type-check
+
+  unit-test:
+    name: Unit Test
+    runs-on: ubuntu-latest
+    needs: [install-dependencies]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        uses: ./.github/actions/install-dependencies
+
+      - name: Test
+        run: pnpm test
+
+  integration-test:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    needs: [install-dependencies]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        uses: ./.github/actions/install-dependencies
+
+      - name: Cypress.io
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          build: pnpm build
+          start: pnpm start
+          wait-on: 'http://localhost:3000'
+          spec: cypress/e2e/game.cy.ts
