@@ -28,7 +28,7 @@
     "prepare": "husky install",
     "start": "craco start",
     "storybook": "NODE_OPTIONS='--openssl-legacy-provider' start-storybook -p 6006 -s public",
-    "test": "craco test",
+    "test": "jest",
     "type-check": "pnpm tsc --noEmit",
     "typesync": "pnpm dlx typesync",
     "upgrade-interactive": "npm-check -u"
