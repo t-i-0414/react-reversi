@@ -13,7 +13,7 @@ exports[`playerInformation unit test snapshot(PieceColor Black) 1`] = `
     className="sc-dkrFOg iIhfqe"
   >
     <span
-      className="sc-bcXHqe dJWbKk"
+      className="sc-bcXHqe elvXki"
       color="#fff"
     />
     <p
@@ -34,7 +34,7 @@ exports[`playerInformation unit test snapshot(PieceColor White) 1`] = `
     className="sc-dkrFOg iIhfqe"
   >
     <span
-      className="sc-bcXHqe JfklG"
+      className="sc-bcXHqe bdqdA"
       color="#000"
     />
     <p
