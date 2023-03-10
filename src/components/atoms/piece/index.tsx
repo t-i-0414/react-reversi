@@ -45,6 +45,7 @@ const StyledPiece = styled.span<StyledPieceProps>`
     props.color === ColorMap.PC_INVISIBLE
       ? css`
           border: none;
+          border-radius: 50%;
 
           &:hover {
             cursor: pointer;
@@ -52,9 +53,8 @@ const StyledPiece = styled.span<StyledPieceProps>`
         `
       : css`
           border: 1px solid ${ColorMap.BD_BLACK};
+          border-radius: 50%;
         `}
-
-  border-radius: 50%;
 `;
 
 export default Piece;

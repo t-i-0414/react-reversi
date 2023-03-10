@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   padding: 32px 24px;
   background-color: ${ColorMap.BG_WHITE};
   border-radius: 24px;
-  box-shadow: 0 0 13px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 13px 5px rgb(0 0 0 / 15%);
 `;
 
 const Title = styled.p`

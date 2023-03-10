@@ -5,7 +5,7 @@ exports[`resetModal snapshot(Draw) 1`] = `
   className="sc-gswNZR bzPwzc"
 >
   <div
-    className="sc-dkrFOg iUmvDk"
+    className="sc-dkrFOg elQNLZ"
   >
     <p
       className="sc-hLBbgP hbXarv"
@@ -34,7 +34,7 @@ exports[`resetModal snapshot(Player 1) 1`] = `
   className="sc-gswNZR bzPwzc"
 >
   <div
-    className="sc-dkrFOg iUmvDk"
+    className="sc-dkrFOg elQNLZ"
   >
     <p
       className="sc-hLBbgP hbXarv"
@@ -63,7 +63,7 @@ exports[`resetModal snapshot(Player 2) 1`] = `
   className="sc-gswNZR bzPwzc"
 >
   <div
-    className="sc-dkrFOg iUmvDk"
+    className="sc-dkrFOg elQNLZ"
   >
     <p
       className="sc-hLBbgP hbXarv"

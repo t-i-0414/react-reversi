@@ -1,8 +1,5 @@
 module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
-  plugins: ['stylelint-order'],
-  ignoreFiles: ['**/node_modules/**'],
-  rules: {
-    'string-quotes': 'single',
-  },
+  customSyntax: 'postcss-styled-syntax',
+  ignoreFiles: ['node_modules/**/*', 'build/**/*', 'dist/**/*'],
 };

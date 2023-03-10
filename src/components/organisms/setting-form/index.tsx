@@ -105,7 +105,7 @@ const Wrapper = styled.div`
   margin: 48px auto 0;
   color: ${ColorMap.TX_BLACK};
   border-radius: 24px;
-  box-shadow: 0 0 13px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 13px 5px rgb(0 0 0 / 15%);
 `;
 
 const FormTitle = styled.p`
@@ -183,7 +183,7 @@ const StyledSelect = styled.div`
   text-align: center;
   background: ${ColorMap.BG_WHITE};
   border-radius: 1em;
-  box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 6px 1px rgb(0 0 0 / 15%);
 
   &::before {
     position: absolute;
