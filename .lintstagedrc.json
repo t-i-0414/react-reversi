@@ -1,5 +1,5 @@
 {
-  "src/**/*.{js,jsx,ts,tsx}": ["pnpm prettier --write", "pnpm lint:es:fix"],
-  "src/**/*.{css,scss,jsx,ts,tsx}": ["pnpm lint:style:fix"],
+  "src/**/*.{js,jsx,ts,tsx}": ["pnpm prettier --write", "pnpm format:es"],
+  "src/**/*.{css,scss,jsx,ts,tsx}": ["pnpm format:style"],
   "./package.json": ["sort-package-json", "sort-package-json --check"]
 }

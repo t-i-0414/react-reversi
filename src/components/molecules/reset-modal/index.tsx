@@ -27,10 +27,7 @@ export default ResetModal;
 
 const OverLay = styled.div`
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +40,7 @@ const Wrapper = styled.div`
   padding: 32px 24px;
   background-color: ${ColorMap.BG_WHITE};
   border-radius: 24px;
-  box-shadow: 0 0 13px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 13px 5px rgb(0 0 0 / 15%);
 `;
 
 const Title = styled.p`

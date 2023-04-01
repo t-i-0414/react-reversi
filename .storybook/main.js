@@ -5,11 +5,22 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/preset-create-react-app',
+    '@storybook/addon-interactions',
   ],
-  webpackFinal: async (config, { configType }) => {
-    config.resolve.modules = [path.resolve(__dirname, '..'), 'node_modules'];
+  framework: '@storybook/react',
+  core: {
+    builder: 'webpack5',
+  },
+  webpackFinal: async config => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '~': path.resolve(__dirname, '../src/'),
+      storybook: path.resolve(__dirname),
+    };
 
     return config;
+  },
+  features: {
+    interactionsDebugger: true,
   },
 };
