@@ -7,9 +7,9 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
   ],
-  framework: '@storybook/react',
-  core: {
-    builder: 'webpack5',
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
   },
   webpackFinal: async config => {
     config.resolve.alias = {
@@ -17,10 +17,12 @@ module.exports = {
       '~': path.resolve(__dirname, '../src/'),
       storybook: path.resolve(__dirname),
     };
-
     return config;
   },
   features: {
     interactionsDebugger: true,
+  },
+  docs: {
+    autodocs: true,
   },
 };

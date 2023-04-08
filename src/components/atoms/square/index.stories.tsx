@@ -1,12 +1,17 @@
-import { Story } from '@storybook/react/types-6-0';
-import React from 'react';
-import Square, { SquareProps } from '.';
+import { Meta, StoryObj } from '@storybook/react';
+import Square from '.';
 
-export default {
+const meta: Meta<typeof Square> = {
   title: 'Atoms/Square',
   component: Square,
 };
 
-const Template: Story<SquareProps> = () => <Square dataCy='dataCy' />;
+export default meta;
 
-export const Normal = Template.bind({});
+type Story = StoryObj<typeof Square>;
+
+export const Normal: Story = {
+  args: {
+    dataCy: 'dataCy',
+  },
+};

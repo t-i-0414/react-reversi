@@ -1,10 +1,10 @@
-import { Story } from '@storybook/react/types-6-0';
+import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import styled from 'styled-components';
 import { PieceColor } from '~/const';
-import Piece, { PieceProps } from '.';
+import Piece from '.';
 
-export default {
+const meta: Meta<typeof Piece> = {
   title: 'Atoms/Piece',
   component: Piece,
   argTypes: {
@@ -21,16 +21,19 @@ export default {
   },
 };
 
-const Template: Story<PieceProps> = args => (
-  <Base>
-    <Piece {...args} />
-  </Base>
-);
+export default meta;
 
-export const Normal = Template.bind({});
+type Story = StoryObj<typeof Piece>;
 
-Normal.args = {
-  pieceColor: PieceColor.WHITE,
+export const Normal: Story = {
+  args: { pieceColor: PieceColor.WHITE },
+  decorators: [
+    StoryComponent => (
+      <Base>
+        <StoryComponent />
+      </Base>
+    ),
+  ],
 };
 
 const Base = styled.div`

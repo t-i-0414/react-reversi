@@ -1,9 +1,9 @@
-import { Story } from '@storybook/react/types-6-0';
+import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import styled from 'styled-components';
-import Button, { ButtonProps } from '.';
+import Button from '.';
 
-export default {
+const meta: Meta<typeof Button> = {
   title: 'Atoms/Button',
   component: Button,
   argTypes: {
@@ -25,17 +25,21 @@ export default {
   },
 };
 
-const Template: Story<ButtonProps> = ({ type, text }) => (
-  <Base>
-    <Button type={type} text={text} />
-  </Base>
-);
+export default meta;
+type Story = StoryObj<typeof Button>;
 
-export const Normal = Template.bind({});
-
-Normal.args = {
-  text: 'Game Start',
-  type: 'submit',
+export const Normal: Story = {
+  args: {
+    text: 'Game Start',
+    type: 'submit',
+  },
+  decorators: [
+    StoryComponent => (
+      <Base>
+        <StoryComponent />
+      </Base>
+    ),
+  ],
 };
 
 const Base = styled.div`
