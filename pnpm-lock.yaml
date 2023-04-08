@@ -90,6 +90,9 @@ devDependencies:
   '@testing-library/user-event':
     specifier: ^14.4.3
     version: 14.4.3(@testing-library/dom@9.0.1)
+  '@types/babel__preset-env':
+    specifier: ^7.9.2
+    version: 7.9.2
   '@types/eslint':
     specifier: 8.37.0
     version: 8.37.0
@@ -4002,6 +4005,10 @@ packages:
     resolution: {integrity: sha512-tFkciB9j2K755yrTALxD44McOrk+gfpIpvC3sxHjRawj6PfnQxrse4Clq5y/Rq+G3mrBurMax/lG8Qn2t9mSsg==}
     dependencies:
       '@babel/types': 7.21.4
+
+  /@types/babel__preset-env@7.9.2:
+    resolution: {integrity: sha512-epEgKQiqTDZdPgYwtriYK1GVAGcyVZVvvw2UatX3+95mogKGimebApcMEWLF12uhUbNIvX284CSQEavnV/OIgw==}
+    dev: true
 
   /@types/babel__template@7.4.1:
     resolution: {integrity: sha512-azBFKemX6kMg5Io+/rdGT0dkGreboUVR0Cdm3fz9QJWpaQGJRQXl7C+6hOTCZcMll7KFyEQpgbYI2lHdsS4U7g==}
