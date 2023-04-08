@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { action } from '@storybook/addon-actions';
-import { Story } from '@storybook/react/types-6-0';
+import { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { PlayerMap, PieceColor } from '~/const';
@@ -33,13 +33,18 @@ const store = {
   dispatch: action('dispatch'),
 };
 
-export default {
+const meta: Meta<typeof ResetModal> = {
   title: 'Molecules/ResetModal',
   component: ResetModal,
-  // @ts-ignore
-  decorators: [story => <Provider store={store}>{story()}</Provider>],
 };
 
-const Template: Story = () => <ResetModal />;
+export default meta;
 
-export const Normal = Template.bind({});
+type Story = StoryObj<typeof ResetModal>;
+
+export const Normal: Story = {
+  decorators: [
+    // @ts-ignore
+    StoryComponent => <Provider store={store}>{StoryComponent()}</Provider>,
+  ],
+};

@@ -1,9 +1,8 @@
-import { Story } from '@storybook/react/types-6-0';
-import React from 'react';
+import { Meta, StoryObj } from '@storybook/react';
 import { initialState } from '~/redux/modules/game';
-import PlayerInformation, { PlayerInformationProps } from '.';
+import PlayerInformation from '.';
 
-export default {
+const meta: Meta<typeof PlayerInformation> = {
   title: 'Molecules/PlayerInformation',
   component: PlayerInformation,
   argTypes: {
@@ -19,12 +18,12 @@ export default {
   },
 };
 
-const Template: Story<PlayerInformationProps> = args => (
-  <PlayerInformation {...args} />
-);
+export default meta;
 
-export const Normal = Template.bind({});
+type Story = StoryObj<typeof PlayerInformation>;
 
-Normal.args = {
-  gamePlayer: initialState.players.black,
+export const Normal: Story = {
+  args: {
+    gamePlayer: initialState.players.black,
+  },
 };
