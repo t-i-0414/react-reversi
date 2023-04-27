@@ -1,6 +1,6 @@
 {
   "name": "react-reversi",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "homepage": "https://happy-williams-02dc8b.netlify.app/",
   "bugs": {
     "url": "https://github.com/t-i-0414/react-reversi/issues",
@@ -59,7 +59,7 @@
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.3.9",
+    "styled-components": "^5.3.10",
     "tslib": "^2.5.0",
     "typescript": "5.0.4",
     "typesync": "^0.10.0"
@@ -123,5 +123,5 @@
     "stylelint-config-standard": "^33.0.0",
     "ts-jest": "^29.1.0"
   },
-  "packageManager": "pnpm@8.1.0"
+  "packageManager": "pnpm@8.3.1"
 }
