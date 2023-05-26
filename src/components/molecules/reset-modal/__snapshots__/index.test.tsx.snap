@@ -2,23 +2,23 @@
 
 exports[`resetModal snapshot(Draw) 1`] = `
 <div
-  className="sc-gTRrQi koWzUg"
+  className="sc-gEvEer fERGhw"
 >
   <div
-    className="sc-ewnqHT kwQNus"
+    className="sc-eqUAAy hVybWQ"
   >
     <p
-      className="sc-fFGjHI gAWJpf"
+      className="sc-fqkvVR yhFdw"
     >
       Game Result
     </p>
     <p
-      className="sc-dicizt dxkcQE"
+      className="sc-dcJsrY ffvbGl"
     >
       Draw!
     </p>
     <button
-      className="sc-bgqQcB dqeAly"
+      className="sc-aXZVg mnGHp"
       data-cy="reset"
       onClick={[Function]}
       type="submit"
@@ -31,23 +31,23 @@ exports[`resetModal snapshot(Draw) 1`] = `
 
 exports[`resetModal snapshot(Player 1) 1`] = `
 <div
-  className="sc-gTRrQi koWzUg"
+  className="sc-gEvEer fERGhw"
 >
   <div
-    className="sc-ewnqHT kwQNus"
+    className="sc-eqUAAy hVybWQ"
   >
     <p
-      className="sc-fFGjHI gAWJpf"
+      className="sc-fqkvVR yhFdw"
     >
       Game Result
     </p>
     <p
-      className="sc-dicizt dxkcQE"
+      className="sc-dcJsrY ffvbGl"
     >
       Player 1 win!
     </p>
     <button
-      className="sc-bgqQcB dqeAly"
+      className="sc-aXZVg mnGHp"
       data-cy="reset"
       onClick={[Function]}
       type="submit"
@@ -60,23 +60,23 @@ exports[`resetModal snapshot(Player 1) 1`] = `
 
 exports[`resetModal snapshot(Player 2) 1`] = `
 <div
-  className="sc-gTRrQi koWzUg"
+  className="sc-gEvEer fERGhw"
 >
   <div
-    className="sc-ewnqHT kwQNus"
+    className="sc-eqUAAy hVybWQ"
   >
     <p
-      className="sc-fFGjHI gAWJpf"
+      className="sc-fqkvVR yhFdw"
     >
       Game Result
     </p>
     <p
-      className="sc-dicizt dxkcQE"
+      className="sc-dcJsrY ffvbGl"
     >
       Player 2 win!
     </p>
     <button
-      className="sc-bgqQcB dqeAly"
+      className="sc-aXZVg mnGHp"
       data-cy="reset"
       onClick={[Function]}
       type="submit"
