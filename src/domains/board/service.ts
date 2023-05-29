@@ -73,7 +73,7 @@ export const getUpperLeftSquaresByLocation = ({
     .filter(
       square =>
         !!(square.row < baseRow && square.column < baseColumn) &&
-        square.column - baseColumn === baseRow - square.row,
+        baseColumn - square.column === baseRow - square.row,
     )
     .reverse();
 
@@ -86,11 +86,13 @@ export const getUpperRightSquaresByLocation = ({
   baseColumn: Square['column'];
   baseRow: Square['row'];
 }): Square[] =>
-  board.filter(
-    square =>
-      !!(square.row < baseRow && square.column > baseColumn) &&
-      square.column - baseColumn === baseRow - square.row,
-  );
+  board
+    .filter(
+      square =>
+        !!(square.row < baseRow && square.column > baseColumn) &&
+        square.column - baseColumn === baseRow - square.row,
+    )
+    .reverse();
 
 export const getLowerLeftSquaresByLocation = ({
   board,
@@ -101,13 +103,11 @@ export const getLowerLeftSquaresByLocation = ({
   baseColumn: Square['column'];
   baseRow: Square['row'];
 }): Square[] =>
-  board
-    .filter(
-      square =>
-        !!(square.row > baseRow && square.column < baseColumn) &&
-        square.column - baseColumn === baseRow - square.row,
-    )
-    .reverse();
+  board.filter(
+    square =>
+      !!(square.row > baseRow && square.column < baseColumn) &&
+      square.column - baseColumn === baseRow - square.row,
+  );
 
 export const getLowerRightSquaresByLocation = ({
   board,
@@ -121,7 +121,7 @@ export const getLowerRightSquaresByLocation = ({
   board.filter(
     square =>
       !!(square.row > baseRow && square.column > baseColumn) &&
-      square.column - baseColumn === baseRow - square.row,
+      baseColumn - square.column === baseRow - square.row,
   );
 
 export const getEachDirectionSquaresByLocation = ({
