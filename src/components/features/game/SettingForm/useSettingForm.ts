@@ -17,31 +17,32 @@ export interface SettingFormInputs {
 const useSettingForm = (): {
   startGame: (data: SettingFormInputs) => void;
 } => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const {
-    players: { black, white },
-  } = useSelector((store: Store) => store.game);
+  // const {
+  //   players: { black, white },
+  // } = useSelector((store: Store) => store.game);
 
   const startGame = (data: SettingFormInputs) => {
-    dispatch(
-      updatePlayers({
-        black: {
-          ...black,
-          ...PlayerMap[data.blackPiecePlayer],
-        },
-        white: {
-          ...white,
-          ...PlayerMap[data.whitePiecePlayer],
-        },
-      }),
-    );
+    // dispatch(
+    //   updatePlayers({
+    //     black: {
+    //       ...black,
+    //       ...PlayerMap[data.blackPiecePlayer],
+    //     },
+    //     white: {
+    //       ...white,
+    //       ...PlayerMap[data.whitePiecePlayer],
+    //     },
+    //   }),
+    // );
 
-    dispatch(initializeBoard(data.sideSquaresCount));
+    // dispatch(initializeBoard(data.sideSquaresCount));
 
-    dispatch(updateScore());
+    // dispatch(updateScore());
 
-    dispatch(updateGameStartFlg(true));
+    // dispatch(updateGameStartFlg(true));
+    console.log('startGame');
   };
 
   return { startGame };
