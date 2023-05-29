@@ -1,14 +1,15 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import styled from 'styled-components';
-import Button from '~/components/atoms/button';
+import { Button } from '~/components/features/game/Button';
 import { ColorMap, SizeMap, PlayerMap } from '~/const';
-import useSettingForm, { SettingFormInputs } from './hooks';
+import useSettingForm, { SettingFormInputs } from './useSettingForm';
 
-interface Props {
+type Props = {
   dataCy?: string;
-}
-const SettingForm: React.FC<Props> = ({ dataCy }) => {
+};
+
+export const SettingForm: React.FC<Props> = ({ dataCy }) => {
   const { startGame } = useSettingForm();
 
   const {
@@ -95,8 +96,6 @@ const SettingForm: React.FC<Props> = ({ dataCy }) => {
     </Wrapper>
   );
 };
-
-export default SettingForm;
 
 const Wrapper = styled.div`
   box-sizing: border-box;
