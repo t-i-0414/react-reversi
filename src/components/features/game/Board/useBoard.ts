@@ -23,7 +23,10 @@ export const useBoard = () => {
       if (squaresHavingCanTurnOverPieceByEachDirection.length > 0) {
         const boardAfterTurningOverPieces = BoardDomainService.turnOverPieces({
           board,
-          targetSquares: squaresHavingCanTurnOverPieceByEachDirection,
+          targetSquares: [
+            square,
+            ...squaresHavingCanTurnOverPieceByEachDirection,
+          ],
           currentTurnPiece,
         });
 
