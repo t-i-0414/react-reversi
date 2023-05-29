@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`square unit test snapshot 1`] = `
-<div
-  className="sc-aXZVg dSSAyd"
-  data-cy="square-1"
-/>
-`;

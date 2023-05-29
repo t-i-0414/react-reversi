@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ResetModal from '~/components/molecules/reset-modal';
+import ResetModal from '~/components/molecules/reset-modal/RestModal';
 import Board from '~/components/organisms/board';
 import Score from '~/components/organisms/score';
 import SettingForm from '~/components/organisms/setting-form';
