@@ -267,3 +267,7 @@ export const updateBoardByNextTurnPiece = ({
 
   return newBoard;
 };
+
+export const createBoard = (
+  _numberOfSquaresPerSideOfBoard: number,
+): Board => [];

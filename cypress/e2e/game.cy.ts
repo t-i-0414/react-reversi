@@ -20,17 +20,17 @@ describe('The Game Page', () => {
   });
 
   it('Successfully Game Start', () => {
-    cy.get('[data-cy="input-sideSquaresCount"]').type('8');
-    cy.get('[data-cy="start"]').click();
+    cy.get('[data-cy="input-numberOfSquaresPerSideOfBoard"]').type('8');
+    cy.get('[data-cy="start-game"]').click();
     expect(cy.get('[data-cy="board"]')).to.exist;
   });
 
   it('Successfully Square click', () => {
-    cy.get('[data-cy="input-sideSquaresCount"]')
+    cy.get('[data-cy="input-numberOfSquaresPerSideOfBoard"]')
       .as('range')
       .invoke('val', 8)
       .trigger('change');
-    cy.get('[data-cy="start"]').click();
+    cy.get('[data-cy="start-game"]').click();
     for (let n = 0; n < 60; n += 1) {
       cy.get('[data-cy="clickable"]').first().click();
     }

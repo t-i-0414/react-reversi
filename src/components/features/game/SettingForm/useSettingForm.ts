@@ -1,51 +1,32 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { PlayerMap } from '~/const';
-import {
-  updateGameStartFlg,
-  initializeBoard,
-  updatePlayers,
-  updateScore,
-} from '~/redux/modules/game';
-import type { Store } from '~/types';
-
-export interface SettingFormInputs {
-  sideSquaresCount: number;
-  blackPiecePlayer: keyof Pick<typeof PlayerMap, 'PLAYER_1' | 'PLAYER_2'>;
-  whitePiecePlayer: keyof Pick<typeof PlayerMap, 'PLAYER_1' | 'PLAYER_2'>;
-}
+import { useDispatch } from 'react-redux';
+import { BoardDomainService } from '~/domains';
+import { startGame } from '~/store';
+import type { SettingFormInputs } from './SettingForm';
 
 const useSettingForm = (): {
-  startGame: (data: SettingFormInputs) => void;
+  handleStartGame: (data: SettingFormInputs) => void;
 } => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const {
-  //   players: { black, white },
-  // } = useSelector((store: Store) => store.game);
+  const handleStartGame = ({
+    numberOfSquaresPerSideOfBoard,
+    blackPiecePlayerName,
+    whitePiecePlayerName,
+    firstTurnPiece,
+  }: SettingFormInputs) => {
+    const board = BoardDomainService.createBoard(numberOfSquaresPerSideOfBoard);
 
-  const startGame = (data: SettingFormInputs) => {
-    // dispatch(
-    //   updatePlayers({
-    //     black: {
-    //       ...black,
-    //       ...PlayerMap[data.blackPiecePlayer],
-    //     },
-    //     white: {
-    //       ...white,
-    //       ...PlayerMap[data.whitePiecePlayer],
-    //     },
-    //   }),
-    // );
-
-    // dispatch(initializeBoard(data.sideSquaresCount));
-
-    // dispatch(updateScore());
-
-    // dispatch(updateGameStartFlg(true));
-    console.log('startGame');
+    dispatch(
+      startGame({
+        board,
+        blackPiecePlayer: { name: blackPiecePlayerName },
+        whitePiecePlayer: { name: whitePiecePlayerName },
+        currentTurnPiece: firstTurnPiece,
+      }),
+    );
   };
 
-  return { startGame };
+  return { handleStartGame };
 };
 
 export default useSettingForm;

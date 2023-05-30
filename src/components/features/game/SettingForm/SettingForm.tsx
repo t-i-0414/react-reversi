@@ -1,43 +1,67 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import styled from 'styled-components';
 import { Button } from '~/components/features/game/Button';
-import { ColorMap, SizeMap, PlayerMap } from '~/const';
-import useSettingForm, { SettingFormInputs } from './useSettingForm';
+import { ColorMap, SizeMap } from '~/const';
+import type { PieceColor } from '~/domains';
+import useSettingForm from './useSettingForm';
 
-type Props = {
-  dataCy?: string;
+export type SettingFormInputs = {
+  numberOfSquaresPerSideOfBoard: number;
+  blackPiecePlayerName: string;
+  whitePiecePlayerName: string;
+  firstTurnPiece: PieceColor;
 };
 
-export const SettingForm: React.FC<Props> = ({ dataCy }) => {
-  const { startGame } = useSettingForm();
+export const SettingForm: React.FC = () => {
+  const { handleStartGame } = useSettingForm();
 
   const {
-    register,
-    getValues,
-    handleSubmit,
     control,
     formState: { errors },
+    register,
+    getValues,
+    setError,
+    handleSubmit,
   } = useForm<SettingFormInputs>({
     defaultValues: {
-      sideSquaresCount: 8,
-      blackPiecePlayer: 'PLAYER_1',
-      whitePiecePlayer: 'PLAYER_2',
+      numberOfSquaresPerSideOfBoard: 8,
+      blackPiecePlayerName: 'Player1',
+      whitePiecePlayerName: 'Player2',
+      firstTurnPiece: 'black',
     },
   });
 
-  const onSubmit = handleSubmit((data: SettingFormInputs) => startGame(data));
+  useEffect(() => {
+    const blackPiecePlayerName = getValues('blackPiecePlayerName');
+    const whitePiecePlayerName = getValues('whitePiecePlayerName');
+
+    if (blackPiecePlayerName === whitePiecePlayerName) {
+      setError('blackPiecePlayerName', {
+        type: 'validate',
+      });
+      setError('whitePiecePlayerName', {
+        type: 'validate',
+      });
+    }
+  }, [getValues, setError]);
 
   return (
-    <Wrapper data-cy={dataCy}>
-      <FormTitle>Game config</FormTitle>
-      <StyledForm onSubmit={onSubmit}>
+    <Wrapper data-cy='setting-form'>
+      <FormTitle>Game Config</FormTitle>
+
+      <StyledForm
+        onSubmit={handleSubmit((data: SettingFormInputs) =>
+          handleStartGame(data),
+        )}
+      >
         <Controller
           control={control}
-          name='sideSquaresCount'
-          render={({ field: { onChange, value } }) => (
+          name='numberOfSquaresPerSideOfBoard'
+          render={({ field: { value, onChange } }) => (
             <FieldWrapper>
-              <StyledLabel>Squares on board&apos;s one side</StyledLabel>
+              <StyledLabel>Number of Squares per Side of the Board</StyledLabel>
+
               <FieldContainer>
                 <StyledRange
                   type='range'
@@ -45,54 +69,99 @@ export const SettingForm: React.FC<Props> = ({ dataCy }) => {
                   min='4'
                   max='16'
                   step='2'
-                  data-cy='input-sideSquaresCount'
+                  data-cy='input-numberOfSquaresPerSideOfBoard'
                   onChange={onChange}
                 />
-                <RangeValue>{getValues('sideSquaresCount')}</RangeValue>
+
+                <RangeValue>
+                  {getValues('numberOfSquaresPerSideOfBoard')}
+                </RangeValue>
               </FieldContainer>
             </FieldWrapper>
           )}
         />
 
         <FieldWrapper>
-          <StyledLabel>Black piece player</StyledLabel>
+          <StyledLabel>Black Piece Player Name</StyledLabel>
+
           <FieldContainer>
-            <StyledSelect>
-              <select
-                {...register('blackPiecePlayer', {
-                  validate: value => value !== getValues('whitePiecePlayer'),
-                })}
-              >
-                <option value='PLAYER_1'>{PlayerMap.PLAYER_1.name}</option>
-                <option value='PLAYER_2'>{PlayerMap.PLAYER_2.name}</option>
-              </select>
-            </StyledSelect>
+            <StyledInput
+              placeholder='Input player name'
+              {...register('blackPiecePlayerName', {
+                required: true,
+                maxLength: 10,
+                validate: value => value !== getValues('whitePiecePlayerName'),
+              })}
+            />
           </FieldContainer>
+
+          {errors.blackPiecePlayerName?.type === 'required' && (
+            <ErrorMessage role='alert'>
+              Black Piece Player Name is required
+            </ErrorMessage>
+          )}
+          {errors.blackPiecePlayerName?.type === 'maxLength' && (
+            <ErrorMessage role='alert'>
+              Piece Player Name is too long(max length is 10 characters)
+            </ErrorMessage>
+          )}
+          {errors.blackPiecePlayerName?.type === 'validate' && (
+            <ErrorMessage>
+              The same player name has been inputted. Please input a unique
+              player name.
+            </ErrorMessage>
+          )}
         </FieldWrapper>
 
         <FieldWrapper>
-          <StyledLabel>White piece player</StyledLabel>
+          <StyledLabel>White Piece Player Name</StyledLabel>
+
           <FieldContainer>
-            <StyledSelect>
-              <select
-                {...register('whitePiecePlayer', {
-                  validate: value => value !== getValues('blackPiecePlayer'),
-                })}
-              >
-                <option value='PLAYER_1'>{PlayerMap.PLAYER_1.name}</option>
-                <option value='PLAYER_2'>{PlayerMap.PLAYER_2.name}</option>
+            <StyledInput
+              placeholder='Input player name'
+              {...register('whitePiecePlayerName', {
+                required: true,
+                maxLength: 10,
+                validate: value => value !== getValues('blackPiecePlayerName'),
+              })}
+            />
+          </FieldContainer>
+
+          {errors.whitePiecePlayerName?.type === 'required' && (
+            <ErrorMessage role='alert'>
+              White Piece Player Name is required
+            </ErrorMessage>
+          )}
+          {errors.whitePiecePlayerName?.type === 'maxLength' && (
+            <ErrorMessage role='alert'>
+              Player Name is too long(max length is 10 characters)
+            </ErrorMessage>
+          )}
+          {errors.whitePiecePlayerName?.type === 'validate' && (
+            <ErrorMessage>
+              The same player name has been inputted. Please input a unique
+              player name.
+            </ErrorMessage>
+          )}
+        </FieldWrapper>
+
+        <FieldWrapper>
+          <StyledLabel>First Turn Piece</StyledLabel>
+
+          <FieldContainer>
+            <SelectInner>
+              <select {...register('firstTurnPiece')}>
+                <option value='black'>black</option>
+                <option value='white'>white</option>
               </select>
-            </StyledSelect>
+            </SelectInner>
           </FieldContainer>
         </FieldWrapper>
 
-        <Button text='Game Start' type='submit' dataCy='start' />
+        <ButtonWrapper>
+          <Button text='Game Start' type='submit' dataCy='start-game' />
+        </ButtonWrapper>
       </StyledForm>
-      {(errors.blackPiecePlayer || errors.whitePiecePlayer) && (
-        <ErrorMessage>
-          The same player has been selected. Please select a unique player.
-        </ErrorMessage>
-      )}
     </Wrapper>
   );
 };
@@ -174,9 +243,18 @@ const RangeValue = styled.span`
   font-size: ${SizeMap.FS_20};
 `;
 
-const StyledSelect = styled.div`
+const StyledInput = styled.input`
+  padding: 6px 12px;
+  font-size: ${SizeMap.FS_16};
+  color: ${ColorMap.TX_BLACK};
+  border: 1px solid ${ColorMap.BD_LIGHT_GRAY};
+  border-radius: 10px;
+`;
+
+const SelectInner = styled.div`
   position: relative;
-  width: 90%;
+  width: 80px;
+  padding: 0 4px;
   margin: 0;
   overflow: hidden;
   text-align: center;
@@ -201,6 +279,7 @@ const StyledSelect = styled.div`
   select {
     width: 100%;
     padding: 8px 1em 8px 8px;
+    font-size: ${SizeMap.FS_16};
     color: ${ColorMap.TX_BLACK};
     text-overflow: ellipsis;
     cursor: pointer;
@@ -218,5 +297,11 @@ const StyledSelect = styled.div`
 `;
 
 const ErrorMessage = styled.p`
+  margin: 12px 0 0;
   color: ${ColorMap.TX_RED};
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;
