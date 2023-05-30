@@ -1,4 +1,4 @@
-import type { PieceColor } from '~/domains/piece/interface';
+import type { PieceColor, Piece } from '~/domains/piece/interface';
 import type { Square } from '~/domains/square/interface';
 import type { Board } from './interface';
 
@@ -268,6 +268,74 @@ export const updateBoardByNextTurnPiece = ({
   return newBoard;
 };
 
-export const createBoard = (
-  _numberOfSquaresPerSideOfBoard: number,
-): Board => [];
+export const createBoard = ({
+  numberOfSquaresPerSideOfBoard,
+  firstTurnPiece,
+}: {
+  numberOfSquaresPerSideOfBoard: number;
+  firstTurnPiece: PieceColor;
+}): Board => {
+  const squaresCountAmount: number = numberOfSquaresPerSideOfBoard ** 2;
+  const stagingBoard: Board = [];
+
+  for (
+    let squareCount = 0;
+    squareCount < squaresCountAmount;
+    squareCount += 1
+  ) {
+    const column = squareCount % numberOfSquaresPerSideOfBoard;
+    const row = Math.floor(squareCount / numberOfSquaresPerSideOfBoard);
+    let piece: Piece | null = null;
+
+    /**
+     * place four stones when the board is initially rendered
+     */
+    // upprer left square
+    if (
+      column === numberOfSquaresPerSideOfBoard / 2 &&
+      row === numberOfSquaresPerSideOfBoard / 2 - 1
+    ) {
+      piece = 'white';
+    }
+
+    // upper right square
+    if (
+      column === numberOfSquaresPerSideOfBoard / 2 - 1 &&
+      row === numberOfSquaresPerSideOfBoard / 2 - 1
+    ) {
+      piece = 'black';
+    }
+
+    // lower left square
+    if (
+      column === numberOfSquaresPerSideOfBoard / 2 &&
+      row === numberOfSquaresPerSideOfBoard / 2
+    ) {
+      piece = 'black';
+    }
+
+    // lower right square
+    if (
+      column === numberOfSquaresPerSideOfBoard / 2 - 1 &&
+      row === numberOfSquaresPerSideOfBoard / 2
+    ) {
+      piece = 'white';
+    }
+
+    piece = null;
+
+    stagingBoard.push({
+      key: `${column}-${row}`,
+      column,
+      row,
+      piece,
+    });
+  }
+
+  const board = updateBoardByNextTurnPiece({
+    board: stagingBoard,
+    nextTurnPiece: firstTurnPiece,
+  });
+
+  return board;
+};

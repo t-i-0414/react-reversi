@@ -14,7 +14,10 @@ const useSettingForm = (): {
     whitePiecePlayerName,
     firstTurnPiece,
   }: SettingFormInputs) => {
-    const board = BoardDomainService.createBoard(numberOfSquaresPerSideOfBoard);
+    const board = BoardDomainService.createBoard({
+      numberOfSquaresPerSideOfBoard,
+      firstTurnPiece,
+    });
 
     dispatch(
       startGame({
