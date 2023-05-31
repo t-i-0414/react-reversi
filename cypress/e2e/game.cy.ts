@@ -8,7 +8,7 @@ describe('The Game Page', () => {
   });
 
   it('Game App exists', () => {
-    expect(cy.get('[data-cy="game"]')).to.exist;
+    expect(cy.get('[data-cy="setting-form"]')).to.exist;
   });
 
   it('Game App Title exists', () => {
