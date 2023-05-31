@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { GameDomainService } from '~/domains';
 import type { PieceColor, PlayerInformation } from '~/domains';
@@ -9,7 +10,7 @@ export const useScore = (): {
   whitePiecePlayerInformation: PlayerInformation;
 } => {
   const game = useSelector((store: RootState) => store.game);
-  const score = GameDomainService.getScore(game);
+  const score = useMemo(() => GameDomainService.getScore(game), [game]);
 
   return score;
 };

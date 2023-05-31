@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { Piece } from '~/components/features/game/Piece';
 import { SizeMap } from '~/constants';
-import type { PlayerInformation as TPlayerInformation } from '~/domains';
+import type {
+  PieceColor,
+  PlayerInformation as TPlayerInformation,
+} from '~/domains';
 
 export type Props = TPlayerInformation & {
   nameSide: 'left' | 'right';
@@ -16,24 +19,38 @@ export const PlayerInformation: React.FC<Props> = ({
 }) => (
   <Wrapper>
     {nameSide === 'left' && (
-      <>
-        <PlayerName>{name}</PlayerName>
-        <Piece pieceColor={pieceColor} size='48px' />
-      </>
+      <Player name={name} pieceColor={pieceColor} side={nameSide} />
     )}
 
     <Score>{score}</Score>
 
     {nameSide === 'right' && (
+      <Player name={name} pieceColor={pieceColor} side={nameSide} />
+    )}
+  </Wrapper>
+);
+
+const Player: React.FC<{
+  name: string;
+  pieceColor: PieceColor;
+  side: 'left' | 'right';
+}> = memo(({ name, pieceColor, side }) => (
+  <>
+    {side === 'left' && (
+      <>
+        <PlayerName>{name}</PlayerName>
+        <Piece pieceColor={pieceColor} size='48px' />
+      </>
+    )}
+    {side === 'right' && (
       <>
         <Piece pieceColor={pieceColor} size='48px' />
         <PlayerName>{name}</PlayerName>
       </>
     )}
-  </Wrapper>
-);
-
-export default PlayerInformation;
+  </>
+));
+Player.displayName = 'Player';
 
 const Wrapper = styled.div`
   display: flex;

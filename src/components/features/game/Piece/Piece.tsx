@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled, { css } from 'styled-components';
 import { ColorMap } from '~/constants';
 import type { Piece as TPiece } from '~/domains';
@@ -10,33 +10,31 @@ export interface Props {
   dataCy?: string;
 }
 
-export const Piece: React.FC<Props> = ({
-  pieceColor,
-  size = '64px',
-  onclick,
-  dataCy,
-}) => {
-  switch (pieceColor) {
-    case 'white':
-      return <StyledPiece color={ColorMap.PC_WHITE} size={size} />;
-    case 'black':
-      return <StyledPiece color={ColorMap.PC_BLACK} size={size} />;
-    case 'canTurnOver':
-      return (
-        <StyledPiece
-          color={ColorMap.PC_INVISIBLE}
-          size={size}
-          onClick={onclick}
-          data-cy={dataCy}
-        />
-      );
-    default: {
-      const exhaustiveCheck: never = pieceColor;
+export const Piece: React.FC<Props> = memo(
+  ({ pieceColor, size = '64px', onclick, dataCy }) => {
+    switch (pieceColor) {
+      case 'white':
+        return <StyledPiece color={ColorMap.PC_WHITE} size={size} />;
+      case 'black':
+        return <StyledPiece color={ColorMap.PC_BLACK} size={size} />;
+      case 'canTurnOver':
+        return (
+          <StyledPiece
+            color={ColorMap.PC_INVISIBLE}
+            size={size}
+            onClick={onclick}
+            data-cy={dataCy}
+          />
+        );
+      default: {
+        const exhaustiveCheck: never = pieceColor;
 
-      return exhaustiveCheck;
+        return exhaustiveCheck;
+      }
     }
-  }
-};
+  },
+);
+Piece.displayName = 'Piece';
 
 type StyledPieceProps = {
   color: (typeof ColorMap)[keyof Pick<
