@@ -10,27 +10,26 @@ const useSettingForm = (): {
   const dispatch = useDispatch();
 
   const handleStartGame = useCallback(
-    () =>
-      ({
+    ({
+      numberOfSquaresPerSideOfBoard,
+      blackPiecePlayerName,
+      whitePiecePlayerName,
+      firstTurnPiece,
+    }: SettingFormInputs) => {
+      const board = BoardDomainService.createBoard({
         numberOfSquaresPerSideOfBoard,
-        blackPiecePlayerName,
-        whitePiecePlayerName,
         firstTurnPiece,
-      }: SettingFormInputs) => {
-        const board = BoardDomainService.createBoard({
-          numberOfSquaresPerSideOfBoard,
-          firstTurnPiece,
-        });
+      });
 
-        dispatch(
-          startGame({
-            board,
-            blackPiecePlayer: { name: blackPiecePlayerName },
-            whitePiecePlayer: { name: whitePiecePlayerName },
-            currentTurnPiece: firstTurnPiece,
-          }),
-        );
-      },
+      dispatch(
+        startGame({
+          board,
+          blackPiecePlayer: { name: blackPiecePlayerName },
+          whitePiecePlayer: { name: whitePiecePlayerName },
+          currentTurnPiece: firstTurnPiece,
+        }),
+      );
+    },
     [dispatch],
   );
 

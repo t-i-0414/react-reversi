@@ -51,9 +51,9 @@ export const SettingForm: React.FC = () => {
       <FormTitle>Game Config</FormTitle>
 
       <StyledForm
-        onSubmit={handleSubmit((data: SettingFormInputs) =>
-          handleStartGame(data),
-        )}
+        onSubmit={handleSubmit((data: SettingFormInputs) => {
+          handleStartGame(data);
+        })}
       >
         <Controller
           control={control}
