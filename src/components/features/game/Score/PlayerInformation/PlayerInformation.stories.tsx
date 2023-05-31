@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import PlayerInformation from './PlayerInformation';
+import { PlayerInformation } from './PlayerInformation';
 
 const meta: Meta<typeof PlayerInformation> = {
   title: 'features/game/Score/PlayerInformation',
