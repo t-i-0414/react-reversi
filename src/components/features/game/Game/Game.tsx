@@ -7,10 +7,7 @@ import { SettingForm } from '~/components/features/game/SettingForm';
 import { ColorMap } from '~/constants';
 import { useGame } from './useGame';
 
-export interface GameProps {
-  dataCy?: string;
-}
-const Game: React.FC<GameProps> = ({ dataCy }) => {
+export const Game: React.FC = () => {
   const { isGameStarted, isGameFinished } = useGame();
 
   return (
@@ -19,15 +16,15 @@ const Game: React.FC<GameProps> = ({ dataCy }) => {
 
       {isGameStarted && (
         <>
-          <GameWrapper data-cy={dataCy}>
-            <Board dataCy='board' />
+          <GameWrapper data-cy='game'>
+            <Board />
             <Score />
           </GameWrapper>
           {isGameFinished && <ResetModal />}
         </>
       )}
 
-      {!isGameStarted && <SettingForm dataCy={dataCy} />}
+      {!isGameStarted && <SettingForm />}
     </>
   );
 };
@@ -42,11 +39,8 @@ const GameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 1026px;
   height: 760px;
-  margin: 0 auto;
+  margin: 32px auto 0;
   color: ${ColorMap.TX_BLACK};
 `;
-
-export default Game;

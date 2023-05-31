@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScoreView } from './ScoreView';
-import useScore from './useScore';
+import { useScore } from './useScore';
 
 export const ScoreContainer: React.FC = () => {
   const {

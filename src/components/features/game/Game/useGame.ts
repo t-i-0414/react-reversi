@@ -1,23 +1,17 @@
 import { useSelector } from 'react-redux';
+import { GameDomainService } from '~/domains';
+import { RootState } from '~/store';
 
 export const useGame = (): {
   isGameStarted: boolean;
   isGameFinished: boolean;
 } => {
-  const { isGameStarted, board } = useSelector((store: Store) => store.game);
+  const game = useSelector((store: RootState) => store.game);
 
-  const updatableSquaresArrays = board.filter(
-    square => getUpdatableSquaresArray(square).length > 0,
-  );
-
-  const canPlacePieces = !!updatableSquaresArrays.find(
-    square => square.pieceColor === PieceColor.INVISIBLE,
-  );
-
-  const isGameFinished = isGameStarted && !canPlacePieces;
+  const isGameFinished = GameDomainService.isGameFinished(game);
 
   return {
-    isGameStarted,
+    isGameStarted: game.isStarted,
     isGameFinished,
   };
 };

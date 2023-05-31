@@ -52,3 +52,5 @@ export const getScore = (game: Game): GameScore => {
 
 export const getNextTurnPiece = (currentTurnPiece: PieceColor): PieceColor =>
   currentTurnPiece === 'black' ? 'white' : 'black';
+
+export const isGameFinished = (_game: Game): boolean => false;
