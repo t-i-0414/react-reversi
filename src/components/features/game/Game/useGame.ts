@@ -1,13 +1,6 @@
 import { useSelector } from 'react-redux';
-import { PieceColor } from '~/constants';
-import Utils from '~/utils';
-import type { Store } from '~/types';
 
-const {
-  Game: { getUpdatableSquaresArray },
-} = Utils;
-
-const useGame = (): {
+export const useGame = (): {
   isGameStarted: boolean;
   isGameFinished: boolean;
 } => {
@@ -28,4 +21,3 @@ const useGame = (): {
     isGameFinished,
   };
 };
-export default useGame;

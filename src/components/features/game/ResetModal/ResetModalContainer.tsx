@@ -6,7 +6,7 @@ export const ResetModalContainer: React.FC = () => {
   const { handleResetGame, gameResult } = useResetModal();
   const resultText = gameResult.isDraw
     ? 'Draw!'
-    : `${gameResult.winner.player.name} Win!`;
+    : `${gameResult.winner.name} Win!`;
 
   return (
     <ResetModalView resultText={resultText} onResetGame={handleResetGame} />
