@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { SizeMap, ColorMap } from '~/constants';
 
@@ -7,9 +7,10 @@ export interface SquareProps {
   children?: React.ReactNode;
 }
 
-export const Square: React.FC<SquareProps> = ({ children, dataCy }) => (
+export const Square: React.FC<SquareProps> = memo(({ children, dataCy }) => (
   <Wrapper data-cy={dataCy}>{children}</Wrapper>
-);
+));
+Square.displayName = 'Square';
 
 const Wrapper = styled.div`
   box-sizing: border-box;

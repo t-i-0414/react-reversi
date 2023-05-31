@@ -1,27 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Board } from '~/components/features/game/Board';
-import { ResetModal } from '~/components/features/game/ResetModal';
 import { Score } from '~/components/features/game/Score';
 import { SettingForm } from '~/components/features/game/SettingForm';
 import { ColorMap } from '~/constants';
 import { useGame } from './useGame';
 
 export const Game: React.FC = () => {
-  const { isGameStarted, isGameFinished } = useGame();
+  const { isGameStarted } = useGame();
 
   return (
     <>
       <StyledHeading>React Reversi</StyledHeading>
 
       {isGameStarted && (
-        <>
-          <GameWrapper>
-            <Board />
-            <Score />
-          </GameWrapper>
-          {isGameFinished && <ResetModal />}
-        </>
+        <GameWrapper>
+          <Board />
+          <Score />
+        </GameWrapper>
       )}
 
       {!isGameStarted && <SettingForm />}
