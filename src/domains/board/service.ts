@@ -1,4 +1,4 @@
-import type { PieceColor, Piece } from '~/domains/piece/interface';
+import type { PieceColor } from '~/domains/piece/interface';
 import type { Square } from '~/domains/square/interface';
 import type { Board } from './interface';
 
@@ -275,65 +275,79 @@ export const createBoard = ({
   numberOfSquaresPerSideOfBoard: number;
   firstTurnPiece: PieceColor;
 }): Board => {
-  const squaresCountAmount: number = numberOfSquaresPerSideOfBoard ** 2;
-  const stagingBoard: Board = [];
+  const emptyBoard: Board = Array(numberOfSquaresPerSideOfBoard ** 2)
+    .fill(null)
+    .map((_, key) => {
+      const column = key % numberOfSquaresPerSideOfBoard;
+      const row = Math.floor(key / numberOfSquaresPerSideOfBoard);
+      const square: Square = {
+        key: `${column}-${row}`,
+        column,
+        row,
+        piece: null,
+      };
 
-  for (
-    let squareCount = 0;
-    squareCount < squaresCountAmount;
-    squareCount += 1
-  ) {
-    const column = squareCount % numberOfSquaresPerSideOfBoard;
-    const row = Math.floor(squareCount / numberOfSquaresPerSideOfBoard);
-    let piece: Piece | null = null;
+      return square;
+    });
 
-    /**
-     * place four stones when the board is initially rendered
-     */
-    // upprer left square
+  const initialPiecePlacedBoard = emptyBoard.map(square => {
+    // upper left square
     if (
-      column === numberOfSquaresPerSideOfBoard / 2 &&
-      row === numberOfSquaresPerSideOfBoard / 2 - 1
+      square.column === numberOfSquaresPerSideOfBoard / 2 - 1 &&
+      square.row === numberOfSquaresPerSideOfBoard / 2 - 1
     ) {
-      piece = 'white';
+      const nextSquare: Square = {
+        ...square,
+        piece: 'black',
+      };
+
+      return nextSquare;
     }
 
     // upper right square
     if (
-      column === numberOfSquaresPerSideOfBoard / 2 - 1 &&
-      row === numberOfSquaresPerSideOfBoard / 2 - 1
+      square.column === numberOfSquaresPerSideOfBoard / 2 &&
+      square.row === numberOfSquaresPerSideOfBoard / 2 - 1
     ) {
-      piece = 'black';
+      const nextSquare: Square = {
+        ...square,
+        piece: 'white',
+      };
+
+      return nextSquare;
     }
 
     // lower left square
     if (
-      column === numberOfSquaresPerSideOfBoard / 2 &&
-      row === numberOfSquaresPerSideOfBoard / 2
+      square.column === numberOfSquaresPerSideOfBoard / 2 - 1 &&
+      square.row === numberOfSquaresPerSideOfBoard / 2
     ) {
-      piece = 'black';
+      const nextSquare: Square = {
+        ...square,
+        piece: 'white',
+      };
+
+      return nextSquare;
     }
 
     // lower right square
     if (
-      column === numberOfSquaresPerSideOfBoard / 2 - 1 &&
-      row === numberOfSquaresPerSideOfBoard / 2
+      square.column === numberOfSquaresPerSideOfBoard / 2 &&
+      square.row === numberOfSquaresPerSideOfBoard / 2
     ) {
-      piece = 'white';
+      const nextSquare: Square = {
+        ...square,
+        piece: 'black',
+      };
+
+      return nextSquare;
     }
 
-    piece = null;
-
-    stagingBoard.push({
-      key: `${column}-${row}`,
-      column,
-      row,
-      piece,
-    });
-  }
+    return square;
+  });
 
   const board = updateBoardByNextTurnPiece({
-    board: stagingBoard,
+    board: initialPiecePlacedBoard,
     nextTurnPiece: firstTurnPiece,
   });
 

@@ -18,6 +18,7 @@ import {
   getSquaresHavingCanTurnOverPieceByEachDirection,
   turnOverPieces,
   updateBoardByNextTurnPiece,
+  createBoard,
 } from './service';
 
 describe('boardDomainService', () => {
@@ -314,6 +315,19 @@ describe('boardDomainService', () => {
         board: BoardMock,
         nextTurnPiece: 'white',
       });
+
+      expect(result).toStrictEqual(expected);
+    });
+  });
+
+  describe('createBoard', () => {
+    it('should create board', () => {
+      const result = createBoard({
+        numberOfSquaresPerSideOfBoard: 4,
+        firstTurnPiece: 'black',
+      });
+
+      const expected: Board = BoardMock;
 
       expect(result).toStrictEqual(expected);
     });
