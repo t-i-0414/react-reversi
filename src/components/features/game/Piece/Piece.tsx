@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { ColorMap } from '~/const';
+import { ColorMap } from '~/constants';
 import type { Piece as TPiece } from '~/domains';
 
 export interface Props {

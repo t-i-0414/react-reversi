@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { PlayerMap, PieceColor } from '~/const';
+import { PlayerMap, PieceColor } from '~/constants';
 import type { Square, Board, Store, MapValues } from '~/types';
 
 /**

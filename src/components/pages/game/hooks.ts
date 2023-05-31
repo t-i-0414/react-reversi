@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { PieceColor } from '~/const';
+import { PieceColor } from '~/constants';
 import Utils from '~/utils';
 import type { Store } from '~/types';
 

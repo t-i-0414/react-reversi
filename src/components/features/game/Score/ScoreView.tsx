@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { ColorMap, SizeMap } from '~/const';
+import { ColorMap, SizeMap } from '~/constants';
 import { PieceColor, PlayerInformation as TPlayerInformation } from '~/domains';
 import { PlayerInformation } from './PlayerInformation';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Piece } from '~/components/features/game/Piece';
-import { SizeMap } from '~/const';
+import { SizeMap } from '~/constants';
 import type { PlayerInformation as TPlayerInformation } from '~/domains';
 
 export type Props = TPlayerInformation & {

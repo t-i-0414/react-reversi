@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SizeMap, ColorMap } from '~/const';
+import { SizeMap, ColorMap } from '~/constants';
 
 export interface SquareProps {
   dataCy?: string;

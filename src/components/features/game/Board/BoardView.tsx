@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Piece } from '~/components/features/game/Piece';
-import { ColorMap, SizeMap } from '~/const';
+import { ColorMap, SizeMap } from '~/constants';
 import { BoardDomainService } from '~/domains';
 import type { Board, Square as TSquare } from '~/domains';
 import { Square } from './Square';

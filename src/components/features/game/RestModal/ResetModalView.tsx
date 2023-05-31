@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from '~/components/features/game/Button';
-import { ColorMap, SizeMap } from '~/const';
+import { ColorMap, SizeMap } from '~/constants';
 
 type Props = {
   resultText: string;

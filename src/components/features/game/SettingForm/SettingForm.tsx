@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import styled from 'styled-components';
 import { Button } from '~/components/features/game/Button';
-import { ColorMap, SizeMap } from '~/const';
+import { ColorMap, SizeMap } from '~/constants';
 import type { PieceColor } from '~/domains';
 import useSettingForm from './useSettingForm';
 

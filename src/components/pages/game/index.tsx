@@ -4,7 +4,7 @@ import ResetModal from '~/components/molecules/reset-modal/RestModal';
 import Board from '~/components/organisms/board';
 import Score from '~/components/organisms/score';
 import SettingForm from '~/components/organisms/setting-form';
-import { ColorMap } from '~/const';
+import { ColorMap } from '~/constants';
 import useGame from './hooks';
 
 export interface GameProps {

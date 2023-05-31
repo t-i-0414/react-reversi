@@ -1,4 +1,4 @@
-import { PieceColor } from '~/const';
+import { PieceColor } from '~/constants';
 import { store } from '~/redux';
 import type { Square, Store } from '~/types';
 
