@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { BoardDomainService } from '~/domains';
 import { startGame } from '~/store';
@@ -8,26 +9,30 @@ const useSettingForm = (): {
 } => {
   const dispatch = useDispatch();
 
-  const handleStartGame = ({
-    numberOfSquaresPerSideOfBoard,
-    blackPiecePlayerName,
-    whitePiecePlayerName,
-    firstTurnPiece,
-  }: SettingFormInputs) => {
-    const board = BoardDomainService.createBoard({
-      numberOfSquaresPerSideOfBoard,
-      firstTurnPiece,
-    });
+  const handleStartGame = useCallback(
+    () =>
+      ({
+        numberOfSquaresPerSideOfBoard,
+        blackPiecePlayerName,
+        whitePiecePlayerName,
+        firstTurnPiece,
+      }: SettingFormInputs) => {
+        const board = BoardDomainService.createBoard({
+          numberOfSquaresPerSideOfBoard,
+          firstTurnPiece,
+        });
 
-    dispatch(
-      startGame({
-        board,
-        blackPiecePlayer: { name: blackPiecePlayerName },
-        whitePiecePlayer: { name: whitePiecePlayerName },
-        currentTurnPiece: firstTurnPiece,
-      }),
-    );
-  };
+        dispatch(
+          startGame({
+            board,
+            blackPiecePlayer: { name: blackPiecePlayerName },
+            whitePiecePlayer: { name: whitePiecePlayerName },
+            currentTurnPiece: firstTurnPiece,
+          }),
+        );
+      },
+    [dispatch],
+  );
 
   return { handleStartGame };
 };
