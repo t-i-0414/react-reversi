@@ -53,4 +53,20 @@ export const getScore = (game: Game): GameScore => {
 export const getNextTurnPiece = (currentTurnPiece: PieceColor): PieceColor =>
   currentTurnPiece === 'black' ? 'white' : 'black';
 
-export const isGameFinished = (_game: Game): boolean => false;
+export const isGameFinished = (game: Game): boolean => {
+  const { board } = game;
+
+  const blackPieceCount = getPieceCountByColor(board, 'black');
+  if (blackPieceCount === 0) {
+    return true;
+  }
+
+  const whitePieceCount = getPieceCountByColor(board, 'white');
+  if (whitePieceCount === 0) {
+    return true;
+  }
+
+  const totalPieceCount = board.length;
+
+  return totalPieceCount === blackPieceCount + whitePieceCount;
+};

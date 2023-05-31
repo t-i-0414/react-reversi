@@ -1,17 +1,14 @@
 import { useSelector } from 'react-redux';
-import { GameDomainService } from '~/domains';
 import { RootState } from '~/store';
 
 export const useGame = (): {
   isGameStarted: boolean;
   isGameFinished: boolean;
 } => {
-  const game = useSelector((store: RootState) => store.game);
-
-  const isGameFinished = GameDomainService.isGameFinished(game);
+  const isGameStarted = useSelector((store: RootState) => store.game.isStarted);
 
   return {
-    isGameStarted: game.isStarted,
-    isGameFinished,
+    isGameStarted,
+    isGameFinished: false,
   };
 };

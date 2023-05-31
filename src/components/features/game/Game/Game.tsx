@@ -16,7 +16,7 @@ export const Game: React.FC = () => {
 
       {isGameStarted && (
         <>
-          <GameWrapper data-cy='game'>
+          <GameWrapper>
             <Board />
             <Score />
           </GameWrapper>
@@ -39,8 +39,10 @@ const GameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 1026px;
-  height: 760px;
+  width: 100%;
+  max-width: 1026px;
+  height: 100%;
+  max-height: 760px;
   margin: 32px auto 0;
   color: ${ColorMap.TX_BLACK};
 `;
