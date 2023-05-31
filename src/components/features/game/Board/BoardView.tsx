@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Piece } from '~/components/features/game/Piece';
 import { ColorMap, SizeMap } from '~/constants';
 import { BoardDomainService } from '~/domains';
 import type { Board, Square as TSquare } from '~/domains';
@@ -20,39 +19,20 @@ export const BoardView: React.FC<Props> = ({ board, onPlacePiece }) => {
     <Wrapper>
       <Container size={boardSize} data-cy='board'>
         {board.map(square => {
-          if (square.piece === 'canTurnOver') {
-            return (
-              <Square
-                key={`square-${square.key}`}
-                dataCy={`square-${square.key}`}
-              >
-                <Piece
-                  size='52px'
-                  pieceColor={square.piece}
-                  onclick={() => {
-                    onPlacePiece(square);
-                  }}
-                  dataCy='clickable'
-                />
-              </Square>
-            );
-          }
+          const hasCanTurnOverPiece = square.piece === 'canTurnOver';
 
-          if (square.piece === 'black' || square.piece === 'white') {
-            return (
-              <Square
-                key={`square-${square.key}`}
-                dataCy={`square-${square.key}`}
-              >
-                <Piece size='52px' pieceColor={square.piece} />
-              </Square>
-            );
-          }
-
-          return (
+          return hasCanTurnOverPiece ? (
             <Square
               key={`square-${square.key}`}
               dataCy={`square-${square.key}`}
+              piece={square.piece}
+              onclick={() => onPlacePiece(square)}
+            />
+          ) : (
+            <Square
+              key={`square-${square.key}`}
+              dataCy={`square-${square.key}`}
+              piece={square.piece}
             />
           );
         })}

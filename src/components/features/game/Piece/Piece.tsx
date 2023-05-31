@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import isEqual from 'react-fast-compare';
 import styled, { css } from 'styled-components';
 import { ColorMap } from '~/constants';
 import type { Piece as TPiece } from '~/domains';
@@ -33,6 +34,7 @@ export const Piece: React.FC<Props> = memo(
       }
     }
   },
+  isEqual,
 );
 Piece.displayName = 'Piece';
 

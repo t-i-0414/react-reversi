@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import isEqual from 'react-fast-compare';
 import styled from 'styled-components';
 import { Piece } from '~/components/features/game/Piece';
 import { SizeMap } from '~/constants';
@@ -34,22 +35,25 @@ const Player: React.FC<{
   name: string;
   pieceColor: PieceColor;
   side: 'left' | 'right';
-}> = memo(({ name, pieceColor, side }) => (
-  <>
-    {side === 'left' && (
-      <>
-        <PlayerName>{name}</PlayerName>
-        <Piece pieceColor={pieceColor} size='48px' />
-      </>
-    )}
-    {side === 'right' && (
-      <>
-        <Piece pieceColor={pieceColor} size='48px' />
-        <PlayerName>{name}</PlayerName>
-      </>
-    )}
-  </>
-));
+}> = memo(
+  ({ name, pieceColor, side }) => (
+    <>
+      {side === 'left' && (
+        <>
+          <PlayerName>{name}</PlayerName>
+          <Piece pieceColor={pieceColor} size='48px' />
+        </>
+      )}
+      {side === 'right' && (
+        <>
+          <Piece pieceColor={pieceColor} size='48px' />
+          <PlayerName>{name}</PlayerName>
+        </>
+      )}
+    </>
+  ),
+  isEqual,
+);
 Player.displayName = 'Player';
 
 const Wrapper = styled.div`

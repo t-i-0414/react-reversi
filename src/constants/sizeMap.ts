@@ -1,6 +1,6 @@
 export const SizeMap = {
-  // one side's size of a square(px)
   SQUARE_SIZE: 64,
+  PIECE_SIZE: 52,
 
   // text font size
   FS_16: '16px',
