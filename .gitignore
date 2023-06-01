@@ -27,3 +27,6 @@ yarn-error.log*
 .eslintcache
 tsconfig.tsbuildinfo
 cypress/videos
+
+storybook-static
+```

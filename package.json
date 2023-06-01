@@ -26,9 +26,13 @@
     "lint:sort-package-json": "sort-package-json --check \"package.json\"",
     "lint:style": "stylelint 'src/**/*.{css,scss,jsx,ts,tsx}'",
     "prepare": "husky install",
+    "run-ci:test-storybook": "run-p storybook:ci test-storybook:ci",
     "start": "craco start",
     "storybook": "storybook dev -p 6006",
+    "storybook:ci": "pm2 start 'storybook dev -p 6006 --ci --no-open' --name storybook:ci",
     "test": "jest",
+    "test-storybook": "test-storybook",
+    "test-storybook:ci": "pnpm dlx wait-on tcp:6006 && yarn test-storybook",
     "type-check": "pnpm tsc --noEmit",
     "typesync": "pnpm dlx typesync",
     "upgrade-interactive": "npm-check -u"
@@ -50,11 +54,14 @@
   },
   "dependencies": {
     "@craco/craco": "^7.1.0",
+    "@reduxjs/toolkit": "^1.9.5",
+    "immer": "^9.0.21",
     "npm-run-all": "^4.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-fast-compare": "^3.2.2",
     "react-hook-form": "^7.43.9",
-    "react-redux": "^7.2.2",
+    "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
@@ -73,9 +80,12 @@
     "@storybook/addon-essentials": "^7.0.18",
     "@storybook/addon-interactions": "^7.0.18",
     "@storybook/addon-links": "^7.0.18",
+    "@storybook/jest": "^0.1.0",
     "@storybook/node-logger": "^7.0.18",
     "@storybook/react": "^7.0.18",
     "@storybook/react-webpack5": "^7.0.18",
+    "@storybook/test-runner": "^0.10.0",
+    "@storybook/testing-library": "^0.1.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
@@ -112,6 +122,7 @@
     "eslint-plugin-testing-library": "^5.11.0",
     "husky": "^8.0.3",
     "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
     "lint-staged": "^13.2.1",
     "npm-check": "^6.0.1",
     "postcss-styled-syntax": "^0.4.0",
@@ -125,5 +136,5 @@
     "stylelint-config-standard": "^33.0.0",
     "ts-jest": "^29.1.0"
   },
-  "packageManager": "pnpm@8.5.1"
+  "packageManager": "pnpm@8.6.0"
 }

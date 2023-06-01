@@ -4,3 +4,4 @@ public/
 .eslintrc.js
 .stylelintrc.js
 cypress.config.ts
+storybook-static
