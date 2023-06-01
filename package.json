@@ -28,8 +28,10 @@
     "prepare": "husky install",
     "start": "craco start",
     "storybook": "storybook dev -p 6006",
+    "storybook:ci": "storybook dev -p 6006 --ci --no-open",
     "test": "jest",
     "test-storybook": "test-storybook",
+    "test-storybook:ci": "run-p storybook:ci test-storybook",
     "type-check": "pnpm tsc --noEmit",
     "typesync": "pnpm dlx typesync",
     "upgrade-interactive": "npm-check -u"
