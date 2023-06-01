@@ -70,6 +70,7 @@ export const SettingForm: React.FC = () => {
                   max='16'
                   step='2'
                   data-cy='input-numberOfSquaresPerSideOfBoard'
+                  data-testid='input-numberOfSquaresPerSideOfBoard'
                   onChange={onChange}
                 />
 
@@ -87,6 +88,8 @@ export const SettingForm: React.FC = () => {
           <FieldContainer>
             <StyledInput
               placeholder='Input player name'
+              data-testid='input-blackPiecePlayerName'
+              data-cy='input-blackPiecePlayerName'
               {...register('blackPiecePlayerName', {
                 required: true,
                 maxLength: 10,
@@ -96,17 +99,26 @@ export const SettingForm: React.FC = () => {
           </FieldContainer>
 
           {errors.blackPiecePlayerName?.type === 'required' && (
-            <ErrorMessage role='alert'>
+            <ErrorMessage
+              role='alert'
+              data-testid='black-piece-player-name-required-error'
+            >
               Black Piece Player Name is required
             </ErrorMessage>
           )}
           {errors.blackPiecePlayerName?.type === 'maxLength' && (
-            <ErrorMessage role='alert'>
+            <ErrorMessage
+              role='alert'
+              data-testid='black-piece-player-name-max-length-error'
+            >
               Piece Player Name is too long(max length is 10 characters)
             </ErrorMessage>
           )}
           {errors.blackPiecePlayerName?.type === 'validate' && (
-            <ErrorMessage>
+            <ErrorMessage
+              role='alert'
+              data-testid='black-piece-player-name-same-name-error'
+            >
               The same player name has been inputted. Please input a unique
               player name.
             </ErrorMessage>
@@ -119,6 +131,8 @@ export const SettingForm: React.FC = () => {
           <FieldContainer>
             <StyledInput
               placeholder='Input player name'
+              data-testid='input-whitePiecePlayerName'
+              data-cy='input-whitePiecePlayerName'
               {...register('whitePiecePlayerName', {
                 required: true,
                 maxLength: 10,
@@ -128,17 +142,26 @@ export const SettingForm: React.FC = () => {
           </FieldContainer>
 
           {errors.whitePiecePlayerName?.type === 'required' && (
-            <ErrorMessage role='alert'>
+            <ErrorMessage
+              role='alert'
+              data-testid='white-piece-player-name-required-error'
+            >
               White Piece Player Name is required
             </ErrorMessage>
           )}
           {errors.whitePiecePlayerName?.type === 'maxLength' && (
-            <ErrorMessage role='alert'>
+            <ErrorMessage
+              role='alert'
+              data-testid='white-piece-player-name-max-length-error'
+            >
               Player Name is too long(max length is 10 characters)
             </ErrorMessage>
           )}
           {errors.whitePiecePlayerName?.type === 'validate' && (
-            <ErrorMessage>
+            <ErrorMessage
+              role='alert'
+              data-testid='white-piece-player-name-same-name-error'
+            >
               The same player name has been inputted. Please input a unique
               player name.
             </ErrorMessage>
@@ -150,7 +173,10 @@ export const SettingForm: React.FC = () => {
 
           <FieldContainer>
             <SelectInner>
-              <select {...register('firstTurnPiece')}>
+              <select
+                {...register('firstTurnPiece')}
+                data-testid='select-firstTurnPiece'
+              >
                 <option value='black'>black</option>
                 <option value='white'>white</option>
               </select>
@@ -159,7 +185,12 @@ export const SettingForm: React.FC = () => {
         </FieldWrapper>
 
         <ButtonWrapper>
-          <Button text='Game Start' type='submit' dataCy='start-game' />
+          <Button
+            text='Start Game'
+            type='submit'
+            dataCy='start-game'
+            dataTestid='start-game'
+          />
         </ButtonWrapper>
       </StyledForm>
     </Wrapper>

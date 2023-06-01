@@ -7,10 +7,22 @@ export interface Props {
   type: 'submit' | 'button' | 'reset';
   onClick?: () => void;
   dataCy?: string;
+  dataTestid?: string;
 }
 
-export const Button: React.FC<Props> = ({ text, type, onClick, dataCy }) => (
-  <StyledBottom type={type} onClick={onClick} data-cy={dataCy}>
+export const Button: React.FC<Props> = ({
+  text,
+  type,
+  onClick,
+  dataCy,
+  dataTestid,
+}) => (
+  <StyledBottom
+    type={type}
+    onClick={onClick}
+    data-cy={dataCy}
+    data-testid={dataTestid}
+  >
     {text}
   </StyledBottom>
 );

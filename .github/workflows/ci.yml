@@ -74,3 +74,27 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+  storybook-test:
+    name: Storybook Test
+    runs-on: ubuntu-latest
+    needs: [install-dependencies]
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        uses: ./.github/actions/install-dependencies
+
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+
+      - name: Build Storybook
+        run: yarn build-storybook --quiet
+
+      - name: Serve Storybook and run tests
+        run: |
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "npx http-server storybook-static --port 6006 --silent" \
+            "npx wait-on tcp:6006 && yarn test-storybook"
