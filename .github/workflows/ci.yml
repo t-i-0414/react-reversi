@@ -91,4 +91,4 @@ jobs:
         run: pnpm dlx playwright install --with-deps
 
       - name: Serve Storybook and run tests
-        run: test-storybook:ci
+        run: pnpm run test-storybook:ci
