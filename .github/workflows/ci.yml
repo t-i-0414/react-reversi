@@ -83,8 +83,6 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
       - name: Install Dependencies
         uses: ./.github/actions/install-dependencies
@@ -92,5 +90,8 @@ jobs:
       - name: Install Playwright
         run: pnpm dlx playwright install --with-deps
 
+      - name: Install pm2
+        run: npm install -g pm2
+
       - name: Serve Storybook and run tests
-        run: pnpm run test-storybook:ci
+        run: pnpm run run-ci:test-storybook
