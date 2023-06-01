@@ -53,9 +53,16 @@ export const BlackPiecePlayerNameRequiredError: Story = {
     const blackPiecePlayerNameInput = canvas.getByTestId(
       'input-blackPiecePlayerName',
     );
+    const whitePiecePlayerNameInput = canvas.getByTestId(
+      'input-whitePiecePlayerName',
+    );
+
     const submitButton = canvas.getByTestId('start-game');
 
     await userEvent.clear(blackPiecePlayerNameInput);
+    await userEvent.type(whitePiecePlayerNameInput, 'aa', {
+      delay: 100,
+    });
     await userEvent.click(submitButton);
 
     const blackPiecePlayerNameRequiredError = await canvas.findByTestId(
@@ -161,7 +168,9 @@ export const BlackPiecePlayerNameMaxLengthError: Story = {
 export const WhitePiecePlayerNameRequiredError: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-
+    const blackPiecePlayerNameInput = canvas.getByTestId(
+      'input-blackPiecePlayerName',
+    );
     const whitePiecePlayerNameInput = canvas.getByTestId(
       'input-whitePiecePlayerName',
     );
@@ -169,6 +178,9 @@ export const WhitePiecePlayerNameRequiredError: Story = {
     const submitButton = canvas.getByTestId('start-game');
 
     await userEvent.clear(whitePiecePlayerNameInput);
+    await userEvent.type(blackPiecePlayerNameInput, 'aa', {
+      delay: 100,
+    });
     await userEvent.click(submitButton);
 
     const whitePiecePlayerNameRequiredError = await canvas.findByTestId(
