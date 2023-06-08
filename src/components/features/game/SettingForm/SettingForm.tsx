@@ -258,9 +258,9 @@ const StyledRange = styled.input`
   &::-webkit-slider-thumb {
     position: relative;
     display: block;
-    appearance: none;
     width: 12px;
     height: 12px;
+    appearance: none;
     cursor: pointer;
     background-color: ${ColorMap.BG_LIGHT_BLACK};
     border: none;
@@ -313,13 +313,13 @@ const SelectInner = styled.div`
     font-size: ${SizeMap.FS_16};
     color: ${ColorMap.TX_BLACK};
     text-overflow: ellipsis;
+    appearance: none;
     cursor: pointer;
     background: transparent;
     background-image: none;
     border: none;
     outline: none;
     box-shadow: none;
-    appearance: none;
 
     &::-ms-expand {
       display: none;
