@@ -1,6 +1,6 @@
 {
   "name": "react-reversi",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "homepage": "https://happy-williams-02dc8b.netlify.app/",
   "bugs": {
     "url": "https://github.com/t-i-0414/react-reversi/issues",
@@ -139,5 +139,5 @@
     "vite": "^4.3.9",
     "vite-plugin-html": "^3.2.0"
   },
-  "packageManager": "pnpm@8.6.0"
+  "packageManager": "pnpm@8.6.3"
 }
