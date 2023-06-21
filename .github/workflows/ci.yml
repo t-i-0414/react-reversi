@@ -87,11 +87,8 @@ jobs:
       - name: Install Dependencies
         uses: ./.github/actions/install-dependencies
 
-      - name: Install Playwright
-        run: pnpm dlx playwright install --with-deps
-
       - name: Install pm2
         run: npm install -g pm2
 
       - name: Serve Storybook and run tests
-        run: pnpm run run-ci:test-storybook
+        run: pnpm run playwright:install && pnpm run ci:test-storybook
