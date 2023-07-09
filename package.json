@@ -130,7 +130,7 @@
     "prettier": "^3.0.0",
     "prettier-stylelint": "^0.4.2",
     "react-test-renderer": "^18.2.0",
-    "sort-package-json": "^2.5.0",
+    "sort-package-json": "^2.5.1",
     "storybook": "^7.0.26",
     "stylelint": "^15.10.1",
     "stylelint-config-recess-order": "^4.2.0",
