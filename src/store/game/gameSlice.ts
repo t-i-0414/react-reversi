@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { Game, Board, Player, PieceColor } from '~/domains';
-import type { PayloadAction } from '@reduxjs/toolkit';
 
 export type StartGamePayload = {
   board: Board;
@@ -30,7 +29,7 @@ export const initialState: Game = {
   currentTurnPiece: 'black',
 };
 
-export const gameSlice = createSlice({
+const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
