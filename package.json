@@ -60,7 +60,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fast-compare": "^3.2.2",
-    "react-hook-form": "^7.45.4",
+    "react-hook-form": "^7.46.0",
     "react-redux": "^8.1.2",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
@@ -93,7 +93,7 @@
     "@types/eslint-config-prettier": "^6.11.0",
     "@types/jest": "^29.5.4",
     "@types/lint-staged": "^13.2.0",
-    "@types/node": "^20.5.8",
+    "@types/node": "^20.5.9",
     "@types/prettier": "^3.0.0",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
@@ -138,5 +138,5 @@
     "vite": "^4.4.9",
     "vite-plugin-html": "^3.2.0"
   },
-  "packageManager": "pnpm@8.7.0"
+  "packageManager": "pnpm@8.7.1"
 }
