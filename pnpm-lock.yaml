@@ -146,8 +146,8 @@ devDependencies:
     specifier: ^5.1.29
     version: 5.1.29
   '@types/testing-library__jest-dom':
-    specifier: ^6.0.0
-    version: 6.0.0(@jest/globals@29.7.0)(@types/jest@29.5.6)(jest@29.7.0)
+    specifier: ^5.14.9
+    version: 5.14.9
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.8.0
     version: 6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.52.0)(typescript@5.2.2)
@@ -5637,16 +5637,10 @@ packages:
     resolution: {integrity: sha512-OSaMrXUKxVigGlKRrET39V2xdhzlztQ9Aqumn1WbCBKHOi9ry7jKSd7rkyj0GzmWaU960Rd+LpOFpLfx5bMQAg==}
     dev: false
 
-  /@types/testing-library__jest-dom@6.0.0(@jest/globals@29.7.0)(@types/jest@29.5.6)(jest@29.7.0):
-    resolution: {integrity: sha512-bnreXCgus6IIadyHNlN/oI5FfX4dWgvGhOPvpr7zzCYDGAPIfvyIoAozMBINmhmsVuqV0cncejF2y5KC7ScqOg==}
-    deprecated: This is a stub types definition. @testing-library/jest-dom provides its own type definitions, so you do not need this installed.
+  /@types/testing-library__jest-dom@5.14.9:
+    resolution: {integrity: sha512-FSYhIjFlfOpGSRyVoMBMuS3ws5ehFQODymf3vlI7U1K8c7PHwWwFY7VREfmsuzHSOnoKs/9/Y983ayOs7eRzqw==}
     dependencies:
-      '@testing-library/jest-dom': 6.1.4(@jest/globals@29.7.0)(@types/jest@29.5.6)(jest@29.7.0)
-    transitivePeerDependencies:
-      - '@jest/globals'
-      - '@types/jest'
-      - jest
-      - vitest
+      '@types/jest': 29.5.6
     dev: true
 
   /@types/tough-cookie@4.0.3:
