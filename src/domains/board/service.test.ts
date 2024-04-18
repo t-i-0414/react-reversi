@@ -1,4 +1,4 @@
-import { expect, it } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 import { Board } from '~/domains/board/interface';
 import type { Square } from '~/domains/square/interface';
 import { base as BoardMock } from './mock';

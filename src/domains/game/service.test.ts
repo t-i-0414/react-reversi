@@ -1,4 +1,4 @@
-import { expect, it } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 import { Board } from '../board/interface';
 import { PieceColor } from '../piece/interface';
 import { Game } from './interface';

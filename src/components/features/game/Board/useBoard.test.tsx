@@ -1,7 +1,14 @@
 /**
  * @jest-environment jsdom
  */
-import { expect } from '@jest/globals';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { renderHook } from '@testing-library/react';
 import React from 'react';
 import * as ReactRedux from 'react-redux';
@@ -11,17 +18,21 @@ import * as StoreModule from '~/store';
 import { useBoard } from './useBoard';
 
 jest.mock<typeof import('react-redux')>('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useSelector: jest.fn(jest.requireActual('react-redux').useSelector) as any,
+  ...jest.requireActual<typeof ReactRedux>('react-redux'),
+  useSelector: jest.fn(
+    jest.requireActual<typeof ReactRedux>('react-redux').useSelector,
+  ) as any,
 }));
 const MockedReactRedux = ReactRedux as jest.Mocked<typeof ReactRedux>;
 
 jest.mock<typeof import('~/store')>('~/store', () => ({
   ...jest.requireActual('~/store'),
   changeCurrentTurnPiece: jest.fn(
-    jest.requireActual('~/store').changeCurrentTurnPiece,
+    jest.requireActual<typeof StoreModule>('~/store').changeCurrentTurnPiece,
   ) as any,
-  updateBoard: jest.fn(jest.requireActual('~/store').updateBoard) as any,
+  updateBoard: jest.fn(
+    jest.requireActual<typeof StoreModule>('~/store').updateBoard,
+  ) as any,
 }));
 const MockedStoreModule = StoreModule as jest.Mocked<typeof StoreModule>;
 
