@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { expect } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { renderHook } from '@testing-library/react';
 import React from 'react';
 import * as ReactRedux from 'react-redux';
@@ -10,8 +10,10 @@ import { store } from '~/store';
 import { useScore } from './useScore';
 
 jest.mock<typeof import('react-redux')>('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useSelector: jest.fn(jest.requireActual('react-redux').useSelector) as any,
+  ...jest.requireActual<typeof ReactRedux>('react-redux'),
+  useSelector: jest.fn(
+    jest.requireActual<typeof ReactRedux>('react-redux').useSelector,
+  ) as any,
 }));
 const MockedReactRedux = ReactRedux as jest.Mocked<typeof ReactRedux>;
 

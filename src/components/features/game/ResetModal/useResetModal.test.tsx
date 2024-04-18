@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { expect } from '@jest/globals';
+import { afterEach, describe, expect, it, jest } from '@jest/globals';
 import { renderHook, act } from '@testing-library/react';
 import React from 'react';
 import * as ReactRedux from 'react-redux';
@@ -12,13 +12,17 @@ import { useResetModal } from './useResetModal';
 
 jest.mock<typeof import('react-redux')>('react-redux', () => ({
   ...jest.requireActual('react-redux'),
-  useSelector: jest.fn(jest.requireActual('react-redux').useSelector) as any,
+  useSelector: jest.fn(
+    jest.requireActual<typeof ReactRedux>('react-redux').useSelector,
+  ) as any,
 }));
 const MockedReactRedux = ReactRedux as jest.Mocked<typeof ReactRedux>;
 
 jest.mock<typeof import('~/store')>('~/store', () => ({
   ...jest.requireActual('~/store'),
-  resetGame: jest.fn(jest.requireActual('~/store').resetGame) as any,
+  resetGame: jest.fn(
+    jest.requireActual<typeof StoreModule>('~/store').resetGame,
+  ) as any,
 }));
 const MockedStoreModule = StoreModule as jest.Mocked<typeof StoreModule>;
 
