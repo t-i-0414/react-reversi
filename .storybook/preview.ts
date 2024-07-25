@@ -11,6 +11,8 @@ const parameters: Preview = {
     },
     layout: 'fullscreen',
   },
+
+  tags: ['autodocs']
 };
 
 export default parameters;
