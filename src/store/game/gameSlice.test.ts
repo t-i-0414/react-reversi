@@ -27,6 +27,7 @@ describe('gameSlice', () => {
           currentTurnPiece: 'white',
         }),
       );
+
       expect(state).toStrictEqual({
         isStarted: true,
         board: [
@@ -59,6 +60,7 @@ describe('gameSlice', () => {
           ],
         }),
       );
+
       expect(state.board).toStrictEqual([
         {
           key: '0-0',
@@ -79,6 +81,7 @@ describe('gameSlice', () => {
         },
         changeCurrentTurnPiece({ pieceColor: 'black' }),
       );
+
       expect(state.currentTurnPiece).toBe('black');
     });
   });
@@ -102,6 +105,7 @@ describe('gameSlice', () => {
         },
         resetGame(),
       );
+
       expect(state).toStrictEqual(initialState);
     });
   });
