@@ -210,6 +210,7 @@ describe('gameDomainService', () => {
         expected: false,
       },
     ];
+
     it.each(testCases)(
       'should return $expected ($case)',
       ({ board, expected }: { board: Board; expected: boolean }) => {
