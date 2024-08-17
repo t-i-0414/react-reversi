@@ -24,7 +24,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 9.4.0
+          version: 9.7.1
 
       - name: Cypress.io
         uses: cypress-io/github-action@v5
