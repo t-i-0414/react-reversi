@@ -1,0 +1,11 @@
+masterからdevelopへのbackport<%= Time.now.strftime("%Y%m%d") %>
+
+## 反映されるPRリスト
+
+<%# 参考: %>
+<%# - https://github.com/x-motemen/git-pr-release/blob/c7eff5f97e4cd2a37bf7ec9bf9bf462209319a93/lib/git/pr/release/pull_request.rb %>
+<%# - https://docs.github.com/ja/rest/pulls/pulls?apiVersion=2022-11-28#get-a-pull-request の応答例 %>
+<% sorted_pr = pull_requests.reject {|pr| pr.pr.merged_at.nil? }.sort_by {|pr| pr.pr.merged_at} -%>
+<% sorted_pr.each do |pr| -%>
+  <%= "- ##{pr.pr.number} #{pr.pr.user.login}" %>
+<% end -%>
